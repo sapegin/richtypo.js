@@ -1,0 +1,17 @@
+{
+  "name": "richtypo",
+  "description": "Smart typography",
+  "author": "Artem Sapegin <artem@sapegin.ru> (http://sapegin.me)",
+  "version": "0.0.0",
+  "main": "./richtypo.js",
+  "engines": {
+    "node": "0.6.x"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {},
+  "scripts": {
+	"test": "jasmine-node test/",
+	"lint": "jshint richtypo.js"
+  }
+}
