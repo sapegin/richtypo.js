@@ -1,8 +1,12 @@
 {
   "name": "richtypo",
-  "description": "Smart typography",
+  "description": "Typography enhancer",
   "author": "Artem Sapegin <artem@sapegin.ru> (http://sapegin.me)",
-  "version": "0.0.0",
+  "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:sapegin/richtypo.git"
+  },
   "main": "./richtypo.js",
   "engines": {
     "node": "0.6.x"
