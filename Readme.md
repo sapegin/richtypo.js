@@ -60,8 +60,8 @@ richtypo.richtypo(text, rulesets, lang)
 
 - `text` is a HTML string;
 - `rulesets` is array of rulesets (available rulesets: `'save_tags'`, `'cleanup_before'`, `'spaces_lite'`, `'spaces_lite'`,
-- `'spaces'`, `'abbrs'`, `'amps'`, `'hanging'`, `'cleanup_after'`, `'restore_tags'`);
-`lang` (_optional_) is a text language (`'en'` or `'ru'`).
+  `'spaces'`, `'abbrs'`, `'amps'`, `'hanging'`, `'cleanup_after'`, `'restore_tags'`);
+- `lang` (_optional_) is a text language (`'en'` or `'ru'`).
 
 ### Change language globally
 
