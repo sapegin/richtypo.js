@@ -146,7 +146,10 @@ describe('RichTypo', function() {
 
 	it('hanging', function() {
 		expect(rt.title('The “quoted text.”'))
-			.toBe(_symb('The <span class="slaquo"> </span> <span class="hlaquo">“</span>quoted text.”'));
+			.toBe(_symb('The<span class="slaquo"> </span> <span class="hlaquo">“</span>quoted text.”'));
+
+		expect(rt.title('“Quoted text” two.'))
+			.toBe(_symb('<span class="hlaquo">“</span>Quoted text” two.'));
 	});	
 
 
