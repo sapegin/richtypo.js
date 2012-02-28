@@ -11,7 +11,9 @@ describe('RichTypo', function() {
 		expect(rt.rich).toBeDefined();
 	});
 
-	it('safe tags', function() {
+	it('safe tags ru', function() {
+		rt.lang('ru');
+
 		expect(rt.rich('<code> -->> </code>'))
 			.toBe('<code> -->> </code>');
 
@@ -25,7 +27,9 @@ describe('RichTypo', function() {
 			.toBe(_symb('Теперь <b>всё_— вместе</b>. А_текст внутри тегов <img src="hamster.jpg" alt="а — б"> не_надо типографить. И_кода кусок:<pre><code>\nа — б\nа — б\nа — б\n</code></pre>.'));	
 	});	
 
-	it('spaces lite', function() {
+	it('spaces lite ru', function() {
+		rt.lang('ru');
+
 		expect(rt.rich('Такса — животное.'))
 			.toBe(_symb('Такса_— животное.'));
 
@@ -33,7 +37,9 @@ describe('RichTypo', function() {
 			.toBe(_symb('Там было много тлонов, тутликов, табачек и_т._п. и_т._п.'));		
 	});
 
-	it('spaces', function() {
+	it('spaces ru', function() {
+		rt.lang('ru');
+
 		expect(rt.rich('Прочитай § 13 журнала «Такса» № 27, там про тлонов, тутликов, табачек.'))
 			.toBe(_symb('Прочитай §_13 журнала «Такса» №_27, там про тлонов, тутликов, табачек.'));
 
@@ -59,7 +65,9 @@ describe('RichTypo', function() {
 			.toBe(_symb('Цири родилась 30_июля.'));
 	});
 
-	it('lite', function() {
+	it('lite ru', function() {
+		rt.lang('ru');
+
 		expect(rt.lite('Эх...'))
 			.toBe('Эх…');
 
@@ -79,18 +87,67 @@ describe('RichTypo', function() {
 			.toBe(_symb('<p>— Бадыдыщь!</p>'));
 	});
 
-	it('quotes', function() {
+	it('lite en', function() {
+		rt.lang('en');
+
+		expect(rt.lite('Yep...'))
+			.toBe('Yep…');
+
+		expect(rt.lite('Dachshund--beast'))
+			.toBe(_symb('Dachshund—beast'));
+	});
+
+	it('quotes ru', function() {
+		rt.lang('ru');
+
 		expect(rt.lite('Тут просто "текст в кавычках".'))
-			.toBe(_symb('Тут просто «текст в кавычках».'));
+			.toBe('Тут просто «текст в кавычках».');
 
 		expect(rt.lite('"Текст в кавычках "в кавычках"".'))
-			.toBe(_symb('«Текст в кавычках «в кавычках»».'));
+			.toBe('«Текст в кавычках «в кавычках»».');
 
 		expect(rt.lite('А тут "текст "в кавычках" в кавычках".'))
-			.toBe(_symb('А тут «текст «в кавычках» в кавычках».'));
+			.toBe('А тут «текст «в кавычках» в кавычках».');
 
 		expect(rt.lite('И "клинический "случай".'))
-			.toBe(_symb('И «клинический «случай».'));
+			.toBe('И «клинический «случай».');
 	});
+
+	it('quotes en', function() {
+		rt.lang('en');
+
+		expect(rt.lite('There is a "text in quotes."'))
+			.toBe('There is a “text in quotes.”');
+
+		expect(rt.lite('There is a "text "in quotes" in quotes."'))
+			.toBe('There is a “text “in quotes” in quotes.”');
+	});
+
+	it('amps en', function() {
+		rt.lang('en');
+
+		expect(rt.title('Dessi &amp; Tsiri'))
+			.toBe('Dessi <span class="amp">&amp;</span> Tsiri');
+	});
+
+	it('abbrs ru', function() {
+		rt.lang('ru');
+
+		expect(rt.title('На ХХ таксовке ТАКСА было 37 такс'))
+			.toBe(_symb('На_ХХ таксовке <abbr>ТАКСА</abbr> было 37 такс'));
+	});
+
+	it('abbrs en', function() {
+		rt.lang('en');
+
+		expect(rt.title('On XX dachshund party DOXIE was 37 wieners'))
+			.toBe(_symb('On_XX dachshund party <abbr>DOXIE</abbr> was 37 wieners'));
+	});
+
+	it('hanging', function() {
+		expect(rt.title('The “quoted text.”'))
+			.toBe(_symb('The <span class="slaquo"> </span> <span class="hlaquo">“</span>quoted text.”'));
+	});	
+
 
 });

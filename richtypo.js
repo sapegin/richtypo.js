@@ -1,36 +1,55 @@
 (function(global) {
 
-// @todo abbr
-// @todo amp
-
 var rules = {},
+	currentLang = 'en',
 	nbsp = String.fromCharCode(160),
 	savedTagsNum,
 	savedTags,
 	saveTagsRe = [
 		/<pre[^>]*>[\s\S]*?<\/pre>/mig,
-	    /<style[^>]*>[\s\S]*?<\/style>/mig,
-	    /<script[^>]*>[\s\S]*?<\/script>/mig,
-	    /<code[^>]*>[\s\S]*?<\/code>/mig,
-	    /<!--[\s\S]*?-->/mig,
+		/<style[^>]*>[\s\S]*?<\/style>/mig,
+		/<script[^>]*>[\s\S]*?<\/script>/mig,
+		/<code[^>]*>[\s\S]*?<\/code>/mig,
+		/<!--[\s\S]*?-->/mig,
 		/<[a-z\/][^>]*>/mig
 	],
 	restoreTagsRe = /<(\d+)>/g;
 
 
 var commonRules = {
-	_cleanup: [
-		[/&nbsp;/g, nbsp],
+	_cleanup_before: [
+		[/ {2,}/g, ' '],  // Remove repeated spaces
 	],
 
+	_cleanup_after: [
+		[/&nbsp;/g, nbsp],  // Nonbreaking space entinty to symbol
+	],
+
+	// Hanging punctuation
+	_hangingTable: {
+		'«': 'laquo',
+		'„': 'laquo',
+		'“': 'laquo',
+		'‘': 'laquo',
+		'(': 'brace',
+	},
+	_hanging: [
+		[/[«„“‘\(]/g, function(s) {
+			var name = commonRules._hangingTable[s];
+			return '<span class="s' + name + '"> </span> <span class="h' + name + '">' + s + '</span>'
+		}],
+	],	
+
 	save_tags: function(text) {
+		function save(s) {
+			savedTags[savedTagsNum] = s;
+			return '<' + savedTagsNum++ + '>';
+		}
+
 		savedTagsNum = 0;
 		savedTags = [];
 		for (var reIdx = 0; reIdx < saveTagsRe.length; reIdx++) {
-			text = text.replace(saveTagsRe[reIdx], function(s) {
-				savedTags[savedTagsNum] = s
-				return '<' + savedTagsNum++ + '>';
-			});
+			text = text.replace(saveTagsRe[reIdx], save);
 		}
 		return text;
 	},
@@ -46,37 +65,44 @@ var commonRules = {
 };
 
 
-var richtypo = {},
-	_lang = 'ru';
+var richtypo = {};
 
 richtypo.lang = function(lang) {
 	if (lang !== undefined) {
-		_lang = lang;
+		currentLang = lang;
 	}
 	else {
 		// Load rules
-		if (!rules[_lang]) {
-			var langRules = {}
+		if (!rules[currentLang]) {
+			var langRules = {};
 			try {
-				langRules = require('./rules/' + _lang + '.js');
+				langRules = require('./rules/' + currentLang + '.js');
 			}
 			catch(e) {
-				console.log('xxxx', e);
+				// console.log('Cannot load rules for language + ' + currentLang + '\n', e);
 			}
-			rules[_lang] = _extend(commonRules, langRules);
+			rules[currentLang] = _extend(commonRules, langRules);
 		}
 
-		return _lang;
+		return currentLang;
 	}
 };
 
 
 richtypo.lite = function(text, lang) {
-	return _process(text, lang, ['save_tags', 'lite', 'spaces_lite', 'quotes', 'cleanup', 'restore_tags']);
+	return _process(text, lang, ['save_tags', 'cleanup_before', 'lite', 'spaces_lite', 'quotes', 'cleanup_after', 'restore_tags']);
 };
 
 richtypo.rich = function(text, lang) {
-	return _process(text, lang, ['save_tags', 'spaces_lite', 'spaces', 'cleanup', 'restore_tags']);
+	return _process(text, lang, ['save_tags', 'cleanup_before', 'spaces_lite', 'spaces', 'abbrs', 'cleanup_after', 'restore_tags']);
+};
+
+richtypo.title = function(text, lang) {
+	return _process(text, lang, ['save_tags', 'cleanup_before', 'spaces_lite', 'spaces', 'abbrs', 'amps', 'hanging', 'cleanup_after', 'restore_tags']);
+};
+
+richtypo.richtypo = function(text, lang, rulesets) {
+	return _process(text, lang, rulesets);
 };
 
 
@@ -103,7 +129,6 @@ function _process(text, lang, ruleset) {
 function _replace(text, rules) {
 	for (var ruleIdx = 0; ruleIdx < rules.length; ruleIdx++) {
 		var rule = rules[ruleIdx];
-		// console.log('RE', rule[0])
 		text = text.replace(rule[0], rule[1]);
 	}
 	return text;
@@ -119,12 +144,6 @@ function _extend(from, to) {
 }
 
 
-// Support both Node and browser environments
-//if (typeof module !== 'undefined' && module.exports) {
-	module.exports = richtypo;
-//}
-//else {
-//	global.richtypo = richtypo;
-//}
+module.exports = richtypo;
 
 })(this);
