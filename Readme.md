@@ -49,7 +49,6 @@ richtypo.title(text, lang)  // Typography for big text: the same as rich + amper
 richtypo.lite(text, lang)  // Simple typographer (quotes, em-dash, etc.) for user generated content (e.g. comments)
 ```
 
-Where
 - `text` is an HTML string;
 - `lang` (_optional_) is a text language (`'en'` or `'ru'`).
 
@@ -59,7 +58,6 @@ But you can use any set of rules if you are kinda control freak:
 richtypo.richtypo(text, rulesets, lang)
 ```
 
-Where
 - `text` is a HTML string;
 - `rulesets` is array of rulesets (available rulesets: `'save_tags'`, `'cleanup_before'`, `'spaces_lite'`, `'spaces_lite'`,
 - `'spaces'`, `'abbrs'`, `'amps'`, `'hanging'`, `'cleanup_after'`, `'restore_tags'`);
@@ -71,7 +69,6 @@ Change language globally:
 richtypo.lang(lang)
 ```
 
-Where
 - `lang` is a language (`'en'` or `'ru'`).
 
 
