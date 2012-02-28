@@ -22,7 +22,7 @@ var commonRules = {
 	],
 
 	_cleanup_after: [
-		[/&nbsp;/g, nbsp],  // Nonbreaking space entinty to symbol
+		[/&nbsp;/g, nbsp],  // Non-breaking space entinty to symbol
 	],
 
 	// Hanging punctuation
@@ -101,7 +101,7 @@ richtypo.title = function(text, lang) {
 	return _process(text, lang, ['save_tags', 'cleanup_before', 'spaces_lite', 'spaces', 'abbrs', 'amps', 'hanging', 'cleanup_after', 'restore_tags']);
 };
 
-richtypo.richtypo = function(text, lang, rulesets) {
+richtypo.richtypo = function(text, rulesets, lang) {
 	return _process(text, lang, rulesets);
 };
 

@@ -1,4 +1,4 @@
-// Nonbreaking space
+// Non-breaking space
 var _nbsp = String.fromCharCode(160);
 
 // Prepositions and conjunctions
