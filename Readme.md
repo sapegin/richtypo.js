@@ -41,7 +41,7 @@ $ npm install richtypo
 
 ## Usage / API
 
-Richtypo have thee functions for common use cases.
+Richtypo has three functions for common use cases.
 
 ```javascript
 richtypo.rich(text, lang)  // Enhancing typography: non-breaking spaces, abbreviations
@@ -50,8 +50,8 @@ richtypo.lite(text, lang)  // Simple typographer (quotes, em-dash, etc.) for use
 ```
 
 Where
-`text` is a HTML string;
-`lang` (_optional_) is a text language (`'en'` or `'ru'`).
+- `text` is an HTML string;
+- `lang` (_optional_) is a text language (`'en'` or `'ru'`).
 
 But you can use any set of rules if you are kinda control freak:
 
@@ -60,19 +60,19 @@ richtypo.richtypo(text, rulesets, lang)
 ```
 
 Where
-`text` is a HTML string;
-`rulesets` is array of rulesets (available rulesets: `'save_tags'`, `'cleanup_before'`, `'spaces_lite'`, `'spaces_lite'`,
-`'spaces'`, `'abbrs'`, `'amps'`, `'hanging'`, `'cleanup_after'`, `'restore_tags'`);
+- `text` is a HTML string;
+- `rulesets` is array of rulesets (available rulesets: `'save_tags'`, `'cleanup_before'`, `'spaces_lite'`, `'spaces_lite'`,
+- `'spaces'`, `'abbrs'`, `'amps'`, `'hanging'`, `'cleanup_after'`, `'restore_tags'`);
 `lang` (_optional_) is a text language (`'en'` or `'ru'`).
 
-You can change language globally:
+Change language globally:
 
 ```javascript
 richtypo.lang(lang)
 ```
 
 Where
-`lang` is a language (`'en'` or `'ru'`).
+- `lang` is a language (`'en'` or `'ru'`).
 
 
 
