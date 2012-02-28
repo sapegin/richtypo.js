@@ -1,4 +1,79 @@
-# Rich Typo
+# Richtypo: typography enhancer for Node.js
+
+The main purpose of this library is to enhance typography of your HTML. It supposes that your texts already have right
+quotes, dashes and other symbols (you can use [Typography Keyboard Layout](http://ilyabirman.net/typography-layout/)).
+Richtypo adds non-breaking spaces in right places, adds CSS classes for abbreviations, ampersands and hanging
+punctuation for special styling.
+
+
+## Features
+
+- Rules for English and Russian languages
+- Non-breaking spaces after prepositions and conjunctions, before em-dash, etc.
+- `<nobr>` for words with hyphens
+- CSS classes for abbreviations, ampersands and hanging punctuation
+- Takes care of your HTML tags
+- Simple typographer (quotes, em-dash, etc.) for user generated content (e.g. comments)
+
+
+## Example
+
+```javascript
+var richtypo = require('richtypo');
+var beatiful = richtypo.rich('Welcome to the world or beautiful web typography — only with Richtypo.');
+var awesome = richtypo.title('Beautiful &amp; Awesome Web Typography with “Richtypo”');
+```
+
+Will produce something like that:
+
+```html
+Welcome to&nbsp;the world or&nbsp;beautiful web typography&nbsp;— only with Richtypo.
+Beautiful <span class="amp">&amp;</span> Awesome Web Typography with <span class="slaquo"> </span> <span class="hlaquo">“</span>Richtypo”'
+```
+
+
+## Installation
+
+```bash
+$ npm install richtypo
+```
+
+
+## Usage / API
+
+Richtypo have thee functions for common use cases.
+
+```javascript
+richtypo.rich(text, lang)  // Enhancing typography: non-breaking spaces, abbreviations
+richtypo.title(text, lang)  // Typography for big text: the same as rich + ampersands and hanging punctuation
+richtypo.lite(text, lang)  // Simple typographer (quotes, em-dash, etc.) for user generated content (e.g. comments)
+```
+
+Where
+`text` is a HTML string;
+`lang` (_optional_) is a text language (`'en'` or `'ru'`).
+
+But you can use any set of rules if you are kinda control freak:
+
+```javascript
+richtypo.richtypo(text, rulesets, lang)
+```
+
+Where
+`text` is a HTML string;
+`rulesets` is array of rulesets (available rulesets: `'save_tags'`, `'cleanup_before'`, `'spaces_lite'`, `'spaces_lite'`,
+`'spaces'`, `'abbrs'`, `'amps'`, `'hanging'`, `'cleanup_after'`, `'restore_tags'`);
+`lang` (_optional_) is a text language (`'en'` or `'ru'`).
+
+You can change language globally:
+
+```javascript
+richtypo.lang(lang)
+```
+
+Where
+`lang` is a language (`'en'` or `'ru'`).
+
 
 
 ---
