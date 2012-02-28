@@ -1,3 +1,15 @@
+/**
+ * Richtypo
+ * Typography enhancer for Node.js
+ *
+ * Rules for English language
+ *
+ * @author Artem Sapegin
+ * @copyright 2012 Artem Sapegin (sapegin.me)
+ * @license MIT
+ */
+
+
 // Non-breaking space
 var _nbsp = String.fromCharCode(160);
 

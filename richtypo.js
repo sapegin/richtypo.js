@@ -1,4 +1,13 @@
-(function(global) {
+/**
+ * Richtypo
+ * Typography enhancer for Node.js
+ *
+ * @author Artem Sapegin
+ * @copyright 2012 Artem Sapegin (sapegin.me)
+ * @license MIT
+ */
+
+(function() {
 
 var rules = {},
 	currentLang = 'en',
@@ -146,4 +155,4 @@ function _extend(from, to) {
 
 module.exports = richtypo;
 
-})(this);
+})();

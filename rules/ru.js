@@ -1,3 +1,15 @@
+/**
+ * Richtypo
+ * Typography enhancer for Node.js
+ *
+ * Rules for Russian language
+ *
+ * @author Artem Sapegin
+ * @copyright 2012 Artem Sapegin (sapegin.me)
+ * @license MIT
+ */
+
+
 // Неразрывный пробел
 var _nbsp = String.fromCharCode(160);
 
