@@ -41,7 +41,7 @@ $ npm install richtypo
 
 ## Usage / API
 
-Richtypo has three functions for common use cases.
+### Text processing: common use cases
 
 ```javascript
 richtypo.rich(text, lang)  // Enhancing typography: non-breaking spaces, abbreviations
@@ -52,7 +52,7 @@ richtypo.lite(text, lang)  // Simple typographer (quotes, em-dash, etc.) for use
 - `text` is an HTML string;
 - `lang` (_optional_) is a text language (`'en'` or `'ru'`).
 
-But you can use any set of rules if you are kinda control freak:
+### Text processing: custom set of rules
 
 ```javascript
 richtypo.richtypo(text, rulesets, lang)
@@ -63,7 +63,7 @@ richtypo.richtypo(text, rulesets, lang)
 - `'spaces'`, `'abbrs'`, `'amps'`, `'hanging'`, `'cleanup_after'`, `'restore_tags'`);
 `lang` (_optional_) is a text language (`'en'` or `'ru'`).
 
-Change language globally:
+### Change language globally
 
 ```javascript
 richtypo.lang(lang)
