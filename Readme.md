@@ -20,7 +20,7 @@ punctuation for special styling.
 
 ```javascript
 var richtypo = require('richtypo');
-var beatiful = richtypo.rich('Welcome to the world or beautiful web typography — only with Richtypo.');
+var beautiful = richtypo.rich('Welcome to the world or beautiful web typography — only with Richtypo.');
 var awesome = richtypo.title('Beautiful &amp; Awesome Web Typography with “Richtypo”');
 ```
 
