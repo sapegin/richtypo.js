@@ -1,0 +1,50 @@
+/* Page styles */
+body {
+	background: #fff;
+	color: #000;
+	font-size: 100%;
+	padding: 1em;
+	margin: 0 auto;
+	max-width: 30em;
+	font-family: 'Bookman Old Style', Georgia, serif;
+	}
+
+h1 {
+	margin: 0 0 1em;
+	line-height: 1.1;
+	text-align: center;
+	font-size: 2.4em;
+	font-weight: normal;
+	font-family: 'Palatino Linotype', Georgia, serif;
+	}
+
+p {
+	margin: 0 0 1em;
+	line-height: 1.75;
+	font-size: 1.15em;
+	}
+
+/* Typography */
+abbr {
+	font-size: 0.875em;
+	letter-spacing: 0.15em;
+	margin-right: -0.15em;
+	}
+
+.amp {
+	font-family: Baskerville, Constantia, Palatino, 'Palatino Linotype', 'Book Antiqua', serif;
+	font-style: italic;
+	}
+
+.sbrace {
+	margin-right: 0.5em;
+	}
+.hbrace {
+	margin-left: -0.5em;
+	}
+.slaquo {
+	margin-right: 0.44em;
+	}
+.hlaquo {
+	margin-left: -0.44em;
+	}

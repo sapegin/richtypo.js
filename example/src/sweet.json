@@ -1,0 +1,7 @@
+{
+	"content_dir": "content",
+	"publish_dir": "../",
+	"templates_dir": "templates",
+	"default_template_id": "template",
+	"typographer": false
+}

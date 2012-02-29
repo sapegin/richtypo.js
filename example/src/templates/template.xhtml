@@ -1,0 +1,14 @@
+<f:template xmlns:f="http://fest.mail.ru" context_name="$">
+	<f:doctype>html</f:doctype>
+	<html lang="en_US">
+		<head>
+			<meta charset="utf8"/>
+			<title><f:value output="text">$.title</f:value></title>
+			<link rel="stylesheet" href="sample.css"/>
+		</head>
+		<body>
+			<h1><f:value output="text">$.typographer.title($.title)</f:value></h1>
+			<f:value output="text">$.typographer.title($.content).replace(/ /g, '&amp;nbsp;')</f:value>
+		</body>
+	</html>
+</f:template>
