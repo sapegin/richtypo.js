@@ -94,7 +94,7 @@ describe('RichTypo', function() {
 			.toBe('Yep…');
 
 		expect(rt.lite('Dachshund--beast'))
-			.toBe(_symb('Dachshund—beast'));
+			.toBe(_symb('<nobr>Dachshund—</nobr>beast'));
 	});
 
 	it('quotes ru', function() {

@@ -19,7 +19,9 @@ var _prepos = 'at|or|and|the|a|by|an|in|on|of|for|to|as|i|or|my';
 
 module.exports = {
 	_spaces_lite: [
-		[/\s([—–])/g, _nbsp + '$1']  // En/Em Dash
+		// En/Em Dashes
+		[/\s([—–])/g, _nbsp + '$1'],
+		[/(\w+[—–])(\w)/g, '<nobr>$1</nobr>$2'],
 	],
 	_spaces: [
 		// Words with hyphens
