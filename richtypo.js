@@ -8,6 +8,7 @@
  */
 
 (function() {
+'use strict';
 
 var rules = {},
 	currentLang = 'en',
@@ -48,7 +49,7 @@ var commonRules = {
 				html = ([' ', nbsp, '\n', '\r', '\t'].indexOf(prefix) !== -1)
 					? '<span class="s' + name + '"> </span> '
 					: prefix;
-			return html + '<span class="h' + name + '">' + symbol + '</span>'
+			return html + '<span class="h' + name + '">' + symbol + '</span>';
 		}],
 	],
 
