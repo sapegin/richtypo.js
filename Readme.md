@@ -20,14 +20,14 @@ punctuation for special styling.
 
 ```javascript
 var richtypo = require('richtypo');
-var beautiful = richtypo.rich('Welcome to the world or beautiful web typography — only with Richtypo.');
+var beautiful = richtypo.rich('Welcome to the world of beautiful web typography — only with Richtypo.');
 var awesome = richtypo.title('Beautiful &amp; Awesome Web Typography with “Richtypo”');
 ```
 
 Will produce something like that:
 
 ```html
-Welcome to&nbsp;the world or&nbsp;beautiful web typography&nbsp;— only with Richtypo.
+Welcome to&nbsp;the world of&nbsp;beautiful web typography&nbsp;— only with Richtypo.
 Beautiful <span class="amp">&amp;</span> Awesome Web Typography with <span class="slaquo"> </span> <span class="hlaquo">“</span>Richtypo”'
 ```
 
