@@ -152,5 +152,12 @@ describe('RichTypo', function() {
 			.toBe(_symb('<span class="hlaquo">“</span>Quoted text” two.'));
 	});	
 
+	it('textify', function() {
+		expect(rt.textify(rt.title('The “quoted text.”')))
+			.toBe(_symb('The “quoted text.”'));
+
+			expect(rt.textify(rt.lite('- Бадыдыщь!\n- Бадыдыщь!', 'ru')))
+				.toBe('— Бадыдыщь!\n— Бадыдыщь!');
+	});	
 
 });
