@@ -85,18 +85,7 @@ richtypo.lang = function(lang) {
 		currentLang = lang;
 	}
 	else {
-		// Load rules
-		if (!rules[currentLang]) {
-			var langRules = {};
-			try {
-				langRules = require('./rules/' + currentLang + '.js');
-			}
 			catch(e) {
-				// console.log('Cannot load rules for language + ' + currentLang + '\n', e);
-			}
-			rules[currentLang] = _extend(commonRules, langRules);
-		}
-
 		return currentLang;
 	}
 };
@@ -122,8 +111,8 @@ richtypo.richtypo = function(text, rulesets, lang) {
 function _process(text, lang, ruleset) {
 	var rulesets = typeof ruleset === 'string' ? [ruleset] : ruleset;
 	lang = lang || richtypo.lang();
-	if (!rules[lang]) return text;
-	var langRules = rules[lang];
+	var langRules = _getRules(lang);
+	if (!langRules) return text;
 
 	for (var setIdx = 0; setIdx < rulesets.length; setIdx++) {
 		var rulesetId = rulesets[setIdx];
@@ -154,6 +143,20 @@ function _extend(from, to) {
 		to[key] = from[key];
 	}
 	return to;
+}
+
+function _getRules(lang) {
+	if (!rules[lang]) {
+		var langRules = {};
+		try {
+			langRules = require('./rules/' + lang + '.js');
+		}
+		catch(e) {
+			// console.log('Cannot load rules for language + ' + currentLang + '\n', e);
+		}
+		rules[lang] = _extend(commonRules, langRules);
+	}
+	return rules[lang];
 }
 
 
