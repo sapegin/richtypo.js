@@ -53,6 +53,12 @@ var commonRules = {
 		}],
 	],
 
+	_textify: [
+		[/<\/?[^>]+>/g, ''],  // Remove tags
+		[/&mdash;/g, '—'],
+		[/[  ]{2,}/g, ' ']  // Repeated spaces [normal space + nbsp]
+	],
+
 	save_tags: function(text) {
 		function save(s) {
 			savedTags[savedTagsNum] = s;
@@ -85,7 +91,6 @@ richtypo.lang = function(lang) {
 		currentLang = lang;
 	}
 	else {
-			catch(e) {
 		return currentLang;
 	}
 };
@@ -101,6 +106,14 @@ richtypo.rich = function(text, lang) {
 
 richtypo.title = function(text, lang) {
 	return _process(text, lang, ['save_tags', 'cleanup_before', 'spaces_lite', 'spaces', 'abbrs', 'amps', 'hanging', 'cleanup_after', 'restore_tags']);
+};
+
+richtypo.full = function(text, lang) {
+	return _process(text, lang, ['save_tags', 'cleanup_before', 'lite', 'spaces_lite', 'spaces', 'quotes', 'abbrs', 'amps', 'hanging', 'cleanup_after', 'restore_tags']);
+};
+
+richtypo.textify = function(text, lang) {
+	return _process(text, lang, ['textify']);
 };
 
 richtypo.richtypo = function(text, rulesets, lang) {
