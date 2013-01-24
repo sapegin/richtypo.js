@@ -108,6 +108,11 @@ Text language: `en` or `ru`.
 Convert result to text.
 
 
+## Release History
+
+* 2013-01-24    v0.1.5   New API methods: full() and textify(). Fix rules loading when lang() method not invoked. CLI.
+
+
 
 ---
 
