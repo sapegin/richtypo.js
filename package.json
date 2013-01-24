@@ -12,10 +12,11 @@
     "node": "0.8.x"
   },
   "dependencies": {
+    "optimist": "~0.3.5"
   },
   "devDependencies": {},
   "scripts": {
-	"test": "jasmine-node test/ || true",
-	"lint": "jshint richtypo.js || true"
+    "test": "jasmine-node test/ || true",
+    "lint": "jshint richtypo.js || true"
   }
 }
