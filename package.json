@@ -8,15 +8,27 @@
     "url": "git@github.com:sapegin/richtypo.git"
   },
   "main": "./richtypo.js",
+  "bin": {
+  	"richtypo": "./bin/cli.js"
+  },
   "engines": {
     "node": "0.8.x"
   },
   "dependencies": {
     "optimist": "~0.3.5"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "jasmine-node": "~1.0.28",
+    "jshint": "~0.9.1"
+  },
   "scripts": {
     "test": "jasmine-node test/ || true",
     "lint": "jshint richtypo.js || true"
-  }
+  },
+  "keywords": [
+      "typography",
+      "typo",
+      "russian",
+      "english"
+  ]
 }

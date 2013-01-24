@@ -35,11 +35,11 @@ Beautiful <span class="amp">&amp;</span> Awesome Web Typography with <span class
 ## Installation
 
 ```bash
-$ npm install richtypo
+$ npm install [-g] richtypo
 ```
 
 
-## Usage / API
+## JavaScript API
 
 ### Text processing: common use cases
 
@@ -47,10 +47,11 @@ $ npm install richtypo
 richtypo.rich(text, lang)  // Enhancing typography: non-breaking spaces, abbreviations
 richtypo.title(text, lang)  // Typography for big text: the same as rich + ampersands and hanging punctuation
 richtypo.lite(text, lang)  // Simple typographer (quotes, em-dash, etc.) for user generated content (e.g. comments)
+richtypo.full(text, lang)  // lite() + rich()
 ```
 
 - `text` is an HTML string;
-- `lang` (_optional_) is a text language (`'en'` or `'ru'`).
+- `lang` (*optional*) is a text language (`'en'` or `'ru'`).
 
 ### Text processing: custom set of rules
 
@@ -61,7 +62,7 @@ richtypo.richtypo(text, rulesets, lang)
 - `text` is a HTML string;
 - `rulesets` is array of rulesets (available rulesets: `'save_tags'`, `'cleanup_before'`, `'spaces_lite'`, `'spaces_lite'`,
   `'spaces'`, `'abbrs'`, `'amps'`, `'hanging'`, `'cleanup_after'`, `'restore_tags'`);
-- `lang` (_optional_) is a text language (`'en'` or `'ru'`).
+- `lang` (*optional*) is a text language (`'en'` or `'ru'`).
 
 ### Change language globally
 
@@ -71,31 +72,45 @@ richtypo.lang(lang)
 
 - `lang` is a language (`'en'` or `'ru'`).
 
+### Convert to text
+
+If you don’t want HTML tags in the result string just wrap it in `textify` method:
+
+```javascript
+richtypo.textify(richtypo.full(text, lang))
+```
+
+
+## Command line
+
+Usage: `richtypo [--rules full] [--lang en] [--text] filename`
+
+### Options
+
+#### `--rules RULESET` (default: `full`)
+
+Define ruleset:
+
+- lite - Simple typographer (quotes, em-dash, etc.) for user generated content (e.g. comments);
+
+- rich - Enhancing typography: non-breaking spaces, abbreviations;
+
+- title - Typography for big text: the same as --rich + ampersands and hanging punctuation.  [default: "full"]
+
+- full - --light + --rich;
+
+#### `--lang LANG` (default `en`)
+
+Text language: `en` or `ru`.
+
+#### `--text`
+
+Convert result to text.
+
 
 
 ---
 
-## License 
+## License
 
-(The MIT License)
-
-Copyright © 2012 Artem Sapegin, artem@sapegin.ru, http://sapegin.me
-
-Permission is hereby granted, free of charge, to any person obtaining
-a copy of this software and associated documentation files (the
-'Software'), to deal in the Software without restriction, including
-without limitation the rights to use, copy, modify, merge, publish,
-distribute, sublicense, and/or sell copies of the Software, and to
-permit persons to whom the Software is furnished to do so, subject to
-the following conditions:
-
-The above copyright notice and this permission notice shall be
-included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,
-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
-CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
-TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
-SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+The MIT License, see the included `License.md` file.

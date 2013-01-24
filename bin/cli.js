@@ -10,10 +10,11 @@ var argv = require('optimist')
 		'Ruleset:',
 		'    - lite - Simple typographer (quotes, em-dash, etc.) for user generated content (e.g. comments);',
 		'    - rich - Enhancing typography: non-breaking spaces, abbreviations;',
-		'    - full - --light + --rich;',
-		'    - title - Typography for big text: the same as --rich + ampersands and hanging punctuation.'
+		'    - title - Typography for big text: the same as --rich + ampersands and hanging punctuation;',
+		'    - full - --light + --rich.'
 		].join('\n'))
 	.describe('lang', 'Text language.')
+	.describe('text', 'Convert result to text.')
 	.argv;
 
 
