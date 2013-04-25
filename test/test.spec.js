@@ -150,6 +150,9 @@ describe('RichTypo', function() {
 
 		expect(rt.title('“Quoted text” two.'))
 			.toBe(_symb('<span class="hlaquo">“</span>Quoted text” two.'));
+
+		expect(rt.title('alert("Hello world!")'))
+			.toBe(_symb('alert("Hello world!")'));
 	});	
 
 	it('textify', function() {

@@ -44,7 +44,7 @@ var commonRules = {
 		'(': 'brace',
 	},
 	_hanging: [
-		[/(^|.)([«„“‘\(])/g, function(s, prefix, symbol) {
+		[/(^|\s)([«„“‘\(])/g, function(s, prefix, symbol) {
 			var name = commonRules._hangingTable[symbol],
 				html = ([' ', nbsp, '\n', '\r', '\t'].indexOf(prefix) !== -1)
 					? '<span class="s' + name + '"> </span> '
