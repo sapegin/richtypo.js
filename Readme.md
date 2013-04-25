@@ -110,8 +110,13 @@ Convert result to text.
 
 ## Release History
 
-* 2013-01-24    v0.1.5   New API methods: full() and textify(). Fix rules loading when lang() method not invoked. CLI.
+### 2013-04-25 v0.1.6
 
+* Fix hanging punctuation.
+
+### 2013-01-24 v0.1.5
+
+* New API methods: full() and textify(). Fix rules loading when lang() method not invoked. CLI.
 
 
 ---
