@@ -9,26 +9,26 @@
   },
   "main": "./richtypo.js",
   "bin": {
-  	"richtypo": "./bin/cli.js"
+    "richtypo": "./bin/cli.js"
   },
   "engines": {
     "node": "0.8.x"
   },
   "dependencies": {
-    "optimist": "~0.3.5"
+    "optimist": "~0.3.7"
   },
   "devDependencies": {
-    "jasmine-node": "~1.0.28",
-    "jshint": "~0.9.1"
+    "jasmine-node": "~1.10.1",
+    "jshint": "~2.1.4"
   },
   "scripts": {
     "test": "jasmine-node test/ || true",
     "lint": "jshint richtypo.js || true"
   },
   "keywords": [
-      "typography",
-      "typo",
-      "russian",
-      "english"
+    "typography",
+    "typo",
+    "russian",
+    "english"
   ]
 }
