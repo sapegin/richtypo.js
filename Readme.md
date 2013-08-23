@@ -110,7 +110,7 @@ Convert result to text.
 
 ## Release History
 
-### 2013-08-23 v0.1.7
+### 2013-08-23 v0.1.8
 
 Maintenance release.
 
