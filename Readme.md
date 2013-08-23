@@ -110,6 +110,10 @@ Convert result to text.
 
 ## Release History
 
+### 2013-08-23 v0.1.7
+
+Maintenance release.
+
 ### 2013-04-25 v0.1.6
 
 * Fix hanging punctuation.
