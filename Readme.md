@@ -31,6 +31,8 @@ Welcome to&nbsp;the world of&nbsp;beautiful web typography&nbsp;— only with Ri
 Beautiful <span class="amp">&amp;</span> Awesome Web Typography with <span class="slaquo"> </span> <span class="hlaquo">“</span>Richtypo”'
 ```
 
+`&nbsp;` is shown here just for demonstration purposes. Actual implementation produces the non-breaking space character itself (`String.fromCharCode(160)`), not the escaped sequence.
+
 
 ## Installation
 
