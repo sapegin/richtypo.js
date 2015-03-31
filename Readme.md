@@ -1,4 +1,6 @@
-# Richtypo: typography enhancer for Node.js [![Build Status](https://travis-ci.org/sapegin/richtypo.js.png)](https://travis-ci.org/sapegin/richtypo.js)
+# Richtypo: typography enhancer for Node.js
+
+[![Build Status](https://travis-ci.org/sapegin/richtypo.js.svg)](https://travis-ci.org/sapegin/richtypo.js)
 
 The main purpose of this library is to enhance typography of your HTML. It supposes that your texts already have right
 quotes, dashes and other symbols (you can use [Typography Keyboard Layout](http://ilyabirman.net/typography-layout/)).
