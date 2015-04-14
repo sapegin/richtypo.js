@@ -3,7 +3,14 @@ describe('RichTypo', function() {
 
 	function _symb(s) {
 		return s.replace(/_/g, String.fromCharCode(160));
-	}	
+	}
+
+	it('has API functions', function() {
+		rt.lang('ru');
+		expect(rt.lite('Такса — животное.'))
+			.toBe(_symb('Такса_— животное.'));
+	});
+
 
 	it('has API functions', function() {
 		expect(rt.lang).toBeDefined();
@@ -161,6 +168,6 @@ describe('RichTypo', function() {
 
 			expect(rt.textify(rt.lite('- Бадыдыщь!\n- Бадыдыщь!', 'ru')))
 				.toBe('— Бадыдыщь!\n— Бадыдыщь!');
-	});	
+	});
 
 });

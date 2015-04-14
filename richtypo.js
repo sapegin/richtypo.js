@@ -10,6 +10,8 @@
 (function() {
 'use strict';
 
+var _ = require('lodash');
+
 var rules = {},
 	currentLang = 'en',
 	nbsp = String.fromCharCode(160),
@@ -23,29 +25,32 @@ var rules = {},
 		/<!--[\s\S]*?-->/mig,
 		/<[a-z\/][^>]*>/mig
 	],
-	restoreTagsRe = /<(\d+)>/g;
+	restoreTagsRe = /<(\d+)>/g,
+	commonDefs = {
+		nbsp: nbsp
+	};
 
 
 var commonRules = {
-	_cleanup_before: [
+	cleanup_before: [
 		[/ {2,}/g, ' '],  // Remove repeated spaces
 	],
 
-	_cleanup_after: [
+	cleanup_after: [
 		[/&nbsp;/g, nbsp],  // Non-breaking space entinty to symbol
 	],
 
 	// Hanging punctuation
-	_hangingTable: {
+	_hanging_table: {
 		'«': 'laquo',
 		'„': 'laquo',
 		'“': 'laquo',
 		'‘': 'laquo',
 		'(': 'brace',
 	},
-	_hanging: [
+	hanging: [
 		[/(^|\s)([«„“‘\(])/g, function(s, prefix, symbol) {
-			var name = commonRules._hangingTable[symbol],
+			var name = commonRules._hanging_table[symbol],
 				html = ([' ', nbsp, '\n', '\r', '\t'].indexOf(prefix) !== -1)
 					? '<span class="s' + name + '"> </span> '
 					: prefix;
@@ -53,7 +58,7 @@ var commonRules = {
 		}],
 	],
 
-	_textify: [
+	textify: [
 		[/<\/?[^>]+>/g, ''],  // Remove tags
 		[/&mdash;/g, '—'],
 		[/[  ]{2,}/g, ' ']  // Repeated spaces [normal space + nbsp]
@@ -101,15 +106,15 @@ richtypo.lite = function(text, lang) {
 };
 
 richtypo.rich = function(text, lang) {
-	return _process(text, lang, ['save_tags', 'cleanup_before', 'spaces_lite', 'spaces', 'abbrs', 'cleanup_after', 'restore_tags']);
+	return _process(text, lang, ['save_tags', 'cleanup_before', 'spaces_lite', 'spaces', 'abbr', 'cleanup_after', 'restore_tags']);
 };
 
 richtypo.title = function(text, lang) {
-	return _process(text, lang, ['save_tags', 'cleanup_before', 'spaces_lite', 'spaces', 'abbrs', 'amps', 'hanging', 'cleanup_after', 'restore_tags']);
+	return _process(text, lang, ['save_tags', 'cleanup_before', 'spaces_lite', 'spaces', 'abbr', 'amp', 'hanging', 'cleanup_after', 'restore_tags']);
 };
 
 richtypo.full = function(text, lang) {
-	return _process(text, lang, ['save_tags', 'cleanup_before', 'lite', 'spaces_lite', 'spaces', 'quotes', 'abbrs', 'amps', 'hanging', 'cleanup_after', 'restore_tags']);
+	return _process(text, lang, ['save_tags', 'cleanup_before', 'lite', 'spaces_lite', 'spaces', 'quotes', 'abbr', 'amp', 'hanging', 'cleanup_after', 'restore_tags']);
 };
 
 richtypo.textify = function(text, lang) {
@@ -121,19 +126,27 @@ richtypo.richtypo = function(text, rulesets, lang) {
 };
 
 
-function _process(text, lang, ruleset) {
-	var rulesets = typeof ruleset === 'string' ? [ruleset] : ruleset;
-	lang = lang || richtypo.lang();
+function _process(text, lang, rulesets) {
+	if (lang === undefined) {
+		lang = richtypo.lang();
+	}
+	if (!_.isArray(rulesets)) {
+		rulesets = [rulesets];
+	}
+
 	var langRules = _getRules(lang);
-	if (!langRules) return text;
+	if (!langRules) {
+		return text;
+	}
 
 	for (var setIdx = 0; setIdx < rulesets.length; setIdx++) {
 		var rulesetId = rulesets[setIdx];
-		if (langRules[rulesetId]) {
-			text = langRules[rulesetId](text);
+		var rule = langRules[rulesetId];
+		if (_.isFunction(rule)) {
+			text = rule(text);
 		}
-		else if (langRules['_' + rulesetId]) {
-			text = _replace(text, langRules['_' + rulesetId]);
+		else if (rule) {
+			text = _replace(text, rule);
 		}
 	}
 
@@ -144,30 +157,57 @@ function _process(text, lang, ruleset) {
 function _replace(text, rules) {
 	for (var ruleIdx = 0; ruleIdx < rules.length; ruleIdx++) {
 		var rule = rules[ruleIdx];
-		text = text.replace(rule[0], rule[1]);
+		if (_.isArray(rule[0])) {
+			text = _replace(text, rule);
+		}
+		else {
+			text = text.replace(rule[0], rule[1]);
+		}
 	}
 	return text;
 }
 
+function _compile(json) {
+	var defs = _.extend({}, commonDefs, json.defs);
 
-function _extend(from, to) {
-	for (var key in from) {
-		if (!from.hasOwnProperty(key)) continue;
-		to[key] = from[key];
+	var rulesets = {};
+	for (var name in json.rules) {
+		var rule = json.rules[name];
+		if (!_.isArray(rule)) {
+			rule = [rule];
+		}
+		
+		rule = rule.map(function(obj) {
+			if (_.isString(obj)) {
+				return rulesets[obj];
+			}
+			else {
+				return [new RegExp(_tmpl(obj.regex, defs), obj.flags || 'gi'), _tmpl(obj.result, defs)];
+			}
+		});
+		rulesets[name] = rule;
 	}
-	return to;
+
+	return rulesets;
+}
+
+function _tmpl(template, data) {
+	return template.replace(/\$\(([^\)]+)\)/g, function tmplReplace(m, key) {
+		return data[key] || '';
+	});
 }
 
 function _getRules(lang) {
 	if (!rules[lang]) {
 		var langRules = {};
 		try {
-			langRules = require('./rules/' + lang + '.js');
+			langRules = require('./rules/' + lang + '.json');
 		}
 		catch(e) {
-			// console.log('Cannot load rules for language + ' + currentLang + '\n', e);
+			throw new Error('Cannot load rules for language + ' + currentLang + '\n', e);
 		}
-		rules[lang] = _extend(commonRules, langRules);
+		langRules = _compile(langRules);
+		rules[lang] = _.extend({}, commonRules, langRules);
 	}
 	return rules[lang];
 }

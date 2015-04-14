@@ -1,0 +1,77 @@
+{
+	"defs": {
+		"prepos": "at|or|and|the|a|by|an|in|on|of|for|to|as|i|or|my"
+	},
+
+	"rules": {
+		"emdash": [
+			{
+				"regex": "\\s([—–])",
+				"result": "$(nbsp)—"
+			},
+			{
+				"regex": "(\\w+[—–])(\\w)",
+				"result": "<nobr>$1</nobr>$2"
+			}
+		],
+		"spaces_lite": ["emdash"],
+
+		"hyphen": {
+			"regex": "(\\W|^)((?:\\w{1,2}(?:\\-\\w+))|(?:\\w+(?:\\-\\w{1,2})))(?!\\w)",
+			"flags": "g",
+			"result": "$1<nobr>$2</nobr>"
+		},
+		"preposition": {
+			"regex": "(\\W|^)($(prepos))\\s",
+			"result": "$1$2$(nbsp)"
+		},
+		"spaces": ["hyphen", "preposition"],
+
+		"ellipsis": {
+			"regex": "\\.{2,}",
+			"result": "…"
+		},
+		"emdash_lite": [
+			{
+				"regex": "---?",
+				"result": "—"
+			},
+			{
+				"regex": " - ",
+				"result": " — "
+			},
+			{
+				"regex": "([,\\)>])- ",
+				"result": "$1 — "
+			},
+			{
+				"regex": "(^|\\n)\\-",
+				"result": "$1&mdash;",
+				"comment": "For strange reason '\n—' replaces '\n' with space"
+			}
+		],
+		"lite": ["ellipsis", "emdash_lite"],
+
+		"quotes": [
+			{
+				"regex": "\"(\\w)",
+				"result": "“$1"
+			},
+			{
+				"regex": "\"",
+				"result": "”"
+			}
+		],
+
+		"amp": {
+			"regex": "&amp;",
+			"result": "<span class=\"amp\">&amp;</span>"
+		},
+
+		"abbr": {
+			"regex": "([A-Z]{3,})",
+			"flags": "g",
+			"result": "<abbr>$1</abbr>"
+		}
+	}
+}
