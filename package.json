@@ -23,8 +23,8 @@
     "jshint": "~2.7.0"
   },
   "scripts": {
-    "test": "jasmine-node test/ || true",
-    "lint": "jshint richtypo.js || true"
+    "test": "jasmine-node test",
+    "lint": "jshint richtypo.js"
   },
   "keywords": [
     "typography",
