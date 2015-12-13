@@ -170,4 +170,9 @@ describe('RichTypo', function() {
 				.toBe('— Бадыдыщь!\n— Бадыдыщь!');
 	});
 
+	it('leaves commented out tags alone', function() {
+		expect(rt.lite('<!-- <script>alert("wheee");</script><style>* { color: red; }</style><pre>...</pre> -->'))
+			.toBe('<!-- <script>alert("wheee");</script><style>* { color: red; }</style><pre>...</pre> -->');
+	});
+
 });
