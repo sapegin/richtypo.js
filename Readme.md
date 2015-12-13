@@ -30,7 +30,7 @@ Will produce something like that:
 
 ```html
 Welcome to&nbsp;the world of&nbsp;beautiful web typography&nbsp;— only with Richtypo.
-Beautiful <span class="amp">&amp;</span> Awesome Web Typography with <span class="slaquo"> </span> <span class="hlaquo">“</span>Richtypo”'
+Beautiful <span class="amp">&amp;</span> Awesome Web Typography with <span class="sldquo"> </span> <span class="hldquo">“</span>Richtypo”'
 ```
 
 `&nbsp;` is shown here just for demonstration purposes. Actual implementation produces the non-breaking space character itself (`String.fromCharCode(160)`), not the escaped sequence.
