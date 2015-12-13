@@ -175,4 +175,12 @@ describe('RichTypo', function() {
 			.toBe('<!-- <script>alert("wheee");</script><style>* { color: red; }</style><pre>...</pre> -->');
 	});
 
+	it('plays nice with ie conditional comments', function() {
+		expect(rt.title('<!--[if lte IE 6]><script>alert("wheee");</script><style>* { color: red; }</style><pre>...</pre><![endif]-->'))
+			.toBe('<!--[if lte IE 6]><script>alert("wheee");</script><style>* { color: red; }</style><pre>...</pre><![endif]-->');
+
+		expect(rt.title('<!--[if lte IE 6]>The “quoted text.”<![endif]-->'))
+			.toBe('<!--[if lte IE 6]>The<span class="slaquo"> </span> <span class="hlaquo">“</span>quoted text.”<![endif]-->');
+	});
+
 });

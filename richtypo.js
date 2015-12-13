@@ -18,6 +18,7 @@ var rules = {},
 	savedTagsNum,
 	savedTags,
 	saveTagsRe = [
+		/<!(--\[[^\]>]+\]|\[[^\]>]+\]--)>/mig,
 		/<!--[\s\S]*?-->/mig,
 		/<pre[^>]*>[\s\S]*?<\/pre>/mig,
 		/<style[^>]*>[\s\S]*?<\/style>/mig,
