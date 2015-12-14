@@ -18,11 +18,12 @@ var rules = {},
 	savedTagsNum,
 	savedTags,
 	saveTagsRe = [
+		/<!(--\[[^\]>]+\]|\[[^\]>]+\]--)>/mig,
+		/<!--[\s\S]*?-->/mig,
 		/<pre[^>]*>[\s\S]*?<\/pre>/mig,
 		/<style[^>]*>[\s\S]*?<\/style>/mig,
 		/<script[^>]*>[\s\S]*?<\/script>/mig,
 		/<code[^>]*>[\s\S]*?<\/code>/mig,
-		/<!--[\s\S]*?-->/mig,
 		/<[a-z\/][^>]*>/mig
 	],
 	restoreTagsRe = /<(\d+)>/g,
