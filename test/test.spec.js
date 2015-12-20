@@ -180,7 +180,7 @@ describe('RichTypo', function() {
 			.toBe('<!--[if lte IE 6]><script>alert("wheee");</script><style>* { color: red; }</style><pre>...</pre><![endif]-->');
 
 		expect(rt.title('<!--[if lte IE 6]>The “quoted text.”<![endif]-->'))
-			.toBe('<!--[if lte IE 6]>The<span class="slaquo"> </span> <span class="hlaquo">“</span>quoted text.”<![endif]-->');
+			.toBe('<!--[if lte IE 6]>The<span class="sldquo"> </span> <span class="hldquo">“</span>quoted text.”<![endif]-->');
 	});
 
 });
