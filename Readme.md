@@ -30,10 +30,92 @@ Will produce something like that:
 
 ```html
 Welcome to&nbsp;the world of&nbsp;beautiful web typography&nbsp;— only with Richtypo.
-Beautiful <span class="amp">&amp;</span> Awesome Web Typography with <span class="slaquo"> </span> <span class="hlaquo">“</span>Richtypo”'
+Beautiful <span class="amp">&amp;</span> Awesome Web Typography with <span class="sldquo"> </span> <span class="hldquo">“</span>Richtypo”'
 ```
 
 `&nbsp;` is shown here just for demonstration purposes. Actual implementation produces the non-breaking space character itself (`String.fromCharCode(160)`), not the escaped sequence.
+
+
+## Styles
+
+Richtypo wraps abbreviations in `<abbr>` tags. It also wraps ampersands and leading quotes to allow for typographic enhancement:
+
+<table>
+  <thead>
+    <tr>
+      <th>Character</th>
+      <th>Spacer class</th>
+      <th>Character class</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td><code>&amp;</code></td>
+      <td></td>
+      <td><code>amp</code></td>
+    </tr>
+    <tr>
+      <td><code>“</code></td>
+      <td><code>sldquo</code></td>
+      <td><code>hldquo</code></td>
+    </tr>
+    <tr>
+      <td><code>‘</code></td>
+      <td><code>slsquo</code></td>
+      <td><code>hlsquo</code></td>
+    </tr>
+    <tr>
+      <td><code>«</code></td>
+      <td><code>slaquo</code></td>
+      <td><code>hlaquo</code></td>
+    </tr>
+    <tr>
+      <td><code>„</code></td>
+      <td><code>sbdquo</code></td>
+      <td><code>hbdquo</code></td>
+    </tr>
+    <tr>
+      <td><code>(</code></td>
+      <td><code>sbrace</code></td>
+      <td><code>hbrace</code></td>
+    </tr>
+   </tbody>
+</table>
+
+
+Start with something like this, and customize it for your site:
+
+```css
+/* Use small caps for abbreviations */
+abbr {
+  font-size: 0.875em;
+  letter-spacing: 0.15em;
+  margin-right: -0.15em;
+}
+
+/* Use the best available ampersand */
+.amp {
+  font-family: Baskerville, Constantia, Palatino, 'Palatino Linotype', 'Book Antiqua', serif;
+  font-style: italic;
+}
+
+/* Hang leading braces and quotes into the left margin */
+.sbrace { margin-right: 0.3em;  }
+.hbrace { margin-left: -0.3em;  }
+
+.slaquo { margin-right: 0.42em; }
+.hlaquo { margin-left: -0.42em; }
+
+.sbdquo { margin-right: 0.42em; }
+.hbdquo { margin-left: -0.42em; }
+
+.sldquo { margin-right: 0.42em; }
+.hldquo { margin-left: -0.42em; }
+
+.slsquo { margin-right: 0.42em; }
+.hlsquo { margin-left: -0.42em; }
+```
 
 
 ## Installation

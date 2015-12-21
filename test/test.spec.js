@@ -153,10 +153,10 @@ describe('RichTypo', function() {
 
 	it('hanging', function() {
 		expect(rt.title('The “quoted text.”'))
-			.toBe(_symb('The<span class="slaquo"> </span> <span class="hlaquo">“</span>quoted text.”'));
+			.toBe(_symb('The<span class="sldquo"> </span> <span class="hldquo">“</span>quoted text.”'));
 
 		expect(rt.title('“Quoted text” two.'))
-			.toBe(_symb('<span class="hlaquo">“</span>Quoted text” two.'));
+			.toBe(_symb('<span class="hldquo">“</span>Quoted text” two.'));
 
 		expect(rt.title('alert("Hello world!")'))
 			.toBe(_symb('alert("Hello world!")'));
@@ -180,7 +180,7 @@ describe('RichTypo', function() {
 			.toBe('<!--[if lte IE 6]><script>alert("wheee");</script><style>* { color: red; }</style><pre>...</pre><![endif]-->');
 
 		expect(rt.title('<!--[if lte IE 6]>The “quoted text.”<![endif]-->'))
-			.toBe('<!--[if lte IE 6]>The<span class="slaquo"> </span> <span class="hlaquo">“</span>quoted text.”<![endif]-->');
+			.toBe('<!--[if lte IE 6]>The<span class="sldquo"> </span> <span class="hldquo">“</span>quoted text.”<![endif]-->');
 	});
 
 });
