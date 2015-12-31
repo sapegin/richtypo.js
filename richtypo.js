@@ -44,7 +44,6 @@
 
 	var rules = {},
 		currentLang = 'en',
-		nbsp = String.fromCharCode(160),
 		savedTagsNum,
 		savedTags,
 		saveTagsRe = [
@@ -58,7 +57,7 @@
 		],
 		restoreTagsRe = /<(\d+)>/g,
 		commonDefs = {
-			nbsp: nbsp
+			nbsp: '\xA0'
 		};
 
 
@@ -82,7 +81,7 @@
 		hanging: [
 			[/(^|\s|>)([«„“‘\(])/g, function(s, prefix, symbol) {
 				var name = commonRules._hanging_table[symbol],
-					html = ([' ', nbsp, '\n', '\r', '\t'].indexOf(prefix) !== -1)
+					html = ([' ', '\xA0', '\n', '\r', '\t'].indexOf(prefix) !== -1)
 						? '<span class="s' + name + '"> </span> '
 						: prefix;
 				return html + '<span class="h' + name + '">' + symbol + '</span>';
