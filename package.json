@@ -31,5 +31,6 @@
     "typo",
     "russian",
     "english"
-  ]
+  ],
+  "tonicExampleFilename": "example/example.js"
 }
