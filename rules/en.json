@@ -6,15 +6,15 @@
 	"rules": {
 		"emdash": [
 			{
-				"regex": "\\s([—–])\\s",
+				"regex": "[ $(nbsp)]([—–])[ $(nbsp)]",
 				"result": "$(hairspace)—$(hairspace)"
 			},
 			{
-				"regex": "\\s([—–])",
+				"regex": "[ $(nbsp)]([—–])",
 				"result": "$(hairspace)—"
 			},
 			{
-				"regex": "([—–])\\s",
+				"regex": "([—–])[ $(nbsp)]",
 				"result": "—$(hairspace)"
 			},
 			{
@@ -30,7 +30,7 @@
 			"result": "$1<nobr>$2</nobr>"
 		},
 		"preposition": {
-			"regex": "(\\W|^)($(prepos))\\s",
+			"regex": "(\\W|^)($(prepos)) ",
 			"result": "$1$2$(nbsp)"
 		},
 		"spaces": ["hyphen", "preposition"],

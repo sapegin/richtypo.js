@@ -6,27 +6,27 @@
 
 	"rules": {
 		"emdash": {
-			"regex": "\\s—",
+			"regex": " —",
 			"result": "$(nbsp)—"
 		},
 		"etc": [
 			{
-				"regex": "и\\sт.\\sд.",
+				"regex": "и[ $(nbsp)]т\\. д\\.",
 				"result": "и$(nbsp)т.$(nbsp)д."
 			},
 			{
-				"regex": "и\\sт.\\sп.",
+				"regex": "и[ $(nbsp)]т\\. п\\.",
 				"result": "и$(nbsp)т.$(nbsp)п."
 			}
 		],
 		"spaces_lite": ["emdash", "etc"],
 
 		"num": {
-			"regex": "№\\s",
+			"regex": "№ ",
 			"result": "№$(nbsp)"
 		},
 		"para": {
-			"regex": "§\\s",
+			"regex": "§ ",
 			"result": "§$(nbsp)"
 		},
 		"initials": {
@@ -52,15 +52,15 @@
 			}
 		],
 		"currency": {
-			"regex": "(\\d)\\s(\\$|р\\.|руб\\.)",
+			"regex": "(\\d) (\\$|р\\.|руб\\.)",
 			"result": "$1$(nbsp)$2"
 		},
 		"year": {
-			"regex": "\\b(\\d{4})\\s(гг?\\.)",
+			"regex": "\\b(\\d{4}) (гг?\\.)",
 			"result": "$1$(nbsp)$2"
 		},
 		"date": {
-			"regex": "(\\d)\\s($(months))",
+			"regex": "(\\d) ($(months))",
 			"result": "$1$(nbsp)$2"
 		},
 		"spaces": ["num", "para", "initials", "hyphen", "particle", "currency", "year", "date"],
