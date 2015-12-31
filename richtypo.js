@@ -7,8 +7,38 @@
  * @license MIT
  */
 
+ /*
+  \x20 - regular space
+  \xA0 - non-breaking space
+  */
+
 (function() {
 	'use strict';
+
+	var verbose = false;
+
+	function logHeader(s) {
+		if (verbose) {
+			console.log('\x1b[1m' + s + '\x1b[22m');
+		}
+	}
+
+	function log() {
+		if (verbose) {
+			var args = _.toArray(arguments).map(function(s) {
+				if (typeof s === 'string') {
+					return s
+						.replace(/\x20/g, '\x1B[36m_\x1B[0m')
+						.replace(/\xA0/g, '\x1B[36m❚\x1B[0m')
+					;
+				}
+				if (_.isRegExp(s)) {
+					return s.toString();
+				}
+			});
+			console.log.apply(console, args);
+		}
+	}
 
 	var _ = require('lodash');
 
@@ -101,6 +131,14 @@
 		}
 	};
 
+	richtypo.verbose = function(enabled) {
+		if (enabled !== undefined) {
+			verbose = enabled;
+		}
+		else {
+			return verbose;
+		}
+	};
 
 	richtypo.lite = function(text, lang) {
 		return _process(text, lang, ['save_tags', 'cleanup_before', 'lite', 'spaces_lite', 'quotes', 'cleanup_after', 'restore_tags']);
@@ -135,6 +173,9 @@
 			rulesets = [rulesets];
 		}
 
+		logHeader('\n\nLang: ' + lang + ', rules: ' + rulesets.join(', '));
+		log('Source:', text);
+
 		var langRules = _getRules(lang);
 		if (!langRules) {
 			return text;
@@ -143,8 +184,10 @@
 		for (var setIdx = 0; setIdx < rulesets.length; setIdx++) {
 			var rulesetId = rulesets[setIdx];
 			var rule = langRules[rulesetId];
+			logHeader('\nRule: ' + rulesetId);
 			if (_.isFunction(rule)) {
 				text = rule(text);
+				log(text);
 			}
 			else if (rule) {
 				text = _replace(text, rule);
@@ -162,7 +205,9 @@
 				text = _replace(text, rule);
 			}
 			else {
+				log(rule[0], '→', rule[1]);
 				text = text.replace(rule[0], rule[1]);
+				log(text);
 			}
 		}
 		return text;

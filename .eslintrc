@@ -70,7 +70,6 @@
     "no-unused-expressions": 0,  // Allow usage of expressions in statement position
     "no-void": 2,  // Disallow use of void operator (off by default)
     "no-with": 2,  // Disallow use of the with statement
-    "prefer-spread": 2,  // Suggest using the spread operator instead of .apply()
     "radix": 2,  // Require use of the second argument for parseInt()
     "wrap-iife": [1, "outside"],  // Require immediate function invocation to be wrapped in parentheses
     "yoda": [2, "never", {  // Disallow Yoda conditions
