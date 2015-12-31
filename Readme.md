@@ -167,4 +167,4 @@ The changelog can be found in the [Changelog.md](Changelog.md) file.
 
 ## License
 
-The MIT License, see the included `License.md` file.
+The MIT License, see the included [License.md](License.md) file.
