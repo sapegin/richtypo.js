@@ -15,16 +15,20 @@
     "node": ">= 0.10.0"
   },
   "dependencies": {
-    "lodash": "~3.6.0",
+    "lodash": "~3.10.1",
     "optimist": "~0.6.1"
   },
   "devDependencies": {
     "jasmine-node": "~1.14.5",
-    "jshint": "~2.7.0"
+    "jshint": "~2.7.0",
+    "sweet2": "~1.0.2"
   },
   "scripts": {
-    "test": "jasmine-node test",
-    "lint": "jshint richtypo.js"
+    "test": "npm run lint && npm run jasmine",
+    "prepublish": "npm run example",
+    "jasmine": "jasmine-node test",
+    "lint": "jshint richtypo.js",
+    "example": "node example/src"
   },
   "keywords": [
     "typography",
