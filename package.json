@@ -19,6 +19,11 @@
   "bin": {
     "richtypo": "./bin/cli.js"
   },
+  "files": [
+    "richtypo.js",
+    "bin",
+    "rules"
+  ],
   "engines": {
     "node": ">= 0.10.0"
   },
