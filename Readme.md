@@ -2,10 +2,7 @@
 
 [![Build Status](https://travis-ci.org/sapegin/richtypo.js.svg)](https://travis-ci.org/sapegin/richtypo.js)
 
-The main purpose of this library is to enhance typography of your HTML. It supposes that your texts already have right
-quotes, dashes and other symbols (you can use [Typography Keyboard Layout](http://ilyabirman.net/typography-layout/)).
-Richtypo adds non-breaking spaces in right places, adds CSS classes for abbreviations, ampersands and hanging
-punctuation for special styling.
+The main purpose of this library is to enhance typography of your HTML. It supposes that your texts already have right quotes, dashes and other symbols (you can use [Typography Keyboard Layout](http://ilyabirman.net/typography-layout/)). Richtypo adds non-breaking spaces in right places, CSS classes for abbreviations, ampersands and hanging punctuation for special styling.
 
 
 ## Features
@@ -20,6 +17,8 @@ punctuation for special styling.
 
 ## Example
 
+[Try it out!](https://tonicdev.com/npm/richtypo)
+
 ```javascript
 var richtypo = require('richtypo');
 var beautiful = richtypo.rich('Welcome to the world of beautiful web typography — only with Richtypo.');
@@ -33,7 +32,7 @@ Welcome to&nbsp;the world of&nbsp;beautiful web typography&nbsp;— only with Ri
 Beautiful <span class="amp">&amp;</span> Awesome Web Typography with <span class="sldquo"> </span> <span class="hldquo">“</span>Richtypo”'
 ```
 
-`&nbsp;` is shown here just for demonstration purposes. Actual implementation produces the non-breaking space character itself (`String.fromCharCode(160)`), not the escaped sequence.
+`&nbsp;` is shown here just for demonstration purposes. Actual implementation produces the non-breaking space character itself (`\xA0`), not the escaped sequence.
 
 
 ## Styles
