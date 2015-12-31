@@ -1,6 +1,6 @@
 {
 	"defs": {
-		"prepos": "at|or|and|the|a|by|an|in|on|of|for|to|as|i|or|my"
+		"prepos": "and|the|for"
 	},
 
 	"rules": {

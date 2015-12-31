@@ -83,6 +83,11 @@ describe('RichTypo', function() {
 		);
 
 		compare(
+			rt.rich('рынка книги, мы к этой цифре'),
+			'рынка книги, мы_к_этой цифре'
+		);
+
+		compare(
 			rt.rich('Это ж как бы колбаса!'),
 			'Это_ж как_бы колбаса!'
 		);
@@ -101,11 +106,16 @@ describe('RichTypo', function() {
 			rt.rich('Цири родилась 30 июля.'),
 			'Цири родилась 30_июля.'
 		);
+	});
 
-		//compare(
-		//  rt.rich('рынка книги, мы к этой цифре'),
-		//	'рынка книги, мы_к_этой цифре'
-		// );
+	it('spaces en', function() {
+		rt.lang('en');
+
+		compare(
+			rt.rich('even if I fell off the top of the house'),
+			'even if_I_fell off the_top of_the_house'
+		);
+
 	});
 
 	it('lite ru', function() {
@@ -273,5 +283,14 @@ describe('RichTypo', function() {
 			'<!--[if lte IE 6]>The<span class="sldquo"> </span> <span class="hldquo">“</span>quoted text.”<![endif]-->'
 		);
 	});
+
+	//it.only('test', function() {
+	//  rt.verbose(true);
+	//	rt.lang('ru');
+	//	compare(
+	//		rt.richtypo('рынка книги, мы к этой цифре', ['short_words']),
+	//		'рынка книги, мы_к_этой цифре'
+	//	);
+	//});
 
 });

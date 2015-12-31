@@ -61,13 +61,21 @@
 		};
 
 
+	var shortWordsRegExp = [/(^|[\x20\xA0(>«”„])([а-яёa-zA-ZА-ЯЁ][а-яёa-z]?)\x20/g, '$1$2\xA0'];
 	var commonRules = {
 		cleanup_before: [
 			[/ {2,}/g, ' ']  // Remove repeated spaces
 		],
 
 		cleanup_after: [
-			[/&nbsp;/g, nbsp],  // Non-breaking space entinty to symbol
+			[/&nbsp;/g, '\xA0']  // Non-breaking space entinty to symbol
+		],
+
+		// Non-breaking space after short words
+		short_words: [
+			// Run twice to catch pairs of short words: of_a_book
+			shortWordsRegExp,
+			shortWordsRegExp
 		],
 
 		// Hanging punctuation
@@ -140,19 +148,59 @@
 	};
 
 	richtypo.lite = function(text, lang) {
-		return _process(text, lang, ['save_tags', 'cleanup_before', 'lite', 'spaces_lite', 'quotes', 'cleanup_after', 'restore_tags']);
+		return _process(text, lang, [
+			'save_tags',
+			'cleanup_before',
+			'lite',
+			'spaces_lite',
+			'quotes',
+			'cleanup_after',
+			'restore_tags'
+		]);
 	};
 
 	richtypo.rich = function(text, lang) {
-		return _process(text, lang, ['save_tags', 'cleanup_before', 'spaces_lite', 'spaces', 'abbr', 'cleanup_after', 'restore_tags']);
+		return _process(text, lang, [
+			'save_tags',
+			'cleanup_before',
+			'short_words',
+			'spaces_lite',
+			'spaces',
+			'abbr',
+			'cleanup_after',
+			'restore_tags'
+		]);
 	};
 
 	richtypo.title = function(text, lang) {
-		return _process(text, lang, ['save_tags', 'cleanup_before', 'spaces_lite', 'spaces', 'abbr', 'amp', 'hanging', 'cleanup_after', 'restore_tags']);
+		return _process(text, lang, [
+			'save_tags',
+			'cleanup_before',
+			'short_words',
+			'spaces_lite',
+			'spaces',
+			'abbr',
+			'amp',
+			'hanging',
+			'cleanup_after',
+			'restore_tags'
+		]);
 	};
 
 	richtypo.full = function(text, lang) {
-		return _process(text, lang, ['save_tags', 'cleanup_before', 'lite', 'spaces_lite', 'spaces', 'quotes', 'abbr', 'amp', 'hanging', 'cleanup_after', 'restore_tags']);
+		return _process(text, lang, [
+			'save_tags',
+			'cleanup_before',
+			'lite',
+			'spaces_lite',
+			'spaces',
+			'quotes',
+			'abbr',
+			'amp',
+			'hanging',
+			'cleanup_after',
+			'restore_tags'
+		]);
 	};
 
 	richtypo.textify = function(text, lang) {

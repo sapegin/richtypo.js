@@ -1,6 +1,5 @@
 {
 	"defs": {
-		"prepos": "а|ай|в|вы|во|да|до|ее|её|ей|за|и|из|их|к|ко|мы|на|не|ни|но|ну|о|об|ой|он|от|по|с|со|то|ты|у|уж|я",
 		"particles": "б|бы|ж|же|ли|ль",
 		"months": "января|февраля|марта|апреля|мая|июня|июля|августа|сентября|ноября|декабря"
 	},
@@ -40,14 +39,18 @@
 			"flags": "g",
 			"result": "$1<nobr>$2</nobr>"
 		},
-		"preposition": {
-			"regex": "([^а-яёА-ЯЁ]|^)($(prepos))\\s",
-			"result": "$1$2$(nbsp)"
-		},
-		"particle": {
-			"regex": "\\s($(particles))(?![-а-яё])",
-			"result": "$(nbsp)$1"
-		},
+		"particle": [
+			{
+				"regex": "([а-яёА-ЯЁ]) ($(particles))(?=[?!,.:;\"‘“»])",
+				"flags": "g",
+				"result": "$1$(nbsp)$2"
+			},
+			{
+				"regex": "([а-яёА-ЯЁ])[ $(nbsp)]($(particles))[ $(nbsp)]",
+				"flags": "g",
+				"result": "$1$(nbsp)$2 "
+			}
+		],
 		"currency": {
 			"regex": "(\\d)\\s(\\$|р\\.|руб\\.)",
 			"result": "$1$(nbsp)$2"
@@ -60,7 +63,7 @@
 			"regex": "(\\d)\\s($(months))",
 			"result": "$1$(nbsp)$2"
 		},
-		"spaces": ["num", "para", "initials", "hyphen", "preposition", "particle", "currency", "year", "date"],
+		"spaces": ["num", "para", "initials", "hyphen", "particle", "currency", "year", "date"],
 
 		"ellipsis": {
 			"regex": "\\.{2,}",
