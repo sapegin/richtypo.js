@@ -49,11 +49,6 @@ describe('RichTypo', function() {
 		rt.lang('ru');
 
 		compare(
-			rt.rich('Такса — животное.'),
-			'Такса_— животное.'
-		);
-
-		compare(
 			rt.rich('Там было много тлонов, тутликов, табачек и т. п. и т. п.'),
 			'Там было много тлонов, тутликов, табачек и_т._п. и_т._п.'
 		);
@@ -163,6 +158,39 @@ describe('RichTypo', function() {
 		compare(
 			rt.lite('Dachshund--beast'),
 			'<nobr>Dachshund—</nobr>beast'
+		);
+	});
+
+	it('emdash ru', function() {
+		rt.lang('ru');
+
+		compare(
+			rt.rich('Такса — животное.'),
+			'Такса_— животное.'
+		);
+	});
+
+	it('emdash en', function() {
+		rt.lang('en');
+
+		compare(
+			rt.rich('Dachshund — beast.'),
+			'Dachshund&#8202;—&#8202;beast.'
+		);
+
+		compare(
+			rt.rich('Dachshund —'),
+			'Dachshund&#8202;—'
+		);
+
+		compare(
+			rt.rich('— Beast!'),
+			'—&#8202;Beast!'
+		);
+
+		compare(
+			rt.rich('Dachshund—beast.'),
+			'<nobr>Dachshund—</nobr>beast.'
 		);
 	});
 

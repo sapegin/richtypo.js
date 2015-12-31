@@ -57,7 +57,8 @@
 		],
 		restoreTagsRe = /<(\d+)>/g,
 		commonDefs = {
-			nbsp: '\xA0'
+			nbsp: '\xA0',
+			hairspace: '&#8202;'
 		};
 
 

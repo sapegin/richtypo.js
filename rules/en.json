@@ -6,8 +6,16 @@
 	"rules": {
 		"emdash": [
 			{
+				"regex": "\\s([—–])\\s",
+				"result": "$(hairspace)—$(hairspace)"
+			},
+			{
 				"regex": "\\s([—–])",
-				"result": "$(nbsp)—"
+				"result": "$(hairspace)—"
+			},
+			{
+				"regex": "([—–])\\s",
+				"result": "—$(hairspace)"
 			},
 			{
 				"regex": "(\\w+[—–])(\\w)",
