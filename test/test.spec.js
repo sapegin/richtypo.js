@@ -251,7 +251,12 @@ describe('RichTypo', function() {
 			rt.title('alert("Hello world!")'),
 			'alert("Hello world!")'
 		);
-	});	
+
+		compare(
+			rt.full('“Quoted text” two.'),
+			'<span class="hldquo">“</span>Quoted text” two.'
+		);
+	});
 
 	it('textify', function() {
 		expect(
