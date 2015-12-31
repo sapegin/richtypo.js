@@ -170,6 +170,14 @@ function _replace(text, rules) {
 
 function _compile(json) {
 	var defs = _.extend({}, commonDefs, json.defs);
+	function compileRule(obj) {
+		if (_.isString(obj)) {
+			return rulesets[obj];
+		}
+		else {
+			return [new RegExp(_tmpl(obj.regex, defs), obj.flags || 'gi'), _tmpl(obj.result, defs)];
+		}
+	}
 
 	var rulesets = {};
 	for (var name in json.rules) {
@@ -178,14 +186,7 @@ function _compile(json) {
 			rule = [rule];
 		}
 		
-		rule = rule.map(function(obj) {
-			if (_.isString(obj)) {
-				return rulesets[obj];
-			}
-			else {
-				return [new RegExp(_tmpl(obj.regex, defs), obj.flags || 'gi'), _tmpl(obj.result, defs)];
-			}
-		});
+		rule = rule.map(compileRule);
 		rulesets[name] = rule;
 	}
 

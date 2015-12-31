@@ -1,6 +1,5 @@
 {
 	"node": true,
-	"es5": true,
 	"strict": false,
 	"curly": false,
 	"forin": false,
