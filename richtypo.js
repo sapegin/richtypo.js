@@ -63,7 +63,7 @@
 
 	var commonRules = {
 		cleanup_before: [
-			[/ {2,}/g, ' '],  // Remove repeated spaces
+			[/ {2,}/g, ' ']  // Remove repeated spaces
 		],
 
 		cleanup_after: [
@@ -76,7 +76,7 @@
 			'„': 'bdquo',
 			'“': 'ldquo',
 			'‘': 'lsquo',
-			'(': 'brace',
+			'(': 'brace'
 		},
 		hanging: [
 			[/(^|\s|>)([«„“‘\(])/g, function(s, prefix, symbol) {
