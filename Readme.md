@@ -158,20 +158,9 @@ Text language: `en` or `ru`.
 
 Convert result to text.
 
+## Changelog
 
-## Release History
-
-### 2013-08-23 v0.1.8
-
-Maintenance release.
-
-### 2013-04-25 v0.1.6
-
-* Fix hanging punctuation.
-
-### 2013-01-24 v0.1.5
-
-* New API methods: full() and textify(). Fix rules loading when lang() method not invoked. CLI.
+The changelog can be found in the [Changelog.md](Changelog.md) file.
 
 
 ---
