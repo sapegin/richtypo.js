@@ -1,12 +1,20 @@
 {
   "name": "richtypo",
-  "description": "Typography enhancer",
-  "author": "Artem Sapegin <artem@sapegin.ru> (http://sapegin.me)",
   "version": "0.1.8",
+  "description": "Typography enhancer for English and Russian",
+  "homepage": "https://github.com/sapegin/richtypo.js",
+  "author": {
+    "name": "Artem Sapegin",
+    "url": "http://sapegin.me/"
+  },
   "repository": {
     "type": "git",
-    "url": "git://github.com/sapegin/richtypo.git"
+    "url": "git://github.com/sapegin/richtypo.js.git"
   },
+  "bugs": {
+    "url": "https://github.com/sapegin/richtypo.js/issues"
+  },
+  "license": "MIT",
   "main": "./richtypo.js",
   "bin": {
     "richtypo": "./bin/cli.js"
