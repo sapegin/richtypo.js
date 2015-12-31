@@ -1,5 +1,5 @@
 ---
-title: Awesome & Beautiful Web Typography with Richtypo
+title: Awesome &amp; Beautiful Web Typography with Richtypo
 layout: template
 ---
 
