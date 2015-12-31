@@ -159,6 +159,9 @@ describe('RichTypo', function() {
 		expect(rt.title('“Quoted text” two.'))
 			.to.eql(_symb('<span class="hldquo">“</span>Quoted text” two.'));
 
+		expect(rt.title('<p>“Quoted text” three.</p>'))
+			.to.eql(_symb('<p><span class="hldquo">“</span>Quoted text” three.</p>'));
+
 		expect(rt.title('alert("Hello world!")'))
 			.to.eql(_symb('alert("Hello world!")'));
 	});	
