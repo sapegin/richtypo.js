@@ -19,15 +19,15 @@
     "optimist": "~0.6.1"
   },
   "devDependencies": {
+    "eslint": "~1.10.3",
     "jasmine-node": "~1.14.5",
-    "jshint": "~2.7.0",
     "sweet2": "~1.0.2"
   },
   "scripts": {
     "test": "npm run lint && npm run jasmine",
     "prepublish": "npm run example",
     "jasmine": "jasmine-node test",
-    "lint": "jshint richtypo.js",
+    "lint": "eslint richtypo.js",
     "example": "node example/src"
   },
   "keywords": [

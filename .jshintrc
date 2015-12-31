@@ -1,7 +1,0 @@
-{
-	"node": true,
-	"strict": false,
-	"curly": false,
-	"forin": false,
-	"laxbreak": true
-}
