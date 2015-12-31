@@ -40,49 +40,14 @@ Beautiful <span class="amp">&amp;</span> Awesome Web Typography with <span class
 
 Richtypo wraps abbreviations in `<abbr>` tags. It also wraps ampersands and leading quotes to allow for typographic enhancement:
 
-<table>
-  <thead>
-    <tr>
-      <th>Character</th>
-      <th>Spacer class</th>
-      <th>Character class</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <tr>
-      <td><code>&amp;</code></td>
-      <td></td>
-      <td><code>amp</code></td>
-    </tr>
-    <tr>
-      <td><code>“</code></td>
-      <td><code>sldquo</code></td>
-      <td><code>hldquo</code></td>
-    </tr>
-    <tr>
-      <td><code>‘</code></td>
-      <td><code>slsquo</code></td>
-      <td><code>hlsquo</code></td>
-    </tr>
-    <tr>
-      <td><code>«</code></td>
-      <td><code>slaquo</code></td>
-      <td><code>hlaquo</code></td>
-    </tr>
-    <tr>
-      <td><code>„</code></td>
-      <td><code>sbdquo</code></td>
-      <td><code>hbdquo</code></td>
-    </tr>
-    <tr>
-      <td><code>(</code></td>
-      <td><code>sbrace</code></td>
-      <td><code>hbrace</code></td>
-    </tr>
-   </tbody>
-</table>
-
+| Character | Spacer class | Character class |
+| --------- | ------------ | --------------- |
+| `&` |           | `.amp`    |
+| `“` | `.sldquo` | `.hldquo` |
+| `‘` | `.slsquo` | `.hlsquo` |
+| `«` | `.slaquo` | `.hlaquo` |
+| `„` | `.sbdquo` | `.hbdquo` |
+| `(` | `.sbrace` | `.hbrace` |
 
 Start with something like this, and customize it for your site:
 
