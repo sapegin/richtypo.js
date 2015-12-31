@@ -179,7 +179,7 @@ describe('RichTypo', function() {
 		rt.lang('en');
 
 		compare(
-			rt.rich('Dachshund — beast.'),
+			rt.rich('Dachshund — beast.'),
 			'Dachshund&#8202;—&#8202;beast.'
 		);
 
@@ -189,7 +189,7 @@ describe('RichTypo', function() {
 		);
 
 		compare(
-			rt.rich('— Beast!'),
+			rt.rich('— Beast!'),
 			'—&#8202;Beast!'
 		);
 
