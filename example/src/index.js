@@ -23,12 +23,12 @@ var documents = sweet2.loadSourceFiles(__dirname, ['md'], {
 
 documents = documents.map(function(doc) {
 	// Run Rich Typo
-	doc.title = richtypo.title(doc.title);  // Titles
+	doc.pageTitle = richtypo.title(doc.title);  // Titles
 	doc.content = richtypo.rich(doc.content);  // Page content
 	doc.content = richtypo.richtypo(doc.content, ['hanging']);  // Hanging punctuation
 
 	// Make non-breaking spaces visible
-	doc.title = doc.title.replace(/ /g, '&nbsp;');
+	doc.pageTitle = doc.pageTitle.replace(/ /g, '&nbsp;');
 	doc.content = doc.content.replace(/ /g, '&nbsp;');
 
 	return doc;
