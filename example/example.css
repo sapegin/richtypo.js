@@ -6,7 +6,7 @@ body {
 	padding: 1em;
 	margin: 0 auto;
 	max-width: 30em;
-	font-family: 'Sorts Mill Goudy', Georgia, serif;
+	font-family: "Sorts Mill Goudy", Georgia, serif;
 	-webkit-hyphens: auto;
 	-moz-hyphens: auto;
 	hyphens: auto;
@@ -15,9 +15,9 @@ body {
 	font-variant-numeric: "oldstyle-nums";
 	-webkit-font-variant-ligatures: common-ligatures discretionary-ligatures contextual historical-ligatures;
 	font-variant-ligatures: common-ligatures discretionary-ligatures contextual historical-ligatures;
-	-webkit-font-feature-settings: "kern","liga","dlig","hlig","clig","ss01","ss03","salt","onum";
-	font-feature-settings: "kern","liga","dlig","hlig","clig","ss01","ss03","salt","onum";
-}
+	-webkit-font-feature-settings: "kern", "liga", "dlig", "hlig", "clig", "ss01", "ss03", "salt", "onum";
+	font-feature-settings: "kern", "liga", "dlig", "hlig", "clig", "ss01", "ss03", "salt", "onum";
+	}
 
 h1 {
 	margin: 0 0 1em;
@@ -41,7 +41,7 @@ abbr {
 	}
 
 .amp {
-	font-family: Baskerville, Constantia, Palatino, 'Palatino Linotype', 'Book Antiqua', serif;
+	font-family: Baskerville, Constantia, Palatino, "Palatino Linotype", "Book Antiqua", serif;
 	font-style: italic;
 	}
 
