@@ -180,12 +180,12 @@ describe('RichTypo', function() {
 
 		compare(
 			rt.rich('Dachshund — beast.'),
-			'Dachshund&#8202;—&#8202;beast.'
+			'<nobr>Dachshund&#8202;—</nobr>&#8202;beast.'
 		);
 
 		compare(
 			rt.rich('Dachshund —'),
-			'Dachshund&#8202;—'
+			'<nobr>Dachshund&#8202;—</nobr>'
 		);
 
 		compare(

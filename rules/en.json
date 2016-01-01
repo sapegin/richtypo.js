@@ -6,12 +6,12 @@
 	"rules": {
 		"emdash": [
 			{
-				"regex": "[ $(nbsp)]([—–])[ $(nbsp)]",
-				"result": "$(hairspace)—$(hairspace)"
+				"regex": "(\\w+)[ $(nbsp)]([—–])[ $(nbsp)]",
+				"result": "<nobr>$1$(hairspace)—</nobr>$(hairspace)"
 			},
 			{
-				"regex": "[ $(nbsp)]([—–])",
-				"result": "$(hairspace)—"
+				"regex": "(\\w+)[ $(nbsp)]([—–])",
+				"result": "<nobr>$1$(hairspace)—</nobr>"
 			},
 			{
 				"regex": "([—–])[ $(nbsp)]",
