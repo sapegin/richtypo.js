@@ -34,6 +34,8 @@ Beautiful <span class="amp">&amp;</span> Awesome Web Typography with <span class
 
 `&nbsp;` is shown here just for demonstration purposes. Actual implementation produces the non-breaking space character itself (`\xA0`), not the escaped sequence.
 
+Also look at [the example page](http://sapegin.github.io/richtypo.js/) and [its source](https://github.com/sapegin/richtypo.js/tree/master/example).
+
 
 ## Styles
 
