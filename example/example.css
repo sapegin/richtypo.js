@@ -1,29 +1,35 @@
 /* Page styles */
 body {
 	background: #f5e9d2;
-	color: #444;
 	color: hsla(0,0%,0%,.75);
 	font-size: 100%;
 	padding: 1em;
 	margin: 0 auto;
 	max-width: 30em;
-	font-family: 'Bookman Old Style', Georgia, serif;
-	text-shadow: 0 1px 0 hsla(0,0%,100%,.3);
-	}
+	font-family: 'Sorts Mill Goudy', Georgia, serif;
+	-webkit-hyphens: auto;
+	-moz-hyphens: auto;
+	hyphens: auto;
+	-webkit-font-kerning: normal;
+	font-kerning: normal;
+	font-variant-numeric: "oldstyle-nums";
+	-webkit-font-variant-ligatures: common-ligatures discretionary-ligatures contextual historical-ligatures;
+	font-variant-ligatures: common-ligatures discretionary-ligatures contextual historical-ligatures;
+	-webkit-font-feature-settings: "kern","liga","dlig","hlig","clig","ss01","ss03","salt","onum";
+	font-feature-settings: "kern","liga","dlig","hlig","clig","ss01","ss03","salt","onum";
+}
 
 h1 {
 	margin: 0 0 1em;
 	line-height: 1.1;
-	text-align: center;
 	font-size: 2.4em;
 	font-weight: normal;
-	font-family: 'Palatino Linotype', Georgia, serif;
 	text-shadow: 0 1px 0 hsla(0,0%,100%,.5);
 	}
 
 p {
 	margin: 0 0 1em;
-	line-height: 1.75;
+	line-height: 1.6;
 	font-size: 1.15em;
 	}
 
