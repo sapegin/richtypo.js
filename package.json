@@ -40,7 +40,7 @@
   },
   "scripts": {
     "test": "npm run lint && npm run mocha",
-    "prepublish": "npm run example && npm run gh-pages",
+    "postpublish": "npm run example && npm run gh-pages",
     "mocha": "mocha test",
     "mocha:watch": "mocha --watch --reporter min test",
     "lint": "eslint richtypo.js",
