@@ -14,3 +14,5 @@ Presently she began again. “I wonder if I shall fall right through the earth! 
 “Well!” thought Alice to herself, “after such a fall as this, I shall think nothing of tumbling down stairs! How brave they’ll all think me at home! Why, I wouldn’t say anything about it, even if I fell off the top of the house!” (Which was very likely true.)
 
 “What a curious feeling!” said Alice; “I must be shutting up like a telescope.”
+
+*Typography by [Richtypo](https://github.com/sapegin/richtypo.js), a typography enhancer for Node.js.*
