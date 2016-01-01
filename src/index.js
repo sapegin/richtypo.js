@@ -22,7 +22,7 @@ var documents = sweet2.loadSourceFiles(__dirname, ['md'], {
 });
 
 documents = documents.map(function(doc) {
-	// Run Rich Typo
+	// Run Richtypo
 	doc.pageTitle = richtypo.title(doc.title);  // Titles
 	doc.content = richtypo.rich(doc.content);  // Page content
 	doc.content = richtypo.richtypo(doc.content, ['hanging']);  // Hanging punctuation
