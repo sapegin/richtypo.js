@@ -103,7 +103,7 @@ richtypo.full(text, lang)  // lite() + rich()
 ```
 
 - `text` is an HTML string;
-- `lang` (*optional*) is a text language (`'en'` or `'ru'`).
+- `lang` (*optional*) is a text language (`en` or `ru`, default: `en`).
 
 ### Text processing: custom set of rules
 
@@ -112,9 +112,8 @@ richtypo.richtypo(text, rulesets, lang)
 ```
 
 - `text` is a HTML string;
-- `rulesets` is array of rulesets (available rulesets: `'save_tags'`, `'cleanup_before'`, `'spaces_lite'`, `'spaces_lite'`,
-  `'spaces'`, `'abbrs'`, `'amps'`, `'hanging'`, `'cleanup_after'`, `'restore_tags'`);
-- `lang` (*optional*) is a text language (`'en'` or `'ru'`).
+- `rulesets` is array of rulesets (available rulesets: `save_tags`, `cleanup_before`, `short_words`, `spaces_lite`, `spaces`, `abbrs`, `amps`, `hanging`, `cleanup_after`, `restore_tags`);
+- `lang` (*optional*) is a text language (`en` or `ru`, default: `en`).
 
 ### Change language globally
 
@@ -122,7 +121,7 @@ richtypo.richtypo(text, rulesets, lang)
 richtypo.lang(lang)
 ```
 
-- `lang` is a language (`'en'` or `'ru'`).
+- `lang` is a language (`en` or `ru`).
 
 ### Convert to text
 
