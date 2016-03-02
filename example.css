@@ -33,6 +33,15 @@ p {
 	font-size: 1.15em;
 	}
 
+a,
+a:link,
+a:visited,
+a:hover,
+a:active,
+a:focus {
+	color: inherit;
+	}
+
 /* Typography */
 abbr {
 	font-size: 0.875em;
