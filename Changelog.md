@@ -1,3 +1,7 @@
+# 1.0.1 - 2016-03-02
+
+* Update Lodash to 4.x.
+
 # 1.0.0 - 2016-01-01
 
 ## Breaking changes
