@@ -22,7 +22,8 @@
   "files": [
     "richtypo.js",
     "bin",
-    "rules"
+    "rules",
+    "example/example.js"
   ],
   "engines": {
     "node": ">= 0.10.0"
