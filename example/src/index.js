@@ -1,5 +1,5 @@
 var path = require('path');
-var sweet2 = require('sweet2');
+var fledermaus = require('fledermaus');
 var richtypo = require('../../richtypo');
 
 richtypo.lang('en');
@@ -10,12 +10,12 @@ var config = {
 	}
 };
 
-var renderMarkdown = sweet2.createMarkdownRenderer();
-var renderTemplate = sweet2.createTemplateRenderer({
+var renderMarkdown = fledermaus.createMarkdownRenderer();
+var renderTemplate = fledermaus.createTemplateRenderer({
 	root:__dirname
 });
 
-var documents = sweet2.loadSourceFiles(__dirname, ['md'], {
+var documents = fledermaus.loadSourceFiles(__dirname, ['md'], {
 	renderers: {
 		md: renderMarkdown
 	}
@@ -34,6 +34,6 @@ documents = documents.map(function(doc) {
 	return doc;
 });
 
-var pages = sweet2.generatePages(documents, config, sweet2.helpers, {ect: renderTemplate});
+var pages = fledermaus.generatePages(documents, config, fledermaus.helpers, {ect: renderTemplate});
 
-sweet2.savePages(pages, path.resolve(__dirname, '..'));
+fledermaus.savePages(pages, path.resolve(__dirname, '..'));

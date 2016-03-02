@@ -35,9 +35,9 @@
   "devDependencies": {
     "chai": "~3.4.1",
     "eslint": "~1.10.3",
+    "fledermaus": "~4.0.0",
     "gh-pages": "~0.8.0",
-    "mocha": "~2.3.4",
-    "sweet2": "~1.0.2"
+    "mocha": "~2.3.4"
   },
   "scripts": {
     "test": "npm run lint && npm run mocha",
