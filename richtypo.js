@@ -217,7 +217,7 @@
 		if (lang === undefined) {
 			lang = richtypo.lang();
 		}
-		if (!_.isArray(rulesets)) {
+		if (!Array.isArray(rulesets)) {
 			rulesets = [rulesets];
 		}
 
@@ -249,7 +249,7 @@
 	function _replace(text, rules) {
 		for (var ruleIdx = 0; ruleIdx < rules.length; ruleIdx++) {
 			var rule = rules[ruleIdx];
-			if (_.isArray(rule[0])) {
+			if (Array.isArray(rule[0])) {
 				text = _replace(text, rule);
 			}
 			else {
@@ -275,7 +275,7 @@
 		var rulesets = {};
 		for (var name in json.rules) {
 			var rule = json.rules[name];
-			if (!_.isArray(rule)) {
+			if (!Array.isArray(rule)) {
 				rule = [rule];
 			}
 
