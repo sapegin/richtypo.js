@@ -14,7 +14,7 @@ var argv = require('optimist')
 		'    - full - --light + --rich.'
 		].join('\n'))
 	.describe('lang', 'Text language.')
-	.describe('text', 'Convert result to text.')
+	.describe('text', 'Strip HTML tags.')
 	.argv;
 
 
