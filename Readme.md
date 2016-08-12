@@ -156,7 +156,7 @@ Text language: `en` or `ru`.
 
 #### `--text`
 
-Convert result to text.
+Strip HTML tags.
 
 ## Changelog
 
