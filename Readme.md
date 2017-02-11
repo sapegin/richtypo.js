@@ -1,8 +1,8 @@
-# Richtypo: typography enhancer for Node.js
+# Richtypo: typography enhancer for Node
 
 [![Build Status](https://travis-ci.org/sapegin/richtypo.js.svg)](https://travis-ci.org/sapegin/richtypo.js)
 
-The main purpose of this library is to enhance typography of your HTML. It supposes that your texts already have right quotes, dashes and other symbols (you can use [Typography Keyboard Layout](http://ilyabirman.net/typography-layout/)). Richtypo adds non-breaking spaces in right places, CSS classes for abbreviations, ampersands and hanging punctuation for special styling.
+The main purpose of this library is to enhance typography of your HTML. It supposes that your texts already have right quotes, dashes and other symbols (you can use [Typography Keyboard Layout](http://ilyabirman.net/projects/typography-layout/)). Richtypo adds non-breaking spaces in right places, CSS classes for abbreviations, ampersands and hanging punctuation for special styling.
 
 
 ## Features
@@ -17,7 +17,7 @@ The main purpose of this library is to enhance typography of your HTML. It suppo
 
 ## Example
 
-[Try it out!](https://tonicdev.com/npm/richtypo)
+[Try it out!](https://runkit.com/npm/richtypo)
 
 ```javascript
 var richtypo = require('richtypo');
@@ -158,9 +158,9 @@ Text language: `en` or `ru`.
 
 Strip HTML tags.
 
-## Changelog
+## Change log
 
-The changelog can be found on the [Releases page](https://github.com/sapegin/richtypo.js/releases).
+The change log can be found on the [Releases page](https://github.com/sapegin/richtypo.js/releases).
 
 
 ---

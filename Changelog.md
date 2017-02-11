@@ -49,7 +49,7 @@ Thanks to @bobthecow.
 
 ## Also
 
-An example [page on gh-pages](http://sapegin.github.io/richtypo.js/) and [a playground on Tonic](https://tonicdev.com/npm/richtypo).
+An example [page on gh-pages](http://sapegin.github.io/richtypo.js/) and [a playground on Tonic](https://runkit.com/npm/richtypo).
 
 # 0.1.8 - 2013-08-23
 
