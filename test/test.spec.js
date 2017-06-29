@@ -235,6 +235,11 @@ describe('RichTypo', function() {
 			rt.lite('There is a "text "in quotes" in quotes."'),
 			'There is a “text “in quotes” in quotes.”'
 		);
+
+        compare(
+            rt.lite('There is a &quot;text &quot;in quotes&quot; in quotes.&quot;'),
+            'There is a “text “in quotes” in quotes.”'
+        );
 	});
 
 	it('amps en', function() {
