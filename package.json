@@ -28,15 +28,15 @@
     "node": ">=4"
   },
   "dependencies": {
-    "lodash": "~4.6.1",
-    "optimist": "~0.6.1"
+    "lodash": "^4.17.4",
+    "optimist": "^0.6.1"
   },
   "devDependencies": {
     "eslint": "^4.1.1",
     "eslint-config-tamia": "^4.1.1",
     "eslint-plugin-prettier": "^2.1.2",
-    "fledermaus": "~4.0.0",
-    "gh-pages": "~0.8.0",
+    "fledermaus": "^4.0.0",
+    "gh-pages": "^1.0.0",
     "jest": "^20.0.4",
     "prettier": "^1.5.2",
     "semantic-release": "^6.3.6",
