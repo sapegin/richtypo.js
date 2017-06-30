@@ -82,13 +82,32 @@ describe('RichTypo', function() {
 		compare(rt.rich('Цири родилась 30 июля.'), 'Цири родилась 30_июля.');
 	});
 
-	it('spaces en', function() {
-		rt.lang('en');
+	describe('spaces en', () => {
+		it('should add nbsp after short words', () => {
+			rt.lang('en');
+			compare(rt.rich('even if I fell off'), 'even if_I_fell off');
+		});
 
-		compare(
-			rt.rich('even if I fell off the top of the house'),
-			'even if_I_fell off the_top of_the_house'
-		);
+		it('should add nbsp after prepositions', () => {
+			rt.lang('en');
+			compare(rt.rich('off the top of the house'), 'off the_top of_the_house');
+		});
+
+		it('should wrap words with hyphen in nobr when one part is 1-2 letters', () => {
+			rt.lang('en');
+			compare(
+				rt.rich('Lie-Fi e-commerce 75-Jähriger US-Krankenhaus'),
+				'<nobr>Lie-Fi</nobr> <nobr>e-commerce</nobr> <nobr>75-Jähriger</nobr> <nobr>US-Krankenhaus</nobr>'
+			);
+		});
+
+		it('should not wrap words with hyphen in nobr', () => {
+			rt.lang('en');
+			compare(
+				rt.rich('Paul-Löbe auto-da-fé ;-) -g --watch'),
+				'Paul-Löbe auto-da-fé ;-) -g --watch'
+			);
+		});
 	});
 
 	it('lite ru', function() {
