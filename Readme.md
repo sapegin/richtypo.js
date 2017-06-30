@@ -1,5 +1,6 @@
 # Richtypo: typography enhancer for Node
 
+[![npm](https://img.shields.io/npm/v/richtypo.svg)](https://www.npmjs.com/package/richtypo)
 [![Build Status](https://travis-ci.org/sapegin/richtypo.js.svg)](https://travis-ci.org/sapegin/richtypo.js)
 
 The main purpose of this library is to enhance typography of your HTML. It supposes that your texts already have right quotes, dashes and other symbols (you can use [Typography Keyboard Layout](http://ilyabirman.net/projects/typography-layout/)). Richtypo adds non-breaking spaces in right places, CSS classes for abbreviations, ampersands and hanging punctuation for special styling.

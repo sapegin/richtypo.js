@@ -8,3 +8,4 @@ Thumbs.db
 *.log
 .eslintcache
 coverage/
+Changelog.md

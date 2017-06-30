@@ -1,6 +1,6 @@
 {
   "name": "richtypo",
-  "version": "1.0.1",
+  "version": "0.0.0-development",
   "description": "Typography enhancer for English and Russian",
   "homepage": "https://github.com/sapegin/richtypo.js",
   "author": {
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/sapegin/richtypo.js.git"
+    "url": "https://github.com/sapegin/richtypo.js.git"
   },
   "bugs": {
     "url": "https://github.com/sapegin/richtypo.js/issues"
@@ -39,7 +39,9 @@
     "fledermaus": "~4.0.0",
     "gh-pages": "~0.8.0",
     "jest": "^20.0.4",
-    "prettier": "^1.5.2"
+    "prettier": "^1.5.2",
+    "semantic-release": "^6.3.6",
+    "semantic-release-tamia": "^1.1.1"
   },
   "scripts": {
     "pretest": "npm run lint",
@@ -50,7 +52,8 @@
     "lint": "eslint . --cache --fix",
     "postpublish": "npm run example && npm run gh-pages",
     "example": "node example/src",
-    "gh-pages": "gh-pages -d example"
+    "gh-pages": "gh-pages -d example",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "keywords": [
     "typography",
@@ -58,5 +61,10 @@
     "russian",
     "english"
   ],
-  "tonicExampleFilename": "example/example.js"
+  "tonicExampleFilename": "example/example.js",
+  "release": {
+    "analyzeCommits": "semantic-release-tamia/analyzeCommits",
+    "generateNotes": "semantic-release-tamia/generateNotes",
+    "verifyRelease": "semantic-release-tamia/verifyRelease"
+  }
 }
