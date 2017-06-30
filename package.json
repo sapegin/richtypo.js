@@ -22,11 +22,10 @@
   "files": [
     "richtypo.js",
     "bin",
-    "rules",
-    "example/example.js"
+    "rules"
   ],
   "engines": {
-    "node": ">= 0.10.0"
+    "node": ">=4"
   },
   "dependencies": {
     "lodash": "~4.6.1",
