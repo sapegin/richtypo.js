@@ -1,8 +1,7 @@
-const expect = require('chai').expect;
 const rt = require('../richtypo');
 
 function compare(actual, expected) {
-	expect(actual.replace(/\xA0/g, '_')).to.eql(expected);
+	expect(actual.replace(/\xA0/g, '_')).toEqual(expected);
 }
 
 describe('RichTypo', function() {
@@ -12,9 +11,9 @@ describe('RichTypo', function() {
 	});
 
 	it('has API functions', function() {
-		expect(rt.lang).to.be.a('function');
-		expect(rt.lite).to.be.a('function');
-		expect(rt.rich).to.be.a('function');
+		expect(rt.lang).toEqual(expect.any(Function));
+		expect(rt.lite).toEqual(expect.any(Function));
+		expect(rt.rich).toEqual(expect.any(Function));
 	});
 
 	it('safe tags ru', function() {
