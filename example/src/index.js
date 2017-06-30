@@ -1,39 +1,41 @@
-var path = require('path');
-var fledermaus = require('fledermaus');
-var richtypo = require('../../richtypo');
+const path = require('path');
+const fledermaus = require('fledermaus');
+const richtypo = require('../../richtypo');
 
 richtypo.lang('en');
 
-var config = {
+const config = {
 	base: {
-		lang: 'en'
-	}
+		lang: 'en',
+	},
 };
 
-var renderMarkdown = fledermaus.createMarkdownRenderer();
-var renderTemplate = fledermaus.createTemplateRenderer({
-	root:__dirname
+const renderMarkdown = fledermaus.createMarkdownRenderer();
+const renderTemplate = fledermaus.createTemplateRenderer({
+	root: __dirname,
 });
 
-var documents = fledermaus.loadSourceFiles(__dirname, ['md'], {
+let documents = fledermaus.loadSourceFiles(__dirname, ['md'], {
 	renderers: {
-		md: renderMarkdown
-	}
+		md: renderMarkdown,
+	},
 });
 
 documents = documents.map(function(doc) {
 	// Run Richtypo
-	doc.pageTitle = richtypo.title(doc.title);  // Titles
-	doc.content = richtypo.rich(doc.content);  // Page content
-	doc.content = richtypo.richtypo(doc.content, ['hanging']);  // Hanging punctuation
+	doc.pageTitle = richtypo.title(doc.title); // Titles
+	doc.content = richtypo.rich(doc.content); // Page content
+	doc.content = richtypo.richtypo(doc.content, ['hanging']); // Hanging punctuation
 
 	// Make non-breaking spaces visible
-	doc.pageTitle = doc.pageTitle.replace(/ /g, '&nbsp;');
-	doc.content = doc.content.replace(/ /g, '&nbsp;');
+	doc.pageTitle = doc.pageTitle.replace(/\xa0/g, '&nbsp;');
+	doc.content = doc.content.replace(/\xa0/g, '&nbsp;');
 
 	return doc;
 });
 
-var pages = fledermaus.generatePages(documents, config, fledermaus.helpers, {ect: renderTemplate});
+const pages = fledermaus.generatePages(documents, config, fledermaus.helpers, {
+	ect: renderTemplate,
+});
 
 fledermaus.savePages(pages, path.resolve(__dirname, '..'));
