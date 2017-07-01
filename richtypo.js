@@ -70,7 +70,7 @@ const commonRules = {
 		shortWordsRegExp,
 	],
 	// Orphans (non-breaking space before the last word)
-	orphans: [[/\s([^\s<]{0,10}(?:\n\n|$))/g, '\xA0$1']],
+	orphans: [[/\s([^\s<]{1,10}(?:\n\n|$))/g, '\xA0$1']],
 	// Hanging punctuation
 	_hanging_table: {
 		'«': 'laquo',

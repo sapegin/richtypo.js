@@ -120,6 +120,11 @@ describe('RichTypo', () => {
 			rt.lang('en');
 			compare(rt.rich('This was otorhinolaryngological.'), 'This was otorhinolaryngological.');
 		});
+
+		it('should not replace trailing whitespace with nbsp', () => {
+			rt.lang('en');
+			compare(rt.rich('This was\n'), 'This was\n');
+		});
 	});
 
 	it('lite ru', () => {
