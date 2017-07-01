@@ -1,3 +1,4 @@
+// @ts-check
 'use strict';
 
 /*
@@ -123,6 +124,10 @@ const commonRules = {
 
 const richtypo = {};
 
+/**
+ * @param {string} lang
+ * @returns {string}
+ */
 richtypo.lang = function(lang) {
 	if (lang !== undefined) {
 		currentLang = lang;
@@ -130,6 +135,10 @@ richtypo.lang = function(lang) {
 	return currentLang;
 };
 
+/**
+ * @param {boolean} enabled
+ * @returns {boolean}
+ */
 richtypo.verbose = function(enabled) {
 	if (enabled !== undefined) {
 		verbose = enabled;
@@ -137,6 +146,11 @@ richtypo.verbose = function(enabled) {
 	return verbose;
 };
 
+/**
+ * @param {string} text
+ * @param {string} [lang]
+ * @return {string}
+ */
 richtypo.lite = function(text, lang) {
 	return _process(text, lang, [
 		'save_tags',
@@ -149,6 +163,11 @@ richtypo.lite = function(text, lang) {
 	]);
 };
 
+/**
+ * @param {string} text
+ * @param {string} [lang]
+ * @return {string}
+ */
 richtypo.rich = function(text, lang) {
 	return _process(text, lang, [
 		'save_tags',
@@ -163,6 +182,11 @@ richtypo.rich = function(text, lang) {
 	]);
 };
 
+/**
+ * @param {string} text
+ * @param {string} [lang]
+ * @return {string}
+ */
 richtypo.title = function(text, lang) {
 	return _process(text, lang, [
 		'save_tags',
@@ -179,6 +203,11 @@ richtypo.title = function(text, lang) {
 	]);
 };
 
+/**
+ * @param {string} text
+ * @param {string} [lang]
+ * @return {string}
+ */
 richtypo.full = function(text, lang) {
 	return _process(text, lang, [
 		'save_tags',
@@ -195,10 +224,21 @@ richtypo.full = function(text, lang) {
 	]);
 };
 
+/**
+ * @param {string} text
+ * @param {string} [lang]
+ * @return {string}
+ */
 richtypo.textify = function(text, lang) {
 	return _process(text, lang, ['textify']);
 };
 
+/**
+ * @param {string} text
+ * @param {string[]} rulesets
+ * @param {string} [lang]
+ * @return {string}
+ */
 richtypo.richtypo = function(text, rulesets, lang) {
 	return _process(text, lang, rulesets);
 };
@@ -283,8 +323,8 @@ function _getRules(lang) {
 		let langRules = {};
 		try {
 			langRules = require('./rules/' + lang + '.json');
-		} catch (e) {
-			throw new Error('Cannot load rules for language + ' + currentLang + '\n', e);
+		} catch (err) {
+			throw new Error('Cannot load rules for language + ' + currentLang + '\n');
 		}
 		langRules = _compile(langRules);
 		rules[lang] = _.extend({}, commonRules, langRules);
