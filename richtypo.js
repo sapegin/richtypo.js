@@ -18,7 +18,6 @@ function logHeader(s) {
 
 function log() {
 	if (verbose) {
-		// eslint-disable-next-line prefer-rest-params
 		const args = _.toArray(arguments).map(function(s) {
 			if (typeof s === 'string') {
 				return s.replace(/\x20/g, '\x1B[36m_\x1B[0m').replace(/\xA0/g, '\x1B[36m❚\x1B[0m');
@@ -29,7 +28,7 @@ function log() {
 			return '';
 		});
 		// eslint-disable-next-line no-console
-		console.log(...args);
+		console.log.apply(console, args);
 	}
 }
 
