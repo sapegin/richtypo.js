@@ -10,7 +10,6 @@ function compare(actual, expected) {
 describe('RichTypo', () => {
 	it('has API functions', () => {
 		expect(rt.lang).toEqual(expect.any(Function));
-		expect(rt.verbose).toEqual(expect.any(Function));
 		expect(rt.lite).toEqual(expect.any(Function));
 		expect(rt.rich).toEqual(expect.any(Function));
 		expect(rt.full).toEqual(expect.any(Function));
