@@ -300,9 +300,8 @@ describe('RichTypo', () => {
 
 	describe('textify', () => {
 		it('remove HTML tags from text', () => {
-			expect(rt.textify(rt.title('The “quoted text.”', 'en')), 'The “quoted text.”');
-
-			expect(rt.textify(rt.lite('- Бадыдыщь!\n- Бадыдыщь!', 'ru')), '— Бадыдыщь!\n— Бадыдыщь!');
+			compare(rt.textify(rt.title('The “quoted text.”', 'en')), 'The “quoted_text.”');
+			compare(rt.textify(rt.lite('- Бадыдыщь!\n- Бадыдыщь!', 'ru')), '— Бадыдыщь!\n— Бадыдыщь!');
 		});
 	});
 });
