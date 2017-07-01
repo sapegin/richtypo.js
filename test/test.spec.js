@@ -219,9 +219,13 @@ describe('RichTypo', () => {
 	describe('emdash en', () => {
 		it('should add hair-spaces around em-dash', () => {
 			compare(rt.rich('Dachshund — beast.', 'en'), '<nobr>Dachshund&#8202;—</nobr>&#8202;beast.');
+			compare(rt.rich('Naïve — word.', 'en'), '<nobr>Naïve&#8202;—</nobr>&#8202;word.');
 			compare(rt.rich('Dachshund —', 'en'), '<nobr>Dachshund&#8202;—</nobr>');
+			compare(rt.rich('Naïve —', 'en'), '<nobr>Naïve&#8202;—</nobr>');
 			compare(rt.rich('— Beast!', 'en'), '—&#8202;Beast!');
+			compare(rt.rich('— Naïve!', 'en'), '—&#8202;Naïve!');
 			compare(rt.rich('Dachshund—beast.', 'en'), '<nobr>Dachshund&#8202;—</nobr>&#8202;beast.');
+			compare(rt.rich('Naïve—word.', 'en'), '<nobr>Naïve&#8202;—</nobr>&#8202;word.');
 		});
 	});
 
@@ -268,7 +272,7 @@ describe('RichTypo', () => {
 
 	describe('abbrs en', () => {
 		it('should wrap abbreviations in <abbr>', () => {
-			compare(rt.title('party DOXIE was\n', 'en'), 'party <abbr>DOXIE</abbr> was\n');
+			compare(rt.title('DOXIE ÖVP\n', 'en'), '<abbr>DOXIE</abbr> <abbr>ÖVP</abbr>\n');
 		});
 
 		it('should not wrap abbreviations in <abbr>', () => {

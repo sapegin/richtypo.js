@@ -6,11 +6,11 @@
 	"rules": {
 		"emdash": [
 			{
-				"regex": "(\\w+)[ $(nbsp)](?:[—–])[ $(nbsp)]",
+				"regex": "($(european)+)[ $(nbsp)](?:[—–])[ $(nbsp)]",
 				"result": "<nobr>$1$(hairspace)—</nobr>$(hairspace)"
 			},
 			{
-				"regex": "(\\w+)[ $(nbsp)](?:[—–])",
+				"regex": "($(european)+)[ $(nbsp)](?:[—–])",
 				"result": "<nobr>$1$(hairspace)—</nobr>"
 			},
 			{
@@ -18,19 +18,19 @@
 				"result": "—$(hairspace)"
 			},
 			{
-				"regex": "(\\w+)(?:[—–])(\\w)",
+				"regex": "($(european)+)(?:[—–])($(european))",
 				"result": "<nobr>$1$(hairspace)—</nobr>$(hairspace)$2"
 			}
 		],
 		"spaces_lite": ["emdash"],
 
 		"hyphen": {
-			"regex": "([^a-zA-ZÀ-ž0-9-]|^)((?:[a-zA-ZÀ-ž0-9]{1,2}(?:\\-[a-zA-ZÀ-ž0-9]+))|(?:[a-zA-ZÀ-ž0-9]+(?:\\-[a-zA-ZÀ-ž0-9]{1,2})))(?![a-zA-ZÀ-ž0-9-])",
+			"regex": "($(noneuropean)|^)((?:$(europeannohyphen){1,2}(?:\\-$(europeannohyphen)+))|(?:$(europeannohyphen)+(?:\\-$(europeannohyphen){1,2})))(?!$(european))",
 			"flags": "g",
 			"result": "$1<nobr>$2</nobr>"
 		},
 		"preposition": {
-			"regex": "(\\W|^)($(prepos)) ",
+			"regex": "($(noneuropean)|^)($(prepos)) ",
 			"result": "$1$2$(nbsp)"
 		},
 		"spaces": ["hyphen", "preposition"],
@@ -62,7 +62,7 @@
 
 		"quotes": [
 			{
-				"regex": "(?:\"|&quot;)(\\w)",
+				"regex": "(?:\"|&quot;)($(european))",
 				"result": "“$1"
 			},
 			{
@@ -77,7 +77,7 @@
 		},
 
 		"abbr": {
-			"regex": "([A-Z]{3,})",
+			"regex": "($(europeanupper){3,})",
 			"flags": "g",
 			"result": "<abbr>$1</abbr>"
 		}

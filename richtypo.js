@@ -19,6 +19,10 @@ const restoreTagsRe = /<(\d+)>/g;
 const commonDefs = {
 	nbsp: '\xA0',
 	hairspace: '&#8202;',
+	european: '[a-zA-ZÀ-ž0-9-]',
+	europeannohyphen: '[a-zA-ZÀ-ž0-9]',
+	europeanupper: '[A-ZÁÀÂÃÄĂĀÅĄÆÉÈÊËĚĒĖĘÍÌÎÏĪĮIÓÒÔÕÖŐØŒÚÙÛÜŰŪÝĆČĎĐĐĢĞŁĻŃÑŇŅŊŘŚŠŞŤŦÞŢŻŹŽ]',
+	noneuropean: '[^a-zA-ZÀ-ž0-9-]',
 };
 const shortWordsRegExp = [/(^|[\x20\xA0(>«”„])([а-яёa-zA-ZА-ЯЁ][а-яёa-z]?)\x20/g, '$1$2\xA0'];
 
