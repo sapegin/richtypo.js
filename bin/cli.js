@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+'use strict';
+
 const argv = require('optimist')
 	.usage('Usage: $0 [--rules full] [--lang en] [--text] filename')
 	.boolean('text')

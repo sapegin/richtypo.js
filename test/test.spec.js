@@ -1,3 +1,5 @@
+'use strict';
+
 const rt = require('../richtypo');
 
 function compare(actual, expected) {

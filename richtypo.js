@@ -1,3 +1,5 @@
+'use strict';
+
 /*
 \x20 - regular space
 \xA0 - non-breaking space

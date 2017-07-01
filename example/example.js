@@ -1,3 +1,5 @@
+'use strict';
+
 const richtypo = require('richtypo');
 
 // eslint-disable-next-line no-console
