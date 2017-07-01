@@ -68,6 +68,8 @@ const commonRules = {
 		shortWordsRegExp,
 		shortWordsRegExp,
 	],
+	// Orphans (non-breaking space before the last word)
+	orphans: [[/\s([^\s<]{0,10}(?:\n\n|$))/g, '\xA0$1']],
 	// Hanging punctuation
 	_hanging_table: {
 		'«': 'laquo',
@@ -152,6 +154,7 @@ richtypo.rich = function(text, lang) {
 		'save_tags',
 		'cleanup_before',
 		'short_words',
+		'orphans',
 		'spaces_lite',
 		'spaces',
 		'abbr',
@@ -165,6 +168,7 @@ richtypo.title = function(text, lang) {
 		'save_tags',
 		'cleanup_before',
 		'short_words',
+		'orphans',
 		'spaces_lite',
 		'spaces',
 		'abbr',

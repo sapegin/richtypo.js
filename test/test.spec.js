@@ -52,17 +52,17 @@ describe('RichTypo', function() {
 
 		compare(
 			rt.rich('Прочитай § 13 журнала «Такса» № 27, там про тлонов, тутликов, табачек.'),
-			'Прочитай §_13 журнала «Такса» №_27, там про тлонов, тутликов, табачек.'
+			'Прочитай §_13 журнала «Такса» №_27, там про тлонов, тутликов,_табачек.'
 		);
 
 		compare(
 			rt.rich('Приснился однажды В. И. Ленин В. Путину.'),
-			'Приснился однажды <nobr>В. И. Ленин</nobr> <nobr>В. Путину</nobr>.'
+			'Приснился однажды <nobr>В. И. Ленин</nobr> <nobr>В._Путину</nobr>.'
 		);
 
 		compare(
 			rt.rich('Из-за чего-то всё-таки это как-то очень странно.'),
-			'<nobr>Из-за</nobr> <nobr>чего-то</nobr> всё-таки это <nobr>как-то</nobr> очень странно.'
+			'<nobr>Из-за</nobr> <nobr>чего-то</nobr> всё-таки это <nobr>как-то</nobr> очень_странно.'
 		);
 
 		compare(
@@ -70,7 +70,7 @@ describe('RichTypo', function() {
 			'За_колбасой в_магазин пошла такса из_резины.'
 		);
 
-		compare(rt.rich('рынка книги, мы к этой цифре'), 'рынка книги, мы_к_этой цифре');
+		compare(rt.rich('рынка книги, мы к этой цифре'), 'рынка книги, мы_к_этой_цифре');
 
 		compare(rt.rich('Это ж как бы колбаса!'), 'Это_ж как_бы колбаса!');
 
@@ -87,7 +87,7 @@ describe('RichTypo', function() {
 	describe('spaces en', () => {
 		it('should add nbsp after short words', () => {
 			rt.lang('en');
-			compare(rt.rich('even if I fell off'), 'even if_I_fell off');
+			compare(rt.rich('even if I fell off'), 'even if_I_fell_off');
 		});
 
 		it('should add nbsp after prepositions', () => {
@@ -107,8 +107,18 @@ describe('RichTypo', function() {
 			rt.lang('en');
 			compare(
 				rt.rich('Paul-Löbe auto-da-fé ;-) -g --watch'),
-				'Paul-Löbe auto-da-fé ;-) -g --watch'
+				'Paul-Löbe auto-da-fé ;-) -g_--watch'
 			);
+		});
+
+		it('should add nbsp before the last word in a paragraph to avoid orphans', () => {
+			rt.lang('en');
+			compare(rt.rich('One two three.\n\nFour five six!'), 'One two_three.\n\nFour five_six!');
+		});
+
+		it('should not add nbsp before the last word longer than 10 letters', () => {
+			rt.lang('en');
+			compare(rt.rich('This was otorhinolaryngological.'), 'This was otorhinolaryngological.');
 		});
 	});
 
@@ -139,7 +149,7 @@ describe('RichTypo', function() {
 	it('emdash ru', function() {
 		rt.lang('ru');
 
-		compare(rt.rich('Такса — животное.'), 'Такса_— животное.');
+		compare(rt.rich('Такса — животное большое.'), 'Такса_— животное_большое.');
 
 		compare(
 			rt.rich(
@@ -195,7 +205,7 @@ describe('RichTypo', function() {
 	it('amps en', function() {
 		rt.lang('en');
 
-		compare(rt.title('Dessi &amp; Tsiri'), 'Dessi <span class="amp">&amp;</span> Tsiri');
+		compare(rt.title('Dessi &amp; Tsiri'), 'Dessi <span class="amp">&amp;</span>_Tsiri');
 	});
 
 	it('abbrs ru', function() {
@@ -203,7 +213,7 @@ describe('RichTypo', function() {
 
 		compare(
 			rt.title('На ХХ таксовке ТАКСА было 37 такс'),
-			'На_ХХ таксовке <abbr>ТАКСА</abbr> было 37 такс'
+			'На_ХХ таксовке <abbr>ТАКСА</abbr> было 37_такс'
 		);
 	});
 
@@ -212,24 +222,24 @@ describe('RichTypo', function() {
 
 		compare(
 			rt.title('On XX dachshund party DOXIE was 37 wieners'),
-			'On_XX dachshund party <abbr>DOXIE</abbr> was 37 wieners'
+			'On_XX dachshund party <abbr>DOXIE</abbr> was 37_wieners'
 		);
 	});
 
 	it('hanging', function() {
 		compare(
 			rt.title('The “quoted text.”'),
-			'The<span class="sldquo"> </span> <span class="hldquo">“</span>quoted text.”'
+			'The<span class="sldquo"> </span> <span class="hldquo">“</span>quoted_text.”'
 		);
 
-		compare(rt.title('“Quoted text” two.'), '<span class="hldquo">“</span>Quoted text” two.');
+		compare(rt.title('“Quoted text” two.'), '<span class="hldquo">“</span>Quoted text”_two.');
 
 		compare(
 			rt.title('<p>“Quoted text” three.</p>'),
 			'<p><span class="hldquo">“</span>Quoted text” three.</p>'
 		);
 
-		compare(rt.title('alert("Hello world!")'), 'alert("Hello world!")');
+		compare(rt.title('alert("Hello world!")'), 'alert("Hello_world!")');
 
 		compare(rt.full('“Quoted text” two.'), '<span class="hldquo">“</span>Quoted text” two.');
 	});
