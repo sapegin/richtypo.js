@@ -18,33 +18,61 @@ describe('RichTypo', () => {
 		expect(rt.richtypo).toEqual(expect.any(Function));
 	});
 
-	it('safe tags ru', () => {
-		rt.lang('ru');
+	describe('safe tags', () => {
+		it('should keep HTML tags', () => {
+			compare(rt.rich('<code> -->> </code>', 'en'), '<code> -->> </code>');
+			compare(rt.rich('<code> а — б </code>', 'ru'), '<code> а — б </code>');
+		});
 
-		compare(rt.rich('<code> -->> </code>'), '<code> -->> </code>');
+		it('should not enhance typography inside HTML tags', () => {
+			compare(
+				rt.rich(
+					'А текст внутри тегов <img src="hamster.jpg" alt="а — б"> не надо типографить.',
+					'ru'
+				),
+				'А_текст внутри тегов <img src="hamster.jpg" alt="а — б"> не_надо типографить.'
+			);
+			compare(
+				rt.rich(
+					'Теперь <b>всё — вместе</b>. А текст внутри тегов <img src="hamster.jpg" alt="а — б"> не надо типографить. И кода кусок:<pre><code>\nа — б\nа — б\nа — б\n</code></pre>.',
+					'ru'
+				),
+				'Теперь <b>всё_— вместе</b>. А_текст внутри тегов <img src="hamster.jpg" alt="а — б"> не_надо типографить. И_кода кусок:<pre><code>\nа — б\nа — б\nа — б\n</code></pre>.'
+			);
+		});
 
-		compare(rt.rich('<code> а — б </code>'), '<code> а — б </code>');
+		it('should leave commented out tags alone', () => {
+			compare(
+				rt.rich(
+					'<!-- <script>alert("wheee");</script><style>* { color: red; }</style><pre>...</pre> -->',
+					'en'
+				),
+				'<!-- <script>alert("wheee");</script><style>* { color: red; }</style><pre>...</pre> -->'
+			);
+		});
 
-		compare(
-			rt.rich('А текст внутри тегов <img src="hamster.jpg" alt="а — б"> не надо типографить.'),
-			'А_текст внутри тегов <img src="hamster.jpg" alt="а — б"> не_надо типографить.'
-		);
-
-		compare(
-			rt.rich(
-				'Теперь <b>всё — вместе</b>. А текст внутри тегов <img src="hamster.jpg" alt="а — б"> не надо типографить. И кода кусок:<pre><code>\nа — б\nа — б\nа — б\n</code></pre>.'
-			),
-			'Теперь <b>всё_— вместе</b>. А_текст внутри тегов <img src="hamster.jpg" alt="а — б"> не_надо типографить. И_кода кусок:<pre><code>\nа — б\nа — б\nа — б\n</code></pre>.'
-		);
+		it('plays nice with ie conditional comments', () => {
+			compare(
+				rt.title(
+					'<!--[if lte IE 6]><script>alert("wheee");</script><style>* { color: red; }</style><pre>...</pre><![endif]-->',
+					'en'
+				),
+				'<!--[if lte IE 6]><script>alert("wheee");</script><style>* { color: red; }</style><pre>...</pre><![endif]-->'
+			);
+			compare(
+				rt.title('<!--[if lte IE 6]>The “quoted text.”<![endif]-->', 'en'),
+				'<!--[if lte IE 6]>The<span class="sldquo"> </span> <span class="hldquo">“</span>quoted text.”<![endif]-->'
+			);
+		});
 	});
 
-	it('spaces lite ru', () => {
-		rt.lang('ru');
-
-		compare(
-			rt.rich('Там было много тлонов, тутликов, табачек и т. д. и т. п.'),
-			'Там было много тлонов, тутликов, табачек и_т._д. и_т._п.'
-		);
+	describe('spaces lite ru', () => {
+		it('should put nbsp inside и т. д. and и т. п.', () => {
+			compare(
+				rt.rich('Там было много тлонов, тутликов, табачек и т. д. и т. п.', 'ru'),
+				'Там было много тлонов, тутликов, табачек и_т._д. и_т._п.'
+			);
+		});
 	});
 
 	describe('spaces ru', () => {
@@ -143,90 +171,94 @@ describe('RichTypo', () => {
 		});
 	});
 
-	it('lite ru', () => {
-		rt.lang('ru');
+	describe('lite ru', () => {
+		it('should replace ... with ellipsis', () => {
+			compare(rt.lite('Эх...', 'ru'), 'Эх…');
+		});
 
-		compare(rt.lite('Эх...'), 'Эх…');
+		it('should replace -- with em-dash', () => {
+			compare(rt.lite('Такса -- зверь', 'ru'), 'Такса_— зверь');
+		});
 
-		compare(rt.lite('Такса -- зверь'), 'Такса_— зверь');
+		it('should replace - with spaces around with em-dash', () => {
+			compare(rt.lite('Такса - зверь', 'ru'), 'Такса_— зверь');
+		});
 
-		compare(rt.lite('Такса - зверь'), 'Такса_— зверь');
-
-		compare(rt.lite('<p>- Бадыдыщь!</p>'), '<p>— Бадыдыщь!</p>');
-
-		compare(rt.lite('- Бадыдыщь!\n- Бадыдыщь!'), '&mdash; Бадыдыщь!\n&mdash; Бадыдыщь!');
-
-		compare(rt.lite('<p>- Бадыдыщь!</p>'), '<p>— Бадыдыщь!</p>');
+		it('should replace - in the beginning with em-dash', () => {
+			compare(rt.lite('<p>- Бадыдыщь!</p>', 'ru'), '<p>— Бадыдыщь!</p>');
+			compare(rt.lite('- Бадыдыщь!\n- Бадыдыщь!', 'ru'), '&mdash; Бадыдыщь!\n&mdash; Бадыдыщь!');
+			compare(rt.lite('<p>- Бадыдыщь!</p>', 'ru'), '<p>— Бадыдыщь!</p>');
+		});
 	});
 
-	it('lite en', () => {
-		rt.lang('en');
+	describe('lite en', () => {
+		it('should replace ... with ellipsis', () => {
+			compare(rt.lite('Yep...', 'en'), 'Yep…');
+		});
 
-		compare(rt.lite('Yep...'), 'Yep…');
-
-		compare(rt.lite('Dachshund--beast'), '<nobr>Dachshund—</nobr>beast');
+		it('should replace -- with em-dash', () => {
+			compare(rt.lite('Dachshund--beast', 'en'), '<nobr>Dachshund—</nobr>beast');
+		});
 	});
 
-	it('emdash ru', () => {
-		rt.lang('ru');
+	describe('emdash ru', () => {
+		it('should replace - with spaces around with em-dash', () => {
+			compare(rt.rich('Такса — животное большое.', 'ru'), 'Такса_— животное_большое.');
+		});
 
-		compare(rt.rich('Такса — животное большое.'), 'Такса_— животное_большое.');
-
-		compare(
-			rt.rich(
+		it('should replace - in the beginning with em-dash', () => {
+			compare(
+				rt.rich(
+					'— Сколько нужно хипстеров, чтобы заготовить дрова?\n— Два: один будет рубить, второй красиво укладывать.',
+					'ru'
+				),
 				'— Сколько нужно хипстеров, чтобы заготовить дрова?\n— Два: один будет рубить, второй красиво укладывать.'
-			),
-			'— Сколько нужно хипстеров, чтобы заготовить дрова?\n— Два: один будет рубить, второй красиво укладывать.'
-		);
+			);
+		});
 	});
 
-	it('emdash en', () => {
-		rt.lang('en');
-
-		compare(rt.rich('Dachshund — beast.'), '<nobr>Dachshund&#8202;—</nobr>&#8202;beast.');
-
-		compare(rt.rich('Dachshund —'), '<nobr>Dachshund&#8202;—</nobr>');
-
-		compare(rt.rich('— Beast!'), '—&#8202;Beast!');
-
-		compare(rt.rich('Dachshund—beast.'), '<nobr>Dachshund—</nobr>beast.');
+	describe('emdash en', () => {
+		it('should add hair-spaces around em-dash', () => {
+			compare(rt.rich('Dachshund — beast.', 'en'), '<nobr>Dachshund&#8202;—</nobr>&#8202;beast.');
+			compare(rt.rich('Dachshund —', 'en'), '<nobr>Dachshund&#8202;—</nobr>');
+			compare(rt.rich('— Beast!', 'en'), '—&#8202;Beast!');
+			compare(rt.rich('Dachshund—beast.', 'en'), '<nobr>Dachshund—</nobr>beast.');
+		});
 	});
 
-	it('quotes ru', () => {
-		rt.lang('ru');
-
-		compare(rt.lite('Тут просто "текст в кавычках".'), 'Тут просто «текст в кавычках».');
-
-		compare(rt.lite('"Текст в кавычках "в кавычках"".'), '«Текст в кавычках «в кавычках»».');
-
-		compare(
-			rt.lite('А тут "текст "в кавычках" в кавычках".'),
-			'А тут «текст «в кавычках» в кавычках».'
-		);
-
-		compare(rt.lite('И "клинический "случай".'), 'И «клинический «случай».');
+	describe('quotes ru', () => {
+		it('should replace "" with «»', () => {
+			compare(rt.lite('Тут просто "текст в кавычках".', 'ru'), 'Тут просто «текст в кавычках».');
+			compare(
+				rt.lite('"Текст в кавычках "в кавычках"".', 'ru'),
+				'«Текст в кавычках «в кавычках»».'
+			);
+			compare(
+				rt.lite('А тут "текст "в кавычках" в кавычках".', 'ru'),
+				'А тут «текст «в кавычках» в кавычках».'
+			);
+			compare(rt.lite('И "клинический "случай".', 'ru'), 'И «клинический «случай».');
+		});
 	});
 
-	it('quotes en', () => {
-		rt.lang('en');
-
-		compare(rt.lite('There is a "text in quotes."'), 'There is a “text in quotes.”');
-
-		compare(
-			rt.lite('There is a "text "in quotes" in quotes."'),
-			'There is a “text “in quotes” in quotes.”'
-		);
-
-		compare(
-			rt.lite('There is a &quot;text &quot;in quotes&quot; in quotes.&quot;'),
-			'There is a “text “in quotes” in quotes.”'
-		);
+	describe('quotes en', () => {
+		it('should replace "" with “”', () => {
+			compare(rt.lite('There is a "text in quotes."', 'en'), 'There is a “text in quotes.”');
+			compare(
+				rt.lite('There is a "text "in quotes" in quotes."', 'en'),
+				'There is a “text “in quotes” in quotes.”'
+			);
+			compare(
+				rt.lite('There is a &quot;text &quot;in quotes&quot; in quotes.&quot;', 'en'),
+				'There is a “text “in quotes” in quotes.”'
+			);
+		});
 	});
 
-	it('amps en', () => {
-		rt.lang('en');
-
-		compare(rt.title('Dessi &amp; Tsiri'), 'Dessi <span class="amp">&amp;</span>_Tsiri');
+	describe('amps en', () => {
+		it('should wrap & in an span', () => {
+			compare(rt.title('Dessi &amp; Tsiri', 'en'), 'Dessi <span class="amp">&amp;</span>_Tsiri');
+		});
 	});
 
 	describe('abbrs ru', () => {
@@ -245,50 +277,33 @@ describe('RichTypo', () => {
 		});
 	});
 
-	it('hanging', () => {
-		compare(
-			rt.title('The “quoted text.”'),
-			'The<span class="sldquo"> </span> <span class="hldquo">“</span>quoted_text.”'
-		);
-
-		compare(rt.title('“Quoted text” two.'), '<span class="hldquo">“</span>Quoted text”_two.');
-
-		compare(
-			rt.title('<p>“Quoted text” three.</p>'),
-			'<p><span class="hldquo">“</span>Quoted text” three.</p>'
-		);
-
-		compare(rt.title('alert("Hello world!")'), 'alert("Hello_world!")');
-
-		compare(rt.full('“Quoted text” two.'), '<span class="hldquo">“</span>Quoted text” two.');
+	describe('hanging punctuation', () => {
+		it('should wrap quotes in spans', () => {
+			compare(
+				rt.title('The “quoted text.”', 'en'),
+				'The<span class="sldquo"> </span> <span class="hldquo">“</span>quoted_text.”'
+			);
+			compare(
+				rt.title('“Quoted text” two.', 'en'),
+				'<span class="hldquo">“</span>Quoted text”_two.'
+			);
+			compare(
+				rt.title('<p>“Quoted text” three.</p>', 'en'),
+				'<p><span class="hldquo">“</span>Quoted text” three.</p>'
+			);
+			compare(rt.title('alert("Hello world!")', 'en'), 'alert("Hello_world!")');
+			compare(
+				rt.full('“Quoted text” two.', 'en'),
+				'<span class="hldquo">“</span>Quoted text” two.'
+			);
+		});
 	});
 
-	it('textify', () => {
-		expect(rt.textify(rt.title('The “quoted text.”')), 'The “quoted text.”');
+	describe('textify', () => {
+		it('remove HTML tags from text', () => {
+			expect(rt.textify(rt.title('The “quoted text.”', 'en')), 'The “quoted text.”');
 
-		expect(rt.textify(rt.lite('- Бадыдыщь!\n- Бадыдыщь!', 'ru')), '— Бадыдыщь!\n— Бадыдыщь!');
-	});
-
-	it('leaves commented out tags alone', () => {
-		compare(
-			rt.lite(
-				'<!-- <script>alert("wheee");</script><style>* { color: red; }</style><pre>...</pre> -->'
-			),
-			'<!-- <script>alert("wheee");</script><style>* { color: red; }</style><pre>...</pre> -->'
-		);
-	});
-
-	it('plays nice with ie conditional comments', () => {
-		compare(
-			rt.title(
-				'<!--[if lte IE 6]><script>alert("wheee");</script><style>* { color: red; }</style><pre>...</pre><![endif]-->'
-			),
-			'<!--[if lte IE 6]><script>alert("wheee");</script><style>* { color: red; }</style><pre>...</pre><![endif]-->'
-		);
-
-		compare(
-			rt.title('<!--[if lte IE 6]>The “quoted text.”<![endif]-->'),
-			'<!--[if lte IE 6]>The<span class="sldquo"> </span> <span class="hldquo">“</span>quoted text.”<![endif]-->'
-		);
+			expect(rt.textify(rt.lite('- Бадыдыщь!\n- Бадыдыщь!', 'ru')), '— Бадыдыщь!\n— Бадыдыщь!');
+		});
 	});
 });
