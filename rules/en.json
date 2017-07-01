@@ -62,11 +62,11 @@
 
 		"quotes": [
 			{
-				"regex": "(\"|&quot;)(\\w)",
-				"result": "“$2"
+				"regex": "(?:\"|&quot;)(\\w)",
+				"result": "“$1"
 			},
 			{
-				"regex": "(\"|&quot;)",
+				"regex": "(?:\"|&quot;)",
 				"result": "”"
 			}
 		],
