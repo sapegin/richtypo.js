@@ -47,83 +47,99 @@ describe('RichTypo', () => {
 		);
 	});
 
-	it('spaces ru', () => {
-		rt.lang('ru');
+	describe('spaces ru', () => {
+		it('should put nbsp after section and number signs', () => {
+			compare(
+				rt.rich('Прочитай § 13 журнала «Такса» № 27, там про тлонов, тутликов, табачек.', 'ru'),
+				'Прочитай §_13 журнала «Такса» №_27, там про тлонов, тутликов,_табачек.'
+			);
+		});
 
-		compare(
-			rt.rich('Прочитай § 13 журнала «Такса» № 27, там про тлонов, тутликов, табачек.'),
-			'Прочитай §_13 журнала «Такса» №_27, там про тлонов, тутликов,_табачек.'
-		);
+		it('should wrap initials with <nobr>', () => {
+			compare(
+				rt.rich('Приснился однажды В. И. Ленин В. Путину.', 'ru'),
+				'Приснился однажды <nobr>В. И. Ленин</nobr> <nobr>В._Путину</nobr>.'
+			);
+		});
 
-		compare(
-			rt.rich('Приснился однажды В. И. Ленин В. Путину.'),
-			'Приснился однажды <nobr>В. И. Ленин</nobr> <nobr>В._Путину</nobr>.'
-		);
+		it('should wrap words with hyphen in nobr when one part is 1-2 characters', () => {
+			compare(
+				rt.rich('Из-за чего-то всё-таки это как-то очень странно.', 'ru'),
+				'<nobr>Из-за</nobr> <nobr>чего-то</nobr> всё-таки это <nobr>как-то</nobr> очень_странно.'
+			);
+		});
 
-		compare(
-			rt.rich('Из-за чего-то всё-таки это как-то очень странно.'),
-			'<nobr>Из-за</nobr> <nobr>чего-то</nobr> всё-таки это <nobr>как-то</nobr> очень_странно.'
-		);
+		it('should add nbsp after short words', () => {
+			compare(
+				rt.rich('За колбасой в магазин пошла такса из резины.', 'ru'),
+				'За_колбасой в_магазин пошла такса из_резины.'
+			);
+			compare(rt.rich('рынка книги, мы к этой цифре', 'ru'), 'рынка книги, мы_к_этой_цифре');
+		});
 
-		compare(
-			rt.rich('За колбасой в магазин пошла такса из резины.'),
-			'За_колбасой в_магазин пошла такса из_резины.'
-		);
+		it('should add nbsp before particles', () => {
+			compare(rt.rich('Это ж как бы колбаса!', 'ru'), 'Это_ж как_бы колбаса!');
+		});
 
-		compare(rt.rich('рынка книги, мы к этой цифре'), 'рынка книги, мы_к_этой_цифре');
+		it('should add nbsp between number and currency', () => {
+			compare(
+				rt.rich('Колбаса стоит 23 р. Такса стоит 1000000 $.', 'ru'),
+				'Колбаса стоит 23_р. Такса стоит 1000000_$.'
+			);
+		});
 
-		compare(rt.rich('Это ж как бы колбаса!'), 'Это_ж как_бы колбаса!');
+		it('should add nbsp in dates', () => {
+			compare(rt.rich('Это было в 1927 г.', 'ru'), 'Это было в_1927_г.');
+		});
 
-		compare(
-			rt.rich('Колбаса стоит 23 р. Такса стоит 1000000 $.'),
-			'Колбаса стоит 23_р. Такса стоит 1000000_$.'
-		);
-
-		compare(rt.rich('Это было в 1927 г.'), 'Это было в_1927_г.');
-
-		compare(rt.rich('Цири родилась 30 июля.'), 'Цири родилась 30_июля.');
+		it('should add nbsp between number and month', () => {
+			compare(rt.rich('Цири родилась 30 июля.', 'ru'), 'Цири родилась 30_июля.');
+		});
 	});
 
 	describe('spaces en', () => {
 		it('should add nbsp after short words', () => {
-			rt.lang('en');
-			compare(rt.rich('even if I fell off'), 'even if_I_fell_off');
+			compare(rt.rich('even if I fell off', 'en'), 'even if_I_fell_off');
 		});
 
 		it('should add nbsp after prepositions', () => {
-			rt.lang('en');
-			compare(rt.rich('off the top of the house'), 'off the_top of_the_house');
+			compare(rt.rich('off the top of the house', 'en'), 'off the_top of_the_house');
 		});
 
-		it('should wrap words with hyphen in nobr when one part is 1-2 letters', () => {
-			rt.lang('en');
+		it('should wrap words with hyphen in nobr when one part is 1-2 characters', () => {
 			compare(
-				rt.rich('Lie-Fi e-commerce 75-Jähriger US-Krankenhaus'),
+				rt.rich('Lie-Fi e-commerce 75-Jähriger US-Krankenhaus', 'en'),
 				'<nobr>Lie-Fi</nobr> <nobr>e-commerce</nobr> <nobr>75-Jähriger</nobr> <nobr>US-Krankenhaus</nobr>'
 			);
 		});
 
 		it('should not wrap words with hyphen in nobr', () => {
-			rt.lang('en');
 			compare(
-				rt.rich('Paul-Löbe auto-da-fé ;-) -g --watch'),
+				rt.rich('Paul-Löbe auto-da-fé ;-) -g --watch', 'en'),
 				'Paul-Löbe auto-da-fé ;-) -g_--watch'
 			);
 		});
 
 		it('should add nbsp before the last word in a paragraph to avoid orphans', () => {
-			rt.lang('en');
-			compare(rt.rich('One two three.\n\nFour five six!'), 'One two_three.\n\nFour five_six!');
+			compare(
+				rt.rich('One two three.\n\nFour five six!', 'en'),
+				'One two_three.\n\nFour five_six!'
+			);
 		});
 
 		it('should not add nbsp before the last word longer than 10 letters', () => {
-			rt.lang('en');
-			compare(rt.rich('This was otorhinolaryngological.'), 'This was otorhinolaryngological.');
+			compare(
+				rt.rich('This was otorhinolaryngological.', 'en'),
+				'This was otorhinolaryngological.'
+			);
 		});
 
 		it('should not replace trailing whitespace with nbsp', () => {
-			rt.lang('en');
-			compare(rt.rich('This was\n'), 'This was\n');
+			compare(rt.rich('This was\n', 'en'), 'This was\n');
+		});
+
+		it('should not wrap words in nobr twice', () => {
+			compare(rt.rich('<nobr>75-Jähriger</nobr>', 'en'), '<nobr>75-Jähriger</nobr>');
 		});
 	});
 
@@ -213,22 +229,20 @@ describe('RichTypo', () => {
 		compare(rt.title('Dessi &amp; Tsiri'), 'Dessi <span class="amp">&amp;</span>_Tsiri');
 	});
 
-	it('abbrs ru', () => {
-		rt.lang('ru');
-
-		compare(
-			rt.title('На ХХ таксовке ТАКСА было 37 такс'),
-			'На_ХХ таксовке <abbr>ТАКСА</abbr> было 37_такс'
-		);
+	describe('abbrs ru', () => {
+		it('should wrap abbreviations in <abbr>', () => {
+			compare(rt.title('таксовке ТАКСА было', 'ru'), 'таксовке <abbr>ТАКСА</abbr>_было');
+		});
 	});
 
-	it('abbrs en', () => {
-		rt.lang('en');
+	describe('abbrs en', () => {
+		it('should wrap abbreviations in <abbr>', () => {
+			compare(rt.title('party DOXIE was\n', 'en'), 'party <abbr>DOXIE</abbr> was\n');
+		});
 
-		compare(
-			rt.title('On XX dachshund party DOXIE was 37 wieners'),
-			'On_XX dachshund party <abbr>DOXIE</abbr> was 37_wieners'
-		);
+		it('should not wrap abbreviations in <abbr>', () => {
+			compare(rt.title('<abbr>DOXIE</abbr>', 'en'), '<abbr>DOXIE</abbr>');
+		});
 	});
 
 	it('hanging', () => {
@@ -277,13 +291,4 @@ describe('RichTypo', () => {
 			'<!--[if lte IE 6]>The<span class="sldquo"> </span> <span class="hldquo">“</span>quoted text.”<![endif]-->'
 		);
 	});
-
-	// it.only('test', () => {
-	//  rt.verbose(true);
-	//	rt.lang('ru');
-	//	compare(
-	//		rt.richtypo('рынка книги, мы к этой цифре', ['short_words']),
-	//		'рынка книги, мы_к_этой цифре'
-	//	);
-	// });
 });

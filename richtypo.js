@@ -63,6 +63,8 @@ const commonRules = {
 		// Non-breaking space entinty to symbol
 		[/&nbsp;/g, '\xA0'],
 	],
+	// Remove dobule tags, like <abbr><abbr>JS</abbr></abbr>
+	remove_doppelgangers: [[/<(nobr|abbr)>(<\1>[^<]+<\/\1>)<\/\1>/g, '$2']],
 	// Non-breaking space after short words
 	short_words: [
 		// Run twice to catch pairs of short words: of_a_book
@@ -160,6 +162,7 @@ richtypo.lite = function(text, lang) {
 		'quotes',
 		'cleanup_after',
 		'restore_tags',
+		'remove_doppelgangers',
 	]);
 };
 
@@ -179,6 +182,7 @@ richtypo.rich = function(text, lang) {
 		'abbr',
 		'cleanup_after',
 		'restore_tags',
+		'remove_doppelgangers',
 	]);
 };
 
@@ -200,6 +204,7 @@ richtypo.title = function(text, lang) {
 		'hanging',
 		'cleanup_after',
 		'restore_tags',
+		'remove_doppelgangers',
 	]);
 };
 
@@ -221,6 +226,7 @@ richtypo.full = function(text, lang) {
 		'hanging',
 		'cleanup_after',
 		'restore_tags',
+		'remove_doppelgangers',
 	]);
 };
 
