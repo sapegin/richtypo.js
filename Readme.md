@@ -133,32 +133,6 @@ richtypo.textify(richtypo.full(text, lang))
 ```
 
 
-## Command line
-
-Usage: `richtypo [--rules full] [--lang en] [--text] filename`
-
-### Options
-
-#### `--rules RULESET` (default: `full`)
-
-Define ruleset:
-
-- lite - Simple typographer (quotes, em-dash, etc.) for user generated content (e.g. comments);
-
-- rich - Enhancing typography: non-breaking spaces, abbreviations;
-
-- title - Typography for big text: the same as --rich + ampersands and hanging punctuation.  [default: "full"]
-
-- full - --light + --rich;
-
-#### `--lang LANG` (default `en`)
-
-Text language: `en` or `ru`.
-
-#### `--text`
-
-Strip HTML tags.
-
 ## Change log
 
 The change log can be found on the [Releases page](https://github.com/sapegin/richtypo.js/releases).
