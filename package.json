@@ -1,7 +1,7 @@
 {
   "name": "richtypo",
   "version": "0.0.0-development",
-  "description": "Typography enhancer for English and Russian",
+  "description": "HTML typography enhancer for English and Russian texts",
   "homepage": "https://github.com/sapegin/richtypo.js",
   "author": {
     "name": "Artem Sapegin",
@@ -50,6 +50,17 @@
   "keywords": [
     "typography",
     "typo",
+    "html",
+    "quotes",
+    "prepositions",
+    "abbr",
+    "abbreviations",
+    "nobr",
+    "nbsp",
+    "hanging",
+    "punctuation",
+    "em-dash",
+    "ampersands",
     "russian",
     "english"
   ],

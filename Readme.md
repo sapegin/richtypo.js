@@ -1,9 +1,10 @@
-# Richtypo: typography enhancer for Node
+# Richtypo: HTML typography enhancer for Node
 
 [![npm](https://img.shields.io/npm/v/richtypo.svg)](https://www.npmjs.com/package/richtypo)
 [![Build Status](https://travis-ci.org/sapegin/richtypo.js.svg)](https://travis-ci.org/sapegin/richtypo.js)
 
-The main purpose of this library is to enhance typography of your HTML. It supposes that your texts already have right quotes, dashes and other symbols (you can use [Typography Keyboard Layout](http://ilyabirman.net/projects/typography-layout/)). Richtypo adds non-breaking spaces in right places, CSS classes for abbreviations, ampersands and hanging punctuation for special styling.
+
+ Richtypo adds non-breaking spaces in right places, `<nobr>` and `<abbr>` tags, CSS classes, ampersands and hanging punctuation for special styling. It expects that your texts already have the right quotes, em-dashes and other symbols (you can use [Typography Keyboard Layout](http://ilyabirman.net/projects/typography-layout/)).
 
 
 ## Features
@@ -11,36 +12,40 @@ The main purpose of this library is to enhance typography of your HTML. It suppo
 - Rules for English and Russian languages
 - Non-breaking spaces after prepositions and conjunctions, before em-dash, etc.
 - `<nobr>` for words with hyphens
-- CSS classes for abbreviations, ampersands and hanging punctuation
+- CSS classes for ampersands and hanging punctuation
+- `<abbr>` for abbreviations
 - Takes care of your HTML tags
-- Simple typographer (quotes, em-dash, etc.) for user generated content (e.g. comments)
+- Simple typographer (quotes, em-dash, etc.) for user generated content (like comments)
+- No dependencies
 
 
 ## Example
 
-[Try it out!](https://runkit.com/npm/richtypo)
+[Try it out!](https://npm.runkit.com/richtypo)
 
 ```javascript
-var richtypo = require('richtypo');
-var beautiful = richtypo.rich('Welcome to the world of beautiful web typography — only with Richtypo.');
-var awesome = richtypo.title('Beautiful &amp; Awesome Web Typography with “Richtypo”');
+const richtypo = require('richtypo');
+const beautiful = richtypo.rich('Welcome to the world of beautiful web typography — only with Richtypo.');
+const awesome = richtypo.title('Beautiful &amp; Awesome Web Typography with “Richtypo”');
+const ok = richtypo.lite('"Richtypo" - awesome!');
 ```
 
 Will produce something like that:
 
 ```html
-Welcome to&nbsp;the world of&nbsp;beautiful web typography&nbsp;— only with Richtypo.
-Beautiful <span class="amp">&amp;</span> Awesome Web Typography with <span class="sldquo"> </span> <span class="hldquo">“</span>Richtypo”'
+Welcome to&nbsp;the&nbsp;world of&nbsp;beautiful web <nobr>typography&#8202;—</nobr>&#8202;only with&nbsp;Richtypo.
+Beautiful <span class="amp">&amp;</span> Awesome Web Typography with<span class="sldquo"> </span> <span class="hldquo">“</span>Richtypo”'
+<nobr>“Richtypo”&#8202;—</nobr>&#8202;awesome!
 ```
 
-`&nbsp;` is shown here just for demonstration purposes. Actual implementation produces the non-breaking space character itself (`\xA0`), not the escaped sequence.
+**Note: all methods render `&nbsp;` as an actual non-breaking space (`\xA0`).**
 
 Also look at [the example page](http://sapegin.github.io/richtypo.js/) and [its source](https://github.com/sapegin/richtypo.js/tree/master/example).
 
 
 ## Styles
 
-Richtypo wraps abbreviations in `<abbr>` tags. It also wraps ampersands and leading quotes to allow for typographic enhancement:
+Richtypo wraps abbreviations in `<abbr>` tags. It also wraps ampersands and leading quotes to allow custom styling:
 
 | Character | Spacer class | Character class |
 | --------- | ------------ | --------------- |
@@ -51,7 +56,7 @@ Richtypo wraps abbreviations in `<abbr>` tags. It also wraps ampersands and lead
 | `„` | `.sbdquo` | `.hbdquo` |
 | `(` | `.sbrace` | `.hbrace` |
 
-Start with something like this, and customize it for your site:
+Start with something like this and customize it for your site:
 
 ```css
 /* Use small caps for abbreviations */
@@ -88,7 +93,7 @@ abbr {
 ## Installation
 
 ```bash
-$ npm install [-g] richtypo
+$ npm install --save richtypo
 ```
 
 
@@ -113,7 +118,7 @@ richtypo.richtypo(text, rulesets, lang)
 ```
 
 - `text` is a HTML string;
-- `rulesets` is array of rulesets (available rulesets: `save_tags`, `cleanup_before`, `short_words`, `spaces_lite`, `spaces`, `abbrs`, `amps`, `hanging`, `cleanup_after`, `restore_tags`);
+- `rulesets` is array of rulesets (available rulesets: `save_tags`, `cleanup_before`, `short_words`, `orphans`, `lite`, `rich`, `hanging`, `cleanup_after`, `restore_tags`, `remove_doppelgangers` or language-specific rules);
 - `lang` (*optional*) is a text language (`en` or `ru`, default: `en`).
 
 ### Change language globally
@@ -126,7 +131,7 @@ richtypo.lang(lang)
 
 ### Convert to text
 
-If you don’t want HTML tags in the result string just wrap it in `textify` method:
+If you don’t want HTML tags in the result string, use `textify` method:
 
 ```javascript
 richtypo.textify(richtypo.full(text, lang))
