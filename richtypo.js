@@ -6,8 +6,6 @@
 \xA0 - non-breaking space
 */
 
-const _ = require('lodash');
-
 const saveTagsRe = [
 	/<!(--\[[^\]>]+\]|\[[^\]>]+\]--)>/gim,
 	/<!--[\s\S]*?-->/gim,
@@ -229,7 +227,7 @@ function _process(text, lang, rulesets) {
 	for (let setIdx = 0; setIdx < rulesets.length; setIdx++) {
 		const rulesetId = rulesets[setIdx];
 		const rule = langRules[rulesetId];
-		if (_.isFunction(rule)) {
+		if (typeof rule === 'function') {
 			text = rule(text);
 		} else if (rule) {
 			text = _replace(text, rule);
@@ -254,7 +252,7 @@ function _replace(text, rules) {
 function _compile(json) {
 	const defs = Object.assign({}, commonDefs, json.defs);
 	function compileRule(obj) {
-		if (_.isString(obj)) {
+		if (typeof obj === 'string') {
 			return rulesets[obj];
 		}
 
