@@ -1,3 +1,4 @@
+// @ts-check
 'use strict';
 
 const rt = require('../richtypo');
@@ -6,19 +7,18 @@ function compare(actual, expected) {
 	expect(actual.replace(/\xA0/g, '_')).toEqual(expected);
 }
 
-describe('RichTypo', function() {
-	it('has API functions', function() {
-		rt.lang('ru');
-		compare(rt.lite('Такса — животное.'), 'Такса_— животное.');
-	});
-
-	it('has API functions', function() {
+describe('RichTypo', () => {
+	it('has API functions', () => {
 		expect(rt.lang).toEqual(expect.any(Function));
+		expect(rt.verbose).toEqual(expect.any(Function));
 		expect(rt.lite).toEqual(expect.any(Function));
 		expect(rt.rich).toEqual(expect.any(Function));
+		expect(rt.full).toEqual(expect.any(Function));
+		expect(rt.textify).toEqual(expect.any(Function));
+		expect(rt.richtypo).toEqual(expect.any(Function));
 	});
 
-	it('safe tags ru', function() {
+	it('safe tags ru', () => {
 		rt.lang('ru');
 
 		compare(rt.rich('<code> -->> </code>'), '<code> -->> </code>');
@@ -38,7 +38,7 @@ describe('RichTypo', function() {
 		);
 	});
 
-	it('spaces lite ru', function() {
+	it('spaces lite ru', () => {
 		rt.lang('ru');
 
 		compare(
@@ -47,7 +47,7 @@ describe('RichTypo', function() {
 		);
 	});
 
-	it('spaces ru', function() {
+	it('spaces ru', () => {
 		rt.lang('ru');
 
 		compare(
@@ -122,7 +122,7 @@ describe('RichTypo', function() {
 		});
 	});
 
-	it('lite ru', function() {
+	it('lite ru', () => {
 		rt.lang('ru');
 
 		compare(rt.lite('Эх...'), 'Эх…');
@@ -138,7 +138,7 @@ describe('RichTypo', function() {
 		compare(rt.lite('<p>- Бадыдыщь!</p>'), '<p>— Бадыдыщь!</p>');
 	});
 
-	it('lite en', function() {
+	it('lite en', () => {
 		rt.lang('en');
 
 		compare(rt.lite('Yep...'), 'Yep…');
@@ -146,7 +146,7 @@ describe('RichTypo', function() {
 		compare(rt.lite('Dachshund--beast'), '<nobr>Dachshund—</nobr>beast');
 	});
 
-	it('emdash ru', function() {
+	it('emdash ru', () => {
 		rt.lang('ru');
 
 		compare(rt.rich('Такса — животное большое.'), 'Такса_— животное_большое.');
@@ -159,7 +159,7 @@ describe('RichTypo', function() {
 		);
 	});
 
-	it('emdash en', function() {
+	it('emdash en', () => {
 		rt.lang('en');
 
 		compare(rt.rich('Dachshund — beast.'), '<nobr>Dachshund&#8202;—</nobr>&#8202;beast.');
@@ -171,7 +171,7 @@ describe('RichTypo', function() {
 		compare(rt.rich('Dachshund—beast.'), '<nobr>Dachshund—</nobr>beast.');
 	});
 
-	it('quotes ru', function() {
+	it('quotes ru', () => {
 		rt.lang('ru');
 
 		compare(rt.lite('Тут просто "текст в кавычках".'), 'Тут просто «текст в кавычках».');
@@ -186,7 +186,7 @@ describe('RichTypo', function() {
 		compare(rt.lite('И "клинический "случай".'), 'И «клинический «случай».');
 	});
 
-	it('quotes en', function() {
+	it('quotes en', () => {
 		rt.lang('en');
 
 		compare(rt.lite('There is a "text in quotes."'), 'There is a “text in quotes.”');
@@ -202,13 +202,13 @@ describe('RichTypo', function() {
 		);
 	});
 
-	it('amps en', function() {
+	it('amps en', () => {
 		rt.lang('en');
 
 		compare(rt.title('Dessi &amp; Tsiri'), 'Dessi <span class="amp">&amp;</span>_Tsiri');
 	});
 
-	it('abbrs ru', function() {
+	it('abbrs ru', () => {
 		rt.lang('ru');
 
 		compare(
@@ -217,7 +217,7 @@ describe('RichTypo', function() {
 		);
 	});
 
-	it('abbrs en', function() {
+	it('abbrs en', () => {
 		rt.lang('en');
 
 		compare(
@@ -226,7 +226,7 @@ describe('RichTypo', function() {
 		);
 	});
 
-	it('hanging', function() {
+	it('hanging', () => {
 		compare(
 			rt.title('The “quoted text.”'),
 			'The<span class="sldquo"> </span> <span class="hldquo">“</span>quoted_text.”'
@@ -244,13 +244,13 @@ describe('RichTypo', function() {
 		compare(rt.full('“Quoted text” two.'), '<span class="hldquo">“</span>Quoted text” two.');
 	});
 
-	it('textify', function() {
+	it('textify', () => {
 		expect(rt.textify(rt.title('The “quoted text.”')), 'The “quoted text.”');
 
 		expect(rt.textify(rt.lite('- Бадыдыщь!\n- Бадыдыщь!', 'ru')), '— Бадыдыщь!\n— Бадыдыщь!');
 	});
 
-	it('leaves commented out tags alone', function() {
+	it('leaves commented out tags alone', () => {
 		compare(
 			rt.lite(
 				'<!-- <script>alert("wheee");</script><style>* { color: red; }</style><pre>...</pre> -->'
@@ -259,7 +259,7 @@ describe('RichTypo', function() {
 		);
 	});
 
-	it('plays nice with ie conditional comments', function() {
+	it('plays nice with ie conditional comments', () => {
 		compare(
 			rt.title(
 				'<!--[if lte IE 6]><script>alert("wheee");</script><style>* { color: red; }</style><pre>...</pre><![endif]-->'
@@ -273,7 +273,7 @@ describe('RichTypo', function() {
 		);
 	});
 
-	// it.only('test', function() {
+	// it.only('test', () => {
 	//  rt.verbose(true);
 	//	rt.lang('ru');
 	//	compare(
