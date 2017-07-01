@@ -1,44 +1,14 @@
 {
 	"defs": {
-		"prepos": "and|the|for"
+		"prepos": "and|the|for",
+    "european": "[a-zA-ZÀ-ž0-9-]",
+    "europeanwithquotes": "[a-zA-ZÀ-ž0-9-“”‘’]",
+    "europeannohyphen": "[a-zA-ZÀ-ž0-9]",
+    "europeanupper": "[A-ZÁÀÂÃÄĂĀÅĄÆÉÈÊËĚĒĖĘÍÌÎÏĪĮIÓÒÔÕÖŐØŒÚÙÛÜŰŪÝĆČĎĐĐĢĞŁĻŃÑŇŅŊŘŚŠŞŤŦÞŢŻŹŽ]",
+    "noneuropean": "[^a-zA-ZÀ-ž0-9-]"
 	},
 
 	"rules": {
-		"emdash": [
-			{
-				"regex": "($(european)+)[ $(nbsp)](?:[—–])[ $(nbsp)]",
-				"result": "<nobr>$1$(hairspace)—</nobr>$(hairspace)"
-			},
-			{
-				"regex": "($(european)+)[ $(nbsp)](?:[—–])",
-				"result": "<nobr>$1$(hairspace)—</nobr>"
-			},
-			{
-				"regex": "(?:[—–])[ $(nbsp)]",
-				"result": "—$(hairspace)"
-			},
-			{
-				"regex": "($(european)+)(?:[—–])($(european))",
-				"result": "<nobr>$1$(hairspace)—</nobr>$(hairspace)$2"
-			}
-		],
-		"spaces_lite": ["emdash"],
-
-		"hyphen": {
-			"regex": "($(noneuropean)|^)((?:$(europeannohyphen){1,2}(?:\\-$(europeannohyphen)+))|(?:$(europeannohyphen)+(?:\\-$(europeannohyphen){1,2})))(?!$(european))",
-			"flags": "g",
-			"result": "$1<nobr>$2</nobr>"
-		},
-		"preposition": {
-			"regex": "($(noneuropean)|^)($(prepos)) ",
-			"result": "$1$2$(nbsp)"
-		},
-		"spaces": ["hyphen", "preposition"],
-
-		"ellipsis": {
-			"regex": "\\.{2,}",
-			"result": "…"
-		},
 		"emdash_lite": [
 			{
 				"regex": "---?",
@@ -58,7 +28,40 @@
 				"comment": "For strange reason '\n—' replaces '\n' with space"
 			}
 		],
-		"lite": ["ellipsis", "emdash_lite"],
+		"emdash": [
+			{
+				"regex": "($(europeanwithquotes)+)[ $(nbsp)](?:[—–])[ $(nbsp)]",
+				"result": "<nobr>$1$(hairspace)—</nobr>$(hairspace)"
+			},
+			{
+				"regex": "($(europeanwithquotes)+)[ $(nbsp)](?:[—–])",
+				"result": "<nobr>$1$(hairspace)—</nobr>"
+			},
+			{
+				"regex": "(?:[—–])[ $(nbsp)]",
+				"result": "—$(hairspace)"
+			},
+			{
+				"regex": "($(europeanwithquotes)+)(?:[—–])($(european))",
+				"result": "<nobr>$1$(hairspace)—</nobr>$(hairspace)$2"
+			}
+		],
+
+		"hyphen": {
+			"regex": "($(noneuropean)|^)((?:$(europeannohyphen){1,2}(?:\\-$(europeannohyphen)+))|(?:$(europeannohyphen)+(?:\\-$(europeannohyphen){1,2})))(?!$(european))",
+			"flags": "g",
+			"result": "$1<nobr>$2</nobr>"
+		},
+		"preposition": {
+			"regex": "($(noneuropean)|^)($(prepos)) ",
+			"result": "$1$2$(nbsp)"
+		},
+		"spaces": ["hyphen", "preposition"],
+
+		"ellipsis": {
+			"regex": "\\.{2,}",
+			"result": "…"
+		},
 
 		"quotes": [
 			{
@@ -80,6 +83,10 @@
 			"regex": "($(europeanupper){3,})",
 			"flags": "g",
 			"result": "<abbr>$1</abbr>"
-		}
+		},
+
+    "lite": ["quotes", "ellipsis", "emdash_lite"],
+    "rich": ["emdash", "spaces", "abbr"],
+    "title": ["amp"]
 	}
 }

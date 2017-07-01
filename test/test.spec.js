@@ -176,11 +176,11 @@ describe('RichTypo', () => {
 		});
 
 		it('should replace -- with em-dash', () => {
-			compare(rt.lite('Такса -- зверь', 'ru'), 'Такса_— зверь');
+			compare(rt.lite('Такса -- зверь', 'ru'), 'Такса — зверь');
 		});
 
 		it('should replace - with spaces around with em-dash', () => {
-			compare(rt.lite('Такса - зверь', 'ru'), 'Такса_— зверь');
+			compare(rt.lite('Такса - зверь', 'ru'), 'Такса — зверь');
 		});
 
 		it('should replace - in the beginning with em-dash', () => {
@@ -196,7 +196,7 @@ describe('RichTypo', () => {
 		});
 
 		it('should replace -- with em-dash', () => {
-			compare(rt.lite('Dachshund--beast', 'en'), '<nobr>Dachshund&#8202;—</nobr>&#8202;beast');
+			compare(rt.lite('Dachshund--beast', 'en'), 'Dachshund—beast');
 		});
 	});
 
@@ -221,6 +221,10 @@ describe('RichTypo', () => {
 			compare(rt.rich('Dachshund — beast.', 'en'), '<nobr>Dachshund&#8202;—</nobr>&#8202;beast.');
 			compare(rt.rich('Naïve — word.', 'en'), '<nobr>Naïve&#8202;—</nobr>&#8202;word.');
 			compare(rt.rich('Dachshund —', 'en'), '<nobr>Dachshund&#8202;—</nobr>');
+			compare(
+				rt.rich('“Richtypo” —&#8202;awesome!', 'en'),
+				'<nobr>“Richtypo”&#8202;—</nobr>&#8202;awesome!'
+			);
 			compare(rt.rich('Naïve —', 'en'), '<nobr>Naïve&#8202;—</nobr>');
 			compare(rt.rich('— Beast!', 'en'), '—&#8202;Beast!');
 			compare(rt.rich('— Naïve!', 'en'), '—&#8202;Naïve!');
@@ -296,8 +300,8 @@ describe('RichTypo', () => {
 			);
 			compare(rt.title('alert("Hello world!")', 'en'), 'alert("Hello_world!")');
 			compare(
-				rt.full('“Quoted text” two.', 'en'),
-				'<span class="hldquo">“</span>Quoted text” two.'
+				rt.title('“Quoted text” two.', 'en'),
+				'<span class="hldquo">“</span>Quoted text”_two.'
 			);
 		});
 	});

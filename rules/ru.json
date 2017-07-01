@@ -9,6 +9,30 @@
 			"regex": " —",
 			"result": "$(nbsp)—"
 		},
+    "emdash_lite": [
+			{
+				"regex": "---?",
+				"result": "—"
+			},
+			{
+				"regex": " - ",
+				"result": " — "
+			},
+			{
+				"regex": ">- ",
+				"result": ">— "
+			},
+			{
+				"regex": "([,\\)])- ",
+				"result": "$1 — "
+			},
+			{
+				"regex": "(^|\\n)\\-",
+				"result": "$1&mdash;",
+				"comment": "For strange reason '\n—' replaces '\n' with space"
+			}
+		],
+
 		"etc": [
 			{
 				"regex": "и[ $(nbsp)]т\\. д\\.",
@@ -19,7 +43,6 @@
 				"result": "и$(nbsp)т.$(nbsp)п."
 			}
 		],
-		"spaces_lite": ["emdash", "etc"],
 
 		"num": {
 			"regex": "№ ",
@@ -69,30 +92,6 @@
 			"regex": "\\.{2,}",
 			"result": "…"
 		},
-		"emdash_lite": [
-			{
-				"regex": "---?",
-				"result": "—"
-			},
-			{
-				"regex": " - ",
-				"result": " — "
-			},
-			{
-				"regex": ">- ",
-				"result": ">— "
-			},
-			{
-				"regex": "([,\\)])- ",
-				"result": "$1 — "
-			},
-			{
-				"regex": "(^|\\n)\\-",
-				"result": "$1&mdash;",
-				"comment": "For strange reason '\n—' replaces '\n' with space"
-			}
-		],
-		"lite": ["ellipsis", "emdash_lite"],
 
 		"quotes": [
 			{
@@ -109,6 +108,10 @@
 			"regex": "([А-ЯЁA-Z]{3,})",
 			"flags": "g",
 			"result": "<abbr>$1</abbr>"
-		}
+		},
+
+		"lite": ["quotes", "ellipsis", "emdash_lite", "etc"],
+    "rich": ["emdash", "spaces", "abbr", "etc"],
+    "title": []
 	}
 }

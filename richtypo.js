@@ -19,10 +19,13 @@ const restoreTagsRe = /<(\d+)>/g;
 const commonDefs = {
 	nbsp: '\xA0',
 	hairspace: '&#8202;',
-	european: '[a-zA-ZÀ-ž0-9-]',
-	europeannohyphen: '[a-zA-ZÀ-ž0-9]',
-	europeanupper: '[A-ZÁÀÂÃÄĂĀÅĄÆÉÈÊËĚĒĖĘÍÌÎÏĪĮIÓÒÔÕÖŐØŒÚÙÛÜŰŪÝĆČĎĐĐĢĞŁĻŃÑŇŅŊŘŚŠŞŤŦÞŢŻŹŽ]',
-	noneuropean: '[^a-zA-ZÀ-ž0-9-]',
+};
+const hangingTable = {
+	'«': 'laquo',
+	'„': 'bdquo',
+	'“': 'ldquo',
+	'‘': 'lsquo',
+	'(': 'brace',
 };
 const shortWordsRegExp = [/(^|[\x20\xA0(>«”„])([а-яёa-zA-ZА-ЯЁ][а-яёa-z]?)\x20/g, '$1$2\xA0'];
 
@@ -36,33 +39,31 @@ const commonRules = {
 		// Remove repeated spaces
 		[/ {2,}/g, ' '],
 	],
+
 	cleanup_after: [
 		// Non-breaking space entinty to symbol
 		[/&nbsp;/g, '\xA0'],
 	],
+
 	// Remove dobule tags, like <abbr><abbr>JS</abbr></abbr>
 	remove_doppelgangers: [[/<(nobr|abbr)>(<\1>[^<]+<\/\1>)<\/\1>/g, '$2']],
+
 	// Non-breaking space after short words
 	short_words: [
 		// Run twice to catch pairs of short words: of_a_book
 		shortWordsRegExp,
 		shortWordsRegExp,
 	],
+
 	// Orphans (non-breaking space before the last word)
 	orphans: [[/\s([^\s<]{1,10}(?:\n\n|$))/g, '\xA0$1']],
+
 	// Hanging punctuation
-	_hanging_table: {
-		'«': 'laquo',
-		'„': 'bdquo',
-		'“': 'ldquo',
-		'‘': 'lsquo',
-		'(': 'brace',
-	},
 	hanging: [
 		[
 			/(^|\s|>)([«„“‘(])/g,
 			function(s, prefix, symbol) {
-				const name = commonRules._hanging_table[symbol];
+				const name = hangingTable[symbol];
 				const html =
 					[' ', '\xA0', '\n', '\r', '\t'].indexOf(prefix) !== -1
 						? '<span class="s' + name + '"> </span> '
@@ -71,6 +72,7 @@ const commonRules = {
 			},
 		],
 	],
+
 	textify: [
 		[/<\/?[^>]+>/g, ''], // Remove tags
 		[/&mdash;/g, '—'],
@@ -124,8 +126,6 @@ richtypo.lite = function(text, lang) {
 		'save_tags',
 		'cleanup_before',
 		'lite',
-		'spaces_lite',
-		'quotes',
 		'cleanup_after',
 		'restore_tags',
 		'remove_doppelgangers',
@@ -143,9 +143,7 @@ richtypo.rich = function(text, lang) {
 		'cleanup_before',
 		'short_words',
 		'orphans',
-		'spaces_lite',
-		'spaces',
-		'abbr',
+		'rich',
 		'cleanup_after',
 		'restore_tags',
 		'remove_doppelgangers',
@@ -163,10 +161,8 @@ richtypo.title = function(text, lang) {
 		'cleanup_before',
 		'short_words',
 		'orphans',
-		'spaces_lite',
-		'spaces',
-		'abbr',
-		'amp',
+		'rich',
+		'title',
 		'hanging',
 		'cleanup_after',
 		'restore_tags',
@@ -184,12 +180,9 @@ richtypo.full = function(text, lang) {
 		'save_tags',
 		'cleanup_before',
 		'lite',
-		'spaces_lite',
-		'spaces',
-		'quotes',
-		'abbr',
-		'amp',
-		'hanging',
+		'short_words',
+		'orphans',
+		'rich',
 		'cleanup_after',
 		'restore_tags',
 		'remove_doppelgangers',
@@ -255,8 +248,14 @@ function _replace(text, rules) {
 
 function _compile(json) {
 	const defs = Object.assign({}, commonDefs, json.defs);
-	function compileRule(obj) {
+	function compileRule(obj, name) {
 		if (typeof obj === 'string') {
+			if (!rulesets[obj]) {
+				throw new Error(
+					`Rule "${obj}" mentioned in "${name}" not found. Available rules: ` +
+						Object.keys(rulesets).join(', ')
+				);
+			}
 			return rulesets[obj];
 		}
 
@@ -266,11 +265,12 @@ function _compile(json) {
 	const rulesets = {};
 	for (const name in json.rules) {
 		let rule = json.rules[name];
+
 		if (!Array.isArray(rule)) {
 			rule = [rule];
 		}
 
-		rule = rule.map(compileRule);
+		rule = rule.map(r => compileRule(r, name));
 		rulesets[name] = rule;
 	}
 
