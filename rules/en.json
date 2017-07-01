@@ -6,20 +6,20 @@
 	"rules": {
 		"emdash": [
 			{
-				"regex": "(\\w+)[ $(nbsp)]([—–])[ $(nbsp)]",
+				"regex": "(\\w+)[ $(nbsp)](?:[—–])[ $(nbsp)]",
 				"result": "<nobr>$1$(hairspace)—</nobr>$(hairspace)"
 			},
 			{
-				"regex": "(\\w+)[ $(nbsp)]([—–])",
+				"regex": "(\\w+)[ $(nbsp)](?:[—–])",
 				"result": "<nobr>$1$(hairspace)—</nobr>"
 			},
 			{
-				"regex": "([—–])[ $(nbsp)]",
+				"regex": "(?:[—–])[ $(nbsp)]",
 				"result": "—$(hairspace)"
 			},
 			{
-				"regex": "(\\w+[—–])(\\w)",
-				"result": "<nobr>$1</nobr>$2"
+				"regex": "(\\w+)(?:[—–])(\\w)",
+				"result": "<nobr>$1$(hairspace)—</nobr>$(hairspace)$2"
 			}
 		],
 		"spaces_lite": ["emdash"],

@@ -197,7 +197,7 @@ describe('RichTypo', () => {
 		});
 
 		it('should replace -- with em-dash', () => {
-			compare(rt.lite('Dachshund--beast', 'en'), '<nobr>Dachshund—</nobr>beast');
+			compare(rt.lite('Dachshund--beast', 'en'), '<nobr>Dachshund&#8202;—</nobr>&#8202;beast');
 		});
 	});
 
@@ -222,7 +222,7 @@ describe('RichTypo', () => {
 			compare(rt.rich('Dachshund — beast.', 'en'), '<nobr>Dachshund&#8202;—</nobr>&#8202;beast.');
 			compare(rt.rich('Dachshund —', 'en'), '<nobr>Dachshund&#8202;—</nobr>');
 			compare(rt.rich('— Beast!', 'en'), '—&#8202;Beast!');
-			compare(rt.rich('Dachshund—beast.', 'en'), '<nobr>Dachshund—</nobr>beast.');
+			compare(rt.rich('Dachshund—beast.', 'en'), '<nobr>Dachshund&#8202;—</nobr>&#8202;beast.');
 		});
 	});
 
