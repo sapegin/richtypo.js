@@ -43,7 +43,7 @@
     "test:coverage": "jest --coverage",
     "lint": "eslint . --cache --fix",
     "postpublish": "npm run example && npm run gh-pages",
-    "example": "node example/src",
+    "example": "node --harmony example/src",
     "gh-pages": "gh-pages -d example",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
