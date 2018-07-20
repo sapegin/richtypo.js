@@ -67,7 +67,10 @@ describe('RichTypo', () => {
 	describe('spaces lite ru', () => {
 		it('should put nbsp inside и т. д. and и т. п.', () => {
 			compare(
-				rt.rich('Там было много тлонов, тутликов, табачек и т. д. и т. п.', 'ru'),
+				rt.rich(
+					'Там было много тлонов, тутликов, табачек и т. д. и т. п.',
+					'ru'
+				),
 				'Там было много тлонов, тутликов, табачек и_т._д. и_т._п.'
 			);
 		});
@@ -76,7 +79,10 @@ describe('RichTypo', () => {
 	describe('spaces ru', () => {
 		it('should put nbsp after section and number signs', () => {
 			compare(
-				rt.rich('Прочитай § 13 журнала «Такса» № 27, там про тлонов, тутликов, табачек.', 'ru'),
+				rt.rich(
+					'Прочитай § 13 журнала «Такса» № 27, там про тлонов, тутликов, табачек.',
+					'ru'
+				),
 				'Прочитай §_13 журнала «Такса» №_27, там про тлонов, тутликов,_табачек.'
 			);
 		});
@@ -100,7 +106,10 @@ describe('RichTypo', () => {
 				rt.rich('За колбасой в магазин пошла такса из резины.', 'ru'),
 				'За_колбасой в_магазин пошла такса из_резины.'
 			);
-			compare(rt.rich('рынка книги, мы к этой цифре', 'ru'), 'рынка книги, мы_к_этой_цифре');
+			compare(
+				rt.rich('рынка книги, мы к этой цифре', 'ru'),
+				'рынка книги, мы_к_этой_цифре'
+			);
 		});
 
 		it('should add nbsp before particles', () => {
@@ -119,7 +128,10 @@ describe('RichTypo', () => {
 		});
 
 		it('should add nbsp between number and month', () => {
-			compare(rt.rich('Цири родилась 30 июля.', 'ru'), 'Цири родилась 30_июля.');
+			compare(
+				rt.rich('Цири родилась 30 июля.', 'ru'),
+				'Цири родилась 30_июля.'
+			);
 		});
 	});
 
@@ -129,7 +141,10 @@ describe('RichTypo', () => {
 		});
 
 		it('should add nbsp after prepositions', () => {
-			compare(rt.rich('off the top of the house', 'en'), 'off the_top of_the_house');
+			compare(
+				rt.rich('off the top of the house', 'en'),
+				'off the_top of_the_house'
+			);
 		});
 
 		it('should wrap words with hyphen in nobr when one part is 1-2 characters', () => {
@@ -165,7 +180,10 @@ describe('RichTypo', () => {
 		});
 
 		it('should not wrap words in nobr twice', () => {
-			compare(rt.rich('<nobr>75-Jähriger</nobr>', 'en'), '<nobr>75-Jähriger</nobr>');
+			compare(
+				rt.rich('<nobr>75-Jähriger</nobr>', 'en'),
+				'<nobr>75-Jähriger</nobr>'
+			);
 		});
 	});
 
@@ -184,7 +202,10 @@ describe('RichTypo', () => {
 
 		it('should replace - in the beginning with em-dash', () => {
 			compare(rt.lite('<p>- Бадыдыщь!</p>', 'ru'), '<p>— Бадыдыщь!</p>');
-			compare(rt.lite('- Бадыдыщь!\n- Бадыдыщь!', 'ru'), '&mdash; Бадыдыщь!\n&mdash; Бадыдыщь!');
+			compare(
+				rt.lite('- Бадыдыщь!\n- Бадыдыщь!', 'ru'),
+				'&mdash; Бадыдыщь!\n&mdash; Бадыдыщь!'
+			);
 			compare(rt.lite('<p>- Бадыдыщь!</p>', 'ru'), '<p>— Бадыдыщь!</p>');
 		});
 	});
@@ -201,7 +222,10 @@ describe('RichTypo', () => {
 
 	describe('emdash ru', () => {
 		it('should replace - with spaces around with em-dash', () => {
-			compare(rt.rich('Такса — животное большое.', 'ru'), 'Такса_— животное_большое.');
+			compare(
+				rt.rich('Такса — животное большое.', 'ru'),
+				'Такса_— животное_большое.'
+			);
 		});
 
 		it('should replace - in the beginning with em-dash', () => {
@@ -217,8 +241,14 @@ describe('RichTypo', () => {
 
 	describe('emdash en', () => {
 		it('should add hair-spaces around em-dash', () => {
-			compare(rt.rich('Dachshund — beast.', 'en'), '<nobr>Dachshund&#8202;—</nobr>&#8202;beast.');
-			compare(rt.rich('Naïve — word.', 'en'), '<nobr>Naïve&#8202;—</nobr>&#8202;word.');
+			compare(
+				rt.rich('Dachshund — beast.', 'en'),
+				'<nobr>Dachshund&#8202;—</nobr>&#8202;beast.'
+			);
+			compare(
+				rt.rich('Naïve — word.', 'en'),
+				'<nobr>Naïve&#8202;—</nobr>&#8202;word.'
+			);
 			compare(rt.rich('Dachshund —', 'en'), '<nobr>Dachshund&#8202;—</nobr>');
 			compare(
 				rt.rich('“Richtypo” —&#8202;awesome!', 'en'),
@@ -227,14 +257,23 @@ describe('RichTypo', () => {
 			compare(rt.rich('Naïve —', 'en'), '<nobr>Naïve&#8202;—</nobr>');
 			compare(rt.rich('— Beast!', 'en'), '—&#8202;Beast!');
 			compare(rt.rich('— Naïve!', 'en'), '—&#8202;Naïve!');
-			compare(rt.rich('Dachshund—beast.', 'en'), '<nobr>Dachshund&#8202;—</nobr>&#8202;beast.');
-			compare(rt.rich('Naïve—word.', 'en'), '<nobr>Naïve&#8202;—</nobr>&#8202;word.');
+			compare(
+				rt.rich('Dachshund—beast.', 'en'),
+				'<nobr>Dachshund&#8202;—</nobr>&#8202;beast.'
+			);
+			compare(
+				rt.rich('Naïve—word.', 'en'),
+				'<nobr>Naïve&#8202;—</nobr>&#8202;word.'
+			);
 		});
 	});
 
 	describe('quotes ru', () => {
 		it('should replace "" with «»', () => {
-			compare(rt.lite('Тут просто "текст в кавычках".', 'ru'), 'Тут просто «текст в кавычках».');
+			compare(
+				rt.lite('Тут просто "текст в кавычках".', 'ru'),
+				'Тут просто «текст в кавычках».'
+			);
 			compare(
 				rt.lite('"Текст в кавычках "в кавычках"".', 'ru'),
 				'«Текст в кавычках «в кавычках»».'
@@ -243,19 +282,28 @@ describe('RichTypo', () => {
 				rt.lite('А тут "текст "в кавычках" в кавычках".', 'ru'),
 				'А тут «текст «в кавычках» в кавычках».'
 			);
-			compare(rt.lite('И "клинический "случай".', 'ru'), 'И «клинический «случай».');
+			compare(
+				rt.lite('И "клинический "случай".', 'ru'),
+				'И «клинический «случай».'
+			);
 		});
 	});
 
 	describe('quotes en', () => {
 		it('should replace "" with “”', () => {
-			compare(rt.lite('There is a "text in quotes."', 'en'), 'There is a “text in quotes.”');
+			compare(
+				rt.lite('There is a "text in quotes."', 'en'),
+				'There is a “text in quotes.”'
+			);
 			compare(
 				rt.lite('There is a "text "in quotes" in quotes."', 'en'),
 				'There is a “text “in quotes” in quotes.”'
 			);
 			compare(
-				rt.lite('There is a &quot;text &quot;in quotes&quot; in quotes.&quot;', 'en'),
+				rt.lite(
+					'There is a &quot;text &quot;in quotes&quot; in quotes.&quot;',
+					'en'
+				),
 				'There is a “text “in quotes” in quotes.”'
 			);
 		});
@@ -263,19 +311,28 @@ describe('RichTypo', () => {
 
 	describe('amps en', () => {
 		it('should wrap & in an span', () => {
-			compare(rt.title('Dessi &amp; Tsiri', 'en'), 'Dessi <span class="amp">&amp;</span>_Tsiri');
+			compare(
+				rt.title('Dessi &amp; Tsiri', 'en'),
+				'Dessi <span class="amp">&amp;</span>_Tsiri'
+			);
 		});
 	});
 
 	describe('abbrs ru', () => {
 		it('should wrap abbreviations in <abbr>', () => {
-			compare(rt.title('таксовке ТАКСА было', 'ru'), 'таксовке <abbr>ТАКСА</abbr>_было');
+			compare(
+				rt.title('таксовке ТАКСА было', 'ru'),
+				'таксовке <abbr>ТАКСА</abbr>_было'
+			);
 		});
 	});
 
 	describe('abbrs en', () => {
 		it('should wrap abbreviations in <abbr>', () => {
-			compare(rt.title('DOXIE ÖVP\n', 'en'), '<abbr>DOXIE</abbr> <abbr>ÖVP</abbr>\n');
+			compare(
+				rt.title('DOXIE ÖVP\n', 'en'),
+				'<abbr>DOXIE</abbr> <abbr>ÖVP</abbr>\n'
+			);
 		});
 
 		it('should not wrap abbreviations in <abbr>', () => {
@@ -285,8 +342,14 @@ describe('RichTypo', () => {
 
 	describe('textify', () => {
 		it('remove HTML tags from text', () => {
-			compare(rt.textify(rt.title('The “quoted text.”', 'en')), 'The_“quoted_text.”');
-			compare(rt.textify(rt.lite('- Бадыдыщь!\n- Бадыдыщь!', 'ru')), '— Бадыдыщь!\n— Бадыдыщь!');
+			compare(
+				rt.textify(rt.title('The “quoted text.”', 'en')),
+				'The_“quoted_text.”'
+			);
+			compare(
+				rt.textify(rt.lite('- Бадыдыщь!\n- Бадыдыщь!', 'ru')),
+				'— Бадыдыщь!\n— Бадыдыщь!'
+			);
 		});
 	});
 });

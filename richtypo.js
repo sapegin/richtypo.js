@@ -19,7 +19,10 @@ const commonDefs = {
 	nbsp: '\xA0',
 	hairspace: '&#8202;',
 };
-const shortWordsRegExp = [/(^|[\x20\xA0(>«”„])([а-яёa-zA-ZА-ЯЁ][а-яёa-z]?)\x20/g, '$1$2\xA0'];
+const shortWordsRegExp = [
+	/(^|[\x20\xA0(>«”„])([а-яёa-zA-ZА-ЯЁ][а-яёa-z]?)\x20/g,
+	'$1$2\xA0',
+];
 
 const rules = {};
 let currentLang = 'en';
@@ -235,7 +238,10 @@ function _compile(json) {
 			return rulesets[obj];
 		}
 
-		return [new RegExp(_tmpl(obj.regex, defs), obj.flags || 'gi'), _tmpl(obj.result, defs)];
+		return [
+			new RegExp(_tmpl(obj.regex, defs), obj.flags || 'gi'),
+			_tmpl(obj.result, defs),
+		];
 	}
 
 	const rulesets = {};

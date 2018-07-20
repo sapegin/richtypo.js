@@ -15,4 +15,4 @@ Presently she began again. “I wonder if I shall fall right through the earth! 
 
 “What a curious feeling!” said Alice; “I must be shutting up like a telescope.”
 
-*[Richtypo](https://github.com/sapegin/richtypo.js), an HTML typography enhancer for Node.*
+_[Richtypo](https://github.com/sapegin/richtypo.js), an HTML typography enhancer for Node._
