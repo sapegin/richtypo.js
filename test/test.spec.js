@@ -60,7 +60,7 @@ describe('RichTypo', () => {
 			);
 			compare(
 				rt.title('<!--[if lte IE 6]>The “quoted text.”<![endif]-->', 'en'),
-				'<!--[if lte IE 6]>The<span class="sldquo"> </span> <span class="hldquo">“</span>quoted text.”<![endif]-->'
+				'<!--[if lte IE 6]>The_“quoted text.”<![endif]-->'
 			);
 		});
 	});
@@ -286,7 +286,7 @@ describe('RichTypo', () => {
 
 	describe('textify', () => {
 		it('remove HTML tags from text', () => {
-			compare(rt.textify(rt.title('The “quoted text.”', 'en')), 'The “quoted_text.”');
+			compare(rt.textify(rt.title('The “quoted text.”', 'en')), 'The_“quoted_text.”');
 			compare(rt.textify(rt.lite('- Бадыдыщь!\n- Бадыдыщь!', 'ru')), '— Бадыдыщь!\n— Бадыдыщь!');
 		});
 	});

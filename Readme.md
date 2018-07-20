@@ -34,7 +34,7 @@ Will produce something like that:
 
 ```html
 Welcome to&nbsp;the&nbsp;world of&nbsp;beautiful web <nobr>typography&#8202;—</nobr>&#8202;only with&nbsp;Richtypo.
-Beautiful <span class="amp">&amp;</span> Awesome Web Typography with<span class="sldquo"> </span> <span class="hldquo">“</span>Richtypo”'
+Beautiful <span class="amp">&amp;</span> Awesome Web Typography with “Richtypo”'
 <nobr>“Richtypo”&#8202;—</nobr>&#8202;awesome!
 ```
 
