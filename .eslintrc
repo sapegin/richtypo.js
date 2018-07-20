@@ -1,14 +1,3 @@
 {
-	"extends": "tamia",
-	"parserOptions": {
-		"sourceType": "script"
-	},
-	"rules": {
-		"strict": [
-			2,
-			"global"
-		],
-		"prefer-spread": 0,
-		"prefer-rest-params": 0
-	}
+	"extends": "tamia"
 }

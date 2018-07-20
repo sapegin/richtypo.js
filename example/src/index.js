@@ -1,5 +1,3 @@
-'use strict';
-
 const path = require('path');
 const fledermaus = require('fledermaus');
 const richtypo = require('../../richtypo');

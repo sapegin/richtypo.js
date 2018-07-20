@@ -1,5 +1,4 @@
 // @ts-check
-'use strict';
 
 /*
 \x20 - regular space
