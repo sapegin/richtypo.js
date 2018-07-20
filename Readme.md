@@ -4,7 +4,7 @@
 [![Build Status](https://travis-ci.org/sapegin/richtypo.js.svg)](https://travis-ci.org/sapegin/richtypo.js)
 
 
- Richtypo adds non-breaking spaces in right places, `<nobr>` and `<abbr>` tags, CSS classes, ampersands and hanging punctuation for special styling. It expects that your texts already have the right quotes, em-dashes and other symbols (you can use [Typography Keyboard Layout](http://ilyabirman.net/projects/typography-layout/)).
+ Richtypo adds non-breaking spaces in the right places, `<nobr>` and `<abbr>` tags and wraps ampersands with a CSS class for special styling. It expects that your texts already have the right quotes, em-dashes and other symbols (you can use [Typography Keyboard Layout](http://ilyabirman.net/projects/typography-layout/)).
 
 
 ## Features
@@ -12,7 +12,7 @@
 - Rules for English and Russian languages
 - Non-breaking spaces after prepositions and conjunctions, before em-dash, etc.
 - `<nobr>` for words with hyphens
-- CSS classes for ampersands and hanging punctuation
+- CSS classes for ampersands
 - `<abbr>` for abbreviations
 - Takes care of your HTML tags
 - Simple typographer (quotes, em-dash, etc.) for user generated content (like comments)
@@ -50,11 +50,6 @@ Richtypo wraps abbreviations in `<abbr>` tags. It also wraps ampersands and lead
 | Character | Spacer class | Character class |
 | --------- | ------------ | --------------- |
 | `&` |           | `.amp`    |
-| `“` | `.sldquo` | `.hldquo` |
-| `‘` | `.slsquo` | `.hlsquo` |
-| `«` | `.slaquo` | `.hlaquo` |
-| `„` | `.sbdquo` | `.hbdquo` |
-| `(` | `.sbrace` | `.hbrace` |
 
 Start with something like this and customize it for your site:
 
@@ -71,22 +66,6 @@ abbr {
   font-family: Baskerville, Constantia, Palatino, 'Palatino Linotype', 'Book Antiqua', serif;
   font-style: italic;
 }
-
-/* Hang leading braces and quotes into the left margin */
-.sbrace { margin-right: 0.3em;  }
-.hbrace { margin-left: -0.3em;  }
-
-.slaquo { margin-right: 0.42em; }
-.hlaquo { margin-left: -0.42em; }
-
-.sbdquo { margin-right: 0.42em; }
-.hbdquo { margin-left: -0.42em; }
-
-.sldquo { margin-right: 0.42em; }
-.hldquo { margin-left: -0.42em; }
-
-.slsquo { margin-right: 0.42em; }
-.hlsquo { margin-left: -0.42em; }
 ```
 
 
@@ -103,7 +82,7 @@ $ npm install --save richtypo
 
 ```javascript
 richtypo.rich(text, lang)  // Enhancing typography: non-breaking spaces, abbreviations
-richtypo.title(text, lang)  // Typography for big text: the same as rich + ampersands and hanging punctuation
+richtypo.title(text, lang)  // Typography for big text: the same as rich and ampersands
 richtypo.lite(text, lang)  // Simple typographer (quotes, em-dash, etc.) for user generated content (e.g. comments)
 richtypo.full(text, lang)  // lite() + rich()
 ```
@@ -118,7 +97,7 @@ richtypo.richtypo(text, rulesets, lang)
 ```
 
 - `text` is a HTML string;
-- `rulesets` is array of rulesets (available rulesets: `save_tags`, `cleanup_before`, `short_words`, `orphans`, `lite`, `rich`, `hanging`, `cleanup_after`, `restore_tags`, `remove_doppelgangers` or language-specific rules);
+- `rulesets` is array of rulesets (available rulesets: `save_tags`, `cleanup_before`, `short_words`, `orphans`, `lite`, `rich`, `cleanup_after`, `restore_tags`, `remove_doppelgangers` or language-specific rules);
 - `lang` (*optional*) is a text language (`en` or `ru`, default: `en`).
 
 ### Change language globally

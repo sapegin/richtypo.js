@@ -284,28 +284,6 @@ describe('RichTypo', () => {
 		});
 	});
 
-	describe('hanging punctuation', () => {
-		it('should wrap quotes in spans', () => {
-			compare(
-				rt.title('The “quoted text.”', 'en'),
-				'The<span class="sldquo"> </span> <span class="hldquo">“</span>quoted_text.”'
-			);
-			compare(
-				rt.title('“Quoted text” two.', 'en'),
-				'<span class="hldquo">“</span>Quoted text”_two.'
-			);
-			compare(
-				rt.title('<p>“Quoted text” three.</p>', 'en'),
-				'<p><span class="hldquo">“</span>Quoted text” three.</p>'
-			);
-			compare(rt.title('alert("Hello world!")', 'en'), 'alert("Hello_world!")');
-			compare(
-				rt.title('“Quoted text” two.', 'en'),
-				'<span class="hldquo">“</span>Quoted text”_two.'
-			);
-		});
-	});
-
 	describe('textify', () => {
 		it('remove HTML tags from text', () => {
 			compare(rt.textify(rt.title('The “quoted text.”', 'en')), 'The “quoted_text.”');

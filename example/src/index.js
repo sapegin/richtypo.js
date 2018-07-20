@@ -27,7 +27,6 @@ documents = documents.map(function(doc) {
 	// Run Richtypo
 	doc.pageTitle = richtypo.title(doc.title); // Titles
 	doc.content = richtypo.rich(doc.content); // Page content
-	doc.content = richtypo.richtypo(doc.content, ['hanging']); // Hanging punctuation
 
 	// Make non-breaking spaces visible
 	doc.pageTitle = doc.pageTitle.replace(/\xa0/g, '&nbsp;');

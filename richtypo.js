@@ -20,13 +20,6 @@ const commonDefs = {
 	nbsp: '\xA0',
 	hairspace: '&#8202;',
 };
-const hangingTable = {
-	'«': 'laquo',
-	'„': 'bdquo',
-	'“': 'ldquo',
-	'‘': 'lsquo',
-	'(': 'brace',
-};
 const shortWordsRegExp = [/(^|[\x20\xA0(>«”„])([а-яёa-zA-ZА-ЯЁ][а-яёa-z]?)\x20/g, '$1$2\xA0'];
 
 const rules = {};
@@ -57,21 +50,6 @@ const commonRules = {
 
 	// Orphans (non-breaking space before the last word)
 	orphans: [[/\s([^\s<]{1,10}(?:\n\n|$))/g, '\xA0$1']],
-
-	// Hanging punctuation
-	hanging: [
-		[
-			/(^|\s|>)([«„“‘(])/g,
-			function(s, prefix, symbol) {
-				const name = hangingTable[symbol];
-				const html =
-					[' ', '\xA0', '\n', '\r', '\t'].indexOf(prefix) !== -1
-						? '<span class="s' + name + '"> </span> '
-						: prefix;
-				return html + '<span class="h' + name + '">' + symbol + '</span>';
-			},
-		],
-	],
 
 	textify: [
 		[/<\/?[^>]+>/g, ''], // Remove tags
@@ -163,7 +141,6 @@ richtypo.title = function(text, lang) {
 		'orphans',
 		'rich',
 		'title',
-		'hanging',
 		'cleanup_after',
 		'restore_tags',
 		'remove_doppelgangers',
