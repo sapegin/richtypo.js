@@ -4,7 +4,10 @@ node_js:
   - 6
   - 8
 after_success:
-  - npm run semantic-release
+  - npm install --no-save semantic-release semantic-release-tamia
+  - >-
+    npx travis-deploy-once "semantic-release --analyze-commits semantic-release-tamia/analyzeCommits --verify-release
+    semantic-release-tamia/verifyRelease --generate-notes semantic-release-tamia/generateNotes"
 branches:
   except:
     - /^v\d+\.\d+\.\d+$/
