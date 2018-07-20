@@ -1,5 +1,5 @@
 ---
-title: Awesome &amp; Beautiful Web Typography with Richtypo
+title: Awesome &amp; beautiful web typography with Richtypo
 layout: template
 ---
 
@@ -15,4 +15,4 @@ Presently she began again. “I wonder if I shall fall right through the earth! 
 
 “What a curious feeling!” said Alice; “I must be shutting up like a telescope.”
 
-*[Richtypo](https://github.com/sapegin/richtypo.js), a typography enhancer for Node.js.*
+_[Richtypo](https://github.com/sapegin/richtypo.js), an HTML typography enhancer for Node._
