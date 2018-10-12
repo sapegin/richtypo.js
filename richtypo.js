@@ -17,7 +17,7 @@ const saveTagsRe = [
 const restoreTagsRe = /<(\d+)>/g;
 const commonDefs = {
 	nbsp: '\xA0',
-	hairspace: '&#8202;',
+	hairspace: '&#x202F;',
 };
 const shortWordsRegExp = [
 	/(^|[\x20\xA0(>«”„])([а-яёa-zA-ZА-ЯЁ][а-яёa-z]?)\x20/g,
@@ -36,11 +36,11 @@ const commonRules = {
 	],
 
 	cleanup_after: [
-		// Non-breaking space entinty to symbol
+		// Non-breaking space entity to symbol
 		[/&nbsp;/g, '\xA0'],
 	],
 
-	// Remove dobule tags, like <abbr><abbr>JS</abbr></abbr>
+	// Remove double tags, like <abbr><abbr>JS</abbr></abbr>
 	remove_doppelgangers: [[/<(nobr|abbr)>(<\1>[^<]+<\/\1>)<\/\1>/g, '$2']],
 
 	// Non-breaking space after short words

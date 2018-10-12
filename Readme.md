@@ -31,9 +31,9 @@ const ok = richtypo.lite('"Richtypo" - awesome!');
 Will produce something like that:
 
 ```html
-Welcome to&nbsp;the&nbsp;world of&nbsp;beautiful web <nobr>typography&#8202;—</nobr>&#8202;only with&nbsp;Richtypo.
+Welcome to&nbsp;the&nbsp;world of&nbsp;beautiful web <nobr>typography&#x202F;—</nobr>&#x202F;only with&nbsp;Richtypo.
 Beautiful <span class="amp">&amp;</span> Awesome Web Typography with “Richtypo”'
-<nobr>“Richtypo”&#8202;—</nobr>&#8202;awesome!
+<nobr>“Richtypo”&#x202F;—</nobr>&#x202F;awesome!
 ```
 
 **Note: all methods render `&nbsp;` as an actual non-breaking space (`\xA0`).**

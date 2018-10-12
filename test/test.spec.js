@@ -243,27 +243,27 @@ describe('RichTypo', () => {
 		it('should add hair-spaces around em-dash', () => {
 			compare(
 				rt.rich('Dachshund — beast.', 'en'),
-				'<nobr>Dachshund&#8202;—</nobr>&#8202;beast.'
+				'<nobr>Dachshund&#x202F;—</nobr>&#x202F;beast.'
 			);
 			compare(
 				rt.rich('Naïve — word.', 'en'),
-				'<nobr>Naïve&#8202;—</nobr>&#8202;word.'
+				'<nobr>Naïve&#x202F;—</nobr>&#x202F;word.'
 			);
-			compare(rt.rich('Dachshund —', 'en'), '<nobr>Dachshund&#8202;—</nobr>');
+			compare(rt.rich('Dachshund —', 'en'), '<nobr>Dachshund&#x202F;—</nobr>');
 			compare(
-				rt.rich('“Richtypo” —&#8202;awesome!', 'en'),
-				'<nobr>“Richtypo”&#8202;—</nobr>&#8202;awesome!'
+				rt.rich('“Richtypo” —&#x202F;awesome!', 'en'),
+				'<nobr>“Richtypo”&#x202F;—</nobr>&#x202F;awesome!'
 			);
-			compare(rt.rich('Naïve —', 'en'), '<nobr>Naïve&#8202;—</nobr>');
-			compare(rt.rich('— Beast!', 'en'), '—&#8202;Beast!');
-			compare(rt.rich('— Naïve!', 'en'), '—&#8202;Naïve!');
+			compare(rt.rich('Naïve —', 'en'), '<nobr>Naïve&#x202F;—</nobr>');
+			compare(rt.rich('— Beast!', 'en'), '—&#x202F;Beast!');
+			compare(rt.rich('— Naïve!', 'en'), '—&#x202F;Naïve!');
 			compare(
 				rt.rich('Dachshund—beast.', 'en'),
-				'<nobr>Dachshund&#8202;—</nobr>&#8202;beast.'
+				'<nobr>Dachshund&#x202F;—</nobr>&#x202F;beast.'
 			);
 			compare(
 				rt.rich('Naïve—word.', 'en'),
-				'<nobr>Naïve&#8202;—</nobr>&#8202;word.'
+				'<nobr>Naïve&#x202F;—</nobr>&#x202F;word.'
 			);
 		});
 	});
@@ -307,6 +307,33 @@ describe('RichTypo', () => {
 				'There is a “text “in quotes” in quotes.”'
 			);
 		});
+	});
+
+	describe('quotes fr', () => {
+		it('should replace "..." with «&#x202F;...&#x202F;»', () => {
+			compare(
+				rt.lite('Ceci est un "texte entre guillemets".', 'fr'),
+				'Ceci est un «texte entre guillemets».'
+			);
+			compare(
+				rt.lite('"Ce texte est "entre guillemets"".', 'fr'),
+				'«Ce texte est «entre guillemets»».'
+			);
+			compare(
+				rt.lite(
+					'Ceci est un "texte "entre guillemets" entre guillemets".',
+					'fr'
+				),
+				'Ceci est un «texte «entre guillemets» entre guillemets».'
+			);
+		});
+	});
+
+	describe('spaces with punctuation fr', () => {
+		compare(
+			rt.full('Ceci: est ; un! test ? de ponctuation entre "guillemets"', 'fr'),
+			'Ceci&#x202F;: est&#x202F;; un&#x202F;! test&#x202F;? de_ponctuation entre «&#x202F;guillemets&#x202F;»'
+		);
 	});
 
 	describe('amps en', () => {
