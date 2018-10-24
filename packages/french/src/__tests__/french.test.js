@@ -1,74 +1,74 @@
-import rules from '../french';
 import richtypo from 'richtypo';
+import rules from '../french';
 
 function compare(actual, expected) {
-	expect(
-		actual
-			.replace(/\xA0/g, '__')
-			.replace(/\xAF/g, '_')
-			.replace(/—/g, '---')
-	).toEqual(expected);
+  expect(
+    actual
+      .replace(/\xA0/g, '__')
+      .replace(/\xAF/g, '_')
+      .replace(/—/g, '---')
+  ).toEqual(expected);
 }
 
 const rt = richtypo(rules);
 
 describe('thin space', () => {
-	it(`should add thin space before punctuation and quotes`, () => {
-		compare(
-			rt(
-				'thinSpace',
-				`Ceci <span>est</span> un &agrave; <b>texte</b>: avec; «de la» ponctuation<b> !</b> ou sans ?`
-			),
-			`Ceci <span>est</span> un &agrave; <b>texte</b>_: avec_; «_de la_» ponctuation<b>_!</b> ou sans_?`
-		);
-	});
+  it(`should add thin space before punctuation and quotes`, () => {
+    compare(
+      rt(
+        'thinSpace',
+        `Ceci <span>est</span> un &agrave; <b>texte</b>: avec; «de la» ponctuation<b> !</b> ou sans ?`
+      ),
+      `Ceci <span>est</span> un &agrave; <b>texte</b>_: avec_; «_de la_» ponctuation<b>_!</b> ou sans_?`
+    );
+  });
 });
 
 describe('quotes', () => {
-	it(`should change quotes "..." into French quotes «...»`, () => {
-		compare(
-			rt('quotes', `Ceci est un "texte entre guillemets"`),
-			`Ceci est un «texte entre guillemets»`
-		);
-		compare(
-			rt('quotes', `Ceci est un "texte "doublement entre" guillemets"`),
-			`Ceci est un «texte «doublement entre» guillemets»`
-		);
-		compare(
-			rt(
-				'quotes',
-				`Ceci est un "<b>texte entre guillemets avec des tags HTML</b>"`
-			),
-			`Ceci est un «<b>texte entre guillemets avec des tags HTML</b>»`
-		);
-	});
+  it(`should change quotes "..." into French quotes «...»`, () => {
+    compare(
+      rt('quotes', `Ceci est un "texte entre guillemets"`),
+      `Ceci est un «texte entre guillemets»`
+    );
+    compare(
+      rt('quotes', `Ceci est un "texte "doublement entre" guillemets"`),
+      `Ceci est un «texte «doublement entre» guillemets»`
+    );
+    compare(
+      rt(
+        'quotes',
+        `Ceci est un "<b>texte entre guillemets avec des tags HTML</b>"`
+      ),
+      `Ceci est un «<b>texte entre guillemets avec des tags HTML</b>»`
+    );
+  });
 });
 
 describe('numbers', () => {
-	it(`should put 1er 2ème 3ème in subscript`, () => {
-		compare(
-			rt('numbers', `1er 2ème ou 2nd 1ères 100èmes`),
-			`1<sup>er</sup> 2<sup>ème</sup> ou 2<sup>nd</sup> 1<sup>ères</sup> 100<sup>èmes</sup>`
-		);
-	});
-	it(`should add space as number separators`, () => {
-		compare(
-			rt(
-				'numbers',
-				`Il y a 6234689821 habitants, et leur revenu moyen est 1432,331123 yens`
-			),
-			`Il y a 6__234__689__821 habitants, et leur revenu moyen est 1__432,331123 yens`
-		);
-	});
+  it(`should put 1er 2ème 3ème in subscript`, () => {
+    compare(
+      rt('numbers', `1er 2ème ou 2nd 1ères 100èmes`),
+      `1<sup>er</sup> 2<sup>ème</sup> ou 2<sup>nd</sup> 1<sup>ères</sup> 100<sup>èmes</sup>`
+    );
+  });
+  it(`should add space as number separators`, () => {
+    compare(
+      rt(
+        'numbers',
+        `Il y a 6234689821 habitants, et leur revenu moyen est 1432,331123 yens`
+      ),
+      `Il y a 6__234__689__821 habitants, et leur revenu moyen est 1__432,331123 yens`
+    );
+  });
 });
 
 describe('all rules', () => {
-	it(`should execute all rules`, () => {
-		compare(
-			rt.all(
-				`Tombe, tombe, tombe ! - Donc Alice, faute d’avoir rien de mieux à faire, se remit à se parler : "Dinah remarquera mon absence ce soir, bien sûr." (Dinah c’était son chat.) "Pourvu qu’on n’oublie pas de lui donner sa jatte de lait à l’heure du thé. Dinah, ma minette, que n’es-tu ici avec moi ? Il n’y a pas de souris dans les airs, j’en ai bien peur ; mais tu pourrais attraper une chauve-souris, et cela ressemble beaucoup à une souris, tu sais. Mais les chats mangent-ils les chauves-souris ?" Ici le sommeil commença à gagner Alice. Elle répétait, à moitié endormie : "Les chats mangent-ils les chauves-souris ? Les chats mangent-ils les chauves-souris ?" Et quelquefois : "Les chauves-souris mangent-elles les chats ?" Car vous comprenez bien que, puisqu’elle ne pouvait répondre ni à l’une ni à l’autre de ces questions, peu importait la manière de les poser. Elle s’assoupissait et commençait à rêver qu’elle se promenait tenant Dinah par la main, lui disant très sérieusement : "Voyons, Dinah, dis-moi la vérité, as-tu jamais mangé des chauves-souris ?" Quand tout à coup, pouf ! la voilà étendue sur un tas de fagots et de feuilles sèches, - et elle a fini de tomber.`
-			),
-			`Tombe, tombe, tombe_! ---__Donc Alice, faute d’avoir rien de__mieux à faire, se__remit à se__parler_: «_Dinah remarquera mon absence ce__soir, bien sûr._» (Dinah c’était son chat.) «_Pourvu qu’on__n’oublie pas de__lui donner sa__jatte de__lait à l’heure du__thé. Dinah, ma__minette, que n’es-tu__ici avec moi_? Il__n’y__a__pas de__souris dans les airs, j’en__ai__bien peur_; mais tu__pourrais attraper une chauve-souris, et__cela ressemble beaucoup à une souris, tu__sais. Mais les chats mangent-ils les chauves-souris_?_» Ici le__sommeil commença__à gagner Alice. Elle répétait, à moitié endormie_: «_Les chats mangent-ils les chauves-souris_? Les chats mangent-ils les chauves-souris_?_» Et__quelquefois_: «_Les chauves-souris mangent-elles les chats_?_» Car vous comprenez bien que, puisqu’elle ne__pouvait répondre ni__à l’une ni__à l’autre de__ces questions, peu importait la__manière__de__les poser. Elle s’assoupissait et__commençait à rêver qu’elle se__promenait tenant Dinah par la__main, lui disant très__sérieusement_: «_Voyons, Dinah, dis-moi la__vérité, as-tu__jamais mangé des chauves-souris_?_» Quand tout à coup, pouf_! la__voilà étendue sur un__tas de__fagots et__de__feuilles sèches, ---__et__elle a__fini de__tomber.`
-		);
-	});
+  it(`should execute all rules`, () => {
+    compare(
+      rt.all(
+        `Tombe, tombe, tombe ! - Donc Alice, faute d’avoir rien de mieux à faire, se remit à se parler : "Dinah remarquera mon absence ce soir, bien sûr." (Dinah c’était son chat.) "Pourvu qu’on n’oublie pas de lui donner sa jatte de lait à l’heure du thé. Dinah, ma minette, que n’es-tu ici avec moi ? Il n’y a pas de souris dans les airs, j’en ai bien peur ; mais tu pourrais attraper une chauve-souris, et cela ressemble beaucoup à une souris, tu sais. Mais les chats mangent-ils les chauves-souris ?" Ici le sommeil commença à gagner Alice. Elle répétait, à moitié endormie : "Les chats mangent-ils les chauves-souris ? Les chats mangent-ils les chauves-souris ?" Et quelquefois : "Les chauves-souris mangent-elles les chats ?" Car vous comprenez bien que, puisqu’elle ne pouvait répondre ni à l’une ni à l’autre de ces questions, peu importait la manière de les poser. Elle s’assoupissait et commençait à rêver qu’elle se promenait tenant Dinah par la main, lui disant très sérieusement : "Voyons, Dinah, dis-moi la vérité, as-tu jamais mangé des chauves-souris ?" Quand tout à coup, pouf ! la voilà étendue sur un tas de fagots et de feuilles sèches, - et elle a fini de tomber.`
+      ),
+      `Tombe, tombe, tombe_! ---__Donc Alice, faute d’avoir rien de__mieux à faire, se__remit à se__parler_: «_Dinah remarquera mon absence ce__soir, bien sûr._» (Dinah c’était son chat.) «_Pourvu qu’on__n’oublie pas de__lui donner sa__jatte de__lait à l’heure du__thé. Dinah, ma__minette, que n’es-tu__ici avec moi_? Il__n’y__a__pas de__souris dans les airs, j’en__ai__bien peur_; mais tu__pourrais attraper une chauve-souris, et__cela ressemble beaucoup à une souris, tu__sais. Mais les chats mangent-ils les chauves-souris_?_» Ici le__sommeil commença__à gagner Alice. Elle répétait, à moitié endormie_: «_Les chats mangent-ils les chauves-souris_? Les chats mangent-ils les chauves-souris_?_» Et__quelquefois_: «_Les chauves-souris mangent-elles les chats_?_» Car vous comprenez bien que, puisqu’elle ne__pouvait répondre ni__à l’une ni__à l’autre de__ces questions, peu importait la__manière__de__les poser. Elle s’assoupissait et__commençait à rêver qu’elle se__promenait tenant Dinah par la__main, lui disant très__sérieusement_: «_Voyons, Dinah, dis-moi la__vérité, as-tu__jamais mangé des chauves-souris_?_» Quand tout à coup, pouf_! la__voilà étendue sur un__tas de__fagots et__de__feuilles sèches, ---__et__elle a__fini de__tomber.`
+    );
+  });
 });
