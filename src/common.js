@@ -9,6 +9,8 @@ export const defs = {
 	nonletters: '[^a-zà-ž0-9-]',
 	letterswithquotes: '[a-zà-ž0-9-“”‘’«»]',
 	semicolon: '(?<!&\\S*);',
+	punctuation: ({ semicolon, quotes }) =>
+		`(?:${semicolon}|${quotes}|[\\.,!?:])`,
 	dash: '[-—]',
 	thousandsSeparator: ',',
 	decimalsSeparator: '[.]',
@@ -45,8 +47,8 @@ export const emdash = [
 		regex: `(${letterswithquotes}(${tag})?)${space}${dash}`,
 		result: `$1${nbsp}—`,
 	}),
-	({ space, nbsp, dash }) => ({
-		regex: `(^|(?:\\.${space}?))${dash}${space}`,
+	({ space, nbsp, punctuation, dash }) => ({
+		regex: `(^|(?:${punctuation}${space}?))${dash}${space}`,
 		result: `$1—${nbsp}`,
 	}),
 ];
