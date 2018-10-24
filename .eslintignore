@@ -1,3 +1,4 @@
-build/*
-src/__tests__/*
+build/
+__tests__/
+example/
 node_modules/
