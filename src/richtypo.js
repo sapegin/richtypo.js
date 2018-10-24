@@ -1,170 +1,174 @@
-import * as common from './common.js';
-const { defs, ...rules } = common;
+import * as common from './common';
 
-export const defaultRuleset = { defs, rules };
+const { defs: defaultDefs, ...defaultRules } = common;
+
+export const defaultRuleset = { defs: defaultDefs, rules: defaultRules };
 
 const cleanupRules = {
-	cleanup_before: [
-		// Remove repeated spaces
-		[/ {2,}/g, ' '],
-	],
+  cleanup_before: [
+    // Remove repeated spaces
+    [/ {2,}/g, ' ']
+  ],
 
-	cleanup_after: [
-		// Non-breaking space entity to symbol
-		[/&nbsp;/g, '\xA0'],
-	],
+  cleanup_after: [
+    // Non-breaking space entity to symbol
+    [/&nbsp;/g, '\xA0']
+  ],
 
-	textify: [
-		[/<\/?[^>]+>/g, ''], // Remove tags
-		[/&mdash;/g, '—'],
-		[/[\x20\xA0]{2,}/g, ' '], // Repeated spaces [normal space + nbsp]
-	],
+  textify: [
+    [/<\/?[^>]+>/g, ''], // Remove tags
+    [/&mdash;/g, '—'],
+    [/[\x20\xA0]{2,}/g, ' '] // Repeated spaces [normal space + nbsp]
+  ]
 };
 
 const saveTagsRe = [
-	/<!(--\[[^\]>]+\]|\[[^\]>]+\]--)>/gim,
-	/<!--[\s\S]*?-->/gim,
-	/<pre[^>]*>[\s\S]*?<\/pre>/gim,
-	/<style[^>]*>[\s\S]*?<\/style>/gim,
-	/<script[^>]*>[\s\S]*?<\/script>/gim,
-	/<code[^>]*>[\s\S]*?<\/code>/gim,
-	/<[a-z/][^>]*>/gim,
+  /<!(--\[[^\]>]+\]|\[[^\]>]+\]--)>/gim,
+  /<!--[\s\S]*?-->/gim,
+  /<pre[^>]*>[\s\S]*?<\/pre>/gim,
+  /<style[^>]*>[\s\S]*?<\/style>/gim,
+  /<script[^>]*>[\s\S]*?<\/script>/gim,
+  /<code[^>]*>[\s\S]*?<\/code>/gim,
+  /<[a-z/][^>]*>/gim
 ];
 
 const restoreTagsRe = /<(\d+)>/g;
 
-const richtypo = ({ defs, rules }, rule) => {
-	const computedDefs = _computeDefs(defs);
+function replace(text, rules) {
+  let processedText = text;
+  rules.forEach(rule => {
+    if (Array.isArray(rule[0])) {
+      processedText = replace(processedText, rule);
+    } else {
+      processedText = processedText.replace(rule[0], rule[1]);
+    }
+  });
+  return processedText;
+}
 
-	const compiledRules = Object.assign(
-		{},
-		cleanupRules,
-		_compileRules(rules, computedDefs)
-	);
+function process(text, rulesets, rules) {
+  let processedText = text;
+  const rulesetArray = !Array.isArray(rulesets) ? [rulesets] : rulesets;
 
-	if (rule) {
-		return text =>
-			_process(text, ['cleanup_before', rule, 'cleanup_after'], compiledRules);
-	}
+  const savedTags = [];
 
-	const rt = (rule, text) =>
-		_process(text, ['cleanup_before', rule, 'cleanup_after'], compiledRules);
-	rt.all = text => _process(text, Object.keys(compiledRules), compiledRules);
+  // saving tags
+  let savedTagsNum = 0;
 
-	return rt;
+  function save(tag) {
+    savedTags[savedTagsNum] = tag;
+    // rTag is <0>, <1>, <2>
+    const rTag = `<${savedTagsNum}>`;
+    savedTagsNum += 1;
+    return rTag;
+  }
+
+  saveTagsRe.forEach(regex => {
+    processedText = processedText.replace(regex, save);
+  });
+
+  // end of saving tags
+
+  rulesetArray.forEach(rulename => {
+    const rule = rules[rulename];
+    if (typeof rule === 'function') {
+      processedText = rule(processedText);
+    } else if (rule) {
+      processedText = replace(processedText, rule);
+    }
+    // console.log(
+    //   'rule',
+    //   rulename,
+    //   text.replace(/\xA0/g, '__').replace(/\xAF/g, '_')
+    // );
+  });
+
+  // restoring tags
+  processedText = processedText
+    .replace(restoreTagsRe, (_, num) => savedTags[num])
+    // Remove double tags, like <abbr><abbr>JS</abbr></abbr>
+    .replace(/<abbr>(<\1>[^<]+<\/\1>)<\/\1>/g, '$2');
+
+  return processedText;
+}
+
+function computeDefs(defs) {
+  // defs can be functions of other defs, so
+  // we iterate through defs to compute them
+  // based on previous key values.
+  // This is not a super clear comment.
+
+  const computedDefs = {};
+  Object.entries(defs).forEach(([key, value]) => {
+    if (typeof value === 'function') {
+      computedDefs[key] = value(computedDefs);
+    } else {
+      computedDefs[key] = value;
+    }
+  });
+
+  return computedDefs;
+}
+
+function compileRules(ruleset, defs) {
+  const rulesets = {};
+
+  function compileRule(obj, name) {
+    if (typeof obj === 'string') {
+      if (!rulesets[obj]) {
+        throw new Error(
+          `Rule "${obj}" mentioned in "${name}" not found. Available rules: ${Object.keys(
+            rulesets
+          ).join(', ')}`
+        );
+      }
+      return rulesets[obj];
+    }
+
+    // if obj is a function, then we compute it through defs
+    const rule = typeof obj === 'function' ? obj(defs) : obj;
+    return [new RegExp(rule.regex, rule.flags || 'gmi'), rule.result];
+  }
+
+  Object.entries(ruleset).forEach(([name, rule]) => {
+    let ruleArray = !Array.isArray(rule) ? [rule] : rule;
+
+    ruleArray = ruleArray.map(r => compileRule(r, name));
+    rulesets[name] = ruleArray;
+  });
+
+  // console.log('RULESETS', rulesets);
+
+  return rulesets;
+}
+
+const richtypo = ({ defs, rules }, rulename) => {
+  const computedDefs = computeDefs(defs);
+
+  const compiledRules = Object.assign(
+    {},
+    cleanupRules,
+    compileRules(rules, computedDefs)
+  );
+
+  if (rulename) {
+    return text =>
+      process(
+        text,
+        ['cleanup_before', rulename, 'cleanup_after'],
+        compiledRules
+      );
+  }
+
+  const rt = (rulename2, text) =>
+    process(
+      text,
+      ['cleanup_before', rulename2, 'cleanup_after'],
+      compiledRules
+    );
+  rt.all = text => process(text, Object.keys(compiledRules), compiledRules);
+
+  return rt;
 };
 
 export default richtypo;
-
-function _process(text, rulesets, rules) {
-	if (!Array.isArray(rulesets)) {
-		rulesets = [rulesets];
-	}
-
-	const savedTags = [];
-
-	function saveTags(text) {
-		let savedTagsNum = 0;
-
-		function save(s) {
-			savedTags[savedTagsNum] = s;
-			return `<${savedTagsNum++}>`;
-		}
-
-		for (let reIdx = 0; reIdx < saveTagsRe.length; reIdx++) {
-			text = text.replace(saveTagsRe[reIdx], save);
-		}
-		return text;
-	}
-
-	function restoreTags(text) {
-		text = text.replace(restoreTagsRe, (_, num) => savedTags[num]);
-		// Remove double tags, like <abbr><abbr>JS</abbr></abbr>
-		return text.replace(/<(nobr|abbr)>(<\1>[^<]+<\/\1>)<\/\1>/g, '$2');
-	}
-
-	text = saveTags(text);
-
-	for (let setIdx = 0; setIdx < rulesets.length; setIdx++) {
-		const rulesetId = rulesets[setIdx];
-		const rule = rules[rulesetId];
-		if (typeof rule === 'function') {
-			text = rule(text);
-		} else if (rule) {
-			text = _replace(text, rule);
-		}
-		// console.log(
-		// 	'rule',
-		// 	rulesetId,
-		// 	text.replace(/\xA0/g, '__').replace(/\xAF/g, '_')
-		// );
-	}
-
-	text = restoreTags(text);
-
-	return text;
-}
-
-function _replace(text, rules) {
-	for (let ruleIdx = 0; ruleIdx < rules.length; ruleIdx++) {
-		const rule = rules[ruleIdx];
-		if (Array.isArray(rule[0])) {
-			text = _replace(text, rule);
-		} else {
-			text = text.replace(rule[0], rule[1]);
-		}
-	}
-	return text;
-}
-
-function _computeDefs(defs) {
-	// defs can be functions of other defs, so
-	// we iterate through defs to compute them
-	// based on previous key values.
-	// This is not a super clear comment.
-
-	const computedDefs = {};
-	Object.entries(defs).map(([key, value]) => {
-		if (typeof value === 'function') {
-			computedDefs[key] = value(computedDefs);
-		} else {
-			computedDefs[key] = value;
-		}
-	});
-
-	return computedDefs;
-}
-
-function _compileRules(ruleset, defs) {
-	function compileRule(obj, name) {
-		if (typeof obj === 'string') {
-			if (!rulesets[obj]) {
-				throw new Error(
-					`Rule "${obj}" mentioned in "${name}" not found. Available rules: ` +
-						Object.keys(rulesets).join(', ')
-				);
-			}
-			return rulesets[obj];
-		}
-
-		// if obj is a function, then we compute it through defs
-		const rule = typeof obj === 'function' ? obj(defs) : obj;
-		return [new RegExp(rule.regex, rule.flags || 'gmi'), rule.result];
-	}
-
-	const rulesets = {};
-	for (const name in ruleset) {
-		let rule = ruleset[name];
-
-		if (!Array.isArray(rule)) {
-			rule = [rule];
-		}
-
-		rule = rule.map(r => compileRule(r, name));
-		rulesets[name] = rule;
-	}
-
-	// console.log('RULESETS', rulesets);
-
-	return rulesets;
-}
