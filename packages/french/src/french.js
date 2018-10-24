@@ -2,7 +2,7 @@ import { defaultRuleset } from 'richtypo';
 
 const {
 	defs,
-	rules: { numbers, quotes, spaces },
+	rules: { numbers, quotes, spaces, emdash },
 } = defaultRuleset;
 
 const frenchDefs = Object.assign({}, defs, {
@@ -16,18 +16,19 @@ const frenchDefs = Object.assign({}, defs, {
 export default {
 	defs: frenchDefs,
 	rules: {
+		quotes,
+		numbers,
+		emdash,
+		spaces,
 		thinSpace: [
 			({ space, semicolon, hairspace }) => ({
-				regex: `(?:${space}+)?([\\?!:\\xbb]|${semicolon})`,
+				regex: `(?:${space}+)?([\\?!:»]|${semicolon})`,
 				result: `${hairspace}$1`,
 			}),
 			({ space, hairspace }) => ({
-				regex: `(\\xab)(?:${space}+)?`,
+				regex: `(«)(?:${space}+)?`,
 				result: `$1${hairspace}`,
 			}),
 		],
-		quotes,
-		numbers,
-		spaces,
 	},
 };
