@@ -35,24 +35,26 @@ const restoreTagsRe = /<(\d+)>/g;
 
 const richtypo = ({ defs, rules }, rule) => {
 	const computedDefs = _computeDefs(defs);
-	const computedRules = Object.assign(
+
+	const compiledRules = Object.assign(
 		{},
 		cleanupRules,
 		_compileRules(rules, computedDefs)
 	);
+
 	if (rule) {
 		return text =>
-			_process(text, ['cleanup_before', rule, 'cleanup_after'], computedRules);
+			_process(text, ['cleanup_before', rule, 'cleanup_after'], compiledRules);
 	}
-	return (rule, text) =>
-		_process(text, ['cleanup_before', rule, 'cleanup_after'], computedRules);
+
+	const rt = (rule, text) =>
+		_process(text, ['cleanup_before', rule, 'cleanup_after'], compiledRules);
+	rt.all = text => _process(text, Object.keys(compiledRules), compiledRules);
+
+	return rt;
 };
 
 export default richtypo;
-
-// all(text) {
-// 	return this._process(text, Object.keys(this.rules));
-// }
 
 function _process(text, rulesets, rules) {
 	if (!Array.isArray(rulesets)) {
