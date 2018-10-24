@@ -4,6 +4,8 @@
 
 Richtypo adds non-breaking spaces in the right places, `<nobr>` and `<abbr>` tags and wraps ampersands with a CSS class for special styling. It expects that your texts already have the right quotes, em-dashes and other symbols (you can use [Typography Keyboard Layout](http://ilyabirman.net/projects/typography-layout/)).
 
+Richtypo aims at proposing a framework for adding typographic rules to plain or HTML text. You can define your own set of rules or import
+
 ## Features
 
 - Rules for English and Russian languages
@@ -31,9 +33,9 @@ const ok = richtypo.lite('"Richtypo" - awesome!');
 Will produce something like that:
 
 ```html
-Welcome to&nbsp;the&nbsp;world of&nbsp;beautiful web <nobr>typography&#8202;—</nobr>&#8202;only with&nbsp;Richtypo.
+Welcome to&nbsp;the&nbsp;world of&nbsp;beautiful web <nobr>typography&#x202F;—</nobr>&#x202F;only with&nbsp;Richtypo.
 Beautiful <span class="amp">&amp;</span> Awesome Web Typography with “Richtypo”'
-<nobr>“Richtypo”&#8202;—</nobr>&#8202;awesome!
+<nobr>“Richtypo”&#x202F;—</nobr>&#x202F;awesome!
 ```
 
 **Note: all methods render `&nbsp;` as an actual non-breaking space (`\xA0`).**
