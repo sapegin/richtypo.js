@@ -45,7 +45,7 @@
 		"build": "babel src --out-dir build --ignore **/*.test.js",
 		"build:watch": "babel -w src --out-dir build --ignore **/*.test.js",
 		"pretest": "npm run lint",
-		"test": "NODE_ENV=local node --harmony node_modules/.bin/jest",
+		"test": "NODE_ENV=local jest",
 		"test:watch": "NODE_ENV=local jest --watch",
 		"test:coverage": "jest --coverage",
 		"lint": "eslint src --cache --fix",
