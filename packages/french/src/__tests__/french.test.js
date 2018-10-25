@@ -4,6 +4,7 @@ import rules from '../french';
 function compare(actual, expected) {
   expect(
     actual
+      .raw()
       .replace(/\xA0/g, '__')
       .replace(/\xAF/g, '_')
       .replace(/—/g, '---')
@@ -12,11 +13,11 @@ function compare(actual, expected) {
 
 const rt = richtypo(rules);
 
-describe('thin space', () => {
+describe('punctuation spaces', () => {
   it(`should add thin space before punctuation and quotes`, () => {
     compare(
       rt(
-        'thinSpace',
+        'punctuation',
         `Ceci <span>est</span> un &agrave; <b>texte</b>: avec; «de la» ponctuation<b> !</b> ou sans ?`
       ),
       `Ceci <span>est</span> un &agrave; <b>texte</b>_: avec_; «_de la_» ponctuation<b>_!</b> ou sans_?`

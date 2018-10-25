@@ -1,29 +1,35 @@
 module.exports = {
   presets: [
     [
-      "@babel/preset-env",
+      '@babel/preset-env',
       {
-        targets: { node: "6" }
+        targets: { node: '6' }
       }
     ]
   ],
   env: {
-    test: {
+    local: {
       presets: [
         [
-          "@babel/preset-env",
+          '@babel/preset-env',
           {
-            targets: { node: "current" }
+            targets: { node: 'current' }
           }
         ]
       ],
       plugins: [
         [
-          "module-resolver",
+          'module-resolver',
           {
             alias: {
-              richtypo: "./src/richtypo.js"
+              richtypo: './src/richtypo.js'
             }
+          }
+        ],
+        [
+          'transform-react-jsx',
+          {
+            pragma: 'vdo'
           }
         ]
       ]

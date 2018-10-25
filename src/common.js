@@ -1,16 +1,15 @@
 export const defs = {
-  space: '[ \t]',
   nbsp: '\xA0',
   hairspace: '\xAF',
-  tag: '</?\\w+>',
+  space: ({ nbsp, hairspace }) => `[ \t${nbsp}${hairspace}]`,
+  tag: '<[^<>]*>',
   quotes: '["“”«»‘’]',
   letters: '[a-zà-ž0-9-]',
   upperletters: '[A-ZÀ-Ž0-9-]',
   nonletters: '[^a-zà-ž0-9-]',
   letterswithquotes: '[a-zà-ž0-9-“”‘’«»]',
   semicolon: '(?<!&\\S*);',
-  punctuation: ({ semicolon, quotes }) =>
-    `(?:${semicolon}|${quotes}|[\\.,!?:])`,
+  punctuation: ({ semicolon }) => `(?:${semicolon}|[\\.,!?:])`,
   dash: '[-—]',
   thousandsSeparator: ',',
   decimalsSeparator: '[.]',
@@ -47,8 +46,8 @@ export const emdash = [
     regex: `(${letterswithquotes}(${tag})?)${space}${dash}`,
     result: `$1${nbsp}—`
   }),
-  ({ space, nbsp, punctuation, dash }) => ({
-    regex: `(^|(?:${punctuation}${space}?))${dash}${space}`,
+  ({ space, nbsp, punctuation, openingQuote, dash }) => ({
+    regex: `(^|(?:(${punctuation}|${openingQuote}|")${space}?))${dash}${space}`,
     result: `$1—${nbsp}`
   })
 ];
@@ -81,12 +80,12 @@ export const numbers = [
 ];
 
 export const quotes = [
-  ({ tag, letters, openingQuote }) => ({
-    regex: `(?:")((${tag})?${letters})`,
+  ({ tag, letters, dash, space, openingQuote }) => ({
+    regex: `"((${tag})?(${dash}${space})?${letters})`,
     result: `${openingQuote}$1`
   }),
   ({ closingQuote }) => ({
-    regex: `(?:")`,
+    regex: `"`,
     result: `${closingQuote}`
   })
 ];

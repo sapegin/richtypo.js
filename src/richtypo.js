@@ -4,23 +4,14 @@ const { defs: defaultDefs, ...defaultRules } = common;
 
 export const defaultRuleset = { defs: defaultDefs, rules: defaultRules };
 
-const cleanupRules = {
-  cleanup_before: [
-    // Remove repeated spaces
-    [/ {2,}/g, ' ']
-  ],
+// const cleanupRules = {
 
-  cleanup_after: [
-    // Non-breaking space entity to symbol
-    [/&nbsp;/g, '\xA0']
-  ],
-
-  textify: [
-    [/<\/?[^>]+>/g, ''], // Remove tags
-    [/&mdash;/g, '—'],
-    [/[\x20\xA0]{2,}/g, ' '] // Repeated spaces [normal space + nbsp]
-  ]
-};
+//   textify: [
+//     [/<\/?[^>]+>/g, ''], // Remove tags
+//     [/&mdash;/g, '—'],
+//     [/[\x20\xA0]{2,}/g, ' '] // Repeated spaces [normal space + nbsp]
+//   ]
+// };
 
 const saveTagsRe = [
   /<!(--\[[^\]>]+\]|\[[^\]>]+\]--)>/gim,
@@ -34,6 +25,30 @@ const saveTagsRe = [
 
 const restoreTagsRe = /<(\d+)>/g;
 
+class RichTypo {
+  constructor(text, processedText) {
+    this.text = text;
+    this.processedText = processedText;
+  }
+
+  html() {
+    // transform hairspace in html entity
+    return this.processedText.replace(/\xAF/gm, '&#x202F;');
+  }
+
+  raw() {
+    return this.processedText;
+  }
+
+  string() {
+    // textify
+    return this.processedText
+      .replace(/<\/?[^>]+>/g, '') // Remove tags
+      .replace(/&mdash;/g, '—')
+      .replace(/[\x20\xA0]{2,}/g, ' '); // Repeated spaces [normal space + nbsp]
+  }
+}
+
 function replace(text, rules) {
   let processedText = text;
   rules.forEach(rule => {
@@ -46,7 +61,7 @@ function replace(text, rules) {
   return processedText;
 }
 
-function process(text, rulesets, rules) {
+function run(text, rulesets, rules) {
   let processedText = text;
   const rulesetArray = !Array.isArray(rulesets) ? [rulesets] : rulesets;
 
@@ -69,6 +84,9 @@ function process(text, rulesets, rules) {
 
   // end of saving tags
 
+  // Remove repeated spaces
+  processedText = processedText.replace(/ {2,}/gm, ' ');
+
   rulesetArray.forEach(rulename => {
     const rule = rules[rulename];
     if (typeof rule === 'function') {
@@ -79,7 +97,7 @@ function process(text, rulesets, rules) {
     // console.log(
     //   'rule',
     //   rulename,
-    //   text.replace(/\xA0/g, '__').replace(/\xAF/g, '_')
+    //   processedText.replace(/\xA0/g, '__').replace(/\xAF/g, '_')
     // );
   });
 
@@ -89,10 +107,10 @@ function process(text, rulesets, rules) {
     // Remove double tags, like <abbr><abbr>JS</abbr></abbr>
     .replace(/<abbr>(<\1>[^<]+<\/\1>)<\/\1>/g, '$2');
 
-  return processedText;
+  return new RichTypo(text, processedText);
 }
 
-function computeDefs(defs) {
+function compileDefs(defs) {
   // defs can be functions of other defs, so
   // we iterate through defs to compute them
   // based on previous key values.
@@ -110,8 +128,15 @@ function computeDefs(defs) {
   return computedDefs;
 }
 
-function compileRules(ruleset, defs) {
+export function compileRules({ rules, defs }) {
+  const computedDefs = compileDefs(defs);
+
   const rulesets = {};
+
+  // add negative lookbehind to make sure we're not in a tag
+  function decorateRule(regex) {
+    return `(?<!<[^>]*)${regex}`;
+  }
 
   function compileRule(obj, name) {
     if (typeof obj === 'string') {
@@ -126,11 +151,14 @@ function compileRules(ruleset, defs) {
     }
 
     // if obj is a function, then we compute it through defs
-    const rule = typeof obj === 'function' ? obj(defs) : obj;
-    return [new RegExp(rule.regex, rule.flags || 'gmi'), rule.result];
+    const rule = typeof obj === 'function' ? obj(computedDefs) : obj;
+    return [
+      new RegExp(decorateRule(rule.regex), rule.flags || 'gmi'),
+      rule.result
+    ];
   }
 
-  Object.entries(ruleset).forEach(([name, rule]) => {
+  Object.entries(rules).forEach(([name, rule]) => {
     let ruleArray = !Array.isArray(rule) ? [rule] : rule;
 
     ruleArray = ruleArray.map(r => compileRule(r, name));
@@ -142,31 +170,13 @@ function compileRules(ruleset, defs) {
   return rulesets;
 }
 
-const richtypo = ({ defs, rules }, rulename) => {
-  const computedDefs = computeDefs(defs);
-
-  const compiledRules = Object.assign(
-    {},
-    cleanupRules,
-    compileRules(rules, computedDefs)
-  );
-
+const richtypo = (rules, rulename) => {
   if (rulename) {
-    return text =>
-      process(
-        text,
-        ['cleanup_before', rulename, 'cleanup_after'],
-        compiledRules
-      );
+    return text => run(text, rulename, rules);
   }
 
-  const rt = (rulename2, text) =>
-    process(
-      text,
-      ['cleanup_before', rulename2, 'cleanup_after'],
-      compiledRules
-    );
-  rt.all = text => process(text, Object.keys(compiledRules), compiledRules);
+  const rt = (rulename2, text) => run(text, rulename2, rules);
+  rt.all = text => run(text, Object.keys(rules), rules);
 
   return rt;
 };
