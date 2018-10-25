@@ -1,4 +1,4 @@
-import { defaultRuleset } from 'richtypo';
+import { defaultRuleset, compileRules } from 'richtypo';
 
 const {
   defs,
@@ -13,14 +13,14 @@ const frenchDefs = Object.assign({}, defs, {
   thousandsSeparator: ({ nbsp }) => nbsp
 });
 
-export default {
+const ruleset = {
   defs: frenchDefs,
   rules: {
     quotes,
     numbers,
     emdash,
     spaces,
-    thinSpace: [
+    punctuation: [
       ({ space, semicolon, hairspace }) => ({
         regex: `(?:${space}+)?([\\?!:»]|${semicolon})`,
         result: `${hairspace}$1`
@@ -32,3 +32,5 @@ export default {
     ]
   }
 };
+
+export default compileRules(ruleset);

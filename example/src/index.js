@@ -1,40 +1,55 @@
-const path = require("path");
-const fledermaus = require("fledermaus");
-const richtypo = require("../../richtypo");
+import path from 'path';
+import {
+  start,
+  loadSourceFiles,
+  generatePages,
+  savePages,
+  createMarkdownRenderer,
+  createTemplateRenderer,
+  helpers
+} from 'fledermaus';
 
-richtypo.lang("en");
+import richtypo from '../../src/richtypo';
+import ukRuleset from '../../packages/uk/src/uk';
+import frenchRuleset from '../../packages/french/src/french';
 
-const config = {
-  base: {
-    lang: "en"
-  }
+function decorateRules(ruleset) {
+  const transformedRules = {};
+  Object.entries(ruleset).forEach(([name, rules]) => {
+    transformedRules[name] = rules.map(([search, replace]) => [
+      search,
+      `<span class="rule ${name}">${replace}</span>`
+    ]);
+  });
+
+  return transformedRules;
+}
+
+const rt = {
+  uk: richtypo(decorateRules(ukRuleset)),
+  fr: richtypo(decorateRules(frenchRuleset))
 };
 
-const renderMarkdown = fledermaus.createMarkdownRenderer();
-const renderTemplate = fledermaus.createTemplateRenderer({
-  root: __dirname
+const config = { base: { lang: 'en' } };
+
+start('Building the page...');
+
+const renderMarkdown = createMarkdownRenderer();
+const renderTemplate = createTemplateRenderer({ root: __dirname });
+
+let documents = loadSourceFiles(__dirname, ['md'], {
+  renderers: { md: renderMarkdown }
 });
 
-let documents = fledermaus.loadSourceFiles(__dirname, ["md"], {
-  renderers: {
-    md: renderMarkdown
-  }
+documents = documents.map(doc => ({
+  ...doc,
+  pageTitle: rt[doc.language].all(doc.title).html(),
+  richtypo: rt[doc.language].all(doc.content).html(),
+  content: doc.content // Page content
+}));
+
+const pages = generatePages(documents, config.base, helpers, {
+  jsx: renderTemplate
 });
 
-documents = documents.map((doc) => {
-  // Run Richtypo
-  doc.pageTitle = richtypo.title(doc.title); // Titles
-  doc.content = richtypo.rich(doc.content); // Page content
-
-  // Make non-breaking spaces visible
-  doc.pageTitle = doc.pageTitle.replace(/\xa0/g, "&nbsp;");
-  doc.content = doc.content.replace(/\xa0/g, "&nbsp;");
-
-  return doc;
-});
-
-const pages = fledermaus.generatePages(documents, config, fledermaus.helpers, {
-  ect: renderTemplate
-});
-
-fledermaus.savePages(pages, path.resolve(__dirname, ".."));
+savePages(pages, path.resolve(__dirname, '..'));
