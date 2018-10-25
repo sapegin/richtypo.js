@@ -25,30 +25,6 @@ const saveTagsRe = [
 
 const restoreTagsRe = /<(\d+)>/g;
 
-class RichTypo {
-	constructor(text, processedText) {
-		this.text = text;
-		this.processedText = processedText;
-	}
-
-	html() {
-		// transform hairspace in html entity
-		return this.processedText.replace(/\xAF/gm, '&#x202F;');
-	}
-
-	raw() {
-		return this.processedText;
-	}
-
-	string() {
-		// textify
-		return this.processedText
-			.replace(/<\/?[^>]+>/g, '') // Remove tags
-			.replace(/&mdash;/g, '—')
-			.replace(/[\x20\xA0]{2,}/g, ' '); // Repeated spaces [normal space + nbsp]
-	}
-}
-
 function replace(text, rules) {
 	let processedText = text;
 	rules.forEach(rule => {
@@ -95,19 +71,21 @@ function run(text, rulesets, rules) {
 			processedText = replace(processedText, rule);
 		}
 		// console.log(
-		//   'rule',
-		//   rulename,
-		//   processedText.replace(/\xA0/g, '__').replace(/\xAF/g, '_')
+		// 	'rule',
+		// 	rulename,
+		// 	processedText.replace(/\xA0/g, '__').replace(/\xAF/g, '_')
 		// );
 	});
 
 	// restoring tags
 	processedText = processedText
+		// transform hairspace in html entity
+		.replace(/\xAF/gm, '&#x202F;')
 		.replace(restoreTagsRe, (_, num) => savedTags[num])
 		// Remove double tags, like <abbr><abbr>JS</abbr></abbr>
 		.replace(/<abbr>(<\1>[^<]+<\/\1>)<\/\1>/g, '$2');
 
-	return new RichTypo(text, processedText);
+	return processedText;
 }
 
 function compileDefs(defs) {

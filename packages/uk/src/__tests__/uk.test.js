@@ -4,9 +4,8 @@ import rules from '../uk';
 function compare(actual, expected) {
 	expect(
 		actual
-			.raw()
 			.replace(/\xA0/g, '__')
-			.replace(/\xAF/g, '_')
+			.replace(/&#x202F;/g, '_')
 			.replace(/—/g, '---')
 	).toEqual(expected);
 }
@@ -14,10 +13,14 @@ function compare(actual, expected) {
 const rt = richtypo(rules);
 
 describe('non breaking space', () => {
-	it('should add non breaking space before orphans and short words', () => {
+	it('should add non breaking space before orphans, short words and units', () => {
 		compare(
 			rt('spaces', `This is <b>of</b> the hook`),
 			`This is__<b>of</b>__the__hook`
+		);
+		compare(
+			rt('spaces', `Still 100 km don't you think?`),
+			`Still 100__km__don't you__think?`
 		);
 	});
 });

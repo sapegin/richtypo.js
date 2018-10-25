@@ -4,9 +4,9 @@ export const defs = {
 	space: ({ nbsp, hairspace }) => `[ \t${nbsp}${hairspace}]`,
 	tag: '<[^<>]*>',
 	quotes: '["“”«»‘’]',
-	letters: '[a-zà-ž0-9-]',
-	upperletters: '[A-ZÀ-Ž0-9-]',
-	nonletters: '[^a-zà-ž0-9-]',
+	letters: '[a-zà-ž0-9]',
+	upperletters: '[A-ZÀ-Ž0-9]',
+	nonletters: '[^a-zà-ž0-9]',
 	letterswithquotes: '[a-zà-ž0-9-“”‘’«»]',
 	semicolon: '(?<!&\\S*);',
 	punctuation: ({ semicolon }) => `(?:${semicolon}|[\\.,!?:])`,
@@ -16,12 +16,12 @@ export const defs = {
 	ordinals: '(?:st|nd|rd|th)',
 	openingQuote: '“',
 	closingQuote: '”',
-	shortWord: ({ letters, tag }) => `\\b${letters}{1,2}\\b(${tag})?`,
+	shortWord: ({ letters }) => `${letters}{1,2}`,
 };
 
 // Non-breaking space after short words
-const shortWordsBreak = ({ shortWord, space, nbsp }) => ({
-	regex: `(${shortWord})${space}`,
+const shortWordsBreak = ({ shortWord, quotes, space, nbsp, tag }) => ({
+	regex: `(?<=^|${space}|${quotes}|>)(${shortWord}(${tag})?)${space}`,
 	result: `$1${nbsp}`,
 });
 
@@ -31,7 +31,12 @@ export const orphans = ({ space, nbsp }) => ({
 	result: `${nbsp}$1`,
 });
 
-export const spaces = [shortWordsBreak, orphans];
+export const numbersUnits = ({ space, nbsp }) => ({
+	regex: `(\\d+)${space}(\\w)`,
+	result: `$1${nbsp}$2`,
+});
+
+export const spaces = [numbersUnits, shortWordsBreak, orphans];
 
 export const emdash = [
 	({ space, nbsp }) => ({
