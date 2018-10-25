@@ -52,7 +52,7 @@
 		"example": "NODE_ENV=local babel-node example/src",
 		"example:watch": "NODE_ENV=local babel-watch example/src",
 		"example:serve": "serve example/build",
-		"format": "prettier '**/*.{js,md}'",
+		"format": "prettier --write '**/*.{js,md}'",
 		"gh-pages": "gh-pages -d example/build",
 		"prepare": "npm run build",
 		"publish": "npm publish"
