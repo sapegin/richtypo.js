@@ -52,4 +52,4 @@ const pages = generatePages(documents, config.base, helpers, {
   jsx: renderTemplate
 });
 
-savePages(pages, path.resolve(__dirname, '..'));
+savePages(pages, path.resolve(__dirname, '../build'));
