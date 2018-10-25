@@ -18,7 +18,7 @@ function decorateRules(ruleset) {
   Object.entries(ruleset).forEach(([name, rules]) => {
     transformedRules[name] = rules.map(([search, replace]) => [
       search,
-      `<span class="rule ${name}">${replace}</span>`
+      `<span class="rule ${name}" title="${name}">${replace}</span>`
     ]);
   });
 
