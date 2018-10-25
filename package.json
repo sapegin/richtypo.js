@@ -43,7 +43,7 @@
 	},
 	"scripts": {
 		"build": "babel src --out-dir build --ignore **/*.test.js",
-		"watch": "babel -w src --out-dir build --ignore **/*.test.js",
+		"build:watch": "babel -w src --out-dir build --ignore **/*.test.js",
 		"pretest": "npm run lint",
 		"test": "NODE_ENV=local node --harmony node_modules/.bin/jest",
 		"test:watch": "NODE_ENV=local jest --watch",
@@ -52,6 +52,7 @@
 		"example": "NODE_ENV=local babel-node example/src",
 		"example:watch": "NODE_ENV=local babel-watch example/src",
 		"example:serve": "serve example/build",
+		"format": "prettier '**/*.{js,md}'",
 		"gh-pages": "gh-pages -d example/build",
 		"prepare": "npm run build",
 		"publish": "npm publish"
