@@ -1,5 +1,5 @@
 ---
-title: Awesome &amp; beautiful web typography with Richtypo
+title: Awesome & beautiful web typography with Richtypo
 layout: template
 language: uk
 ---

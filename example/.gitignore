@@ -1,5 +1,5 @@
 node_modules/
-/build/
+*.html
 .DS_Store
 Thumbs.db
 .idea/
