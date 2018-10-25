@@ -1,77 +1,77 @@
 {
-  "name": "richtypo",
-  "version": "4.0.0",
-  "description": "HTML typography enhancer with extensible rules",
-  "homepage": "https://github.com/sapegin/richtypo.js",
-  "author": {
-    "name": "Artem Sapegin",
-    "url": "http://sapegin.me/"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/sapegin/richtypo.js.git"
-  },
-  "bugs": {
-    "url": "https://github.com/sapegin/richtypo.js/issues"
-  },
-  "license": "MIT",
-  "main": "build/richtypo.js",
-  "files": [
-    "build"
-  ],
-  "engines": {
-    "node": ">=6"
-  },
-  "devDependencies": {
-    "@babel/cli": "^7.1.2",
-    "@babel/core": "^7.1.2",
-    "@babel/preset-env": "^7.1.0",
-    "babel-core": "^7.0.0-bridge",
-    "babel-jest": "^23.6.0",
-    "babel-plugin-module-resolver": "^3.1.1",
-    "babel-plugin-transform-react-jsx": "^6.24.1",
-    "babel-watch": "https://github.com/monathur/babel-watch.git",
-    "eslint": "^5.7.0",
-    "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-config-prettier": "^3.1.0",
-    "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-prettier": "^3.0.0",
-    "gh-pages": "^2.0.1",
-    "jest": "^23.6.0",
-    "prettier": "^1.14.3",
-    "serve": "^10.0.2"
-  },
-  "scripts": {
-    "build": "babel src --out-dir build --ignore **/*.test.js",
-    "watch": "babel -w src --out-dir build --ignore **/*.test.js",
-    "pretest": "npm run lint",
-    "test": "NODE_ENV=local node --harmony node_modules/.bin/jest",
-    "test:watch": "NODE_ENV=local jest --watch",
-    "test:coverage": "jest --coverage",
-    "lint": "eslint src --cache --fix",
-    "example": "NODE_ENV=local babel-node example/src",
-    "example:watch": "NODE_ENV=local babel-watch example/src",
-    "example:serve": "serve example/build",
-    "gh-pages": "gh-pages -d example/build",
-    "prepare": "npm run build",
-    "publish": "npm publish"
-  },
-  "keywords": [
-    "typography",
-    "typo",
-    "html",
-    "quotes",
-    "prepositions",
-    "abbr",
-    "abbreviations",
-    "nobr",
-    "nbsp",
-    "punctuation",
-    "em-dash",
-    "ampersands",
-    "space"
-  ],
-  "dependencies": {
-    "@babel/node": "^7.0.0"
-  }
+	"name": "richtypo",
+	"version": "4.0.0",
+	"description": "HTML typography enhancer with extensible rules",
+	"homepage": "https://github.com/sapegin/richtypo.js",
+	"author": {
+		"name": "Artem Sapegin",
+		"url": "http://sapegin.me/"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/sapegin/richtypo.js.git"
+	},
+	"bugs": {
+		"url": "https://github.com/sapegin/richtypo.js/issues"
+	},
+	"license": "MIT",
+	"main": "build/richtypo.js",
+	"files": [
+		"build"
+	],
+	"engines": {
+		"node": ">=6"
+	},
+	"devDependencies": {
+		"@babel/cli": "^7.1.2",
+		"@babel/core": "^7.1.2",
+		"@babel/preset-env": "^7.1.0",
+		"babel-core": "^7.0.0-bridge",
+		"babel-jest": "^23.6.0",
+		"babel-plugin-module-resolver": "^3.1.1",
+		"babel-plugin-transform-react-jsx": "^6.24.1",
+		"babel-watch": "https://github.com/monathur/babel-watch.git",
+		"eslint": "^5.7.0",
+		"eslint-config-prettier": "^3.1.0",
+		"eslint-config-tamia": "^6.0.2",
+		"eslint-plugin-import": "^2.14.0",
+		"eslint-plugin-prettier": "^3.0.0",
+		"gh-pages": "^2.0.1",
+		"jest": "^23.6.0",
+		"prettier": "^1.14.3",
+		"serve": "^10.0.2"
+	},
+	"scripts": {
+		"build": "babel src --out-dir build --ignore **/*.test.js",
+		"watch": "babel -w src --out-dir build --ignore **/*.test.js",
+		"pretest": "npm run lint",
+		"test": "NODE_ENV=local node --harmony node_modules/.bin/jest",
+		"test:watch": "NODE_ENV=local jest --watch",
+		"test:coverage": "jest --coverage",
+		"lint": "eslint src --cache --fix",
+		"example": "NODE_ENV=local babel-node example/src",
+		"example:watch": "NODE_ENV=local babel-watch example/src",
+		"example:serve": "serve example/build",
+		"gh-pages": "gh-pages -d example/build",
+		"prepare": "npm run build",
+		"publish": "npm publish"
+	},
+	"keywords": [
+		"typography",
+		"typo",
+		"html",
+		"quotes",
+		"prepositions",
+		"abbr",
+		"abbreviations",
+		"nobr",
+		"nbsp",
+		"punctuation",
+		"em-dash",
+		"ampersands",
+		"space"
+	],
+	"dependencies": {
+		"@babel/node": "^7.0.0"
+	}
 }
