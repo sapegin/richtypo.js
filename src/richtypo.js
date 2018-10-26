@@ -25,21 +25,22 @@ const saveTagsRe = [
 
 const restoreTagsRe = /<(\d+)>/g;
 
-function replace(text, rules) {
+function replace(text, rule) {
+	if (typeof rule === 'function') {
+		return rule(text);
+	}
+
+	if (rule[0] instanceof RegExp) {
+		return text.replace(rule[0], rule[1]);
+	}
+
 	let processedText = text;
-	rules.forEach(rule => {
-		if (Array.isArray(rule[0])) {
-			processedText = replace(processedText, rule);
-		} else {
-			processedText = processedText.replace(rule[0], rule[1]);
-		}
-	});
+	rule.forEach(r => (processedText = replace(processedText, r)));
 	return processedText;
 }
 
-function run(text, rulesets, rules) {
+function run(rules, text) {
 	let processedText = text;
-	const rulesetArray = !Array.isArray(rulesets) ? [rulesets] : rulesets;
 
 	const savedTags = [];
 
@@ -63,16 +64,11 @@ function run(text, rulesets, rules) {
 	// Remove repeated spaces
 	processedText = processedText.replace(/ {2,}/gm, ' ');
 
-	rulesetArray.forEach(rulename => {
-		const rule = rules[rulename];
-		if (typeof rule === 'function') {
-			processedText = rule(processedText);
-		} else if (rule) {
-			processedText = replace(processedText, rule);
-		}
+	rules.forEach(rule => {
+		processedText = replace(processedText, rule);
 		// console.log(
 		// 	'rule',
-		// 	rulename,
+		// 	rule,
 		// 	processedText.replace(/\xA0/g, '__').replace(/\xAF/g, '_')
 		// );
 	});
@@ -109,54 +105,51 @@ function compileDefs(defs) {
 export function compileRules({ rules, defs }) {
 	const computedDefs = compileDefs(defs);
 
-	const rulesets = {};
-
 	// add negative lookbehind to make sure we're not in a tag
 	function decorateRule(regex) {
 		return `(?<!<[^>]*)${regex}`;
 	}
 
-	function compileRule(obj, name) {
-		if (typeof obj === 'string') {
-			if (!rulesets[obj]) {
-				throw new Error(
-					`Rule "${obj}" mentioned in "${name}" not found. Available rules: ${Object.keys(
-						rulesets
-					).join(', ')}`
-				);
-			}
-			return rulesets[obj];
-		}
-
+	function compileRule(rule) {
 		// if obj is a function, then we compute it through defs
-		const rule = typeof obj === 'function' ? obj(computedDefs) : obj;
-		return [
+		rule = typeof rule === 'function' ? rule(computedDefs) : rule;
+		const result = [
 			new RegExp(decorateRule(rule.regex), rule.flags || 'gmi'),
 			rule.result,
 		];
+		return result;
+	}
+
+	const rulesets = {};
+
+	function compileRuleArray(rules) {
+		return rules.reduce((acc, rule) => {
+			if (Array.isArray(rule)) {
+				return [...acc, ...compileRuleArray(rule)];
+			}
+			return [...acc, compileRule(rule)];
+		}, []);
 	}
 
 	Object.entries(rules).forEach(([name, rule]) => {
 		let ruleArray = !Array.isArray(rule) ? [rule] : rule;
 
-		ruleArray = ruleArray.map(r => compileRule(r, name));
+		ruleArray = compileRuleArray(ruleArray);
+
+		// ruleArray = ruleArray.map(r => compileRule(r, name));
 		rulesets[name] = ruleArray;
 	});
-
-	// console.log('RULESETS', rulesets);
 
 	return rulesets;
 }
 
-const richtypo = (rules, rulename) => {
-	if (rulename) {
-		return text => run(text, rulename, rules);
+const richtypo = (rules, text) => {
+	if (text) {
+		return run(rules, text);
 	}
 
-	const rt = (rulename, text) => run(text, rulename, rules);
-	rt.all = text => run(text, Object.keys(rules), rules);
-
-	return rt;
+	return text => run(rules, text);
+	//rt.all = text => run(text, Object.keys(rules), rules);
 };
 
 export default richtypo;
