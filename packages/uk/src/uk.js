@@ -1,3 +1,25 @@
 import { defaultRuleset, compileRules } from 'richtypo';
 
-export default compileRules(defaultRuleset);
+const {
+	spaces,
+	quotes,
+	abbr,
+	numbers,
+	amp,
+	emdash,
+	ellipsis,
+} = defaultRuleset.rules;
+
+export default compileRules({
+	defs: defaultRuleset.defs,
+	rules: {
+		spaces,
+		quotes,
+		abbr,
+		numbers,
+		emdash,
+		ellipsis,
+		amp,
+		all: [spaces, quotes, abbr, numbers, emdash, ellipsis, amp],
+	},
+});
