@@ -7,7 +7,7 @@ function compare(actual, expected) {
 	expect(
 		actual
 			.replace(/\xA0/g, '__')
-			.replace(/<span style="white-space:nowrap">&thinsp;<\/span>/g, '_')
+			.replace(/&#x202f;/g, '_')
 			.replace(/—/g, '---')
 	).toEqual(expected);
 }
@@ -17,9 +17,9 @@ describe('punctuation spaces', () => {
 		compare(
 			rt(
 				punctuation,
-				`Ceci <span>est</span> un &agrave; <b>texte</b>: avec; «de la» ponctuation<b> !</b> ou sans ?`
+				`Ceci est ? un &agrave; <b>texte secondaire</b>: avec; <i>«de la»</i> ponctuation<b> !</b> ou sans ?`
 			),
-			`Ceci <span>est</span> un &agrave; <b>texte</b>_: avec_; «_de la_» ponctuation<b>_!</b> ou sans_?`
+			`Ceci est_? un &agrave; <b>texte secondaire</b>_: avec_; <i>«_de la_»</i> ponctuation<b>_!</b> ou sans_?`
 		);
 		compare(
 			rt(
