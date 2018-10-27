@@ -16,11 +16,11 @@ const frenchDefs = Object.assign({}, defs, {
 const punctuation = [
 	({ space, semicolon, hairspace }) => ({
 		regex: `(?:${space}+)?([\\?!:»]|${semicolon})`,
-		result: `${hairspace}$1`,
+		replace: `${hairspace}$1`,
 	}),
 	({ space, hairspace }) => ({
 		regex: `(«)(?:${space}+)?`,
-		result: `$1${hairspace}`,
+		replace: `$1${hairspace}`,
 	}),
 ];
 
@@ -32,7 +32,7 @@ const ruleset = {
 		emdash,
 		spaces,
 		punctuation,
-		all: [quotes, numbers, emdash, spaces, punctuation],
+		all: ['quotes', 'numbers', 'emdash', 'spaces', 'punctuation'],
 	},
 };
 
