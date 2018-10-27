@@ -30,8 +30,8 @@ function replace(text, rule) {
 		return rule(text);
 	}
 
-	if (rule[0] instanceof RegExp) {
-		return text.replace(rule[0], rule[1]);
+	if (rule.regex) {
+		return text.replace(rule.regex, rule.replace);
 	}
 
 	let processedText = text;
@@ -40,6 +40,7 @@ function replace(text, rule) {
 }
 
 function run(rules, text) {
+	const rulesArray = !Array.isArray(rules) ? [rules] : rules;
 	let processedText = text;
 
 	const savedTags = [];
@@ -64,7 +65,7 @@ function run(rules, text) {
 	// Remove repeated spaces
 	processedText = processedText.replace(/ {2,}/gm, ' ');
 
-	rules.forEach(rule => {
+	rulesArray.forEach(rule => {
 		processedText = replace(processedText, rule);
 		// console.log(
 		// 	'rule',
@@ -76,7 +77,7 @@ function run(rules, text) {
 	// restoring tags
 	processedText = processedText
 		// transform hairspace in html entity
-		.replace(/\xAF/gm, '&#x202F;')
+		.replace(/\xAF/gm, '<span style="white-space:nowrap">&thinsp;</span>')
 		.replace(restoreTagsRe, (_, num) => savedTags[num])
 		// Remove double tags, like <abbr><abbr>JS</abbr></abbr>
 		.replace(/<abbr>(<\1>[^<]+<\/\1>)<\/\1>/g, '$2');
@@ -102,42 +103,61 @@ function compileDefs(defs) {
 	return computedDefs;
 }
 
+function flatten(array, fn, ...args) {
+	if (!Array.isArray(array)) return [array];
+
+	return array.reduce((acc, el) => {
+		if (Array.isArray(el)) {
+			return [...acc, ...flatten(el, fn, ...args)];
+		}
+
+		return [...acc, ...flatten(fn ? fn(el, ...args) : el)];
+	}, []);
+}
+
 export function compileRules({ rules, defs }) {
 	const computedDefs = compileDefs(defs);
+	const rulesets = {};
 
 	// add negative lookbehind to make sure we're not in a tag
 	function decorateRule(regex) {
 		return `(?<!<[^>]*)${regex}`;
 	}
 
-	function compileRule(rule) {
+	function compileRule(rule, name) {
+		if (typeof rule === 'string') {
+			if (!rulesets[rule]) {
+				throw new Error(
+					`Rule "${rule}" mentioned in "${name}" not found. Available rules: ` +
+						Object.keys(rulesets).join(', ')
+				);
+			}
+			return rulesets[rule];
+		}
+
 		// if obj is a function, then we compute it through defs
 		rule = typeof rule === 'function' ? rule(computedDefs) : rule;
-		const result = [
-			new RegExp(decorateRule(rule.regex), rule.flags || 'gmi'),
-			rule.result,
-		];
+
+		// if at this point rule does not have a regex, then the rule is
+		// a composition of other rules as in {rule1, rule2, rule3}
+		if (!rule.regex) {
+			return Object.entries(rule).map(([n, r]) => compileRule(r, n));
+		}
+
+		const result = {
+			name,
+			regex: new RegExp(decorateRule(rule.regex), rule.flags || 'gmi'),
+			replace: rule.replace,
+		};
 		return result;
 	}
 
-	const rulesets = {};
-
-	function compileRuleArray(rules) {
-		return rules.reduce((acc, rule) => {
-			if (Array.isArray(rule)) {
-				return [...acc, ...compileRuleArray(rule)];
-			}
-			return [...acc, compileRule(rule)];
-		}, []);
-	}
-
 	Object.entries(rules).forEach(([name, rule]) => {
-		let ruleArray = !Array.isArray(rule) ? [rule] : rule;
+		const compiledRule = !Array.isArray(rule)
+			? flatten(compileRule(rule, name))
+			: flatten(rule, compileRule, name);
 
-		ruleArray = compileRuleArray(ruleArray);
-
-		// ruleArray = ruleArray.map(r => compileRule(r, name));
-		rulesets[name] = ruleArray;
+		rulesets[name] = compiledRule;
 	});
 
 	return rulesets;
