@@ -13,7 +13,7 @@ function compare(actual, expected) {
 }
 
 describe('non breaking space', () => {
-	it('should add non breaking space before orphans, short words and units', () => {
+	it('should add non breaking space before orphans, short words, degrees and units', () => {
 		compare(
 			rt(spaces, `This is <b>of</b> the hook`),
 			`This is__<b>of</b>__the__hook`
@@ -21,6 +21,10 @@ describe('non breaking space', () => {
 		compare(
 			rt(spaces, `Still 100 km don't you think?`),
 			`Still 100__km__don't you__think?`
+		);
+		compare(
+			rt(spaces, `It's freezing, must be -30 °C? Or -25°C maybe or maybe not?`),
+			`It's freezing, must be__-30__°C? Or__-25__°C maybe or__maybe__not?`
 		);
 	});
 });
