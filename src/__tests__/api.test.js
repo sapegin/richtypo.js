@@ -1,7 +1,7 @@
 import rt from '../richtypo';
 
-const mockRule = [[/\d/gim, '_']];
-const mockFunction = [text => text.toUpperCase()];
+const mockRule = { regex: /\d/gim, replace: '_' };
+const mockFunction = text => text.toUpperCase();
 
 describe('api test', () => {
 	it('should run the fake rule that changes numbers with underscores', () => {
