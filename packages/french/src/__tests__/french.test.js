@@ -21,6 +21,13 @@ describe('punctuation spaces', () => {
 			),
 			`Ceci <span>est</span> un &agrave; <b>texte</b>_: avec_; «_de la_» ponctuation<b>_!</b> ou sans_?`
 		);
+		compare(
+			rt(
+				punctuation,
+				`Alice, assise auprès de sa sœur sur le gazon, commençait à s’ennuyer de rester là à ne rien faire ; une ou deux fois elle avait jeté les yeux sur le livre que lisait sa sœur ; mais quoi ! pas d’images, pas de dialogues ! «La belle avance,» pensait Alice, «qu’un livre sans images, sans causeries !»`
+			),
+			`Alice, assise auprès de sa sœur sur le gazon, commençait à s’ennuyer de rester là à ne rien faire_; une ou deux fois elle avait jeté les yeux sur le livre que lisait sa sœur_; mais quoi_! pas d’images, pas de dialogues_! «_La belle avance,_» pensait Alice, «_qu’un livre sans images, sans causeries_!_»`
+		);
 	});
 });
 
