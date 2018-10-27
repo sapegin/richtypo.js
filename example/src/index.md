@@ -14,7 +14,7 @@ There was nothing so very remarkable in that; nor did Alice think it so very muc
 
 Presently she began again. "I wonder if I shall fall right through the earth! How funny it’ll seem to come out among the people that walk with their heads downward! The Antipathies, I think -" (she was rather glad there was no one listening, this time, as it didn’t sound at all the right word) "- but I shall have to ask them what the name of the country is, you know. Please, Ma’am, is this New Zealand or Australia?" (and she tried to curtsey as she spoke - fancy curtseying as you’re falling through the air! Do you think you could manage it?) "And what an ignorant little girl she’ll think me for asking! No, it’ll never do to ask: perhaps I shall see it written up somewhere."
 
-"Well!" thought Alice to herself, "after such a fall as this, I shall think nothing of tumbling down stairs! How brave they’ll all think me at home! Why, I wouldn’t say anything about it, even if I fell off the top of the house!" (Which was very likely true.)
+"Well!" thought Alice to herself, "after such a fall as this (averaging 30000 ft at a temperature of 30°C), I shall think nothing of tumbling down stairs! How brave they’ll all think me at home! Why, I wouldn’t say anything about it, even if I fell off the top of the house!" (Which was very likely true.)
 
 "What a curious feeling!" said Alice; "I must be shutting up like a telescope."
 

@@ -30,12 +30,24 @@ body {
 	background-color: rgba(4, 0, 255, 0.2);
 }
 
-.rule.spaces {
+.rule.shortWordBreak {
 	background-color: rgba(255, 0, 242, 0.2);
+}
+
+.rule.numberUnits {
+	background-color: rgba(255, 0, 64, 0.2);
 }
 
 .rule.quotes {
 	background-color: rgba(255, 145, 0, 0.2);
+}
+
+.rule.numbers {
+	background-color: rgba(0, 255, 106, 0.3);
+}
+
+.rule.temperature {
+	background-color: rgba(255, 238, 0, 0.6);
 }
 
 .rule.emdash {
