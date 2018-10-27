@@ -97,7 +97,7 @@ function run(rules, text) {
 
 	processedText = processedText
 		// transform hairspace in compatible html entity
-		.replace(/\xAF/gm, '<span style="white-space:nowrap">&thinsp;</span>')
+		.replace(/\xAF/gm, '&#x202f;')
 		// restoring HTML tags
 		.replace(restoreTagsRe, (_, num) => savedTags[num])
 		// Remove double tags, like <abbr><abbr>JS</abbr></abbr>
@@ -137,7 +137,9 @@ function compileDefs(defs) {
 // i.e. ['space', [quotes, emdash]]
 
 function flatten(array, fn, ...args) {
-	if (!Array.isArray(array)) {return [array];}
+	if (!Array.isArray(array)) {
+		return [array];
+	}
 
 	return array.reduce((acc, el) => {
 		if (Array.isArray(el)) {

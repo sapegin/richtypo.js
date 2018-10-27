@@ -7,7 +7,7 @@ function compare(actual, expected) {
 	expect(
 		actual
 			.replace(/\xA0/g, '__')
-			.replace(/<span style="white-space:nowrap">&thinsp;<\/span>/g, '_')
+			.replace(/&#x202f;/g, '_')
 			.replace(/—/g, '---')
 	).toEqual(expected);
 }
