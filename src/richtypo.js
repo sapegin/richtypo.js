@@ -137,7 +137,7 @@ function compileDefs(defs) {
 // i.e. ['space', [quotes, emdash]]
 
 function flatten(array, fn, ...args) {
-	if (!Array.isArray(array)) return [array];
+	if (!Array.isArray(array)) {return [array];}
 
 	return array.reduce((acc, el) => {
 		if (Array.isArray(el)) {
