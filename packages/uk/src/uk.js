@@ -10,7 +10,7 @@ const {
 	ellipsis,
 } = defaultRuleset.rules;
 
-export default compileRules({
+const rules = compileRules({
 	defs: defaultRuleset.defs,
 	rules: {
 		spaces,
@@ -20,6 +20,8 @@ export default compileRules({
 		emdash,
 		ellipsis,
 		amp,
-		all: [spaces, quotes, abbr, numbers, emdash, ellipsis, amp],
+		all: ['spaces', 'quotes', 'abbr', 'numbers', 'emdash', 'ellipsis', 'amp'],
 	},
 });
+
+export default rules;
