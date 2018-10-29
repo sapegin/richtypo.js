@@ -1,40 +1,51 @@
-import { defaultRuleset, compileRules } from 'richtypo';
+import { defaultRuleset } from 'richtypo';
 
 const {
-	defs,
-	rules: { numbers, quotes, spaces, emdash },
+	spaces,
+	abbr,
+	quotesFactory,
+	numberOrdinalsFactory,
+	numberSeparatorsFactory,
+	amp,
+	emdash,
+	ellipsis,
+} = defaultRuleset.rules;
+
+const {
+	defs: { nbsp, space, hairspace, semicolon },
 } = defaultRuleset;
 
-const frenchDefs = {
-	...defs,
-	ordinals: '(?:ème|er|ère|nd)s?',
-	decimalsSeparator: '[.,]',
-	openingQuote: '«',
-	closingQuote: '»',
-	thousandsSeparator: ({ nbsp }) => nbsp,
+const ordinals = '(?:ème|er|ère|nd)s?';
+const decimalsSeparator = '[.,]';
+const openingQuote = '«';
+const closingQuote = '»';
+const thousandsSeparator = nbsp;
+
+const quotes = quotesFactory({ openingQuote, closingQuote });
+const numberOrdinals = numberOrdinalsFactory({ ordinals });
+const numberSeparators = numberSeparatorsFactory({
+	thousandsSeparator,
+	decimalsSeparator,
+});
+
+const numbers = [numberOrdinals, numberSeparators];
+
+const punctuation = text =>
+	text
+		.replace(
+			new RegExp(`(?:${space}+)?([\\?!:»]|${semicolon})`, 'gmi'),
+			`${hairspace}$1`
+		)
+		.replace(new RegExp(`(«)(?:${space}+)?`, 'gmi'), `$1${hairspace}`);
+
+export default {
+	spaces,
+	quotes,
+	abbr,
+	punctuation,
+	numbers,
+	emdash,
+	amp,
+	ellipsis,
+	all: [spaces, quotes, abbr, ellipsis, punctuation, numbers, emdash],
 };
-
-const punctuation = [
-	({ space, semicolon, hairspace }) => ({
-		regex: `(?:${space}+)?([\\?!:»]|${semicolon})`,
-		replace: `${hairspace}$1`,
-	}),
-	({ space, hairspace }) => ({
-		regex: `(«)(?:${space}+)?`,
-		replace: `$1${hairspace}`,
-	}),
-];
-
-const ruleset = {
-	defs: frenchDefs,
-	rules: {
-		quotes,
-		numbers,
-		emdash,
-		spaces,
-		punctuation,
-		all: ['quotes', 'numbers', 'emdash', 'spaces', 'punctuation'],
-	},
-};
-
-export default compileRules(ruleset);

@@ -15,26 +15,24 @@ import frenchRuleset from '../../packages/french/src/french';
 
 start('------ Building the page...');
 
-function decorateRules(ruleset) {
-	const transformedRules = {};
-	Object.entries(ruleset).forEach(([rulename, rules]) => {
-		rules = !Array.isArray(rules) ? [rules] : rules;
+// function decorateRules(ruleset) {
+// 	const transformedRules = {};
+// 	Object.entries(ruleset).forEach(([rulename, rules]) => {
+// 		rules = !Array.isArray(rules) ? [rules] : rules;
 
-		transformedRules[rulename] = rules.map(({ regex, replace, name }) => {
-			return {
-				name,
-				regex,
-				replace: `<span class="rule ${name}" title="${name}">${replace}</span>`,
-			};
-		});
-	});
+// 		transformedRules[rulename] = rules.map(({ regex, replace, name }) => {
+// 			return {
+// 				name,
+// 				regex,
+// 				replace: `<span class="rule ${name}" title="${name}">${replace}</span>`,
+// 			};
+// 		});
+// 	});
 
-	return transformedRules;
+// 	return transformedRules;
 }
 
 // console.log('UKRULESET', ukRuleset);
-
-decorateRules(ukRuleset);
 
 // console.log(
 // 	'UK',
@@ -44,8 +42,8 @@ decorateRules(ukRuleset);
 // );
 
 const rt = {
-	uk: richtypo(decorateRules(ukRuleset).all),
-	fr: richtypo(decorateRules(frenchRuleset).all),
+	uk: richtypo(ukRuleset.all),
+	fr: richtypo(frenchRuleset.all),
 };
 
 const config = { base: { lang: 'en' } };
