@@ -1,27 +1,38 @@
-import { defaultRuleset, compileRules } from 'richtypo';
+import { defaultRuleset } from 'richtypo';
 
 const {
 	spaces,
-	quotes,
 	abbr,
-	numbers,
+	quotesFactory,
+	numberOrdinalsFactory,
+	numberSeparatorsFactory,
 	amp,
 	emdash,
 	ellipsis,
 } = defaultRuleset.rules;
 
-const rules = compileRules({
-	defs: defaultRuleset.defs,
-	rules: {
-		spaces,
-		quotes,
-		abbr,
-		numbers,
-		emdash,
-		ellipsis,
-		amp,
-		all: ['spaces', 'quotes', 'abbr', 'numbers', 'emdash', 'ellipsis', 'amp'],
-	},
+const thousandsSeparator = ',';
+const decimalsSeparator = '[.]';
+const ordinals = '(?:st|nd|rd|th)';
+const openingQuote = '“';
+const closingQuote = '”';
+
+const quotes = quotesFactory({ openingQuote, closingQuote });
+const numberOrdinals = numberOrdinalsFactory({ ordinals });
+const numberSeparators = numberSeparatorsFactory({
+	thousandsSeparator,
+	decimalsSeparator,
 });
 
-export default rules;
+const numbers = [numberOrdinals, numberSeparators];
+
+export default {
+	spaces,
+	quotes,
+	abbr,
+	numbers,
+	emdash,
+	amp,
+	ellipsis,
+	all: [spaces, quotes, abbr, numbers, emdash, ellipsis],
+};
