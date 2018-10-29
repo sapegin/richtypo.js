@@ -5,13 +5,14 @@ const {
 	rules: { numbers, quotes, spaces, emdash },
 } = defaultRuleset;
 
-const frenchDefs = Object.assign({}, defs, {
+const frenchDefs = {
+	...defs,
 	ordinals: '(?:ème|er|ère|nd)s?',
 	decimalsSeparator: '[.,]',
 	openingQuote: '«',
 	closingQuote: '»',
 	thousandsSeparator: ({ nbsp }) => nbsp,
-});
+};
 
 const punctuation = [
 	({ space, semicolon, hairspace }) => ({
