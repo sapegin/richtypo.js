@@ -14,11 +14,6 @@ body {
 	hyphens: auto;
 	-webkit-font-kerning: normal;
 	font-kerning: normal;
-	font-variant-numeric: "oldstyle-nums";
-	-webkit-font-variant-ligatures: common-ligatures discretionary-ligatures contextual historical-ligatures;
-	font-variant-ligatures: common-ligatures discretionary-ligatures contextual historical-ligatures;
-	-webkit-font-feature-settings: "kern", "liga", "dlig", "hlig", "clig", "ss01", "ss03", "salt", "onum";
-	font-feature-settings: "kern", "liga", "dlig", "hlig", "clig", "ss01", "ss03", "salt", "onum";
 }
 
 .rule {
