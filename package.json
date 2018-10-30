@@ -29,7 +29,7 @@
 		"pretest": "npm run lint",
 		"test": "NODE_ENV=local jest",
 		"test:watch": "NODE_ENV=local jest --watch",
-		"test:coverage": "jest --coverage",
+		"test:coverage": "NODE_ENV=local jest --coverage",
 		"lint": "eslint src --cache --fix",
 		"example": "NODE_ENV=local babel-node example/src",
 		"example:watch": "NODE_ENV=local babel-watch example/src",
