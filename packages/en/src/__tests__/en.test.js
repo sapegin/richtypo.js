@@ -1,5 +1,5 @@
 import rt from 'richtypo';
-import rules from '../uk';
+import rules from '../en';
 
 const { spaces, quotes, abbr, numbers, amp, emdash, ellipsis, all } = rules;
 

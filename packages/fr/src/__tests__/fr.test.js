@@ -1,5 +1,5 @@
 import rt from 'richtypo';
-import rules from '../french';
+import rules from '../fr';
 
 const { quotes, punctuation, numbers, all } = rules;
 
