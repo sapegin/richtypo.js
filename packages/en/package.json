@@ -11,11 +11,6 @@
 	"peerDependencies": {
 		"richtypo": "^4.0.0"
 	},
-	"devDependencies": {
-		"@babel/cli": "^7.1.2",
-		"@babel/core": "^7.1.2",
-		"@babel/preset-env": "^7.1.0"
-	},
 	"scripts": {
 		"build": "babel src --out-dir . --ignore **/*.test.js",
 		"watch": "babel -w src --out-dir . --ignore **/*.test.js",

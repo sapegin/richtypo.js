@@ -25,7 +25,7 @@
 	},
 	"scripts": {
 		"build": "babel packages/richtypo/src --out-dir packages/richtypo/build --ignore **/*.test.js",
-		"build:watch": "babel -w paclages/richtypo/src --out-dir packages/richtypo/build --ignore **/*.test.js",
+		"build:watch": "babel -w packages/richtypo/src --out-dir packages/richtypo/build --ignore **/*.test.js",
 		"pretest": "npm run lint",
 		"test": "NODE_ENV=local jest",
 		"test:watch": "NODE_ENV=local jest --watch",
