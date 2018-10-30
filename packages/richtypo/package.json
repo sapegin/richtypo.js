@@ -1,0 +1,37 @@
+{
+	"name": "richtypo",
+	"version": "4.0.0",
+	"description": "HTML typography enhancer with extensible rules",
+	"homepage": "https://github.com/sapegin/richtypo.js",
+	"author": {
+		"name": "Artem Sapegin",
+		"url": "http://sapegin.me/"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/sapegin/richtypo.js.git"
+	},
+	"bugs": {
+		"url": "https://github.com/sapegin/richtypo.js/issues"
+	},
+	"license": "MIT",
+	"main": "build/richtypo.js",
+	"files": [
+		"build"
+	],
+	"keywords": [
+		"typography",
+		"typo",
+		"html",
+		"quotes",
+		"prepositions",
+		"abbr",
+		"abbreviations",
+		"nobr",
+		"nbsp",
+		"punctuation",
+		"em-dash",
+		"ampersands",
+		"space"
+	]
+}

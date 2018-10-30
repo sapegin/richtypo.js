@@ -2,7 +2,10 @@
 	"name": "richtypo-rules-fr",
 	"version": "1.0.0",
 	"description": "French Typography Rules for richtypo.js",
-	"main": "french.js",
+	"main": "build/fr.js",
+	"files": [
+		"build"
+	],
 	"author": "David Bismut",
 	"license": "MIT",
 	"peerDependencies": {

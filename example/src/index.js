@@ -9,13 +9,13 @@ import {
 	helpers,
 } from 'fledermaus';
 
-import richtypo from '../../src/richtypo';
-import ukRuleset from '../../packages/uk/src/uk';
-import frenchRuleset from '../../packages/french/src/french';
+import richtypo from '../../packages/richtypo/src/richtypo';
+import enRules from '../../packages/en/src/en';
+import frRules from '../../packages/fr/src/fr';
 
 start('------ Building the page...');
 
-const highlights = text =>
+const highlight = text =>
 	text
 		.replace(
 			/(&nbsp;|\xA0)/gm,
@@ -29,8 +29,8 @@ const highlights = text =>
 		.replace(/(—)/gm, '<span class="rule emdash" title="dash">$1</span>');
 
 const rt = {
-	uk: richtypo([ukRuleset.all, highlights]),
-	fr: richtypo([frenchRuleset.all, highlights]),
+	uk: richtypo([enRules.all, highlight]),
+	fr: richtypo([frRules.all, highlight]),
 };
 
 const config = { base: { lang: 'en' } };
