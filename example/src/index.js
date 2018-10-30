@@ -30,7 +30,7 @@ start('------ Building the page...');
 // 	});
 
 // 	return transformedRules;
-}
+// }
 
 // console.log('UKRULESET', ukRuleset);
 
@@ -41,9 +41,22 @@ start('------ Building the page...');
 // 	decorateRules(ukRuleset).all
 // );
 
+const highlights = text =>
+	text
+		.replace(
+			/(&nbsp;|\xA0)/gm,
+			'<span class="rule nbsp" title="non breaking space">$1</span>'
+		)
+		.replace(
+			/(\xAF)/gm,
+			'<span class="rule narrow" title="narrow space">$1</span>'
+		)
+		.replace(/([“”«»])/gm, '<span class="rule quotes" title="quotes">$1</span>')
+		.replace(/(—)/gm, '<span class="rule emdash" title="dash">$1</span>');
+
 const rt = {
-	uk: richtypo(ukRuleset.all),
-	fr: richtypo(frenchRuleset.all),
+	uk: richtypo([ukRuleset.all, highlights]),
+	fr: richtypo([frenchRuleset.all, highlights]),
 };
 
 const config = { base: { lang: 'en' } };
