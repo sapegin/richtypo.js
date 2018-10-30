@@ -88,7 +88,7 @@ export const amp = text =>
 
 export const abbr = text =>
 	text.replace(
-		new RegExp(`${notInTag}(${upperletters}{3,})`, 'gm'),
+		new RegExp(`${notInTag}(\\b${upperletters}{3,5}\\b)`, 'gm'),
 		`<abbr>$1</abbr>`
 	);
 
