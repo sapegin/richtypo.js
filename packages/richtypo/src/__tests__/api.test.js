@@ -29,7 +29,7 @@ describe('api test', () => {
 	});
 	it('should run both the mock function and mock rule', () => {
 		expect(
-			rt([mockFunction, mockRule], `changes number 100 with underscores`)
+			rt([mockFunction, [mockRule]], `changes number 100 with underscores`)
 		).toEqual(`CHANGES NUMBER ___ WITH UNDERSCORES`);
 	});
 });
