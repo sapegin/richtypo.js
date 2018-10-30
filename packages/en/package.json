@@ -2,7 +2,10 @@
 	"name": "richtypo-rules-en",
 	"version": "1.0.0",
 	"description": "English Typography Rules for richtypo.js",
-	"main": "uk.js",
+	"main": "build/en.js",
+	"files": [
+		"build"
+	],
 	"author": "David Bismut",
 	"license": "MIT",
 	"peerDependencies": {
