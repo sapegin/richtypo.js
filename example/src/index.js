@@ -15,32 +15,6 @@ import frenchRuleset from '../../packages/french/src/french';
 
 start('------ Building the page...');
 
-// function decorateRules(ruleset) {
-// 	const transformedRules = {};
-// 	Object.entries(ruleset).forEach(([rulename, rules]) => {
-// 		rules = !Array.isArray(rules) ? [rules] : rules;
-
-// 		transformedRules[rulename] = rules.map(({ regex, replace, name }) => {
-// 			return {
-// 				name,
-// 				regex,
-// 				replace: `<span class="rule ${name}" title="${name}">${replace}</span>`,
-// 			};
-// 		});
-// 	});
-
-// 	return transformedRules;
-// }
-
-// console.log('UKRULESET', ukRuleset);
-
-// console.log(
-// 	'UK',
-// 	ukRuleset.all,
-// 	'\n\n DECORATED',
-// 	decorateRules(ukRuleset).all
-// );
-
 const highlights = text =>
 	text
 		.replace(
