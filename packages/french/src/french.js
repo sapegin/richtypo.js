@@ -12,7 +12,7 @@ const {
 } = defaultRuleset.rules;
 
 const {
-	defs: { nbsp, space, hairspace, semicolon },
+	defs: { nbsp, space, hairspace, semicolon, notInTag },
 } = defaultRuleset;
 
 const ordinals = '(?:ème|er|ère|nd)s?';
@@ -33,10 +33,13 @@ const numbers = [numberOrdinals, numberSeparators];
 const punctuation = text =>
 	text
 		.replace(
-			new RegExp(`(?:${space}+)?([\\?!:»]|${semicolon})`, 'gmi'),
+			new RegExp(`${notInTag}(?:${space}+)?([\\?!:»]|${semicolon})`, 'gmi'),
 			`${hairspace}$1`
 		)
-		.replace(new RegExp(`(«)(?:${space}+)?`, 'gmi'), `$1${hairspace}`);
+		.replace(
+			new RegExp(`${notInTag}(«)(?:${space}+)?`, 'gmi'),
+			`$1${hairspace}`
+		);
 
 export default {
 	spaces,
