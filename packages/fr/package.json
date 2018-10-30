@@ -1,5 +1,5 @@
 {
-	"name": "richtypo-french-rules",
+	"name": "richtypo-rules-fr",
 	"version": "1.0.0",
 	"description": "French Typography Rules for richtypo.js",
 	"main": "french.js",
