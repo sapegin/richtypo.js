@@ -2,7 +2,7 @@
 
 [![npm](https://img.shields.io/npm/v/richtypo.svg)](https://www.npmjs.com/package/richtypo) [![Build Status](https://travis-ci.org/sapegin/richtypo.js.svg)](https://travis-ci.org/sapegin/richtypo.js)
 
-Richtypo is a framework for adding rules to plain or HTML text. You can define your own set of rules or import one of the [rules packages](#rules).
+Richtypo is a framework for adding rules to plain or HTML text. You can define your own set of rules or import one of the [rules packages](##rule-packages).
 
 Richtypo was made with typographic rules in mind (eg adding a non breaking space to avoid orphans), but rules are actually just functions that can transform text in any desired way.
 
@@ -14,7 +14,7 @@ Richtypo was made with typographic rules in mind (eg adding a non breaking space
 - Works server-side
 - No dependencies
 
-## Example
+## Usage
 
 ```javascript
 import richtypo from 'richtypo';
@@ -35,6 +35,8 @@ There are 1,000 “ways” to&nbsp;extend&nbsp;Richtypo
 
 **Note: Richtypo actually renders `&nbsp;` as the Unicode character for non-breaking-space: `\xA0`.**
 
+#### Currying
+
 Richtypo can also be curried and used as below:
 
 ```javascript
@@ -46,6 +48,8 @@ const text = 'There are 1000 ways to extend Richtypo.';
 
 allRules(text); // will produce the same output as above
 ```
+
+#### Composition
 
 You can also run several rules at once:
 
@@ -61,13 +65,13 @@ richtypo([rules.spaces, rules.quotes], text);
 
 Have a look at [the example page](http://sapegin.github.io/richtypo.js/) and [its source](https://github.com/sapegin/richtypo.js/tree/master/packages/example/src).
 
-## Installation
+### Installation
 
 ```bash
 npm install --save richtypo
 ```
 
-Note that you will need to also install a [rule package](#rules) that can be consumed by Richtypo.
+Note that you will probably also need to install a [rule package](#rule-packages) that can be consumed by Richtypo (unless you want to write your rules locally which is perfectly fine).
 
 ## Rule packages
 
@@ -76,9 +80,11 @@ At the moment there are two packages compatible with Richtypo:
 - [richtypo-rules-en](https://github.com/sapegin/richtypo.js/packages/richtypo-rules-en): English rules
 - [richtypo-rules-fr](https://github.com/sapegin/richtypo.js/packages/richtypo-rules-fr): French rules
 
-# Creating your own rules
+---
 
-Creating your own rules for Richtypo is simple: rules are regrouped in a plain Javascript object structured like so:
+## Creating your own rules
+
+Creating your own rules for Richtypo is simple: rules are attributes of a plain Javascript object structured like so:
 
 ```javascript
 const ruleOne = text => doSomething(text);
@@ -93,7 +99,7 @@ richtypo(rules.ruleOne, 'sample text');
 richtypo(rules.ruleTwo, 'sample text');
 ```
 
-### Rule composition
+#### Rule composition
 
 You can also compose rules together.
 
@@ -113,11 +119,11 @@ richtypo(rules.all, 'sample text');
 
 **We strongly encourage you to create a `all` rule that will execute all relevant rules. `all` should just be a composition of your previously defined rules.**
 
-## The Common Rule package
+### The Common Rule package
 
 A convenience package called [richtypo-rules-common](https://github.com/sapegin/richtypo.js/packages/richtypo-rules-common) including common typographic rules can be easily extended.
 
-### Definitions
+#### Definitions
 
 The common rules package exports `definitions` and a list of rules. `definitions` are convenience variables that you can use in your own rules for more readability. For example, `definitions.quotes` is set as `'["“”«»‘’]'`, which allows you to write:
 
@@ -134,7 +140,7 @@ export default {
 };
 ```
 
-### Common rules
+#### Common rules
 
 The common rules package also exports rules that your package can re-use as is.
 
