@@ -2,9 +2,7 @@
   "name": "richtypo-example",
   "version": "1.0.0",
   "main": "build/index.html",
-  "files": [
-    "build"
-  ],
+  "private": true,
   "license": "MIT",
   "dependencies": {
     "fledermaus": "^7.1.0",
@@ -15,7 +13,6 @@
   "scripts": {
     "build": "babel-node src",
     "build:watch": "babel-watch src",
-    "serve": "serve build",
-    "prepare": "npm run build"
+    "serve": "serve build"
   }
 }
