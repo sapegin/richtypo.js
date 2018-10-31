@@ -8,20 +8,22 @@ It includes `definitions` and a list of rules.
 
 Definitions can be imported as in `import { definitions } from 'richtypo-common-rules'` and can be used to simplify readability of your own rules.
 
-- **`nbsp`**: non breaking space
-- **`hairspace`**: narrow non breaking space (`\xAF`). Note that Richtypo will automatically replace it with the HTML entity `&#x202f;` that modern browsers should be able to render.
-- **`space`**: any space (except `\n`)
-- **`tag`**: matches a HTML tag
-- **`quotes`**: any quotes
-- **`letters`**: any european letter
-- **`upperletters`**: any uppercase european letter
-- **`letterswithquotes`**: any european letter with quotes
-- **`semicolon`**: a semicolon (making sure it doesn't match semicolon in special html characters such as `&nbsp;`)
-- **`punctuation`**: punctuation symbols
-- **`dash`**: any dash
-- **`openingQuotes`**: any opening quote
-- **`shortWord`**: a word of one or two letters,
-- **`notInTag`**: negative lookbehind to make sure we're not running rules inside a HTML tag. It's usually added to the beginning of `RegExp` in most rules.
+| Definition              | Description                                                                                                                                                        | RegExp                       |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------- |
+| **`nbsp`**              | non breaking space                                                                                                                                                 | `\xA0`                       |
+| **`hairspace`**         | narrow non breaking space (`\xAF`). Note that Richtypo will automatically replace it with the HTML entity `&#x202f` that modern browsers should be able to render. | `\xAF`                       |
+| **`space`**             | any space (except `\n`)                                                                                                                                            | `[ \t${nbsp}${hairspace}]`   |
+| **`tag`**               | matches any HTML tag                                                                                                                                               | `(?:<[^<>]*>)`               |
+| **`quotes`**            | any quotes                                                                                                                                                         | `["“”«»‘’]`                  |
+| **`letters`**           | any european letter                                                                                                                                                | `[a-zà-ž0-9]`                |
+| **`upperletters`**      | any uppercase european letter                                                                                                                                      | `[A-ZÀ-Ž]`                   |
+| **`letterswithquotes`** | any european letter with quotes                                                                                                                                    | `[a-zà-ž0-9-“”‘’«»]`         |
+| **`semicolon`**         | a semicolon (making sure it doesn't match semicolon in special html characters such as ``) | `(?<!&\\S*);`                                                         |
+| **`punctuation`**       | punctuation symbols                                                                                                                                                | `(?:${semicolon}|[\\.,!?:])` |
+| **`dash`**              | hyphen or dash                                                                                                                                                     | `[-—]`                       |
+| **`openingQuotes`**     | ny opening quote                                                                                                                                                   | `[“«]`                       |
+| **`shortWord`**         | a word of one or two letters                                                                                                                                       | `${letters}{1,2}`            |
+| **`notInTag`**          | negative lookbehind to make sure we're not running rules inside a HTML tag. It's usually added to the beginning of `RegExp` in most rules.                         | `(?<!<[>]*)`                 |
 
 ### Common rules
 
@@ -29,15 +31,17 @@ A rule from `richtypo-rules-common` can be imported as in `import { ruleName } f
 
 _For better readability, the non-breaking space symbol `&nbsp;` is replaced with two underscores `__`_
 
-- **`numberUnits`**: inserts non breaking space between numbers and the following word `100 km → 100__km`
-- **`temperature`**: fixes space between numbers and temperature symbol → `34 ° or 34° → 34__°`
-- **`shortWordBreak`**: adds a non breaking space after short words → `We go to the mall → We__go__to__the mall`
-- **`orphans`**: adds a non breaking space to avoid orphans → `We go to the mall → We go to the__mall`
-- **`spaces`**: composed rule that executes `numberUnits`, `temperature`, `shortWordBreak` and `orphans`
-- **`abbr`**: wraps short uppercase words in `<abbr>` tags
-- **`emdash`**: replaces the hyphen character into a dash and adds non breaking spaces when it makes sense.
-- **`ellipsis`**: replaces three consecutive dots into ellipsis → `oh... → oh…`
-- **`amp`**: decorative rule that wraps ampersand `&` in `<span class="amp">` tags.
+| Rule              | Description                                                                                 |               Input | Output                                |
+| ----------------- | ------------------------------------------------------------------------------------------- | ------------------: | ------------------------------------- |
+| **`numberUnits`** | inserts non breaking space between numbers and the following word                           |            `100 km` | `100__km`                             |
+| **`temperature`** | fixes space between numbers and temperature symbol                                          |       `34 ° or 34°` | `34__°`                               |
+| shortWordBreak    | adds a non breaking space after short words                                                 | `We go to the mall` | `We__go__to__the mall`                |
+| **`orphans`**     | adds a non breaking space to avoid orphans                                                  | `We go to the mall` | `We go to the__mall`                  |
+| **`spaces`**      | composed rule that executes `numberUnits`, `temperature`, `shortWordBreak` and `orphans`    |                     |                                       |
+| **`abbr`**        | wraps short uppercase words in `<abbr>` tags                                                |               `ONU` | `ONU`                                 |
+| **`emdash`**      | replaces the hyphen character into a dash and adds non breaking spaces when it makes sense. |           `- Hello` | `—__Hello`                            |
+| **`ellipsis`**    | replaces three consecutive dots into ellipsis                                               |             `oh...` | `oh…`                                 |
+| **`amp`**         | decorative rule that wraps ampersand `&` in `<span class="amp">` tags.                      |        `Cie & Sons` | `Cie <span class="amp">&</span> Sons` |
 
 ### Factory rules
 
@@ -52,6 +56,8 @@ const quotes = quotesFactory({
 });
 ```
 
-- **`quotesFactory({ openingQuote, closingQuote })`**: helper to replace straight quotes.
-- **`numberSeparatorsFactory({ decimalsSeparator, thousandsSeparator })`**: formats numbers with thousands separator. `decimalsSeparator` is not used to replace anything, it helps `numberSeparatorsFactory(` to identify decimals and avoid adding a separator within decimals.
-- **`numberOrdinalsFactory({ ordinals })`**: helper to format _1st, 2nd, 3rd_ etc. into _1<sup>st</sup>, 2<sup>nd</sup>, 3<sup>rd</sup>_. `ordinals` should be a regex array of strings such as `'(st|nd|rd|th)'`.
+| Rule                          | Arguments                                   | Description                                                                                                                                                                               |
+| ----------------------------- | ------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`quotesFactory`**           | `{ openingQuote, closingQuote }`            | helper to replace straight quotes.                                                                                                                                                        |
+| **`numberSeparatorsFactory`** | `{ decimalsSeparator, thousandsSeparator }` | formats numbers with thousands separator. `decimalsSeparator` is not used to replace anything, it just allows the rule to identify decimals and avoid adding a separator within decimals. |
+| **`numberOrdinalsFactory`**   | `{ ordinals }`                              | helper to format _1st, 2nd, 3rd_ etc. into _1st, 2nd, 3rd_. `ordinals` should be a regex array of strings such as `'(st|nd|rd|th)'`.                                                      |

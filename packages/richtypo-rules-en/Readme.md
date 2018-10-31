@@ -14,6 +14,8 @@ The rules of this package include the `spaces`, `abbr`, `emdash`, `amp`, `ellips
 
 It also includes the following customized rules:
 
-- **`quotes`**: transforms straight double quotes into curly double quotes → `text in "quotes" → text in “quotes”`
-- **`numbers`**: adds thousands separators to large numbers and put ordinals within `<sup>` tags → `10000.123, 1st 2nd 3rd → 10,000.123 1<sup>st</sup> 2<sup>nd</sup> 3<sup>rd</sup>`
-- **`all`**: runs `spaces`, `quotes`, `abbr`, `numbers`, `emdash`, `ellipsis` rules in sequence.
+| Rule          | Description                                                                         | Input                    | Output                                              |
+| ------------- | ----------------------------------------------------------------------------------- | ------------------------ | --------------------------------------------------- |
+| **`quotes`**  | transforms straight double quotes into double curly quotes                          | `text in "quotes"`       | `text in “quotes”`                                  |
+| **`numbers`** | adds thousands separators to large numbers and put ordinals within `<sup>` tags     | `10000.123, 1st 2nd 3rd` | `10,000.123 1<sup>st</sup> 2<sup>nd</sup> 3<sup>rd` |
+| **`all`**     | runs `spaces`, `quotes`, `abbr`, `numbers`, `emdash`, `ellipsis` rules in sequence. |                          |                                                     |
