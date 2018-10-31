@@ -35,6 +35,8 @@ There are 1,000 “ways” to&nbsp;extend&nbsp;Richtypo
 
 **Note: Richtypo actually renders `&nbsp;` as the Unicode character for non-breaking-space: `\xA0`.**
 
+Also note that Richtypo works better if the input text is cleared from special characters. You can use the [he package](https://github.com/mathiasbynens/he) and its [decode function](https://github.com/mathiasbynens/he#hedecodehtml-options) as in `he.decode(text)` for that purpose.
+
 #### Currying
 
 Richtypo can also be curried and used as below:
