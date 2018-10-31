@@ -1,7 +1,7 @@
 const nbsp = '\xA0';
 const hairspace = '\xAF';
 const space = `[ \t${nbsp}${hairspace}]`;
-const tag = '<[^<>]*>';
+const tag = '(?:<[^<>]*>)';
 const quotes = '["“”«»‘’]';
 const letters = '[a-zà-ž0-9]';
 const upperletters = '[A-ZÀ-Ž]';
@@ -49,12 +49,15 @@ export const orphans = text =>
 
 export const numberUnits = text =>
 	text.replace(
-		new RegExp(`${notInTag}(\\d+)${space}(\\w)`, 'gmi'),
+		new RegExp(`${notInTag}(\\d+${tag}?)${space}(\\w)`, 'gmi'),
 		`$1${nbsp}$2`
 	);
 
 export const temperature = text =>
-	text.replace(new RegExp(`${notInTag}(\\d)${space}?°`, 'gmi'), `$1${nbsp}°`);
+	text.replace(
+		new RegExp(`${notInTag}(\\d${tag}?)${space}?°`, 'gmi'),
+		`$1${nbsp}°`
+	);
 
 export const spaces = [numberUnits, temperature, shortWordBreak, orphans];
 
