@@ -36,6 +36,9 @@
     "lint": "eslint packages/*/src --cache --fix",
     "format": "prettier --write '**/*.{js,md}'",
     "gh-pages": "gh-pages -d example/build",
+    "example:build": "lerna exec --scope richtypo-example -- npm run build",
+    "example:watch": "lerna exec --scope richtypo-example -- npm run build:watch",
+    "example:serve": "lerna exec --scope richtypo-example -- npm run serve",
     "publish": "npm publish"
   }
 }

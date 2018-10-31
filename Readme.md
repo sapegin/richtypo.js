@@ -2,117 +2,176 @@
 
 [![npm](https://img.shields.io/npm/v/richtypo.svg)](https://www.npmjs.com/package/richtypo) [![Build Status](https://travis-ci.org/sapegin/richtypo.js.svg)](https://travis-ci.org/sapegin/richtypo.js)
 
-Richtypo adds non-breaking spaces in the right places, `<nobr>` and `<abbr>` tags and wraps ampersands with a CSS class for special styling. It expects that your texts already have the right quotes, em-dashes and other symbols (you can use [Typography Keyboard Layout](http://ilyabirman.net/projects/typography-layout/)).
+Richtypo is a framework for adding rules to plain or HTML text. You can define your own set of rules or import one of the [rules packages](#rules).
 
-Richtypo aims at proposing a framework for adding typographic rules to plain or HTML text. You can define your own set of rules or import
+Richtypo was made with typographic rules in mind (eg adding a non breaking space to avoid orphans), but rules are actually just functions that can transform text in any desired way.
 
 ## Features
 
-- Rules for English and Russian languages
-- Non-breaking spaces after prepositions and conjunctions, before em-dash, etc.
-- `<nobr>` for words with hyphens
-- CSS classes for ampersands
-- `<abbr>` for abbreviations
+- Works with plain or HTML text
 - Takes care of your HTML tags
-- Simple typographer (quotes, em-dash, etc.) for user generated content (like comments)
+- Extensible through third-party rule packages
+- Works server-side
 - No dependencies
 
 ## Example
 
 ```javascript
-const richtypo = require('richtypo');
-const beautiful = richtypo.rich(
-  'Welcome to the world of beautiful web typography — only with Richtypo.'
-);
-const awesome = richtypo.title(
-  'Beautiful &amp; Awesome Web Typography with “Richtypo”'
-);
-const ok = richtypo.lite('"Richtypo" - awesome!');
+import richtypo from 'richtypo';
+import rules from 'richtypo-rules-en';
+
+const text = 'There are 1000 "ways" to extend Richtypo.';
+
+// the all rule is defined in richtypo-rules-en
+// and executes all the rules from the package.
+richtypo(rules.all, text));
 ```
 
 Will produce something like that:
 
 ```html
-Welcome to&nbsp;the&nbsp;world of&nbsp;beautiful web <nobr>typography&#x202F;—</nobr>&#x202F;only with&nbsp;Richtypo.
-Beautiful <span class="amp">&amp;</span> Awesome Web Typography with “Richtypo”'
-<nobr>“Richtypo”&#x202F;—</nobr>&#x202F;awesome!
+There are 1,000 “ways” to&nbsp;extend&nbsp;Richtypo
 ```
 
-**Note: all methods render `&nbsp;` as an actual non-breaking space (`\xA0`).**
+**Note: Richtypo actually renders `&nbsp;` as the Unicode character for non-breaking-space: `\xA0`.**
 
-Also look at [the example page](http://sapegin.github.io/richtypo.js/) and [its source](https://github.com/sapegin/richtypo.js/tree/master/example).
+Richtypo can also be curried and used as below:
 
-## Styles
+```javascript
+import richtypo from 'richtypo';
+import rules from 'richtypo-rules-en';
 
-Richtypo wraps abbreviations in `<abbr>` tags. It also wraps ampersands and leading quotes to allow custom styling:
+const allRules = richtypo(rules.all);
+const text = 'There are 1000 ways to extend Richtypo.';
 
-| Character | Spacer class | Character class |
-| --------- | ------------ | --------------- |
-| `&`       |              | `.amp`          |
-
-Start with something like this and customize it for your site:
-
-```css
-/* Use small caps for abbreviations */
-abbr {
-  font-size: 0.875em;
-  letter-spacing: 0.15em;
-  margin-right: -0.15em;
-}
-
-/* Use the best available ampersand */
-.amp {
-  font-family: Baskerville, Constantia, Palatino, 'Palatino Linotype',
-    'Book Antiqua', serif;
-  font-style: italic;
-}
+allRules(text); // will produce the same output as above
 ```
+
+You can also run several rules at once:
+
+```javascript
+import richtypo from 'richtypo';
+import rules from 'richtypo-rules-en';
+
+const text = 'There are 1000 ways to extend Richtypo.';
+
+// this will only run spaces and quotes rules
+richtypo([rules.spaces, rules.quotes], text);
+```
+
+Have a look at [the example page](http://sapegin.github.io/richtypo.js/) and [its source](https://github.com/sapegin/richtypo.js/tree/master/packages/example/src).
 
 ## Installation
 
 ```bash
-$ npm install --save richtypo
+npm install --save richtypo
 ```
 
-## JavaScript API
+Note that you will need to also install a [rule package](#rules) that can be consumed by Richtypo.
 
-### Text processing: common use cases
+## Rule packages
+
+At the moment there are two packages compatible with Richtypo:
+
+- [richtypo-rules-en](https://github.com/sapegin/richtypo.js/packages/richtypo-rules-en): English rules
+- [richtypo-rules-fr](https://github.com/sapegin/richtypo.js/packages/richtypo-rules-fr): French rules
+
+# Creating your own rules
+
+Creating your own rules for Richtypo is simple: rules are regrouped in a plain Javascript object structured like so:
 
 ```javascript
-richtypo.rich(text, lang); // Enhancing typography: non-breaking spaces, abbreviations
-richtypo.title(text, lang); // Typography for big text: the same as rich and ampersands
-richtypo.lite(text, lang); // Simple typographer (quotes, em-dash, etc.) for user generated content (e.g. comments)
-richtypo.full(text, lang); // lite() + rich()
+const ruleOne = text => doSomething(text);
+const ruleTwo = text => doSomethingElse(text);
+
+const rules = {
+  ruleOne,
+  ruleTwo
+};
+
+richtypo(rules.ruleOne, 'sample text');
+richtypo(rules.ruleTwo, 'sample text');
 ```
 
-- `text` is an HTML string;
-- `lang` (_optional_) is a text language (`en` or `ru`, default: `en`).
+### Rule composition
 
-### Text processing: custom set of rules
+You can also compose rules together.
 
 ```javascript
-richtypo.richtypo(text, rulesets, lang);
+const ruleOne = text => doSomething(text);
+const ruleTwo = text => doSomethingElse(text);
+
+const rules = {
+  ruleOne,
+  ruleTwo,
+  all: [ruleOne, ruleTwo]
+};
+
+// will execute ruleOne and ruleTwo
+richtypo(rules.all, 'sample text');
 ```
 
-- `text` is a HTML string;
-- `rulesets` is array of rulesets (available rulesets: `save_tags`, `cleanup_before`, `short_words`, `orphans`, `lite`, `rich`, `cleanup_after`, `restore_tags`, `remove_doppelgangers` or language-specific rules);
-- `lang` (_optional_) is a text language (`en` or `ru`, default: `en`).
+**We strongly encourage you to create a `all` rule that will execute all relevant rules. `all` should just be a composition of your previously defined rules.**
 
-### Change language globally
+## The Common Rule package
 
-```javascript
-richtypo.lang(lang);
+A convenience package called [richtypo-rules-common](https://github.com/sapegin/richtypo.js/packages/richtypo-rules-common) including common typographic rules can be easily extended.
+
+### Definitions
+
+The common rules package exports `definitions` and a list of rules. `definitions` are convenience variables that you can use in your own rules for more readability. For example, `definitions.quotes` is set as `'["“”«»‘’]'`, which allows you to write:
+
+```js
+import { definitions } from 'richtypo-rules-common';
+
+const { quotes } = definitions;
+
+const quoteToUnderscore = text =>
+  text.replace(new RegExp(`${quotes}`, 'gm'), '_');
+
+export default {
+  quoteToUnderscore
+};
 ```
 
-- `lang` is a language (`en` or `ru`).
+### Common rules
 
-### Convert to text
+The common rules package also exports rules that your package can re-use as is.
 
-If you don’t want HTML tags in the result string, use `textify` method:
+For example, the `ellipsis` rule replaces `...` with `…` symbol. Rather than you having to rewrite that rule, you can just import it and re-export it as part of your rules.
 
-```javascript
-richtypo.textify(richtypo.full(text, lang));
+```js
+import { definitions, ellipsis } from 'richtypo-rules-common';
+
+// ...
+
+export default {
+  quoteToUnderscore,
+  ellipsis
+};
 ```
+
+Some rules such as the quote rule are factory rules and need to be "configured".
+
+```js
+import {
+  definitions,
+  quotesFactory,
+  ellipsis
+} from 'richtypo-rules-common';
+
+// ...
+
+export default {
+  quoteToUnderscore,
+  ellipsis,
+  quotes: quotesFactory({ openingQuote: '«', closingQuote: '»' })
+};
+```
+
+For a complete list of rules, head on to the [Readme page of the common rule package](https://github.com/sapegin/richtypo.js/packages/richtypo-rules-common).
+
+Have a look at the [French rules package](https://github.com/sapegin/richtypo.js/packages/richtypo-rules-fr) to have a feeling of how it works.
 
 ## Change log
 
