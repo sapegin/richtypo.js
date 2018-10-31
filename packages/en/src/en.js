@@ -1,6 +1,4 @@
-import { defaultRuleset } from 'richtypo';
-
-const {
+import {
 	spaces,
 	abbr,
 	quotesFactory,
@@ -9,7 +7,7 @@ const {
 	amp,
 	emdash,
 	ellipsis,
-} = defaultRuleset.rules;
+} from 'richtypo-rules-common';
 
 const thousandsSeparator = ',';
 const decimalsSeparator = '[.]';

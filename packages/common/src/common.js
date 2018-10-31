@@ -13,7 +13,7 @@ const openingQuotes = `[“«]`;
 const shortWord = `${letters}{1,2}`;
 const notInTag = `(?<!<[^>]*)`;
 
-export const defs = {
+export const definitions = {
 	nbsp,
 	hairspace,
 	space,

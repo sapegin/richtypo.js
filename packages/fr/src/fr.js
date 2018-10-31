@@ -1,6 +1,5 @@
-import { defaultRuleset } from 'richtypo';
-
-const {
+import {
+	definitions,
 	spaces,
 	abbr,
 	quotesFactory,
@@ -9,11 +8,9 @@ const {
 	amp,
 	emdash,
 	ellipsis,
-} = defaultRuleset.rules;
+} from 'richtypo-rules-common';
 
-const {
-	defs: { nbsp, space, hairspace, semicolon, notInTag },
-} = defaultRuleset;
+const { nbsp, space, hairspace, semicolon, notInTag } = definitions;
 
 const ordinals = '(?:ème|er|ère|nd)s?';
 const decimalsSeparator = '[.,]';
