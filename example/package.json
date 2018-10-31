@@ -1,9 +1,21 @@
 {
-  "name": "richtypo-example",
-  "version": "1.0.0",
-  "main": "index.html",
-  "license": "MIT",
-  "dependencies": {
-    "fledermaus": "^7.1.0"
-  }
+	"name": "richtypo-example",
+	"version": "1.0.0",
+	"main": "build/index.html",
+	"files": [
+		"build"
+	],
+	"license": "MIT",
+	"dependencies": {
+		"fledermaus": "^7.1.0",
+		"richtypo": "^4.0.0",
+		"richtypo-rules-en": "^1.0.0",
+		"richtypo-rules-fr": "^1.0.0"
+	},
+	"scripts": {
+		"build": "babel-node src",
+		"build:watch": "babel-watch src",
+		"serve": "serve build",
+		"prepare": "npm run build"
+	}
 }

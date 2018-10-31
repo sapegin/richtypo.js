@@ -1,6 +1,7 @@
 coverage/
 node_modules/
-build
+packages/*/*.js
+!packages/*/*.config.js
 .DS_Store
 Thumbs.db
 .idea/

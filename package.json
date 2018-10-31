@@ -15,28 +15,28 @@
 		"eslint-config-tamia": "^6.0.2",
 		"eslint-plugin-import": "^2.14.0",
 		"gh-pages": "^2.0.1",
-		"lerna": "^3.4.3",
 		"jest": "^23.6.0",
+		"lerna": "^3.4.3",
 		"prettier": "^1.14.3",
 		"serve": "^10.0.2"
 	},
 	"engines": {
 		"node": ">=7"
 	},
+	"jest": {
+		"coveragePathIgnorePatterns": [
+			"<rootDir>/packages/[^/]*/[^/]*\\.js"
+		]
+	},
 	"scripts": {
-		"build": "babel packages/richtypo/src --out-dir packages/richtypo/build --ignore **/*.test.js",
-		"build:watch": "babel -w packages/richtypo/src --out-dir packages/richtypo/build --ignore **/*.test.js",
+		"prepare": "lerna bootstrap",
 		"pretest": "npm run lint",
-		"test": "NODE_ENV=local jest",
-		"test:watch": "NODE_ENV=local jest --watch",
-		"test:coverage": "NODE_ENV=local jest --coverage",
-		"lint": "eslint src --cache --fix",
-		"example": "NODE_ENV=local babel-node example/src",
-		"example:watch": "NODE_ENV=local babel-watch example/src",
-		"example:serve": "serve example/build",
+		"test": "jest",
+		"test:watch": "jest --watch",
+		"test:coverage": "jest --coverage",
+		"lint": "eslint packages/*/src --cache --fix",
 		"format": "prettier --write '**/*.{js,md}'",
 		"gh-pages": "gh-pages -d example/build",
-		"prepare": "npm run build",
 		"publish": "npm publish"
 	}
 }
