@@ -8,10 +8,8 @@ It includes `definitions` and a list of rules.
 
 Definitions can be imported as in `import { definitions } from 'richtypo-common-rules'` and can be used to simplify readability of your own rules.
 
-Definitions include:
-
 - **`nbsp`**: non breaking space
-- **`hairspace`**: narrow non breaking space (`\xAF`). Note that Richtypo will automatically replace it with HTML character `&#x202f;` that a browser can render.
+- **`hairspace`**: narrow non breaking space (`\xAF`). Note that Richtypo will automatically replace it with the HTML entity `&#x202f;` that modern browsers should be able to render.
 - **`space`**: any space (except `\n`)
 - **`tag`**: matches a HTML tag
 - **`quotes`**: any quotes
@@ -27,9 +25,7 @@ Definitions include:
 
 ### Common rules
 
-Common rules can be imported as in `import { ruleName } from 'richtypo-common-rules'`.
-
-Common rules are:
+A rule from `richtypo-rules-common` can be imported as in `import { ruleName } from 'richtypo-common-rules'`.
 
 _For better readability, the non-breaking space symbol `&nbsp;` is replaced with two underscores `__`_
 
@@ -39,8 +35,8 @@ _For better readability, the non-breaking space symbol `&nbsp;` is replaced with
 - **`orphans`**: adds a non breaking space to avoid orphans → `We go to the mall → We go to the__mall`
 - **`spaces`**: composed rule that executes `numberUnits`, `temperature`, `shortWordBreak` and `orphans`
 - **`abbr`**: wraps short uppercase words in `<abbr>` tags
-- **`emdash`**:
-- **`ellipsis`**:
+- **`emdash`**: replaces the hyphen character into a dash and adds non breaking spaces when it makes sense.
+- **`ellipsis`**: replaces three consecutive dots into ellipsis → `oh... → oh…`
 - **`amp`**: decorative rule that wraps ampersand `&` in `<span class="amp">` tags.
 
 ### Factory rules
@@ -49,12 +45,13 @@ Some rules called factory rules expect an argument that depends on the language 
 
 ```js
 import { quotesFactory } from 'richtypo-rules-common';
+
 const quotes = quotesFactory({
   openingQuote: '«',
   closingQuote: '»'
 });
 ```
 
-- **`quotesFactory(`** `{ openingQuote, closingQuote }` **`)`**: helper to replace straight quotes.
-- **`numberSeparatorsFactory(`** `{ decimalsSeparator, thousandsSeparator }` **`)`**: formats numbers with thousands separator. `decimalsSeparator` is not used to replace anything, it helps `numberSeparatorsFactory(` to identify decimals and avoid adding a separator within decimals.
-- **`numberOrdinalsFactory(`** `{ ordinals }` **`)`**: helper to format _1st, 2nd, 3rd_ etc. into _1<sup>st</sup>, 2<sup>nd</sup>, 3<sup>rd</sup>_. `ordinals` should be a regex array of strings such as `'(st|nd|rd|th)'`.
+- **`quotesFactory({ openingQuote, closingQuote })`**: helper to replace straight quotes.
+- **`numberSeparatorsFactory({ decimalsSeparator, thousandsSeparator })`**: formats numbers with thousands separator. `decimalsSeparator` is not used to replace anything, it helps `numberSeparatorsFactory(` to identify decimals and avoid adding a separator within decimals.
+- **`numberOrdinalsFactory({ ordinals })`**: helper to format _1st, 2nd, 3rd_ etc. into _1<sup>st</sup>, 2<sup>nd</sup>, 3<sup>rd</sup>_. `ordinals` should be a regex array of strings such as `'(st|nd|rd|th)'`.
