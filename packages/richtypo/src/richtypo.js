@@ -1,17 +1,3 @@
-import * as common from './common';
-const { defs: defaultDefs, ...defaultRules } = common;
-
-export const defaultRuleset = { defs: defaultDefs, rules: defaultRules };
-
-// const cleanupRules = {
-
-//   textify: [
-//     [/<\/?[^>]+>/g, ''], // Remove tags
-//     [/&mdash;/g, '—'],
-//     [/[\x20\xA0]{2,}/g, ' '] // Repeated spaces [normal space + nbsp]
-//   ]
-// };
-
 const saveTagsRe = [
 	/<!(--\[[^\]>]+\]|\[[^\]>]+\]--)>/gim,
 	/<!--[\s\S]*?-->/gim,
@@ -36,13 +22,7 @@ function flatten(array) {
 		return [array];
 	}
 
-	return array.reduce((acc, el) => {
-		if (Array.isArray(el)) {
-			return [...acc, ...flatten(el)];
-		}
-
-		return [...acc, el];
-	}, []);
+	return array.reduce((acc, el) => [...acc, ...flatten(el)], []);
 }
 
 /**
