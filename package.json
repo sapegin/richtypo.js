@@ -1,42 +1,41 @@
 {
-	"private": true,
-	"devDependencies": {
-		"@babel/cli": "^7.1.2",
-		"@babel/core": "^7.1.2",
-		"@babel/node": "^7.0.0",
-		"@babel/preset-env": "^7.1.0",
-		"babel-core": "^7.0.0-bridge",
-		"babel-jest": "^23.6.0",
-		"babel-plugin-module-resolver": "^3.1.1",
-		"babel-plugin-transform-react-jsx": "^6.24.1",
-		"babel-watch": "https://github.com/monathur/babel-watch.git",
-		"eslint": "^5.7.0",
-		"eslint-config-prettier": "^3.1.0",
-		"eslint-config-tamia": "^6.0.2",
-		"eslint-plugin-import": "^2.14.0",
-		"gh-pages": "^2.0.1",
-		"jest": "^23.6.0",
-		"lerna": "^3.4.3",
-		"prettier": "^1.14.3",
-		"serve": "^10.0.2"
-	},
-	"engines": {
-		"node": ">=7"
-	},
-	"jest": {
-		"coveragePathIgnorePatterns": [
-			"<rootDir>/packages/[^/]*/[^/]*\\.js"
-		]
-	},
-	"scripts": {
-		"prepare": "lerna bootstrap",
-		"pretest": "npm run lint",
-		"test": "jest",
-		"test:watch": "jest --watch",
-		"test:coverage": "jest --coverage",
-		"lint": "eslint packages/*/src --cache --fix",
-		"format": "prettier --write '**/*.{js,md}'",
-		"gh-pages": "gh-pages -d example/build",
-		"publish": "npm publish"
-	}
+  "private": true,
+  "devDependencies": {
+    "@babel/cli": "^7.1.2",
+    "@babel/core": "^7.1.2",
+    "@babel/node": "^7.0.0",
+    "@babel/preset-env": "^7.1.0",
+    "babel-core": "^7.0.0-bridge",
+    "babel-jest": "^23.6.0",
+    "babel-plugin-transform-react-jsx": "^6.24.1",
+    "babel-watch": "https://github.com/monathur/babel-watch.git",
+    "eslint": "^5.7.0",
+    "eslint-config-prettier": "^3.1.0",
+    "eslint-config-tamia": "^6.0.2",
+    "eslint-plugin-import": "^2.14.0",
+    "gh-pages": "^2.0.1",
+    "jest": "^23.6.0",
+    "lerna": "^3.4.3",
+    "prettier": "^1.14.3",
+    "serve": "^10.0.2"
+  },
+  "engines": {
+    "node": ">=7"
+  },
+  "jest": {
+    "coveragePathIgnorePatterns": [
+      "<rootDir>/packages/[^/]*/[^/]*\\.js"
+    ]
+  },
+  "scripts": {
+    "prepare": "lerna bootstrap",
+    "pretest": "npm run lint",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "lint": "eslint packages/*/src --cache --fix",
+    "format": "prettier --write '**/*.{js,md}'",
+    "gh-pages": "gh-pages -d example/build",
+    "publish": "npm publish"
+  }
 }
