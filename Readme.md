@@ -159,7 +159,7 @@ export default {
 };
 ```
 
-Some rules such as the quote rule are factory rules and need to be "configured".
+Some rules such as the `quotes` rule are factory rules and need to be "configured".
 
 ```js
 import {
@@ -171,17 +171,16 @@ import {
 // ...
 
 export default {
-  quoteToUnderscore,
   ellipsis,
   quotes: quotesFactory({ openingQuote: '«', closingQuote: '»' })
 };
 ```
 
+For the complete list of common rules, head on to the [Readme page of the common rule package](https://github.com/sapegin/richtypo.js/packages/richtypo-rules-common).
+
 #### Testing
 
 Don't forget to test your rules. Have a look at the French and English rules to see how tests are built.
-
-For a complete list of rules, head on to the [Readme page of the common rule package](https://github.com/sapegin/richtypo.js/packages/richtypo-rules-common).
 
 Have a look at the [French rules package](https://github.com/sapegin/richtypo.js/packages/richtypo-rules-fr) to have a feeling of how it works.
 
