@@ -1,7 +1,7 @@
 {
   "name": "richtypo-rules-common",
   "version": "1.0.0",
-  "description": "French Typography Rules for richtypo.js",
+  "description": "Common Typography Rules for Richtypo",
   "main": "common.js",
   "author": "David Bismut",
   "license": "MIT",
