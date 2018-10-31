@@ -1,39 +1,39 @@
 {
-	"name": "richtypo",
-	"version": "4.0.0",
-	"description": "HTML typography enhancer with extensible rules",
-	"homepage": "https://github.com/sapegin/richtypo.js",
-	"author": {
-		"name": "Artem Sapegin",
-		"url": "http://sapegin.me/"
-	},
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/sapegin/richtypo.js.git"
-	},
-	"bugs": {
-		"url": "https://github.com/sapegin/richtypo.js/issues"
-	},
-	"license": "MIT",
-	"main": "richtypo.js",
-	"keywords": [
-		"typography",
-		"typo",
-		"html",
-		"quotes",
-		"prepositions",
-		"abbr",
-		"abbreviations",
-		"nobr",
-		"nbsp",
-		"punctuation",
-		"em-dash",
-		"ampersands",
-		"space"
-	],
-	"scripts": {
-		"build": "babel src --out-dir . --ignore **/*.test.js",
-		"build:watch": "babel -w src --out-dir . --ignore **/*.test.js",
-		"prepare": "npm run build"
-	}
+  "name": "richtypo",
+  "version": "4.0.0",
+  "description": "HTML typography enhancer with extensible rules",
+  "homepage": "https://github.com/sapegin/richtypo.js",
+  "author": {
+    "name": "Artem Sapegin",
+    "url": "http://sapegin.me/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sapegin/richtypo.js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sapegin/richtypo.js/issues"
+  },
+  "license": "MIT",
+  "main": "richtypo.js",
+  "keywords": [
+    "typography",
+    "typo",
+    "html",
+    "quotes",
+    "prepositions",
+    "abbr",
+    "abbreviations",
+    "nobr",
+    "nbsp",
+    "punctuation",
+    "em-dash",
+    "ampersands",
+    "space"
+  ],
+  "scripts": {
+    "build": "babel src --out-dir . --ignore **/*.test.js",
+    "watch": "babel -w src --out-dir . --ignore **/*.test.js",
+    "prepare": "npm run build"
+  }
 }
