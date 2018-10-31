@@ -21,7 +21,7 @@ Definitions can be imported as in `import { definitions } from 'richtypo-common-
 | **`semicolon`**         | a semicolon (making sure it doesn't match semicolon in special html characters such as ``) | `(?<!&\\S*);`                                                         |
 | **`punctuation`**       | punctuation symbols                                                                                                                                                | `(?:${semicolon}|[\\.,!?:])` |
 | **`dash`**              | hyphen or dash                                                                                                                                                     | `[-—]`                       |
-| **`openingQuotes`**     | ny opening quote                                                                                                                                                   | `[“«]`                       |
+| **`openingQuotes`**     | any opening quote                                                                                                                                                  | `[“«]`                       |
 | **`shortWord`**         | a word of one or two letters                                                                                                                                       | `${letters}{1,2}`            |
 | **`notInTag`**          | negative lookbehind to make sure we're not running rules inside a HTML tag. It's usually added to the beginning of `RegExp` in most rules.                         | `(?<!<[>]*)`                 |
 
@@ -31,17 +31,17 @@ A rule from `richtypo-rules-common` can be imported as in `import { ruleName } f
 
 _For better readability, the non-breaking space symbol `&nbsp;` is replaced with two underscores `__`_
 
-| Rule              | Description                                                                                 |               Input | Output                                |
-| ----------------- | ------------------------------------------------------------------------------------------- | ------------------: | ------------------------------------- |
-| **`numberUnits`** | inserts non breaking space between numbers and the following word                           |            `100 km` | `100__km`                             |
-| **`temperature`** | fixes space between numbers and temperature symbol                                          |       `34 ° or 34°` | `34__°`                               |
-| shortWordBreak    | adds a non breaking space after short words                                                 | `We go to the mall` | `We__go__to__the mall`                |
-| **`orphans`**     | adds a non breaking space to avoid orphans                                                  | `We go to the mall` | `We go to the__mall`                  |
-| **`spaces`**      | composed rule that executes `numberUnits`, `temperature`, `shortWordBreak` and `orphans`    |                     |                                       |
-| **`abbr`**        | wraps short uppercase words in `<abbr>` tags                                                |               `ONU` | `ONU`                                 |
-| **`emdash`**      | replaces the hyphen character into a dash and adds non breaking spaces when it makes sense. |           `- Hello` | `—__Hello`                            |
-| **`ellipsis`**    | replaces three consecutive dots into ellipsis                                               |             `oh...` | `oh…`                                 |
-| **`amp`**         | decorative rule that wraps ampersand `&` in `<span class="amp">` tags.                      |        `Cie & Sons` | `Cie <span class="amp">&</span> Sons` |
+| Rule                 | Description                                                                                 | Input               | Output                                |
+| -------------------- | ------------------------------------------------------------------------------------------- | ------------------- | ------------------------------------- |
+| **`numberUnits`**    | inserts non breaking space between numbers and the following word                           | `100 km`            | `100__km`                             |
+| **`temperature`**    | fixes space between numbers and temperature symbol                                          | `34 ° or 34°`       | `34__°`                               |
+| **`shortWordBreak`** | adds a non breaking space after short words                                                 | `We go to the mall` | `We__go__to__the mall`                |
+| **`orphans`**        | adds a non breaking space to avoid orphans                                                  | `We go to the mall` | `We go to the__mall`                  |
+| **`spaces`**         | composed rule that executes `numberUnits`, `temperature`, `shortWordBreak` and `orphans`    |                     |                                       |
+| **`abbr`**           | wraps short uppercase words in `<abbr>` tags                                                | `ONU`               | `ONU`                                 |
+| **`emdash`**         | replaces the hyphen character into a dash and adds non breaking spaces when it makes sense. | `- Hello`           | `—__Hello`                            |
+| **`ellipsis`**       | replaces three consecutive dots into ellipsis                                               | `oh...`             | `oh…`                                 |
+| **`amp`**            | decorative rule that wraps ampersand `&` in `<span class="amp">` tags.                      | `Cie & Sons`        | `Cie <span class="amp">&</span> Sons` |
 
 ### Factory rules
 
