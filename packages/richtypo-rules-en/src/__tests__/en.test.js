@@ -23,8 +23,11 @@ describe('non breaking space', () => {
 			`Still 100__km__don't you__think?`
 		);
 		compare(
-			rt(spaces, `It's freezing, must be -30 °C? Or -25°C maybe or maybe not?`),
-			`It's freezing, must be__-30__°C? Or__-25__°C maybe or__maybe__not?`
+			rt(
+				spaces,
+				`It's freezing, must be <b>-30</b> °C? Or -25°C maybe or maybe not?`
+			),
+			`It's freezing, must be__<b>-30</b>__°C? Or__-25__°C maybe or__maybe__not?`
 		);
 	});
 });
@@ -91,7 +94,7 @@ describe('numbers', () => {
 				numbers,
 				`There are <b>6234689821</b> people, and their average revenue is 1432.331123 yens`
 			),
-			`There are <b>6,234,689,821</b> people, and their average revenue is 1,432.331123 yens`
+			`There are <b>6,234,689,821</b>__people, and their average revenue is 1,432.331123__yens`
 		);
 	});
 });

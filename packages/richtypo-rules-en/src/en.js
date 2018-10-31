@@ -4,6 +4,7 @@ import {
 	quotesFactory,
 	numberOrdinalsFactory,
 	numberSeparatorsFactory,
+	numberUnits,
 	amp,
 	emdash,
 	ellipsis,
@@ -11,7 +12,7 @@ import {
 
 const thousandsSeparator = ',';
 const decimalsSeparator = '[.]';
-const ordinals = '(?:st|nd|rd|th)';
+const ordinals = '(st|nd|rd|th)';
 const openingQuote = '“';
 const closingQuote = '”';
 
@@ -22,7 +23,7 @@ const numberSeparators = numberSeparatorsFactory({
 	decimalsSeparator,
 });
 
-const numbers = [numberOrdinals, numberSeparators];
+const numbers = [numberOrdinals, numberSeparators, numberUnits];
 
 export default {
 	spaces,

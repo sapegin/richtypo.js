@@ -64,7 +64,7 @@ describe('numbers', () => {
 				numbers,
 				`Il y a 6234689821 habitants, et leur revenu moyen est 1432,331123 yens`
 			),
-			`Il y a 6__234__689__821 habitants, et leur revenu moyen est 1__432,331123 yens`
+			`Il y a 6__234__689__821__habitants, et leur revenu moyen est 1__432,331123__yens`
 		);
 	});
 });
