@@ -4,7 +4,7 @@
 
 Richtypo is a framework for adding rules to plain or HTML text. You can define your own set of rules or import one of the [rules packages](##rule-packages).
 
-Richtypo was made with typographic rules in mind (eg adding a non breaking space to avoid orphans), but rules are actually just functions that can transform text in any desired way.
+Richtypo was made with typographic rules in mind to render HTML text following the same guidelines as a book being printed (eg adding a non breaking space to avoid orphans), but rules are actually just functions that can transform text in any desired way.
 
 ## Features
 
@@ -33,7 +33,7 @@ Will produce something like that:
 There are 1,000 “ways” to&nbsp;extend&nbsp;Richtypo
 ```
 
-**Note: Richtypo actually renders `&nbsp;` as the Unicode character for non-breaking-space: `\xA0`.**
+**Note: `&nbsp;` is actually rendered by Richtypo as the Unicode character for non-breaking-space `\xA0` which plays well with any modern browser.**
 
 Also note that Richtypo works better if the input text is cleared from special characters. You can use the [he package](https://github.com/mathiasbynens/he) and its [decode function](https://github.com/mathiasbynens/he#hedecodehtml-options) as in `he.decode(text)` for that purpose.
 
@@ -176,6 +176,10 @@ export default {
   quotes: quotesFactory({ openingQuote: '«', closingQuote: '»' })
 };
 ```
+
+#### Testing
+
+Don't forget to test your rules. Have a look at the French and English rules to see how tests are built.
 
 For a complete list of rules, head on to the [Readme page of the common rule package](https://github.com/sapegin/richtypo.js/packages/richtypo-rules-common).
 
