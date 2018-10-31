@@ -15,10 +15,7 @@
 		"url": "https://github.com/sapegin/richtypo.js/issues"
 	},
 	"license": "MIT",
-	"main": "build/richtypo.js",
-	"files": [
-		"build"
-	],
+	"main": "richtypo.js",
 	"keywords": [
 		"typography",
 		"typo",
@@ -33,5 +30,10 @@
 		"em-dash",
 		"ampersands",
 		"space"
-	]
+	],
+	"scripts": {
+		"build": "babel src --out-dir . --ignore **/*.test.js",
+		"build:watch": "babel -w src --out-dir . --ignore **/*.test.js",
+		"prepare": "npm run build"
+	}
 }

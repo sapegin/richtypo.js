@@ -1,4 +1,3 @@
-build/
 __tests__/
 *.jsx
 node_modules/

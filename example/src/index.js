@@ -9,9 +9,9 @@ import {
 	helpers,
 } from 'fledermaus';
 
-import richtypo from '../../packages/richtypo/src/richtypo';
-import enRules from '../../packages/en/src/en';
-import frRules from '../../packages/fr/src/fr';
+import richtypo from 'richtypo';
+import enRules from 'richtypo-rules-en';
+import frRules from 'richtypo-rules-fr';
 
 start('------ Building the page...');
 

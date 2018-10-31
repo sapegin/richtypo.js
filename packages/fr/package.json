@@ -2,18 +2,15 @@
 	"name": "richtypo-rules-fr",
 	"version": "1.0.0",
 	"description": "French Typography Rules for richtypo.js",
-	"main": "build/fr.js",
-	"files": [
-		"build"
-	],
+	"main": "fr.js",
 	"author": "David Bismut",
 	"license": "MIT",
-	"peerDependencies": {
+	"dependencies": {
 		"richtypo": "^4.0.0"
 	},
 	"scripts": {
-		"build": "babel src --out-dir build/ --ignore **/*.test.js",
-		"watch": "babel -w src --out-dir build/ --ignore **/*.test.js",
+		"build": "babel src --out-dir . --ignore **/*.test.js",
+		"watch": "babel -w src --out-dir . --ignore **/*.test.js",
 		"prepare": "npm run build"
 	}
 }
