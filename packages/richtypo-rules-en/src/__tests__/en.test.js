@@ -1,7 +1,14 @@
 import rt from 'richtypo';
-import rules from '../en';
 
-const { spaces, quotes, abbr, numbers, amp, emdash, ellipsis, all } = rules;
+import all, {
+	spaces,
+	quotes,
+	abbr,
+	numbers,
+	amp,
+	emdash,
+	ellipsis,
+} from '../en';
 
 function compare(actual, expected) {
 	expect(

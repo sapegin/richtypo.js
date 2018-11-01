@@ -24,7 +24,7 @@ const text = 'There are 1000 "rules" to enrich your text with RichTypo.';
 
 // the all rule is defined in richtypo-rules-en
 // and executes all the rules from the package.
-richtypo(rules.all, text));
+richtypo(rules, text));
 ```
 
 Will produce something like that:
@@ -45,11 +45,11 @@ Richtypo can also be curried and used as below:
 import richtypo from 'richtypo';
 import rules from 'richtypo-rules-en';
 
-const allRules = richtypo(rules.all);
+const rt = richtypo(rules);
 const text =
   'There are 1000 "rules" to enrich your text with RichTypo.';
 
-allRules(text); // will produce the same output as above
+rt(text); // will produce the same output as above
 ```
 
 #### Composition
@@ -58,13 +58,13 @@ You can also run several rules at once:
 
 ```javascript
 import richtypo from 'richtypo';
-import rules from 'richtypo-rules-en';
+import { spaces, quotes } from 'richtypo-rules-en';
 
 const text =
   'There are 1000 "rules" to enrich your text with RichTypo.';
 
 // this will only run spaces and quotes rules
-richtypo([rules.spaces, rules.quotes], text);
+richtypo([spaces, quotes], text);
 ```
 
 Have a look at [the example page](http://sapegin.github.io/richtypo.js/) and [its source](https://github.com/sapegin/richtypo.js/tree/master/packages/example/src).
@@ -94,13 +94,8 @@ Creating your own rules for Richtypo is simple: rules are attributes of a plain 
 const ruleOne = text => doSomething(text);
 const ruleTwo = text => doSomethingElse(text);
 
-const rules = {
-  ruleOne,
-  ruleTwo
-};
-
-richtypo(rules.ruleOne, 'sample text');
-richtypo(rules.ruleTwo, 'sample text');
+richtypo(ruleOne, 'sample text');
+richtypo(ruleTwo, 'sample text');
 ```
 
 #### Rule composition
@@ -111,17 +106,13 @@ You can also compose rules together.
 const ruleOne = text => doSomething(text);
 const ruleTwo = text => doSomethingElse(text);
 
-const rules = {
-  ruleOne,
-  ruleTwo,
-  all: [ruleOne, ruleTwo]
-};
+const all = [ruleOne, ruleTwo];
 
 // will execute ruleOne and ruleTwo
-richtypo(rules.all, 'sample text');
+richtypo(all, 'sample text');
 ```
 
-**We strongly encourage you to create a `all` rule that will execute all relevant rules. `all` should just be a composition of your previously defined rules.**
+**We strongly encourage you to create a `all` rule that will execute all relevant rules. `all` should just be a composition of your previously defined rules and exported as default.**
 
 ### The Common Rule package
 

@@ -1,7 +1,5 @@
 import rt from 'richtypo';
-import rules from '../fr';
-
-const { quotes, punctuation, numbers, all } = rules;
+import all, { quotes, punctuation, numbers } from '../fr';
 
 function compare(actual, expected) {
 	expect(

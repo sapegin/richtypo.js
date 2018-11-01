@@ -29,8 +29,8 @@ const highlight = text =>
 		.replace(/(—)/gm, '<span class="rule emdash" title="dash">$1</span>');
 
 const rt = {
-	uk: richtypo([enRules.all, highlight]),
-	fr: richtypo([frRules.all, highlight]),
+	uk: richtypo([enRules, highlight]),
+	fr: richtypo([frRules, highlight]),
 };
 
 const config = { base: { lang: 'en' } };

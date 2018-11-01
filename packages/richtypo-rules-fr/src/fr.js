@@ -26,8 +26,6 @@ const numberSeparators = numberSeparatorsFactory({
 	decimalsSeparator,
 });
 
-const numbers = [numberOrdinals, numberSeparators, numberUnits];
-
 const punctuation = text =>
 	text
 		.replace(
@@ -39,14 +37,19 @@ const punctuation = text =>
 			`$1${hairspace}`
 		);
 
-export default {
-	spaces,
+const numbers = [numberOrdinals, numberSeparators, numberUnits];
+
+const all = [spaces, quotes, abbr, numbers, emdash, ellipsis, punctuation];
+
+export {
 	quotes,
-	abbr,
-	punctuation,
 	numbers,
-	emdash,
+	spaces,
+	abbr,
 	amp,
+	emdash,
 	ellipsis,
-	all: [spaces, quotes, abbr, numbers, emdash, ellipsis, punctuation],
+	punctuation,
+	all,
 };
+export default all;

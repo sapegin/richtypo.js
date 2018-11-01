@@ -1,13 +1,13 @@
 import {
 	spaces,
 	abbr,
-	quotesFactory,
-	numberOrdinalsFactory,
-	numberSeparatorsFactory,
-	numberUnits,
 	amp,
 	emdash,
 	ellipsis,
+	numberUnits,
+	quotesFactory,
+	numberOrdinalsFactory,
+	numberSeparatorsFactory,
 } from 'richtypo-rules-common';
 
 const thousandsSeparator = ',';
@@ -22,16 +22,8 @@ const numberSeparators = numberSeparatorsFactory({
 	thousandsSeparator,
 	decimalsSeparator,
 });
-
 const numbers = [numberOrdinals, numberSeparators, numberUnits];
+const all = [spaces, quotes, abbr, numbers, emdash, ellipsis];
 
-export default {
-	spaces,
-	quotes,
-	abbr,
-	numbers,
-	emdash,
-	amp,
-	ellipsis,
-	all: [spaces, quotes, abbr, numbers, emdash, ellipsis],
-};
+export { quotes, numbers, spaces, abbr, amp, emdash, ellipsis, all };
+export default all;
