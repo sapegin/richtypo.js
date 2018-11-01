@@ -20,7 +20,7 @@ Richtypo was made with typographic rules in mind to render HTML text following t
 import richtypo from 'richtypo';
 import rules from 'richtypo-rules-en';
 
-const text = 'There are 1000 "ways" to extend Richtypo.';
+const text = 'There are 1000 "rules" to enrich your text with RichTypo.';
 
 // the all rule is defined in richtypo-rules-en
 // and executes all the rules from the package.
@@ -30,7 +30,7 @@ richtypo(rules.all, text));
 Will produce something like that:
 
 ```html
-There are 1,000 “ways” to&nbsp;extend&nbsp;Richtypo
+There are 1,000 “rules” to&nbsp;enrich your text with&nbsp;RichTypo.
 ```
 
 **Note: `&nbsp;` is actually rendered by Richtypo as the Unicode character for non-breaking-space `\xA0` which plays well with any modern browser.**
@@ -46,7 +46,8 @@ import richtypo from 'richtypo';
 import rules from 'richtypo-rules-en';
 
 const allRules = richtypo(rules.all);
-const text = 'There are 1000 ways to extend Richtypo.';
+const text =
+  'There are 1000 "rules" to enrich your text with RichTypo.';
 
 allRules(text); // will produce the same output as above
 ```
@@ -59,7 +60,8 @@ You can also run several rules at once:
 import richtypo from 'richtypo';
 import rules from 'richtypo-rules-en';
 
-const text = 'There are 1000 ways to extend Richtypo.';
+const text =
+  'There are 1000 "rules" to enrich your text with RichTypo.';
 
 // this will only run spaces and quotes rules
 richtypo([rules.spaces, rules.quotes], text);
