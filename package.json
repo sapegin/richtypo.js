@@ -10,9 +10,7 @@
     "babel-plugin-transform-react-jsx": "^6.24.1",
     "babel-watch": "https://github.com/monathur/babel-watch.git",
     "eslint": "^5.7.0",
-    "eslint-config-prettier": "^3.1.0",
     "eslint-config-tamia": "^6.0.2",
-    "eslint-plugin-import": "^2.14.0",
     "gh-pages": "^2.0.1",
     "jest": "^23.6.0",
     "lerna": "^3.4.3",
@@ -20,7 +18,7 @@
     "serve": "^10.0.2"
   },
   "engines": {
-    "node": ">=7"
+    "node": ">=8"
   },
   "jest": {
     "coveragePathIgnorePatterns": [
