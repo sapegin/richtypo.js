@@ -139,8 +139,8 @@ describe('all rules', () => {
 			`Presently she began again. “I__wonder if__I__shall fall right through the earth! How funny it’ll__seem to__come out among the people that walk with their heads downward! The Antipathies, I__think__---” (she was rather glad there was no__one listening, this time, as__it__didn’t__sound at__all the right word) “---__but I__shall have to__ask them what the name of__the country is, you know. Please, Ma’am, is__this New Zealand or__Australia?” (and she tried to__curtsey as__she spoke__--- fancy curtseying as__you’re__falling through the air! Do__you think you could manage it?) “And what an__ignorant little girl she’ll__think me__for asking! No, it’ll__never do__to__ask: perhaps I__shall see it__written up__somewhere.”`
 		);
 		compare(
-			allRules(`There are 1000 "ways" to extend Richtypo`),
-			`There are 1,000 “ways” to__extend__Richtypo`
+			allRules(`There are 1000 "rules" to enrich your text with RichTypo.`),
+			`There are 1,000 “rules” to__enrich your text with__RichTypo.`
 		);
 	});
 });
