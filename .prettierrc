@@ -4,7 +4,7 @@
 	"trailingComma": "es5",
 	"overrides": [
 		{
-			"files": ["*.md", "*.json"],
+			"files": "*.md",
 			"options": {
 				"printWidth": 70,
 				"useTabs": false,

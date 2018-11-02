@@ -1,7 +1,12 @@
 coverage/
 node_modules/
+
+# prevents commit of build files at the root of packages
 packages/*/*.js
+
+# allows commit of babel.config.js in packages
 !packages/*/*.config.js
+
 .DS_Store
 Thumbs.db
 .idea/
