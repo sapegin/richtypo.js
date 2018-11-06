@@ -3,7 +3,15 @@
   "version": "1.0.0",
   "description": "English Typography Rules for richtypo.js",
   "main": "lib/en.js",
-  "author": "David Bismut",
+  "author": {
+    "name": "Artem Sapegin",
+    "url": "http://sapegin.me/"
+  },
+  "contributors": [
+    {
+      "name": "David Bismut"
+    }
+  ],
   "license": "MIT",
   "dependencies": {
     "richtypo-rules-common": "^1.0.0"
