@@ -2,12 +2,12 @@
   "name": "richtypo-rules-common",
   "version": "1.0.0",
   "description": "Common Typography Rules for Richtypo",
-  "main": "common.js",
+  "main": "lib/common.js",
   "author": "David Bismut",
   "license": "MIT",
   "scripts": {
-    "build": "babel src --out-dir . --ignore **/*.test.js",
-    "watch": "babel -w src --out-dir . --ignore **/*.test.js",
+    "build": "babel src --out-dir lib --ignore **/*.test.js",
+    "watch": "babel -w src --out-dir lib --ignore **/*.test.js",
     "prepare": "npm run build"
   }
 }

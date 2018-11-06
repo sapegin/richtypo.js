@@ -1,10 +1,5 @@
-coverage/*
+coverage/
 __tests__/
 *.jsx
-
-# prevents linting of build files at the root of packages
-packages/*/*.js
-
-# allows linting of babel.config.js in packages
-!packages/*/*.config.js
+lib/
 node_modules/
