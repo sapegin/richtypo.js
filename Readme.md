@@ -1,45 +1,70 @@
-# Richtypo: HTML typography enhancer for Node
+# Richtypo: HTML typography enhancer for Node.js
 
 [![npm](https://img.shields.io/npm/v/richtypo.svg)](https://www.npmjs.com/package/richtypo) [![Build Status](https://travis-ci.org/sapegin/richtypo.js.svg)](https://travis-ci.org/sapegin/richtypo.js) [![Codecov](https://codecov.io/gh/sapegin/richtypo.js/branch/master/graph/badge.svg)](https://codecov.io/gh/sapegin/richtypo.js)
 
-Richtypo is a framework for adding rules to plain or HTML text. You can define your own set of rules or import one of the [rules packages](##rule-packages).
+Richtypo is a tool to prepare your texts to publication on web: apply typography rules like quotes (`"` → `“”`), dashes (`-` → `—`) and non-breaking spaces (to make text easier to read).
 
-Richtypo was made with typographic rules in mind to render HTML text following the same guidelines as a book being printed (eg adding a non breaking space to avoid orphans), but rules are actually just functions that can transform text in any desired way.
+Richtypo comes with [typography rules](##rule-packages) for English, French and Russian, but we encourage you to customize them and make your own rules — they are just JavaScript functions.
 
 ## Features
 
-- Works with plain or HTML text
+- Works with plain text, Markdown or HTML
 - Takes care of your HTML tags
-- Extensible through third-party rule packages
+- English, French and Russian rules
+- Run only rules you need
+- Add your own rules
 - Works server-side
-- No dependencies
+- No big dependencies
+
+## Installation
+
+```bash
+npm install richtypo
+```
+
+You will probably need to install a [rule package](#rule-packages) for your language, like this:
+
+```bash
+npm install richtypo-rules-en
+```
+
+But it’s not required, see how to [create your own rules](#custom-rules).
+
+### Rule packages
+
+- [richtypo-rules-en](https://github.com/sapegin/richtypo.js/packages/richtypo-rules-en): English
+- [richtypo-rules-fr](https://github.com/sapegin/richtypo.js/packages/richtypo-rules-fr): French
+- [richtypo-rules-ru](https://github.com/sapegin/richtypo.js/packages/richtypo-rules-ru): Russian
 
 ## Usage
+
+### Basic usage
 
 ```javascript
 import richtypo from 'richtypo';
 import rules from 'richtypo-rules-en';
 
-const text = 'There are 1000 "rules" to enrich your text with RichTypo.';
+const text =
+  'There are 1000 "rules" to enrich your text with Richtypo.';
 
-// the all rule is defined in richtypo-rules-en
-// and executes all the rules from the package.
-richtypo(rules, text));
+richtypo(rules, text);
 ```
 
 Will produce something like that:
 
 ```html
-There are 1,000 “rules” to&nbsp;enrich your text with&nbsp;RichTypo.
+There are 1,000 “rules” to&nbsp;enrich your text with&nbsp;Richtypo.
 ```
 
-**Note: `&nbsp;` is actually rendered by Richtypo as the Unicode character for non-breaking-space `\xA0` which plays well with any modern browser.**
+> **Note:** The default export of `richtypo-rules-en` contains recommended rules but you can import each rule separately, see below.
 
-Also note that Richtypo works better if the input text is cleared from special characters. You can use the [he package](https://github.com/mathiasbynens/he) and its [decode function](https://github.com/mathiasbynens/he#hedecodehtml-options) as in `he.decode(text)` for that purpose.
+> **Note:** `&nbsp;` is actually rendered by Richtypo as the Unicode character for non-breaking-space `\xA0` which plays well with any modern browser.
 
-#### Currying
+> **Note:** Richtypo works better if the input text is cleared from special characters. You can use the [he package](https://github.com/mathiasbynens/he) and its [decode function](https://github.com/mathiasbynens/he#hedecodehtml-options) as in `he.decode(text)` for that purpose.
 
-Richtypo can also be curried and used as below:
+### Currying
+
+Richtypo can be curried and used as below:
 
 ```javascript
 import richtypo from 'richtypo';
@@ -47,14 +72,15 @@ import rules from 'richtypo-rules-en';
 
 const rt = richtypo(rules);
 const text =
-  'There are 1000 "rules" to enrich your text with RichTypo.';
+  'There are 1000 "rules" to enrich your text with Richtypo.';
 
-rt(text); // will produce the same output as above
+// Will produce the same output as in the previous section
+rt(text);
 ```
 
-#### Composition
+### Composition
 
-You can also run several rules at once:
+You can run only rules you need by importing them separately:
 
 ```javascript
 import richtypo from 'richtypo';
@@ -67,82 +93,51 @@ const text =
 richtypo([spaces, quotes], text);
 ```
 
-Have a look at [the example page](http://sapegin.github.io/richtypo.js/) and [its source](https://github.com/sapegin/richtypo.js/tree/master/packages/example/src).
+> **Note:** Have a look at [the example page](http://sapegin.github.io/richtypo.js/) and [its source](https://github.com/sapegin/richtypo.js/tree/master/packages/example/src).
 
-### Installation
+### Custom rules
 
-```bash
-npm install --save richtypo
-```
-
-Note that you will probably also need to install a [rule package](#rule-packages) that can be consumed by Richtypo (unless you want to write your rules locally which is perfectly fine).
-
-## Rule packages
-
-At the moment there are two packages compatible with Richtypo:
-
-- [richtypo-rules-en](https://github.com/sapegin/richtypo.js/packages/richtypo-rules-en): English rules
-- [richtypo-rules-fr](https://github.com/sapegin/richtypo.js/packages/richtypo-rules-fr): French rules
-
----
-
-## Creating your own rules
-
-Creating your own rules for Richtypo is simple: rules are attributes of a plain Javascript object structured like so:
+Rules are JavaScript functions that take a string and return a transformed string. For example, a rule that replaces three dots (`...`) with an ellipsis (`…`) can look like this:
 
 ```javascript
-const ruleOne = text => doSomething(text);
-const ruleTwo = text => doSomethingElse(text);
-
-richtypo(ruleOne, 'sample text');
-richtypo(ruleTwo, 'sample text');
+const ellipsis = text => text.replace(new RegExp(/\.{2,}/gim), '…');
 ```
 
-#### Rule composition
-
-You can also compose rules together.
+And then you use is as any other rule:
 
 ```javascript
-const ruleOne = text => doSomething(text);
-const ruleTwo = text => doSomethingElse(text);
-
-const all = [ruleOne, ruleTwo];
-
-// will execute ruleOne and ruleTwo
-richtypo(all, 'sample text');
+import richtypo from 'richtypo';
+richtypo(ellipsis, 'Typography everywhere...');
+// -> Typography everywhere…
 ```
 
-**We strongly encourage you to create a `all` rule that will execute all relevant rules. `all` should just be a composition of your previously defined rules and exported as default.**
+#### Common rules package
 
-### The Common Rule package
-
-A convenience package called [richtypo-rules-common](https://github.com/sapegin/richtypo.js/packages/richtypo-rules-common) including common typographic rules can be easily extended.
+[richtypo-rules-common](https://github.com/sapegin/richtypo.js/packages/richtypo-rules-common) package contains common typography rules that you can use or extend in your own rules.
 
 #### Definitions
 
-The common rules package exports `definitions` and a list of rules. `definitions` are convenience variables that you can use in your own rules for more readability. For example, `definitions.quotes` is set as `'["“”«»‘’]'`, which allows you to write:
+The common rules package exports `definitions`, convenience constants that you can use in your own rules. For example, `definitions.quotes` is set as `'["“”«»‘’]'`, which allows you to write:
 
 ```js
 import { definitions } from 'richtypo-rules-common';
 
-const { quotes } = definitions;
-
 const quoteToUnderscore = text =>
-  text.replace(new RegExp(`${quotes}`, 'gm'), '_');
+  text.replace(new RegExp(`${definitions.quotes}`, 'gm'), '_');
 
 export default {
   quoteToUnderscore
 };
 ```
 
-#### Common rules
+##### Common rules
 
 The common rules package also exports rules that your package can re-use as is.
 
-For example, the `ellipsis` rule replaces `...` with `…` symbol. Rather than you having to rewrite that rule, you can just import it and re-export it as part of your rules.
+For example, the `ellipsis` rule replaces `...` with `…` symbol. Rather than you having to rewrite that rule, you can reexport it as part of your rules.
 
 ```js
-import { definitions, ellipsis } from 'richtypo-rules-common';
+import { ellipsis } from 'richtypo-rules-common';
 
 // ...
 
@@ -152,14 +147,10 @@ export default {
 };
 ```
 
-Some rules such as the `quotes` rule are factory rules and need to be "configured".
+Some rules such as the `quotes` rule are factory rules and need to be “configured”.
 
 ```js
-import {
-  definitions,
-  quotesFactory,
-  ellipsis
-} from 'richtypo-rules-common';
+import { ellipsis, quotesFactory } from 'richtypo-rules-common';
 
 // ...
 
@@ -169,13 +160,13 @@ export default {
 };
 ```
 
-For the complete list of common rules, head on to the [Readme page of the common rule package](https://github.com/sapegin/richtypo.js/packages/richtypo-rules-common).
+For the complete list of common rules, check out the [Readme page of the common rule package](https://github.com/sapegin/richtypo.js/packages/richtypo-rules-common).
 
 #### Testing
 
-Don't forget to test your rules. Have a look at the French and English rules to see how tests are built.
+Don’t forget to test your rules. Have a look at the [English rules package](https://github.com/sapegin/richtypo.js/packages/richtypo-rules-en) to see how tests are done.
 
-Have a look at the [French rules package](https://github.com/sapegin/richtypo.js/packages/richtypo-rules-fr) to have a feeling of how it works.
+---
 
 ## Change log
 
