@@ -12,7 +12,7 @@ npm install --save richtypo-rules-fr
 
 The rules of this package include the `spaces`, `abbr`, `emdash`, `amp`, `ellipsis` rules that are directly imported from the [`richtypo-rules-common` package](https://github.com/sapegin/richtypo.js/packages/richtypo-rules-common).
 
-_For better readability, the non-breaking space symbol `&nbsp;` is replaced with two underscores `__` and the narrow non-breaking space symbol `&#x202f;` with a single underscore `_`_
+_For better readability, the non-breaking space symbol `&nbsp;` is replaced with two underscores `__` and the narrow non-breaking space symbol `&#x202f;` with a single underscore `_`\_
 
 | Rule              | Description                                                                                        | Input                                            | Output                                                 |
 | ----------------- | -------------------------------------------------------------------------------------------------- | ------------------------------------------------ | ------------------------------------------------------ |
