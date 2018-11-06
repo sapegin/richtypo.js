@@ -18,7 +18,7 @@
     "serve": "^10.0.2"
   },
   "engines": {
-    "node": ">=8"
+    "node": ">=8.10"
   },
   "jest": {
     "coveragePathIgnorePatterns": [
