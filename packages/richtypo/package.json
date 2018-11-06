@@ -40,5 +40,8 @@
     "build": "babel src --out-dir lib --ignore **/*.test.js",
     "watch": "babel -w src --out-dir lib --ignore **/*.test.js",
     "prepare": "npm run build"
+  },
+  "dependencies": {
+    "@arr/flatten": "^1.0.0"
   }
 }
