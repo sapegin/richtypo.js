@@ -7,9 +7,12 @@ after_success:
   - >-
     npx travis-deploy-once "semantic-release --analyze-commits semantic-release-tamia/analyzeCommits --verify-release
     semantic-release-tamia/verifyRelease --generate-notes semantic-release-tamia/generateNotes"
+  - 'bash <(curl -s https://codecov.io/bash)'
 branches:
   except:
     - /^v\d+\.\d+\.\d+$/
 cache:
   directories:
     - node_modules
+script:
+  - 'npm run test:coverage'
