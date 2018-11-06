@@ -1,76 +1,71 @@
 import flatten from '@arr/flatten';
 
-const saveTagsRe = [
+const SAVE_TAGS_REGEXPS = [
 	/<!(--\[[^\]>]+\]|\[[^\]>]+\]--)>/gim,
 	/<!--[\s\S]*?-->/gim,
 	/<pre[^>]*>[\s\S]*?<\/pre>/gim,
+	/<code[^>]*>[\s\S]*?<\/code>/gim,
 	/<style[^>]*>[\s\S]*?<\/style>/gim,
 	/<script[^>]*>[\s\S]*?<\/script>/gim,
-	/<code[^>]*>[\s\S]*?<\/code>/gim,
 	/<[a-z/][^>]*>/gim,
 ];
+const RESTORE_TAGS_REGEXPS = /<(\d+)>/g;
 
-const restoreTagsRe = /<(\d+)>/g;
+const beforeAll = text =>
+	// Remove repeated spaces
+	text.replace(/ {2,}/gm, ' ');
+
+const afterAll = text =>
+	text
+		// Convert hairspace to an HTML entity
+		.replace(/\xAF/gm, '&#x202f;')
+		// Remove double tags, like <abbr><abbr>JS</abbr></abbr>
+		.replace(/<(\w+)>(<\1>[^<]+<\/\1>)<\/\1>/g, '$2');
+
+// Replace HTML tags with <0>, <1>, etc.
+const saveTags = text => {
+	let index = 0;
+	const tags = [];
+
+	const save = tag => {
+		const replacement = `<${index}>`;
+		tags[index] = tag;
+		index++;
+		return replacement;
+	};
+
+	const textWithouTags = SAVE_TAGS_REGEXPS.reduce(
+		(processedText, regex) => processedText.replace(regex, save),
+		text
+	);
+
+	return { text: textWithouTags, tags };
+};
+
+const restoreTags = (text, { tags }) =>
+	text.replace(RESTORE_TAGS_REGEXPS, (_, index) => tags[index]);
+
+const runAllRules = (text, { rules }) =>
+	flatten([rules]).reduce((processedText, rule) => rule(processedText), text);
 
 /**
- * @param {(Object[]|Object)} rules
+ * @param {Function[]|Function} rules
  * @param {string} text
  * @returns {string}
  */
-
 function run(rules, text) {
-	const rulesArray = flatten([rules]);
-
-	let processedText = text;
-
-	const savedTags = [];
-
-	// saving HTML tags
-	let savedTagsNum = 0;
-
-	function save(tag) {
-		savedTags[savedTagsNum] = tag;
-		// rTag is <0>, <1>, <2>
-		const rTag = `<${savedTagsNum}>`;
-		savedTagsNum += 1;
-		return rTag;
-	}
-
-	saveTagsRe.forEach(regex => {
-		processedText = processedText.replace(regex, save);
-	});
-	// end of saving tags
-
-	// Remove repeated spaces
-	processedText = processedText.replace(/ {2,}/gm, ' ');
-
-	// iterating through all rules of rulesArray
-	rulesArray.forEach(rule => {
-		processedText = rule(processedText);
-		// console.log(
-		// 	'rule',
-		// 	rule,
-		// 	processedText.replace(/\xA0/g, '__').replace(/\xAF/g, '_')
-		// );
-	});
-
-	processedText = processedText
-		// transform hairspace in compatible html entity
-		.replace(/\xAF/gm, '&#x202f;')
-		// restoring HTML tags
-		.replace(restoreTagsRe, (_, num) => savedTags[num])
-		// Remove double tags, like <abbr><abbr>JS</abbr></abbr>
-		.replace(/<abbr>(<\1>[^<]+<\/\1>)<\/\1>/g, '$2');
-
-	return processedText;
+	const { text: textWithouTags, tags } = saveTags(text);
+	return [beforeAll, runAllRules, afterAll, restoreTags].reduce(
+		(processedText, fn) => fn(processedText, { rules, tags }),
+		textWithouTags
+	);
 }
 
 /**
- * @param {Object} rules
- * @param {string} test
- * @returns {Function}
+ * @param {Function[]|Function} rules
+ * @param {string} [text]
+ * @returns {Function|text}
  */
-
 const richtypo = (rules, text) => {
 	if (text) {
 		return run(rules, text);
