@@ -1,3 +1,5 @@
+import flatten from '@arr/flatten';
+
 const saveTagsRe = [
 	/<!(--\[[^\]>]+\]|\[[^\]>]+\]--)>/gim,
 	/<!--[\s\S]*?-->/gim,
@@ -10,21 +12,6 @@ const saveTagsRe = [
 
 const restoreTagsRe = /<(\d+)>/g;
 
-// This is a utility function that recursively flattens deeply nested arrays.
-// it can accepts a action function as an argument that is run on plain elements
-// of the array.
-
-// This function is useful in case rules are nested composition of other rules
-// i.e. ['space', [quotes, emdash]]
-
-function flatten(array) {
-	if (!Array.isArray(array)) {
-		return [array];
-	}
-
-	return array.reduce((acc, el) => [...acc, ...flatten(el)], []);
-}
-
 /**
  * @param {(Object[]|Object)} rules
  * @param {string} text
@@ -32,7 +19,8 @@ function flatten(array) {
  */
 
 function run(rules, text) {
-	const rulesArray = flatten(rules);
+	const rulesArray = flatten([rules]);
+
 	let processedText = text;
 
 	const savedTags = [];
