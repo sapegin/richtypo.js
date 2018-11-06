@@ -21,6 +21,9 @@
     "node": ">=8.10"
   },
   "jest": {
+    "moduleNameMapper": {
+      "<rootDir>/packages/(.*)/lib/(.*)$": "<rootDir>/packages/$1/src/$2"
+    },
     "coveragePathIgnorePatterns": [
       "<rootDir>/packages/**/lib/**/*\\.js"
     ]
