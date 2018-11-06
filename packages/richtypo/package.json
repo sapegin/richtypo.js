@@ -7,6 +7,11 @@
     "name": "Artem Sapegin",
     "url": "http://sapegin.me/"
   },
+  "contributors": [
+    {
+      "name": "David Bismut"
+    }
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/sapegin/richtypo.js.git"
