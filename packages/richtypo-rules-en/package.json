@@ -2,15 +2,15 @@
   "name": "richtypo-rules-en",
   "version": "1.0.0",
   "description": "English Typography Rules for richtypo.js",
-  "main": "en.js",
+  "main": "lib/en.js",
   "author": "David Bismut",
   "license": "MIT",
   "dependencies": {
     "richtypo-rules-common": "^1.0.0"
   },
   "scripts": {
-    "build": "babel src --out-dir . --ignore **/*.test.js",
-    "watch": "babel -w src --out-dir . --ignore **/*.test.js",
+    "build": "babel src --out-dir lib --ignore **/*.test.js",
+    "watch": "babel -w src --out-dir lib --ignore **/*.test.js",
     "prepare": "npm run build"
   }
 }
