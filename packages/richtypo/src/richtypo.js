@@ -34,12 +34,12 @@ const saveTags = text => {
 		return replacement;
 	};
 
-	const textWithouTags = SAVE_TAGS_REGEXPS.reduce(
+	const textWithoutTags = SAVE_TAGS_REGEXPS.reduce(
 		(processedText, regex) => processedText.replace(regex, save),
 		text
 	);
 
-	return { text: textWithouTags, tags };
+	return { text: textWithoutTags, tags };
 };
 
 const restoreTags = (text, { tags }) =>
@@ -54,10 +54,10 @@ const runAllRules = (text, { rules }) =>
  * @returns {string}
  */
 function run(rules, text) {
-	const { text: textWithouTags, tags } = saveTags(text);
+	const { text: textWithoutTags, tags } = saveTags(text);
 	return [beforeAll, runAllRules, afterAll, restoreTags].reduce(
 		(processedText, fn) => fn(processedText, { rules, tags }),
-		textWithouTags
+		textWithoutTags
 	);
 }
 
