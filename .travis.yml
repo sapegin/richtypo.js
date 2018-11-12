@@ -3,14 +3,7 @@ node_js:
   - 8
   - 10
 after_success:
-  - npm install --no-save semantic-release semantic-release-tamia
-  - >-
-    npx travis-deploy-once "semantic-release --analyze-commits semantic-release-tamia/analyzeCommits --verify-release
-    semantic-release-tamia/verifyRelease --generate-notes semantic-release-tamia/generateNotes"
   - 'bash <(curl -s https://codecov.io/bash)'
-branches:
-  except:
-    - /^v\d+\.\d+\.\d+$/
 cache:
   directories:
     - node_modules
