@@ -1,10 +1,10 @@
 import {
 	numberUnits,
-	temperature,
-	shortWordBreak,
+	degreeSigns,
+	shortWords,
 	orphans,
-	abbr,
-	ellipsis,
+	abbrs,
+	ellipses,
 	quotesFactory,
 	numberSeparatorsFactory,
 	definitions,
@@ -15,9 +15,9 @@ const thousandsSeparator = hairspace;
 const decimalsSeparator = ',';
 const openingQuote = '«';
 const closingQuote = '»';
-const particleWords = 'б|бы|ж|же|ли|ль';
+const particle = 'б|бы|ж|же|ли|ль';
 
-export const emdash = text =>
+export const dashes = text =>
 	text
 		// Replace -- or --- with em dash
 		.replace(new RegExp(`${notInTag}---?`, 'gmi'), `—`)
@@ -33,7 +33,7 @@ export const emdash = text =>
 		.replace(new RegExp(`${notInTag}(\\S)${space}?—`, 'gmi'), `$1${nbsp}—`);
 
 // Spaces inside "и т. д." and "и т. п."
-export const etc = text =>
+export const etcs = text =>
 	text
 		.replace(
 			new RegExp(`и${space}т\\.${space}д\\.`, 'gi'),
@@ -67,11 +67,11 @@ export const hyphenatedWords = text =>
 export const particles = text =>
 	text
 		.replace(
-			new RegExp(`([а-яёА-ЯЁ]) (${particleWords})(?=[?!,.:;"‘“»])`, 'g'),
+			new RegExp(`([а-яёА-ЯЁ]) (${particle})(?=[?!,.:;"‘“»])`, 'g'),
 			`$1${nbsp}$2`
 		)
 		.replace(
-			new RegExp(`([а-яёА-ЯЁ])${space}(${particleWords})${space}`, 'g'),
+			new RegExp(`([а-яёА-ЯЁ])${space}(${particle})${space}`, 'g'),
 			`$1${nbsp}$2 `
 		);
 
@@ -84,14 +84,11 @@ export const numberSeparators = numberSeparatorsFactory({
 
 export {
 	numberUnits,
-	temperature,
-	shortWordBreak,
+	degreeSigns,
+	shortWords,
 	orphans,
-	abbr,
-	ellipsis,
-	quotesFactory,
-	numberSeparatorsFactory,
-	definitions,
+	abbrs,
+	ellipses,
 } from 'richtypo-rules-common';
 
 // TODO: export defs
@@ -102,19 +99,19 @@ export {
 const recommended = [
 	// Common rules
 	numberUnits,
-	temperature,
-	shortWordBreak,
+	shortWords,
 	orphans,
-	abbr,
-	ellipsis,
+	abbrs,
+	ellipses,
 	quotes,
+	degreeSigns,
 	// Custom rules
-	etc,
+	etcs,
 	numberSigns,
 	sectionSigns,
 	initials,
 	hyphenatedWords,
 	particles,
-	emdash,
+	dashes,
 ];
 export default recommended;

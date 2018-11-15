@@ -56,10 +56,11 @@ See more examples in [Richtypo docs](https://github.com/sapegin/richtypo.js).
 
 | Rule                   | Description                                                                                      | Input                | Output                     |
 | ---------------------- | ------------------------------------------------------------------------------------------------ | -------------------- | -------------------------- |
-| **`abbr`¹**            | wrap abbreviations in `<abbr>` tag                                                               | `БКОАНТОЛО`          | `<abbr>БКОАНТОЛО</abbr>`   |
-| **`ellipsis`¹**        | transform three dots (...) to an ellipsis (…)                                                    | `...`                | `…`                        |
-| **`emdash`¹**          | transform a dash between two words to an em dash (—), add a non-breaking space before an em dash | `собака - друг`      | `собака&nbsp;— друг`²      |
-| **`etc`¹**             | add a non-breaking space inside “и т. д.” and “и т. п.”                                          | `и т. д.`            | `и&nbsp;т.&nbsp;д.`²       |
+| **`abbrs`¹**           | wrap abbreviations in `<abbr>` tag                                                               | `БКОАНТОЛО`          | `<abbr>БКОАНТОЛО</abbr>`   |
+| **`dashes`¹**          | transform a dash between two words to an em dash (—), add a non-breaking space before an em dash | `собака - друг`      | `собака&nbsp;— друг`²      |
+| **`degreeSigns`¹**     | add a non-breaking space between a number and a degree sign (°)                                  | `13 °C`              | `13&nbsp;°C`²              |
+| **`ellipses`¹**        | transform three dots (...) to an ellipsis (…)                                                    | `...`                | `…`                        |
+| **`etcs`¹**            | add a non-breaking space inside “и т. д.” and “и т. п.”                                          | `и т. д.`            | `и&nbsp;т.&nbsp;д.`²       |
 | **`hyphenatedWords`¹** | wrap words with a hyphen in `<nobr>` tag                                                         | `из-за`              | `<nobr>из-за</nobr>`       |
 | **`initials`¹**        | wrap initials in `<nobr>` tag                                                                    | `В. И. Ленин`        | `<nobr>В. И. Ленин</nobr>` |
 | **`numberSigns`¹**     | add a non-breaking space between a number sign (№) and a number                                  | `№ 3`                | `№&nbsp;3`²                |
@@ -68,8 +69,7 @@ See more examples in [Richtypo docs](https://github.com/sapegin/richtypo.js).
 | **`particles`¹**       | add a non-breaking space before particles                                                        | `это ж как бы`       | `это&nbsp;ж как&nbsp;бы`²  |
 | **`quotes`¹**          | transform dumb quotes (") to typography quotes («»)                                              | `текст "в кавычках"` | `текст «в кавычках»`       |
 | **`sectionSigns`¹**    | add a non-breaking space between a section sign (§) and a number                                 | `§ 3`                | `§&nbsp;3`²                |
-| **`shortWordBreak`¹**  | add a non-breaking space after short words                                                       | `в печали`           | `в&nbsp;печали`²           |
-| **`temperature`¹**     | add a non-breaking space between a number and a degree sign (°)                                  | `13 °C`              | `13&nbsp;°C`²              |
+| **`shortWords`¹**      | add a non-breaking space after short words                                                       | `в печали`           | `в&nbsp;печали`²           |
 
 _¹ Recommended rules (see code examples above)_
 

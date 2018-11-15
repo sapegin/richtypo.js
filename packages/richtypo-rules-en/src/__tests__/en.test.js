@@ -1,13 +1,17 @@
 import rt from 'richtypo';
 
-import all, {
-	spaces,
+import recommended, {
+	shortWords,
+	orphans,
 	quotes,
-	abbr,
-	numbers,
-	amp,
-	emdash,
-	ellipsis,
+	abbrs,
+	amps,
+	dashes,
+	ellipses,
+	degreeSigns,
+	numberUnits,
+	numberOrdinals,
+	numberSeparators,
 } from '../en';
 
 function compare(actual, expected) {
@@ -15,26 +19,24 @@ function compare(actual, expected) {
 		actual
 			.replace(/\xA0/g, '__')
 			.replace(/&#x202f;/g, '_')
-			.replace(/—/g, '---')
+			.replace(/—/g, '=')
 	).toEqual(expected);
 }
 
-describe('non breaking space', () => {
-	it('should add non breaking space before orphans, short words, degrees and units', () => {
+describe('non-breaking space', () => {
+	it('should add non-breaking space before orphans', () => {
+		compare(rt(orphans, `Still don't you think?`), `Still don't you__think?`);
+	});
+	it('should add non-breaking space after short words', () => {
 		compare(
-			rt(spaces, `This is <b>of</b> the hook`),
-			`This is__<b>of</b>__the__hook`
+			rt(shortWords, `This is <b>of</b> the hook`),
+			`This is__<b>of</b>__the hook`
 		);
+	});
+	it('should add non-breaking space between a number and a degree sign', () => {
 		compare(
-			rt(spaces, `Still 100 km don't you think?`),
-			`Still 100__km__don't you__think?`
-		);
-		compare(
-			rt(
-				spaces,
-				`It's freezing, must be <b>-30</b> °C? Or -25°C maybe or maybe not?`
-			),
-			`It's freezing, must be__<b>-30</b>__°C? Or__-25__°C maybe or__maybe__not?`
+			rt(degreeSigns, `Must be <b>-30</b> °C? Or -25°C maybe`),
+			`Must be <b>-30</b>_°C? Or -25_°C maybe`
 		);
 	});
 });
@@ -42,7 +44,7 @@ describe('non breaking space', () => {
 describe('abbr', () => {
 	it('should wrap abbreviations in <abbr>', () => {
 		compare(
-			rt(abbr, `DOXIE and ONU and DaN`),
+			rt(abbrs, `DOXIE and ONU and DaN`),
 			`<abbr>DOXIE</abbr> and <abbr>ONU</abbr> and DaN`
 		);
 	});
@@ -51,57 +53,60 @@ describe('abbr', () => {
 describe('amp', () => {
 	it('should wrap & in a span', () => {
 		compare(
-			rt(amp, `Dessi & Tsiri`),
+			rt(amps, `Dessi & Tsiri`),
 			`Dessi__<span class="amp">&</span>__Tsiri`
 		);
 	});
 });
 
 describe('em-dash', () => {
-	it(`should add non breaking spaces before em-dash`, () => {
+	it(`should add non-breaking spaces before em-dash`, () => {
 		compare(
-			rt(emdash, `<i>Dachshund</i> - <b>beast</b>.`),
-			`<i>Dachshund</i>__--- <b>beast</b>.`
+			rt(dashes, `<i>Dachshund</i> - <b>beast</b>.`),
+			`<i>Dachshund</i>__= <b>beast</b>.`
 		);
-		compare(rt(emdash, `Naïve — word.`), `Naïve__--- word.`);
-		compare(rt(emdash, `“Richtypo” — awesome!`), `“Richtypo”__--- awesome!`);
-		compare(rt(emdash, `Dachshund—beast.`), `Dachshund__--- beast.`);
+		compare(rt(dashes, `Naïve — word.`), `Naïve__= word.`);
+		compare(rt(dashes, `“Richtypo” — awesome!`), `“Richtypo”__= awesome!`);
+		compare(rt(dashes, `Dachshund—beast.`), `Dachshund__= beast.`);
 	});
 
-	it(`should add non breaking spaces after em-dash when the em-dash is starting a line or sentence.`, () => {
-		compare(rt(emdash, `- Beast!. - Zombie!`), `---__Beast!. ---__Zombie!`);
+	it(`should add non-breaking spaces after em-dash when the em-dash is starting a line or sentence.`, () => {
+		compare(rt(dashes, `- Beast!. - Zombie!`), `=__Beast!. =__Zombie!`);
 		compare(
 			rt(
-				emdash,
+				dashes,
 				`- Beast!
 - Zombie!`
 			),
-			`---__Beast!
----__Zombie!`
+			`=__Beast!
+=__Zombie!`
 		);
 	});
 });
 
 describe('ellipsis', () => {
 	it(`should replace '...' with ellipsis …`, () => {
-		compare(rt(ellipsis, `Yes... Hello.`), `Yes… Hello.`);
+		compare(rt(ellipses, `Yes... Hello.`), `Yes… Hello.`);
 	});
 });
 
 describe('numbers', () => {
+	it(`should add a non-breaking space between a number and its unit`, () => {
+		compare(rt(numberUnits, `1 kg, 2 m`), `1__kg, 2__m`);
+	});
 	it(`should put 1st 2nd 3rd etc in subscript`, () => {
 		compare(
-			rt(numbers, `1st 2nd 3rd 4th 100th`),
+			rt(numberOrdinals, `1st 2nd 3rd 4th 100th`),
 			`1<sup>st</sup> 2<sup>nd</sup> 3<sup>rd</sup> 4<sup>th</sup> 100<sup>th</sup>`
 		);
 	});
 	it(`should add space as number separators`, () => {
 		compare(
 			rt(
-				numbers,
-				`There are <b>6234689821</b> people, and their average revenue is 1432.331123 yens`
+				numberSeparators,
+				`There are <b>6234689821</b> people, revenue is 1432.331123 yens`
 			),
-			`There are <b>6,234,689,821</b>__people, and their average revenue is 1,432.331123__yens`
+			`There are <b>6,234,689,821</b> people, revenue is 1,432.331123 yens`
 		);
 	});
 });
@@ -130,9 +135,9 @@ describe('quotes', () => {
 	});
 });
 
-describe('all rules', () => {
-	const allRules = rt(all);
-	it(`should execute all rules`, () => {
+describe('recommended rules', () => {
+	const allRules = rt(recommended);
+	it(`should run recommended rules`, () => {
 		compare(
 			allRules(
 				`<p>Down, down, down. There was nothing else to do, so Alice soon began talking again. "Dinah’ll miss me very much to-night, I should think!" (Dinah was the cat.) "I hope they’ll remember her saucer of milk at tea-time. Dinah my dear! I wish you were down here with me! There are no mice in the air, I’m afraid, but you might catch a bat, and that’s very like a mouse, you know. But do cats eat bats, I wonder?" And here Alice began to get rather sleepy, and went on saying to herself, in a dreamy sort of way, "Do cats eat bats? Do cats eat bats?" and sometimes, "Do bats eat cats?’ for, you see, as she couldn’t answer either question, it didn’t much matter which way she put it. She felt that she was dozing off, and had just begun to dream that she was walking hand in hand with Dinah, and saying to her very earnestly, "Now, Dinah, tell me the truth: did you ever eat a bat?" when suddenly, thump! thump! down she came upon a heap of sticks and dry leaves, and the fall was over.</p>`
@@ -143,11 +148,11 @@ describe('all rules', () => {
 			allRules(
 				`Presently she began again. "I wonder if I shall fall right through the earth! How funny it’ll seem to come out among the people that walk with their heads downward! The Antipathies, I think -" (she was rather glad there was no one listening, this time, as it didn’t sound at all the right word) "- but I shall have to ask them what the name of the country is, you know. Please, Ma’am, is this New Zealand or Australia?" (and she tried to curtsey as she spoke - fancy curtseying as you’re falling through the air! Do you think you could manage it?) "And what an ignorant little girl she’ll think me for asking! No, it’ll never do to ask: perhaps I shall see it written up somewhere."`
 			),
-			`Presently she began again. “I__wonder if__I__shall fall right through the earth! How funny it’ll__seem to__come out among the people that walk with their heads downward! The Antipathies, I__think__---” (she was rather glad there was no__one listening, this time, as__it__didn’t__sound at__all the right word) “---__but I__shall have to__ask them what the name of__the country is, you know. Please, Ma’am, is__this New Zealand or__Australia?” (and she tried to__curtsey as__she spoke__--- fancy curtseying as__you’re__falling through the air! Do__you think you could manage it?) “And what an__ignorant little girl she’ll__think me__for asking! No, it’ll__never do__to__ask: perhaps I__shall see it__written up__somewhere.”`
+			`Presently she began again. “I__wonder if__I__shall fall right through the earth! How funny it’ll__seem to__come out among the people that walk with their heads downward! The Antipathies, I__think__=” (she was rather glad there was no__one listening, this time, as__it__didn’t__sound at__all the right word) “=__but I__shall have to__ask them what the name of__the country is, you know. Please, Ma’am, is__this New Zealand or__Australia?” (and she tried to__curtsey as__she spoke__= fancy curtseying as__you’re__falling through the air! Do__you think you could manage it?) “And what an__ignorant little girl she’ll__think me__for asking! No, it’ll__never do__to__ask: perhaps I__shall see it__written up__somewhere.”`
 		);
 		compare(
 			allRules(`There are 1000 "rules" to enrich your text with RichTypo.`),
-			`There are 1,000 “rules” to__enrich your text with__RichTypo.`
+			`There are 1000 “rules” to__enrich your text with__RichTypo.`
 		);
 	});
 });
