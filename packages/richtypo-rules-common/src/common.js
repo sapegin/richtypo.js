@@ -4,12 +4,12 @@ const space = `[ \t${nbsp}${hairspace}]`;
 const tag = '(?:<[^<>]*>)';
 const quotes = '["“”«»‘’]';
 const letters = '[a-zà-ž0-9а-яё]';
-const upperletters = '[A-ZÀ-ŽА-ЯЁ]';
-const letterswithquotes = `(?:${letters}|[-“”‘’«»])`;
+const upperLetters = '[A-ZÀ-ŽdА-ЯЁ]';
+const lettersWithQuotes = `(?:${letters}|[-“”‘’«»])`;
 const semicolon = '(?<!&\\S*);';
 const punctuation = `(?:${semicolon}|[\\.,!?:])`;
 const dash = '[-—]';
-const openingQuotes = `[“«]`;
+const openingQuotes = `[“«]`; // TODO: Shouldn't be here
 const shortWord = `${letters}{1,2}`;
 const notInTag = `(?<!<[^>]*)`;
 
@@ -20,8 +20,8 @@ export const definitions = {
 	tag,
 	quotes,
 	letters,
-	upperletters,
-	letterswithquotes,
+	upperLetters,
+	lettersWithQuotes,
 	semicolon,
 	punctuation,
 	dash,
@@ -53,6 +53,8 @@ export const numberUnits = text =>
 		`$1${nbsp}$2`
 	);
 
+// TODO: Use hair space
+// TODO: Rename to degreeSigns
 export const temperature = text =>
 	text.replace(
 		new RegExp(`${notInTag}(\\d${tag}?)${space}?°`, 'gmi'),
@@ -61,13 +63,14 @@ export const temperature = text =>
 
 export const spaces = [numberUnits, temperature, shortWordBreak, orphans];
 
+// TODO: Hair space in English?
 export const emdash = text =>
 	text
 		.replace(new RegExp(`${notInTag}(\\S)${space}?—`, 'gmi'), `$1${nbsp}—`)
 		.replace(new RegExp(`${notInTag}—(\\S)`, 'gmi'), `— $1`)
 		.replace(
 			new RegExp(
-				`${notInTag}(${letterswithquotes}(${tag})?)${space}${dash}`,
+				`${notInTag}(${lettersWithQuotes}(${tag})?)${space}${dash}`,
 				'gmi'
 			),
 			`$1${nbsp}—`
@@ -91,7 +94,7 @@ export const amp = text =>
 
 export const abbr = text =>
 	text.replace(
-		new RegExp(`${notInTag}(\\b${upperletters}{3,5}\\b)`, 'gm'),
+		new RegExp(`${notInTag}(${upperLetters}{3,})`, 'gm'),
 		`<abbr>$1</abbr>`
 	);
 
