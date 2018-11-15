@@ -22,7 +22,7 @@
   },
   "jest": {
     "moduleNameMapper": {
-      "<rootDir>/packages/(.*)/lib/(.*)$": "<rootDir>/packages/$1/src/$2"
+      "richtypo-rules-common": "<rootDir>/packages/richtypo-rules-common/src/common.js"
     },
     "coveragePathIgnorePatterns": [
       "<rootDir>/packages/(.*)/lib/(.*)\\.js"
