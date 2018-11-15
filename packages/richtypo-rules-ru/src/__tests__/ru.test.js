@@ -22,8 +22,8 @@ describe('Russian, recommended rules', () => {
 		compare(rt(recommended, 'Прочитай № 27 журнала'), 'Прочитай №_27_журнала');
 	});
 
-	test('add non-breaking space after degree sign', () => {
-		compare(rt(recommended, '13 °C'), '13_°C');
+	test('add hair space after degree sign', () => {
+		compare(rt(recommended, '13 °C'), '13&#x202f;°C');
 	});
 
 	test('wrap initials with <nobr>', () => {

@@ -1,10 +1,12 @@
 import {
-	spaces,
-	abbr,
-	amp,
-	emdash,
-	ellipsis,
+	shortWords,
+	orphans,
+	abbrs,
+	amps,
+	dashes,
+	ellipses,
 	numberUnits,
+	degreeSigns,
 	quotesFactory,
 	numberOrdinalsFactory,
 	numberSeparatorsFactory,
@@ -12,18 +14,46 @@ import {
 
 const thousandsSeparator = ',';
 const decimalsSeparator = '[.]';
-const ordinals = '(st|nd|rd|th)';
+const ordinal = '(st|nd|rd|th)';
 const openingQuote = '“';
 const closingQuote = '”';
 
-const quotes = quotesFactory({ openingQuote, closingQuote });
-const numberOrdinals = numberOrdinalsFactory({ ordinals });
-const numberSeparators = numberSeparatorsFactory({
+export const quotes = quotesFactory({ openingQuote, closingQuote });
+export const numberOrdinals = numberOrdinalsFactory({ ordinals: ordinal });
+export const numberSeparators = numberSeparatorsFactory({
 	thousandsSeparator,
 	decimalsSeparator,
 });
-const numbers = [numberOrdinals, numberSeparators, numberUnits];
-const all = [spaces, quotes, abbr, numbers, emdash, ellipsis];
 
-export { quotes, numbers, spaces, abbr, amp, emdash, ellipsis, all };
-export default all;
+export {
+	shortWords,
+	orphans,
+	abbrs,
+	amps,
+	dashes,
+	ellipses,
+	numberUnits,
+	degreeSigns,
+} from 'richtypo-rules-common';
+
+// TODO: export defs
+
+// Not in recommended:
+// - numberOrdinals
+// - numberSeparators - breaks years, like "1920"
+
+const recommended = [
+	// Common rules
+	shortWords,
+	orphans,
+	abbrs,
+	amps,
+	dashes,
+	ellipses,
+	numberUnits,
+	degreeSigns,
+	// Custom rules
+	quotes,
+];
+
+export default recommended;

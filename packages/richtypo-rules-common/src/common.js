@@ -2,15 +2,15 @@ const nbsp = '\xA0';
 const hairspace = '\xAF';
 const space = `[ \t${nbsp}${hairspace}]`;
 const tag = '(?:<[^<>]*>)';
-const quotes = '["“”«»‘’]';
-const letters = '[a-zà-ž0-9а-яё]';
-const upperLetters = '[A-ZÀ-ŽdА-ЯЁ]';
-const lettersWithQuotes = `(?:${letters}|[-“”‘’«»])`;
+const quote = '["“”«»‘’]';
+const letter = '[a-zà-ž0-9а-яё]';
+const upperLetter = '[A-ZÀ-ŽdА-ЯЁ]';
+const letterOrQuote = `[-“”‘’«»a-zà-ž0-9а-яё]`;
 const semicolon = '(?<!&\\S*);';
 const punctuation = `(?:${semicolon}|[\\.,!?:])`;
 const dash = '[-—]';
-const openingQuotes = `[“«]`; // TODO: Shouldn't be here
-const shortWord = `${letters}{1,2}`;
+const openingQuote = `[“‘«]`;
+const shortWord = `${letter}{1,2}`;
 const notInTag = `(?<!<[^>]*)`;
 
 export const definitions = {
@@ -18,23 +18,23 @@ export const definitions = {
 	hairspace,
 	space,
 	tag,
-	quotes,
-	letters,
-	upperLetters,
-	lettersWithQuotes,
+	quote,
+	letter,
+	upperLetter,
+	letterOrQuote,
 	semicolon,
 	punctuation,
 	dash,
-	openingQuotes,
+	openingQuote,
 	shortWord,
 	notInTag,
 };
 
 // Non-breaking space after short words
-export const shortWordBreak = text =>
+export const shortWords = text =>
 	text.replace(
 		new RegExp(
-			`${notInTag}(?<=^|${space}|${quotes}|>)(${shortWord}(${tag})?)${space}`,
+			`${notInTag}(?<=^|${space}|${quote}|>)(${shortWord}(${tag})?)${space}`,
 			'gmi'
 		),
 		`$1${nbsp}`
@@ -53,48 +53,45 @@ export const numberUnits = text =>
 		`$1${nbsp}$2`
 	);
 
-// TODO: Use hair space
-// TODO: Rename to degreeSigns
-export const temperature = text =>
+export const degreeSigns = text =>
 	text.replace(
 		new RegExp(`${notInTag}(\\d${tag}?)${space}?°`, 'gmi'),
-		`$1${nbsp}°`
+		`$1${hairspace}°`
 	);
 
-export const spaces = [numberUnits, temperature, shortWordBreak, orphans];
-
 // TODO: Hair space in English?
-export const emdash = text =>
+export const dashes = text =>
 	text
+		// TODO: --- -> —
 		.replace(new RegExp(`${notInTag}(\\S)${space}?—`, 'gmi'), `$1${nbsp}—`)
 		.replace(new RegExp(`${notInTag}—(\\S)`, 'gmi'), `— $1`)
 		.replace(
 			new RegExp(
-				`${notInTag}(${lettersWithQuotes}(${tag})?)${space}${dash}`,
+				`${notInTag}(${letterOrQuote}(${tag})?)${space}${dash}`,
 				'gmi'
 			),
 			`$1${nbsp}—`
 		)
 		.replace(
 			new RegExp(
-				`(${notInTag}^|(?:(${punctuation}|${openingQuotes}|")${space}?))${dash}${space}`,
+				`(${notInTag}^|(?:(${punctuation}|${openingQuote}|")${space}?))${dash}${space}`,
 				'gmi'
 			),
 			`$1—${nbsp}`
 		);
 
-export const ellipsis = text =>
+export const ellipses = text =>
 	text.replace(new RegExp(`${notInTag}\\.{2,}`, 'gmi'), `…`);
 
-export const amp = text =>
+export const amps = text =>
 	text.replace(
 		new RegExp(`${notInTag}${space}(&(?!\\S*;))${space}`, 'gmi'),
 		`${nbsp}<span class="amp">&</span>${nbsp}`
 	);
 
-export const abbr = text =>
+export const abbrs = text =>
 	text.replace(
-		new RegExp(`${notInTag}(${upperLetters}{3,})`, 'gm'),
+		new RegExp(`${notInTag}(${upperLetter}{3,})`, 'gm'),
 		`<abbr>$1</abbr>`
 	);
 
@@ -119,7 +116,7 @@ export const numberSeparatorsFactory = ({
 export const quotesFactory = ({ openingQuote, closingQuote }) => text =>
 	text
 		.replace(
-			new RegExp(`${notInTag}"((${tag})?(${dash}${space})?${letters})`, 'gmi'),
+			new RegExp(`${notInTag}"((${tag})?(${dash}${space})?${letter})`, 'gmi'),
 			`${openingQuote}$1`
 		)
 		.replace(new RegExp(`${notInTag}"`, 'gmi'), `${closingQuote}`);

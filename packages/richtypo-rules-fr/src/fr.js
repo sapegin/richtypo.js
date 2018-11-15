@@ -1,14 +1,16 @@
 import {
+	shortWords,
+	orphans,
 	definitions,
-	spaces,
-	abbr,
+	abbrs,
 	quotesFactory,
 	numberOrdinalsFactory,
 	numberSeparatorsFactory,
 	numberUnits,
-	amp,
-	emdash,
-	ellipsis,
+	degreeSigns,
+	amps,
+	dashes,
+	ellipses,
 } from 'richtypo-rules-common';
 
 const { nbsp, space, hairspace, semicolon, notInTag } = definitions;
@@ -19,14 +21,14 @@ const openingQuote = '«';
 const closingQuote = '»';
 const thousandsSeparator = nbsp;
 
-const quotes = quotesFactory({ openingQuote, closingQuote });
-const numberOrdinals = numberOrdinalsFactory({ ordinals });
-const numberSeparators = numberSeparatorsFactory({
+export const quotes = quotesFactory({ openingQuote, closingQuote });
+export const numberOrdinals = numberOrdinalsFactory({ ordinals });
+export const numberSeparators = numberSeparatorsFactory({
 	thousandsSeparator,
 	decimalsSeparator,
 });
 
-const punctuation = text =>
+export const punctuation = text =>
 	text
 		.replace(
 			new RegExp(`${notInTag}(?:${space}+)?([\\?!:»]|${semicolon})`, 'gmi'),
@@ -37,19 +39,35 @@ const punctuation = text =>
 			`$1${hairspace}`
 		);
 
-const numbers = [numberOrdinals, numberSeparators, numberUnits];
-
-const all = [spaces, quotes, abbr, numbers, emdash, ellipsis, punctuation];
-
 export {
+	shortWords,
+	orphans,
+	definitions,
+	abbrs,
+	numberUnits,
+	degreeSigns,
+	amps,
+	dashes,
+	ellipses,
+} from 'richtypo-rules-common';
+
+// Not in recommended:
+// - numberOrdinals
+// - numberSeparators - breaks years, like "1920"
+
+const recommended = [
+	// Common rules
+	shortWords,
+	orphans,
+	abbrs,
+	amps,
+	dashes,
+	ellipses,
+	numberUnits,
+	degreeSigns,
+	// Custom rules
 	quotes,
-	numbers,
-	spaces,
-	abbr,
-	amp,
-	emdash,
-	ellipsis,
 	punctuation,
-	all,
-};
-export default all;
+];
+
+export default recommended;
