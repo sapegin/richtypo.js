@@ -12,8 +12,8 @@ Converts this:
 to this:
 
 ```html
-Настругал Папа Карло тысячу <abbr>БУРАТИН</abbr> 29_февраля_=
-используйте «Ричтайпо» и_ваши уши будут торчать <nobr>из-за</nobr>_туч.
+Настругал Папа Карло тысячу <abbr>БУРАТИН</abbr> 29&nbsp;февраля&nbsp;—
+используйте «Ричтайпо» и&nbsp;ваши уши будут торчать <nobr>из-за</nobr>&nbsp;туч.
 ```
 
 ### Installation
@@ -34,8 +34,8 @@ const text =
 
 richtypo(rules, text);
 
-// -> Настругал Папа Карло тысячу <abbr>БУРАТИН</abbr> 29_февраля_=
-//    используйте «Ричтайпо» и_ваши уши будут торчать <nobr>из-за</nobr>_туч.
+// -> Настругал Папа Карло тысячу <abbr>БУРАТИН</abbr> 29&nbsp;февраля&nbsp;—
+//    используйте «Ричтайпо» и&nbsp;ваши уши будут торчать <nobr>из-за</nobr>&nbsp;туч.
 ```
 
 The default export of `richtypo-rules-ru` contains _recommended_ rules (marked with ¹ in a table below), but you can import each rule separately:
@@ -58,7 +58,7 @@ See more examples in [Richtypo docs](https://github.com/sapegin/richtypo.js).
 | ---------------------- | ------------------------------------------------------------------------------------------------ | -------------------- | -------------------------- |
 | **`abbrs`¹**           | wrap abbreviations in `<abbr>` tag                                                               | `БКОАНТОЛО`          | `<abbr>БКОАНТОЛО</abbr>`   |
 | **`dashes`¹**          | transform a dash between two words to an em dash (—), add a non-breaking space before an em dash | `собака - друг`      | `собака&nbsp;— друг`²      |
-| **`degreeSigns`¹**     | add a non-breaking space between a number and a degree sign (°)                                  | `13 °C`              | `13&nbsp;°C`²              |
+| **`degreeSigns`¹**     | add a non-breaking space between a number and a degree sign (°)                                  | `13 °C`              | `13&#x202f;°C`             |
 | **`ellipses`¹**        | transform three dots (...) to an ellipsis (…)                                                    | `...`                | `…`                        |
 | **`etcs`¹**            | add a non-breaking space inside “и т. д.” and “и т. п.”                                          | `и т. д.`            | `и&nbsp;т.&nbsp;д.`²       |
 | **`hyphenatedWords`¹** | wrap words with a hyphen in `<nobr>` tag                                                         | `из-за`              | `<nobr>из-за</nobr>`       |

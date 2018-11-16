@@ -9,12 +9,13 @@ import {
 	numberUnits,
 	degreeSigns,
 	amps,
-	dashes,
+	dashesBasic,
 	ellipses,
 } from 'richtypo-rules-common';
 
-const { nbsp, space, hairspace, semicolon, notInTag } = definitions;
+const { nbsp, space, hairspace, dash, notInTag } = definitions;
 
+const semicolon = '(?<!&\\S*);';
 const ordinals = '(ème|er|ère|nd)s?';
 const decimalsSeparator = '[.,]';
 const openingQuote = '«';
@@ -27,6 +28,20 @@ export const numberSeparators = numberSeparatorsFactory({
 	thousandsSeparator,
 	decimalsSeparator,
 });
+
+export const dashesAdvanced = text =>
+	text
+		// Replace - at the beginnning of a line or right after a tag with em dash
+		.replace(new RegExp(`^-(${space})`, 'gmi'), `—$1`)
+		// Add non-braking space between , or ) and a dash
+		.replace(
+			new RegExp(`(${punctuation})${dash}(${space})`, 'gmi'),
+			`$1${nbsp}—$2`
+		)
+		// Add non-breaking space in front of a dash
+		.replace(new RegExp(`${notInTag}(\\S)${space}?—`, 'gmi'), `$1${nbsp}—`);
+
+export const dashes = [dashesBasic, dashesAdvanced];
 
 export const punctuation = text =>
 	text
@@ -47,7 +62,7 @@ export {
 	numberUnits,
 	degreeSigns,
 	amps,
-	dashes,
+	dashesBasic,
 	ellipses,
 } from 'richtypo-rules-common';
 

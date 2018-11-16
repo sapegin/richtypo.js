@@ -107,6 +107,10 @@ describe('Russian, recommended rules', () => {
 		);
 	});
 
+	test('keep words with a dash at the end', () => {
+		compare(rt(recommended, 'двух- и трёхпупочные'), 'двух- и_трёхпупочные');
+	});
+
 	test('replace "" with «»', () => {
 		compare(
 			rt(recommended, 'Тут просто "текст в кавычках".'),

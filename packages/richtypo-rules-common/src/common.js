@@ -4,10 +4,11 @@ const space = `[ \t${nbsp}${hairspace}]`;
 const tag = '(?:<[^<>]*>)';
 const quote = '["“”«»‘’]';
 const letter = '[a-zà-ž0-9а-яё]';
+const letterOrHyphen = '[-a-zà-ž0-9а-яё]';
+const notLetterOrHyphen = '[^-a-zà-ž0-9а-яё]';
 const upperLetter = '[A-ZÀ-ŽdА-ЯЁ]';
 const letterOrQuote = `[-“”‘’«»a-zà-ž0-9а-яё]`;
-const semicolon = '(?<!&\\S*);';
-const punctuation = `(?:${semicolon}|[\\.,!?:])`;
+const punctuation = `[.,!?:;)]`;
 const dash = '[-—]';
 const openingQuote = `[“‘«]`;
 const shortWord = `${letter}{1,2}`;
@@ -22,7 +23,6 @@ export const definitions = {
 	letter,
 	upperLetter,
 	letterOrQuote,
-	semicolon,
 	punctuation,
 	dash,
 	openingQuote,
@@ -59,27 +59,6 @@ export const degreeSigns = text =>
 		`$1${hairspace}°`
 	);
 
-// TODO: Hair space in English?
-export const dashes = text =>
-	text
-		// TODO: --- -> —
-		.replace(new RegExp(`${notInTag}(\\S)${space}?—`, 'gmi'), `$1${nbsp}—`)
-		.replace(new RegExp(`${notInTag}—(\\S)`, 'gmi'), `— $1`)
-		.replace(
-			new RegExp(
-				`${notInTag}(${letterOrQuote}(${tag})?)${space}${dash}`,
-				'gmi'
-			),
-			`$1${nbsp}—`
-		)
-		.replace(
-			new RegExp(
-				`(${notInTag}^|(?:(${punctuation}|${openingQuote}|")${space}?))${dash}${space}`,
-				'gmi'
-			),
-			`$1—${nbsp}`
-		);
-
 export const ellipses = text =>
 	text.replace(new RegExp(`${notInTag}\\.{2,}`, 'gmi'), `…`);
 
@@ -94,6 +73,23 @@ export const abbrs = text =>
 		new RegExp(`${notInTag}(${upperLetter}{3,})`, 'gm'),
 		`<abbr>$1</abbr>`
 	);
+
+// Nowrap short words with a hyphen ("из-за")
+export const hyphenatedWords = text =>
+	text.replace(
+		new RegExp(
+			`(${notLetterOrHyphen}|^)((?:${letter}{1,2}(?:-${letter}+))|(?:${letter}+(?:-${letter}{1,2})))(?!${letterOrHyphen})`,
+			'gi'
+		),
+		`$1<nobr>$2</nobr>`
+	);
+
+export const dashesBasic = text =>
+	text
+		// Replace -- or --- with em dash
+		.replace(new RegExp(`${notInTag}---?`, 'gmi'), `—`)
+		// Replace - with em dash if there's a space or a tag before and a space after it
+		.replace(new RegExp(`(${space}|${tag})-(${space})`, 'gmi'), `$1—$2`);
 
 export const numberOrdinalsFactory = ({ ordinals }) => text =>
 	text.replace(
