@@ -5,6 +5,7 @@ import {
 	orphans,
 	abbrs,
 	ellipses,
+	dashesBasic,
 	quotesFactory,
 	numberSeparatorsFactory,
 	definitions,
@@ -17,20 +18,19 @@ const openingQuote = '«';
 const closingQuote = '»';
 const particle = 'б|бы|ж|же|ли|ль';
 
-export const dashes = text =>
+export const dashesAdvanced = text =>
 	text
-		// Replace -- or --- with em dash
-		.replace(new RegExp(`${notInTag}---?`, 'gmi'), `—`)
 		// Replace - at the beginnning of a line or right after a tag with em dash
-		.replace(new RegExp(`^-`, 'gmi'), `—`)
-		.replace(new RegExp(`${notInTag}-(${space})`, 'gmi'), `—$1`)
+		.replace(new RegExp(`^-(${space})`, 'gmi'), `—$1`)
 		// Add non-braking space between , or ) and a dash
 		.replace(
-			new RegExp(`${notInTag}(${punctuation}])${dash}(${space})`, 'gmi'),
+			new RegExp(`(${punctuation})${dash}(${space})`, 'gmi'),
 			`$1${nbsp}—$2`
 		)
 		// Add non-breaking space in front of a dash
 		.replace(new RegExp(`${notInTag}(\\S)${space}?—`, 'gmi'), `$1${nbsp}—`);
+
+export const dashes = [dashesBasic, dashesAdvanced];
 
 // Spaces inside "и т. д." and "и т. п."
 export const etcs = text =>
@@ -89,6 +89,7 @@ export {
 	orphans,
 	abbrs,
 	ellipses,
+	dashesBasic,
 } from 'richtypo-rules-common';
 
 // TODO: export defs
