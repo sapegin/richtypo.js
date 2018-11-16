@@ -39,6 +39,7 @@ export {
 // TODO: export defs
 
 // Not in recommended:
+// - amps
 // - numberOrdinals
 // - numberSeparators - breaks years, like "1920"
 
@@ -47,7 +48,6 @@ const recommended = [
 	shortWords,
 	orphans,
 	abbrs,
-	amps,
 	dashes,
 	ellipses,
 	numberUnits,
