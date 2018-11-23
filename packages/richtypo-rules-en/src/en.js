@@ -34,8 +34,8 @@ export const dashesAdvanced = text =>
 		)
 		// Add hair spaces before and after an em dash
 		.replace(
-			new RegExp(`${space}?—${space}?`, 'gmi'),
-			`${hairspace}—${hairspace}`
+			new RegExp(`(\\S*)${space}?—${space}?`, 'gmi'),
+			`<nobr>$1${hairspace}—</nobr>${hairspace}`
 		);
 
 export const dashes = [dashesBasic, dashesAdvanced];
