@@ -61,7 +61,7 @@ export const dashesAdvanced = text =>
 export const dashes = [dashesBasic, dashesAdvanced];
 
 export const quotes = quotesFactory({ openingQuote, closingQuote });
-export const numberOrdinals = numberOrdinalsFactory({ ordinals: ordinal });
+export const numberOrdinals = numberOrdinalsFactory({ ordinal });
 export const numberSeparators = numberSeparatorsFactory({
 	thousandsSeparator,
 	decimalsSeparator,

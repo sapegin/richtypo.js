@@ -16,14 +16,14 @@ import {
 const { punctuation, nbsp, space, hairspace, dash, notInTag } = definitions;
 
 const semicolon = '(?<!&\\S*);';
-const ordinals = '(ème|er|ère|nd)s?';
+const ordinal = '(ème|er|ère|nd)s?';
 const decimalsSeparator = '[.,]';
 const openingQuote = '«';
 const closingQuote = '»';
 const thousandsSeparator = nbsp;
 
 export const quotes = quotesFactory({ openingQuote, closingQuote });
-export const numberOrdinals = numberOrdinalsFactory({ ordinals });
+export const numberOrdinals = numberOrdinalsFactory({ ordinal });
 export const numberSeparators = numberSeparatorsFactory({
 	thousandsSeparator,
 	decimalsSeparator,

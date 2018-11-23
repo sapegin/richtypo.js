@@ -93,9 +93,9 @@ export const dashesBasic = text =>
 		// Replace - with em dash if there's a space or a tag before and a space after it
 		.replace(new RegExp(`(${space}|${tag})-(${space})`, 'gmi'), `$1—$2`);
 
-export const numberOrdinalsFactory = ({ ordinals }) => text =>
+export const numberOrdinalsFactory = ({ ordinal }) => text =>
 	text.replace(
-		new RegExp(`${notInTag}(\\d+)(${ordinals})`, 'gmi'),
+		new RegExp(`${notInTag}(\\d+)(${ordinal})`, 'gmi'),
 		`$1<sup>$2</sup>`
 	);
 
