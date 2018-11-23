@@ -55,7 +55,7 @@ const runAllRules = (text, { rules }) =>
  */
 function run(rules, text) {
 	const { text: textWithoutTags, tags } = saveTags(text);
-	return [beforeAll, runAllRules, afterAll, restoreTags].reduce(
+	return [beforeAll, runAllRules, restoreTags, afterAll].reduce(
 		(processedText, fn) => fn(processedText, { rules, tags }),
 		textWithoutTags
 	);

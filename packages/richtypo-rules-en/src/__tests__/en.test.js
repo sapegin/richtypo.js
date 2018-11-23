@@ -63,6 +63,17 @@ describe('English, recommended rules', () => {
 		);
 	});
 
+	test('do not replace trailing whitespace with nbsp', () => {
+		compare(rt(recommended, 'This was\n'), 'This__was\n');
+	});
+
+	test('do not wrap words in nobr twice', () => {
+		compare(
+			rt(recommended, '<nobr>75-Jähriger</nobr>'),
+			'<nobr>75-Jähriger</nobr>'
+		);
+	});
+
 	test('add non-breaking space between a number and a degree sign', () => {
 		compare(
 			rt(recommended, `Temperature <b>-30</b> °C? Even -25°C maybe`),
