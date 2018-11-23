@@ -1,7 +1,7 @@
 import rt from 'richtypo';
 import recommended, {
 	quotes,
-	punctuation,
+	punctuationMarks,
 	numberOrdinals,
 	numberSeparators,
 } from '../fr';
@@ -19,14 +19,14 @@ describe('punctuation spaces', () => {
 	it(`should add thin space before punctuation and quotes`, () => {
 		compare(
 			rt(
-				punctuation,
+				punctuationMarks,
 				`Ceci est ? un &agrave; <b>texte secondaire</b>: avec; <i>«de la»</i> ponctuation<b> !</b> ou sans ?`
 			),
 			`Ceci est_? un &agrave; <b>texte secondaire</b>_: avec_; <i>«_de la_»</i> ponctuation<b>_!</b> ou sans_?`
 		);
 		compare(
 			rt(
-				punctuation,
+				punctuationMarks,
 				`Alice, assise auprès de sa sœur sur le gazon, commençait à s’ennuyer de rester là à ne rien faire ; une ou deux fois elle avait jeté les yeux sur le livre que lisait sa sœur ; mais quoi ! pas d’images, pas de dialogues ! «La belle avance,» pensait Alice, «qu’un livre sans images, sans causeries !»`
 			),
 			`Alice, assise auprès de sa sœur sur le gazon, commençait à s’ennuyer de rester là à ne rien faire_; une ou deux fois elle avait jeté les yeux sur le livre que lisait sa sœur_; mais quoi_! pas d’images, pas de dialogues_! «_La belle avance,_» pensait Alice, «_qu’un livre sans images, sans causeries_!_»`

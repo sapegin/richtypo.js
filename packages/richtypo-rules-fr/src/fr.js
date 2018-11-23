@@ -13,7 +13,7 @@ import {
 	ellipses,
 } from 'richtypo-rules-common';
 
-const { nbsp, space, hairspace, dash, notInTag } = definitions;
+const { punctuation, nbsp, space, hairspace, dash, notInTag } = definitions;
 
 const semicolon = '(?<!&\\S*);';
 const ordinals = '(ème|er|ère|nd)s?';
@@ -43,7 +43,7 @@ export const dashesAdvanced = text =>
 
 export const dashes = [dashesBasic, dashesAdvanced];
 
-export const punctuation = text =>
+export const punctuationMarks = text =>
 	text
 		.replace(
 			new RegExp(`${notInTag}(?:${space}+)?([\\?!:»]|${semicolon})`, 'gmi'),
@@ -82,7 +82,7 @@ const recommended = [
 	degreeSigns,
 	// Custom rules
 	quotes,
-	punctuation,
+	punctuationMarks,
 ];
 
 export default recommended;
