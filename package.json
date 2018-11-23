@@ -22,7 +22,8 @@
   },
   "jest": {
     "moduleNameMapper": {
-      "richtypo-rules-common": "<rootDir>/packages/richtypo-rules-common/src/common.js"
+      "^richtypo$": "<rootDir>/packages/richtypo/src/richtypo.js",
+      "^richtypo-rules-common$": "<rootDir>/packages/richtypo-rules-common/src/common.js"
     },
     "coveragePathIgnorePatterns": [
       "<rootDir>/packages/(.*)/lib/(.*)\\.js"
