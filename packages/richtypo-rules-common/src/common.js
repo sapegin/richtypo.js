@@ -8,7 +8,8 @@ const letterOrHyphen = '[-a-zà-ž0-9а-яё]';
 const notLetterOrHyphen = '[^-a-zà-ž0-9а-яё]';
 const upperLetter = '[A-ZÀ-ŽdА-ЯЁ]';
 const letterOrQuote = `[-“”‘’«»a-zà-ž0-9а-яё]`;
-const punctuation = `[.,!?:;)]`;
+const punctuation = `[.,!?:;)(]`;
+const punctuationOrQuote = `[.,!?:;)("“”«»‘’]`;
 const dash = '[-—]';
 const openingQuote = `[“‘«]`;
 const shortWord = `${letter}{1,2}`;
@@ -24,6 +25,7 @@ export const definitions = {
 	upperLetter,
 	letterOrQuote,
 	punctuation,
+	punctuationOrQuote,
 	dash,
 	openingQuote,
 	shortWord,
@@ -34,7 +36,7 @@ export const definitions = {
 export const shortWords = text =>
 	text.replace(
 		new RegExp(
-			`${notInTag}(?<=^|${space}|${quote}|>)(${shortWord}(${tag})?)${space}`,
+			`${notInTag}(?<=^|${space}|${punctuationOrQuote}|>)(${shortWord}(${tag})?)${space}`,
 			'gmi'
 		),
 		`$1${nbsp}`
