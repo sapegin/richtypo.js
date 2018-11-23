@@ -13,12 +13,32 @@ import {
 	definitions,
 } from 'richtypo-rules-common';
 
-const { punctuation, dash, space, hairspace, tag } = definitions;
+const {
+	punctuation,
+	punctuationOrQuote,
+	dash,
+	space,
+	nbsp,
+	hairspace,
+	tag,
+	notInTag,
+} = definitions;
 const thousandsSeparator = ',';
 const decimalsSeparator = '[.]';
 const ordinal = '(st|nd|rd|th)';
+const preposition = 'and|the|for';
 const openingQuote = '“';
 const closingQuote = '”';
+
+// Prepositions
+export const prepositions = text =>
+	text.replace(
+		new RegExp(
+			`${notInTag}(?<=^|${space}|${punctuationOrQuote}|>)(${preposition}(${tag})?)${space}`,
+			'gmi'
+		),
+		`$1${nbsp}`
+	);
 
 export const dashesAdvanced = text =>
 	text
@@ -70,6 +90,7 @@ const recommended = [
 	// Common rules
 	shortWords,
 	hyphenatedWords,
+	prepositions,
 	orphans,
 	abbrs,
 	dashes,
