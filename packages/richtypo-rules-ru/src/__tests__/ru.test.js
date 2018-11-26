@@ -85,6 +85,10 @@ describe('Russian, recommended rules', () => {
 		compare(rt(recommended, 'Такса - большой зверь'), 'Такса_= большой_зверь');
 	});
 
+	test('replace en dash with spaces around with a non-breaking space and em dash', () => {
+		compare(rt(recommended, 'Такса – большой зверь'), 'Такса_= большой_зверь');
+	});
+
 	test('replace - in the beginning of a line with em dash', () => {
 		compare(
 			rt(recommended, '- Бадыдыщь йоу!\n- Бадыдыщь_йоу!'),

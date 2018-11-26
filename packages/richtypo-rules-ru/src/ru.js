@@ -11,7 +11,16 @@ import {
 	definitions,
 } from 'richtypo-rules-common';
 
-const { notInTag, space, nbsp, hairspace, dash, punctuation } = definitions;
+const {
+	notInTag,
+	space,
+	nbsp,
+	hairspace,
+	endash,
+	emdash,
+	dash,
+	punctuation,
+} = definitions;
 const thousandsSeparator = hairspace;
 const decimalsSeparator = ',';
 const openingQuote = '«';
@@ -21,14 +30,17 @@ const particle = 'б|бы|ж|же|ли|ль';
 export const dashesAdvanced = text =>
 	text
 		// Replace - at the beginnning of a line or right after a tag with em dash
-		.replace(new RegExp(`^-(${space})`, 'gmi'), `—$1`)
+		.replace(new RegExp(`^-(${space})`, 'gmi'), `${emdash}$1`)
 		// Add non-braking space between , or ) and a dash
 		.replace(
 			new RegExp(`(${punctuation})${dash}(${space})`, 'gmi'),
-			`$1${nbsp}—$2`
+			`$1${nbsp}${emdash}$2`
 		)
 		// Add non-breaking space in front of a dash
-		.replace(new RegExp(`${notInTag}(\\S)${space}?—`, 'gmi'), `$1${nbsp}—`);
+		.replace(
+			new RegExp(`${notInTag}(\\S)${space}?[${endash}${emdash}]`, 'gmi'),
+			`$1${nbsp}${emdash}`
+		);
 
 export const dashes = [dashesBasic, dashesAdvanced];
 

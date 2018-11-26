@@ -16,6 +16,8 @@ import {
 const {
 	punctuation,
 	punctuationOrQuote,
+	endash,
+	emdash,
 	dash,
 	space,
 	nbsp,
@@ -45,17 +47,17 @@ export const dashesAdvanced = text =>
 		// Add hair space between , or ) and a dash
 		.replace(
 			new RegExp(`(${punctuation})${dash}(${space}?)`, 'gmi'),
-			`$1${hairspace}—$2`
+			`$1${hairspace}${emdash}$2`
 		)
 		// Add hair space between a tag and a dash
 		.replace(
 			new RegExp(`(?<!\\s)(${tag})${dash}(${space}?)`, 'gmi'),
-			`$1${hairspace}—$2`
+			`$1${hairspace}${emdash}$2`
 		)
 		// Add hair spaces before and after an em dash
 		.replace(
-			new RegExp(`(\\S*)${space}?—${space}?`, 'gmi'),
-			`<nobr>$1${hairspace}—</nobr>${hairspace}`
+			new RegExp(`(\\S*)${space}?[${endash}${emdash}]${space}?`, 'gmi'),
+			`<nobr>$1${hairspace}${emdash}</nobr>${hairspace}`
 		);
 
 export const dashes = [dashesBasic, dashesAdvanced];

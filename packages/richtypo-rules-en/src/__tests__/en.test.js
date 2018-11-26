@@ -103,6 +103,13 @@ describe('English, recommended rules', () => {
 		);
 	});
 
+	test('replace an en dash with an em dash', () => {
+		compare(
+			rt(recommended, `“Richtypo” – is awesome!`),
+			`<nobr>“Richtypo”_=</nobr>_is__awesome!`
+		);
+	});
+
 	test('replace a hyphen with an em dash between tags', () => {
 		compare(
 			rt(recommended, `<i>Dachshund</i> - <b>beast</b>.`),
@@ -127,8 +134,15 @@ describe('English, recommended rules', () => {
 
 	test('keep negative numbers', () => {
 		compare(
-			rt(recommended, `-10, –11, *-12*, _-13_, <b>-14</b>, stop`),
-			`-10, –11, *-12*, _-13_, <b>-14</b>,__stop`
+			rt(recommended, `−10, −11, *−12*, _−13_, <b>−14</b>, stop`),
+			`−10, −11, *−12*, _−13_, <b>−14</b>,__stop`
+		);
+	});
+
+	test('keep negative numbers (hyphen instead of minus)', () => {
+		compare(
+			rt(recommended, `-10, -11, *-12*, _-13_, <b>-14</b>, stop`),
+			`-10, -11, *-12*, _-13_, <b>-14</b>,__stop`
 		);
 	});
 
