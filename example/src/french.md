@@ -4,7 +4,7 @@ layout: template
 language: fr
 ---
 
-_[Essayer en anglais](/)_
+_[English](/), **French**, [Russian](/russian)_
 
 Alice, assise auprès de sa sœur sur le gazon, commençait à s’ennuyer de rester là à ne rien faire ; une ou deux fois elle avait jeté les yeux sur le livre que lisait sa sœur ; mais quoi ! pas d’images, pas de dialogues ! "La belle avance," pensait Alice, "qu’un livre sans images, sans causeries !"
 
