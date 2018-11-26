@@ -96,7 +96,7 @@ export const dashesBasic = text =>
 		.replace(new RegExp(`${notInTag}---?`, 'gmi'), emdash)
 		// Replace - with em dash if there's a space or a tag before and a space after it
 		.replace(
-			new RegExp(`(${space}|${tag})-(${space})`, 'gmi'),
+			new RegExp(`(${space}|${tag})[-${endash}](${space})`, 'gmi'),
 			`$1${emdash}$2`
 		);
 

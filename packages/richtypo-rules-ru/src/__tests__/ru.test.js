@@ -96,9 +96,23 @@ describe('Russian, recommended rules', () => {
 		);
 	});
 
+	test('replace en dash in the beginning of a line with em dash', () => {
+		compare(
+			rt(recommended, '– Бадыдыщь йоу!\n– Бадыдыщь_йоу!'),
+			'= Бадыдыщь_йоу!\n= Бадыдыщь_йоу!'
+		);
+	});
+
 	test('replace - right after the tag with em dash', () => {
 		compare(
 			rt(recommended, '<p>- Бадыдыщь йоу!</p>'),
+			'<p>= Бадыдыщь_йоу!</p>'
+		);
+	});
+
+	test('replace en dash right after the tag with em dash', () => {
+		compare(
+			rt(recommended, '<p>– Бадыдыщь йоу!</p>'),
 			'<p>= Бадыдыщь_йоу!</p>'
 		);
 	});
