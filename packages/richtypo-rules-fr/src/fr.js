@@ -8,7 +8,6 @@ import {
 	numberSeparatorsFactory,
 	numberUnits,
 	degreeSigns,
-	amps,
 	dashesBasic,
 	ellipses,
 } from 'richtypo-rules-common';
@@ -67,6 +66,7 @@ export {
 } from 'richtypo-rules-common';
 
 // Not in recommended:
+// - amps
 // - numberOrdinals
 // - numberSeparators - breaks years, like "1920"
 
@@ -75,7 +75,6 @@ const recommended = [
 	shortWords,
 	orphans,
 	abbrs,
-	amps,
 	dashes,
 	ellipses,
 	numberUnits,
