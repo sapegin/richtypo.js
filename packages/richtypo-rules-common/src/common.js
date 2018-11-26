@@ -10,7 +10,9 @@ const upperLetter = '[A-ZÀ-ŽdА-ЯЁ]';
 const letterOrQuote = `[-“”‘’«»a-zà-ž0-9а-яё]`;
 const punctuation = `[.,!?:;)(]`;
 const punctuationOrQuote = `[.,!?:;)("“”«»‘’]`;
-const dash = '[-—]';
+const endash = '–';
+const emdash = '—';
+const dash = `[-${endash}${emdash}]`;
 const openingQuote = `[“‘«]`;
 const shortWord = `${letter}{1,2}`;
 const notInTag = `(?<!<[^>]*)`;
@@ -26,6 +28,8 @@ export const definitions = {
 	letterOrQuote,
 	punctuation,
 	punctuationOrQuote,
+	endash,
+	emdash,
 	dash,
 	openingQuote,
 	shortWord,
@@ -89,9 +93,12 @@ export const hyphenatedWords = text =>
 export const dashesBasic = text =>
 	text
 		// Replace -- or --- with em dash
-		.replace(new RegExp(`${notInTag}---?`, 'gmi'), `—`)
+		.replace(new RegExp(`${notInTag}---?`, 'gmi'), emdash)
 		// Replace - with em dash if there's a space or a tag before and a space after it
-		.replace(new RegExp(`(${space}|${tag})-(${space})`, 'gmi'), `$1—$2`);
+		.replace(
+			new RegExp(`(${space}|${tag})-(${space})`, 'gmi'),
+			`$1${emdash}$2`
+		);
 
 export const numberOrdinalsFactory = ({ ordinal }) => text =>
 	text.replace(
