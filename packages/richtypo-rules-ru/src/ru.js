@@ -30,7 +30,7 @@ const particle = 'б|бы|ж|же|ли|ль';
 export const dashesAdvanced = text =>
 	text
 		// Replace - at the beginnning of a line or right after a tag with em dash
-		.replace(new RegExp(`^-(${space})`, 'gmi'), `${emdash}$1`)
+		.replace(new RegExp(`^[-${endash}](${space})`, 'gmi'), `${emdash}$1`)
 		// Add non-braking space between , or ) and a dash
 		.replace(
 			new RegExp(`(${punctuation})${dash}(${space})`, 'gmi'),
