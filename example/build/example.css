@@ -2,13 +2,13 @@
 
 body {
 	background: #f5e9d2;
-	color: hsla(0, 0%, 0%, .75);
+	color: hsla(0, 0%, 0%, 0.75);
 	font-size: 120%;
 	line-height: 1.68;
 	padding: 1em;
 	margin: 0 auto;
 	max-width: 80em;
-	font-family: "Vollkorn", Georgia, serif;
+	font-family: 'Vollkorn', Georgia, serif;
 	-webkit-hyphens: auto;
 	-moz-hyphens: auto;
 	hyphens: auto;
@@ -18,22 +18,22 @@ body {
 
 .rule {
 	cursor: help;
-	background-color: rgba(0, 0, 0, .2);
+	background-color: rgba(0, 0, 0, 0.2);
 }
 
-.rule.nbsp {
+.rule-nbsp {
 	background-color: rgba(4, 0, 255, 0.2);
 }
 
-.rule.narrow {
+.rule-narrow {
 	background-color: rgba(4, 0, 255, 0.4);
 }
 
-.rule.quotes {
+.rule-quote {
 	background-color: rgba(255, 145, 0, 0.2);
 }
 
-.rule.emdash {
+.rule-emdash {
 	background-color: rgba(21, 255, 0, 0.2);
 }
 
@@ -41,8 +41,8 @@ body {
 	display: flex;
 }
 
-.content>* {
-	margin: 0 40px;
+.content__column {
+	margin: 0 2em;
 }
 
 h1 {
@@ -51,14 +51,19 @@ h1 {
 	line-height: 1.1;
 	font-size: 2.4em;
 	font-weight: normal;
-	text-shadow: 0 1px 0 hsla(0, 0%, 100%, .5);
+	text-shadow: 0 1px 0 hsla(0, 0%, 100%, 0.5);
 }
 
 p {
 	margin: 0 0 1em;
 }
 
-a, a:link, a:visited, a:hover, a:active, a:focus {
+a,
+a:link,
+a:visited,
+a:hover,
+a:active,
+a:focus {
 	color: inherit;
 }
 
@@ -71,6 +76,7 @@ abbr {
 }
 
 .amp {
-	font-family: Baskerville, Constantia, Palatino, "Palatino Linotype", "Book Antiqua", serif;
+	font-family: Baskerville, Constantia, Palatino, 'Palatino Linotype',
+		'Book Antiqua', serif;
 	font-style: italic;
 }

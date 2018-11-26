@@ -30,14 +30,14 @@
     ]
   },
   "scripts": {
-    "prepare": "lerna bootstrap",
+    "bootstrap": "lerna bootstrap",
     "pretest": "npm run lint",
     "test": "jest",
     "posttest": "npm run format",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "lint": "eslint . --cache --fix",
-    "format": "prettier --write '**/*.{js,md}'",
+    "format": "prettier --write '**/*.{js,jsx,md,css}'",
     "gh-pages": "gh-pages -d example/build",
     "example:build": "lerna exec --scope richtypo-example -- npm run build",
     "example:watch": "lerna exec --scope richtypo-example -- npm run build:watch",

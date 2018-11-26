@@ -11,17 +11,17 @@ export default function({
 				<meta charset="utf-8" />
 				<title>{title}</title>
 				<link
-					href="https://fonts.googleapis.com/css?family=Vollkorn:400,400italic&subset=latin,latin-ext"
+					href="https://fonts.googleapis.com/css?family=Vollkorn:400,400i,700i&amp;subset=cyrillic,latin-ext"
 					rel="stylesheet"
 				/>
 				<link href="example.css" rel="stylesheet" />
 			</head>
 			<body>
 				<h1>{vdo.markSafe(pageTitle)}</h1>
-				<div class="content">
-					<div class="original">{vdo.markSafe(content)}</div>
-					<div class="richtypo">{vdo.markSafe(richtypo)}</div>
-				</div>
+				<main role="main" class="content">
+					<div class="content__column">{vdo.markSafe(content)}</div>
+					<div class="content__column">{vdo.markSafe(richtypo)}</div>
+				</main>
 			</body>
 		</html>
 	);
