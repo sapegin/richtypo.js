@@ -13,7 +13,6 @@
   },
   "scripts": {
     "build": "babel-node src",
-    "build:watch": "babel-watch src",
     "serve": "serve build"
   }
 }

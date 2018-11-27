@@ -3,15 +3,16 @@
 Converts this:
 
 ```html
-The quick brown FOX - weighting 47 kg -
-jumps over "the lazy dog" on sunny morning...
+The quick brown FOX - weighting 47 kg - jumps over "the lazy dog" on
+sunny morning...
 ```
 
 to this:
 
 ```html
-The quick brown <abbr>FOX</abbr>&#x202f;=&#x202f;weighting 47&nbsp;kg&#x202f;=&#x202f;
-jumps over “the lazy dog” on&nbsp;sunny&nbsp;morning…
+The quick brown <abbr>FOX</abbr>&#x202f;=&#x202f;weighting
+47&nbsp;kg&#x202f;=&#x202f; jumps over “the lazy dog”
+on&nbsp;sunny&nbsp;morning…
 ```
 
 _**Note:** `&#x202f;` is and HTML entity for a hair space._
