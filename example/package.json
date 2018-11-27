@@ -6,10 +6,10 @@
   "license": "MIT",
   "dependencies": {
     "fledermaus": "^7.1.0",
-    "richtypo": "^4.0.0",
-    "richtypo-rules-en": "^1.0.0",
-    "richtypo-rules-fr": "^1.0.0",
-    "richtypo-rules-ru": "^1.0.0"
+    "richtypo": "^4.0.0-beta.0",
+    "richtypo-rules-en": "^1.0.0-beta.0",
+    "richtypo-rules-fr": "^1.0.0-beta.0",
+    "richtypo-rules-ru": "^1.0.0-beta.0"
   },
   "scripts": {
     "build": "babel-node src",

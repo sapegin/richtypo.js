@@ -1,6 +1,6 @@
 {
   "name": "richtypo-rules-common",
-  "version": "1.0.0",
+  "version": "1.0.0-beta.0",
   "description": "Common Typography Rules for Richtypo",
   "main": "lib/common.js",
   "author": {
