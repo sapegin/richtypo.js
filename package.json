@@ -30,7 +30,7 @@
     ]
   },
   "scripts": {
-    "bootstrap": "lerna bootstrap",
+    "prepare": "lerna bootstrap",
     "pretest": "npm run lint",
     "test": "jest",
     "posttest": "npm run format",
