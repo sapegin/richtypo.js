@@ -11,8 +11,10 @@
     "eslint": "^5.9.0",
     "eslint-config-tamia": "^6.0.2",
     "gh-pages": "^2.0.1",
+    "husky": "^1.2.0",
     "jest": "^23.6.0",
     "lerna": "^3.4.3",
+    "lint-staged": "^8.1.0",
     "prettier": "^1.15.2",
     "serve": "^10.1.1"
   },
@@ -36,10 +38,22 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "lint": "eslint . --cache --fix",
-    "format": "prettier --write '**/*.{js,jsx,md,css}'",
+    "format": "prettier --write \"**/*.{js,jsx,md,css}\"",
     "gh-pages": "gh-pages -d example/build",
     "example:build": "lerna exec --scope richtypo-example -- npm run build",
     "example:serve": "lerna exec --scope richtypo-example -- npm run serve",
-    "publish": "npm publish"
+    "publish": "npm publish",
+    "precommit": "lint-staged"
+  },
+  "license": "MIT",
+  "lint-staged": {
+    "*.{js,jsx,md,css}": [
+      "prettier --write",
+      "git add"
+    ],
+    "*.{js,jsx}": [
+      "eslint --fix",
+      "git add"
+    ]
   }
 }
