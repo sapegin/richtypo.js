@@ -1,4 +1,14 @@
 {
 	"packages": ["packages/*", "example"],
-	"version": "0.0.0"
+	"version": "independent",
+  "command": {
+    "publish": {
+      "ignoreChanges": [
+        "package-lock.json",
+        "*.md",
+        "*.spec.js",
+        "*.snap"
+      ]
+    }
+  }
 }
