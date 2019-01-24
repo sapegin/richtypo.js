@@ -8,6 +8,8 @@ const SAVE_TAGS_REGEXPS = [
 	/<style[^>]*>[\s\S]*?<\/style>/gim,
 	/<script[^>]*>[\s\S]*?<\/script>/gim,
 	/<[a-z/][^>]*>/gim,
+	// Markdown links and images
+	/\]\([^)]*\)/gim,
 ];
 const RESTORE_TAGS_REGEXPS = /<(\d+)>/g;
 

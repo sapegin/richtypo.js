@@ -62,6 +62,20 @@ describe('rightypo', () => {
 		compare(rt(rule1, '<code> -->> </code>'), '<code> -->> </code>');
 	});
 
+	test('keep Markdown images', () => {
+		compare(
+			rt(rule2, '![](/foo.jpg) ![Bar](/bar.jpg)'),
+			'![](/foo.jpg) ![BAR](/bar.jpg)'
+		);
+	});
+
+	test('keep Markdown links', () => {
+		compare(
+			rt(rule2, 'Some [foo bar](/foo) baz.'),
+			'SOME [FOO BAR](/foo) BAZ.'
+		);
+	});
+
 	test('rules don’t affect text inside HTML tags', () => {
 		compare(
 			rt(rule1, 'No typo <img src="hamster.jpg" alt="a 100 b"> inside tags.'),
