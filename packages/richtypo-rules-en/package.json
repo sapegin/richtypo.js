@@ -1,6 +1,6 @@
 {
   "name": "richtypo-rules-en",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "English Typography Rules for richtypo.js",
   "main": "lib/en.js",
   "author": {
