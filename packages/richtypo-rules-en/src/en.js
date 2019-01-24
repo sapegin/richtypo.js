@@ -54,10 +54,18 @@ export const dashesAdvanced = text =>
 			new RegExp(`(?<!\\s)(${tag})${dash}(${space}?)`, 'gmi'),
 			`$1${hairspace}${emdash}$2`
 		)
+		// Wrap in <nobr> emdash and preceeding word
+		.replace(
+			new RegExp(
+				`([^\\s\\]\\)]+)${space}?[${endash}${emdash}]${space}?`,
+				'gmi'
+			),
+			`<nobr>$1${hairspace}${emdash}</nobr>${hairspace}`
+		)
 		// Add hair spaces before and after an em dash
 		.replace(
-			new RegExp(`(\\S*)${space}?[${endash}${emdash}]${space}?`, 'gmi'),
-			`<nobr>$1${hairspace}${emdash}</nobr>${hairspace}`
+			new RegExp(`${space}[${endash}${emdash}]${space}`, 'gmi'),
+			`${hairspace}${emdash}${hairspace}`
 		);
 
 export const dashes = [dashesBasic, dashesAdvanced];

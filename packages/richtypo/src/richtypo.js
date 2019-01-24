@@ -9,7 +9,7 @@ const SAVE_TAGS_REGEXPS = [
 	/<script[^>]*>[\s\S]*?<\/script>/gim,
 	/<[a-z/][^>]*>/gim,
 	// Markdown links and images
-	/\]\([^)]*\)/gim,
+	/(?<=\])\([^)]*\)/gim,
 ];
 const RESTORE_TAGS_REGEXPS = /<(\d+)>/g;
 

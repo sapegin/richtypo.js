@@ -188,6 +188,13 @@ describe('English, recommended rules', () => {
 			),
 			`There are 1000 “rules” to__enrich your text with__RichTypo.`
 		);
+		compare(
+			rt(
+				recommended,
+				`Have spoken at a conference ([React Alicante](http://reactalicante.es/talks)) and at a meetup ([React Open Source in Berlin](https://www.youtube.com/watch?v=5tHfAf4bRcM)) — my first talks in English.`
+			),
+			`Have spoken at__a__conference ([React Alicante](http://reactalicante.es/talks)) and__at__a__meetup ([React Open Source in__Berlin](https://www.youtube.com/watch?v=5tHfAf4bRcM))_=_my__first talks in__English.`
+		);
 	});
 });
 
