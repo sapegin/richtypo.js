@@ -78,6 +78,13 @@ describe('rightypo', () => {
 
 	test('keep Markdown code blocks', () => {
 		compare(
+			rt(rule2, `Some \`and some bar\` foo.`),
+			`SOME \`and some bar\` FOO.`
+		);
+	});
+
+	test('keep Markdown fenced code blocks', () => {
+		compare(
 			rt(
 				rule2,
 				`Some foo.
@@ -96,7 +103,7 @@ npm install --save-dev typings-for-css-modules-loader
 		);
 	});
 
-	test('keep Markdown code blocks with HTML inside', () => {
+	test('keep Markdown fenced code blocks with HTML inside', () => {
 		compare(
 			rt(
 				rule2,

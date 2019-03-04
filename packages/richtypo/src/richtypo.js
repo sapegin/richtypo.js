@@ -4,7 +4,7 @@ const SAVE_TAGS_REGEXPS = [
 	// Markdown links and images
 	/(?<=\])\([^)]*\)/gim,
 	// Markdown fenced code blocks
-	/```[\s\S]*?```/gim,
+	/`[\s\S]*?`/gim,
 	/<!(--\[[^\]>]+\]|\[[^\]>]+\]--)>/gim,
 	/<!--[\s\S]*?-->/gim,
 	/<pre[^>]*>[\s\S]*?<\/pre>/gim,
