@@ -3,7 +3,7 @@ import flatten from '@arr/flatten';
 const SAVE_TAGS_REGEXPS = [
 	// Markdown links and images
 	/(?<=\])\([^)]*\)/gim,
-	// Markdown fenced code blocks
+	// Markdown code blocks
 	/`[\s\S]*?`/gim,
 	/<!(--\[[^\]>]+\]|\[[^\]>]+\]--)>/gim,
 	/<!--[\s\S]*?-->/gim,
