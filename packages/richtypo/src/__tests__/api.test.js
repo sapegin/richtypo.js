@@ -76,6 +76,26 @@ describe('rightypo', () => {
 		);
 	});
 
+	test('keep Markdown code blocks', () => {
+		compare(
+			rt(
+				rule2,
+				`Some foo.
+
+\`\`\`bash
+npm install --save-dev typings-for-css-modules-loader
+\`\`\`
+			`
+			),
+			`SOME FOO.
+
+\`\`\`bash
+npm install --save-dev typings-for-css-modules-loader
+\`\`\`
+			`
+		);
+	});
+
 	test('rules don’t affect text inside HTML tags', () => {
 		compare(
 			rt(rule1, 'No typo <img src="hamster.jpg" alt="a 100 b"> inside tags.'),

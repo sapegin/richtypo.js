@@ -10,6 +10,8 @@ const SAVE_TAGS_REGEXPS = [
 	/<[a-z/][^>]*>/gim,
 	// Markdown links and images
 	/(?<=\])\([^)]*\)/gim,
+	// Markdown fenced code blocks
+	/```[\s\S]*?```/gim,
 ];
 const RESTORE_TAGS_REGEXPS = /<(\d+)>/g;
 
