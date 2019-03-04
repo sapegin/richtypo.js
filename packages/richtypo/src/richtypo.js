@@ -1,6 +1,10 @@
 import flatten from '@arr/flatten';
 
 const SAVE_TAGS_REGEXPS = [
+	// Markdown links and images
+	/(?<=\])\([^)]*\)/gim,
+	// Markdown fenced code blocks
+	/```[\s\S]*?```/gim,
 	/<!(--\[[^\]>]+\]|\[[^\]>]+\]--)>/gim,
 	/<!--[\s\S]*?-->/gim,
 	/<pre[^>]*>[\s\S]*?<\/pre>/gim,
@@ -8,10 +12,6 @@ const SAVE_TAGS_REGEXPS = [
 	/<style[^>]*>[\s\S]*?<\/style>/gim,
 	/<script[^>]*>[\s\S]*?<\/script>/gim,
 	/<[a-z/][^>]*>/gim,
-	// Markdown links and images
-	/(?<=\])\([^)]*\)/gim,
-	// Markdown fenced code blocks
-	/```[\s\S]*?```/gim,
 ];
 const RESTORE_TAGS_REGEXPS = /<(\d+)>/g;
 

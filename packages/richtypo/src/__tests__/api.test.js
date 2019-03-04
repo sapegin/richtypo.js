@@ -96,6 +96,26 @@ npm install --save-dev typings-for-css-modules-loader
 		);
 	});
 
+	test('keep Markdown code blocks with HTML inside', () => {
+		compare(
+			rt(
+				rule2,
+				`Some foo.
+
+\`\`\`bash
+<p><a href="#">Click here</a> for puppy videos!!</p>
+\`\`\`
+			`
+			),
+			`SOME FOO.
+
+\`\`\`bash
+<p><a href="#">Click here</a> for puppy videos!!</p>
+\`\`\`
+			`
+		);
+	});
+
 	test('rules don’t affect text inside HTML tags', () => {
 		compare(
 			rt(rule1, 'No typo <img src="hamster.jpg" alt="a 100 b"> inside tags.'),
