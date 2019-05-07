@@ -93,7 +93,7 @@ const text =
 richtypo([spaces, quotes], text);
 ```
 
-> **Note:** Have a look at [the example page](http://sapegin.github.io/richtypo.js/) and [its source](https://github.com/sapegin/richtypo.js/tree/master/packages/example/src).
+> **Note:** Have a look at [the example page](https://sapegin.github.io/richtypo.js/) and [its source](https://github.com/sapegin/richtypo.js/tree/master/packages/example/src).
 
 ### Custom rules
 
