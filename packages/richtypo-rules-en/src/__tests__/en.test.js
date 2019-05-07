@@ -125,6 +125,11 @@ describe('English, recommended rules', () => {
 		compare(rt(recommended, `Naïve---word.`), `<nobr>Naïve_=</nobr>_word.`);
 	});
 
+	test('do not replace two or more hyphens on a separate line (Markdown horizontal line)', () => {
+		compare(rt(recommended, `\n--\n`), `\n--\n`);
+		compare(rt(recommended, `\n---\n`), `\n---\n`);
+	});
+
 	test('keep words with a hypnen at the end', () => {
 		compare(
 			rt(recommended, `one- and twotailed dogs`),

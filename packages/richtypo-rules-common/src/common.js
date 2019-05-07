@@ -93,7 +93,7 @@ export const hyphenatedWords = text =>
 export const dashesBasic = text =>
 	text
 		// Replace -- or --- with em dash
-		.replace(new RegExp(`${notInTag}---?`, 'gmi'), emdash)
+		.replace(new RegExp(`${notInTag}(?<!\n)---?(?!\n)`, 'gmi'), emdash)
 		// Replace - with em dash if there's a space or a tag before and a space after it
 		.replace(
 			new RegExp(`(${space}|${tag})[-${endash}](${space})`, 'gmi'),
