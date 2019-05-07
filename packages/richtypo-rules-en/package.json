@@ -1,6 +1,6 @@
 {
   "name": "richtypo-rules-en",
-  "version": "4.0.1",
+  "version": "4.0.2",
   "description": "English Typography Rules for richtypo.js",
   "main": "lib/en.js",
   "author": {
@@ -14,7 +14,7 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "richtypo-rules-common": "^4.0.0"
+    "richtypo-rules-common": "^4.0.1"
   },
   "scripts": {
     "build": "babel src --out-dir lib --ignore **/*.test.js",
