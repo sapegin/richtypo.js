@@ -114,10 +114,17 @@ describe('English, recommended rules', () => {
 		);
 	});
 
-	test('replace a hyphen with an em dash between tags', () => {
+	test('do not replace a hyphen with an em dash between tags', () => {
 		compare(
 			rt(recommended, `<i>Dachshund</i> - <b>beast</b>.`),
-			`<nobr><i>Dachshund</i>_=</nobr>_<b>beast</b>.`
+			`<i>Dachshund</i>_=_<b>beast</b>.`
+		);
+	});
+
+	test('do not replace a hyphen with an em dash between tags, multiple words', () => {
+		compare(
+			rt(recommended, `<i>Big dog</i> - <b>beast</b>.`),
+			`<i>Big dog</i>_=_<b>beast</b>.`
 		);
 	});
 
@@ -134,7 +141,11 @@ describe('English, recommended rules', () => {
 		compare(rt(recommended, `\n---\n`), `\n---\n`);
 	});
 
-	test('keep words with a hypnen at the end', () => {
+	test('do not break Markdown links in front of em-dash', () => {
+		compare(rt(recommended, `- [Foo](/) — bar`), `- [Foo](/)_=_bar`);
+	});
+
+	test('keep words with a hyphen at the end', () => {
 		compare(
 			rt(recommended, `one- and twotailed dogs`),
 			`one- and__twotailed__dogs`
@@ -240,7 +251,7 @@ describe('English, examples from Readme', () => {
 				recommended,
 				'The quick brown FOX - weighting 47 kg - jumps over "the lazy dog" on sunny morning...'
 			),
-			'The__quick brown <nobr><abbr>FOX</abbr>_=</nobr>_weighting 47__<nobr>kg_=</nobr>_jumps over “the__lazy dog” on__sunny__morning…'
+			'The__quick brown <abbr>FOX</abbr>_=_weighting 47__<nobr>kg_=</nobr>_jumps over “the__lazy dog” on__sunny__morning…'
 		);
 	});
 	test('selected rules', () => {

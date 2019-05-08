@@ -57,7 +57,7 @@ export const dashesAdvanced = text =>
 		// Wrap in <nobr> emdash and preceeding word
 		.replace(
 			new RegExp(
-				`([^\\s\\]\\)]+)${space}?[${endash}${emdash}]${space}?`,
+				`([^\\s\\]\\)\\>]+)${space}?[${endash}${emdash}]${space}?`,
 				'gmi'
 			),
 			`<nobr>$1${hairspace}${emdash}</nobr>${hairspace}`
