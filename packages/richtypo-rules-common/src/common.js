@@ -49,7 +49,7 @@ export const shortWords = text =>
 // Orphans (non-breaking space before the last word)
 export const orphans = text =>
 	text.replace(
-		new RegExp(`${notInTag}${space}([\\S<]{1,10}(?:\n\n|$))`, 'gmi'),
+		new RegExp(`${notInTag}(?<!\\#)${space}([\\S<]{1,10}(?:\n\n|$))`, 'gmi'),
 		`${nbsp}$1`
 	);
 

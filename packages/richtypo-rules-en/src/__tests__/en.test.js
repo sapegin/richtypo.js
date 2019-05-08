@@ -24,6 +24,10 @@ describe('English, recommended rules', () => {
 		);
 	});
 
+	test('no weird leading non-breaking space in Markdown headings', () => {
+		compare(rt(recommended, `## JavaScript`), '## JavaScript');
+	});
+
 	test('do not add nbsp before the last word longer than 10 letters', () => {
 		compare(
 			rt(recommended, 'This was otorhinolaryngological.'),
