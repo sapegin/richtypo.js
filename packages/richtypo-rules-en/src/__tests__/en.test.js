@@ -16,6 +16,21 @@ function compare(actual, expected) {
 	).toEqual(expected);
 }
 
+describe('English, generic API', () => {
+	test('keep Markdown tables', () => {
+		compare(rt(recommended, '| - | - |'), '| - | - |');
+		compare(rt(recommended, '| -- | -- |'), '| -- | -- |');
+		compare(rt(recommended, '| --- | --- |'), '| --- | --- |');
+		compare(rt(recommended, '| :- | -: |'), '| :- | -: |');
+		compare(rt(recommended, '| :-- | --: |'), '| :-- | --: |');
+		compare(rt(recommended, '| :--- | ---: |'), '| :--- | ---: |');
+		compare(
+			rt(recommended, '| A | B |\n| - | - |\n| a | b |'),
+			'| A | B |\n| - | - |\n| a | b |'
+		);
+	});
+});
+
 describe('English, recommended rules', () => {
 	test('add non-breaking space before orphans', () => {
 		compare(

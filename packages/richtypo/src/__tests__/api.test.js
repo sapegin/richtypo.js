@@ -2,6 +2,7 @@ import rt from '../richtypo';
 
 const rule1 = text => text.replace(/100/g, '%');
 const rule2 = text => text.toUpperCase();
+const rule3 = text => text.replace(/-/g, '#');
 
 const compare = (actual, expected) =>
 	expect(actual.replace(/\xA0/g, '_')).toEqual(expected);
@@ -140,6 +141,19 @@ npm install \`--save-dev\` typings-for-css-modules-loader
 npm install \`--save-dev\` typings-for-css-modules-loader
 \`\`\`
 			`
+		);
+	});
+
+	test('keep Markdown tables', () => {
+		compare(rt(rule3, '| - | - |'), '| - | - |');
+		compare(rt(rule3, '| -- | -- |'), '| -- | -- |');
+		compare(rt(rule3, '| --- | --- |'), '| --- | --- |');
+		compare(rt(rule3, '| :- | -: |'), '| :- | -: |');
+		compare(rt(rule3, '| :-- | --: |'), '| :-- | --: |');
+		compare(rt(rule3, '| :--- | ---: |'), '| :--- | ---: |');
+		compare(
+			rt(rule3, '| A | B |\n| - | - |\n| a | b |'),
+			'| A | B |\n| - | - |\n| a | b |'
 		);
 	});
 

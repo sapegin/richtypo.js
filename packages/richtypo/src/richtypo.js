@@ -14,6 +14,8 @@ const SAVE_TAGS_REGEXPS = [
 	/<style[^>]*>[\s\S]*?<\/style>/gim,
 	/<script[^>]*>[\s\S]*?<\/script>/gim,
 	/<[a-z/][^>]*>/gim,
+	// Markdown tables
+	/^\|.*?\|$/gm,
 ];
 const RESTORE_TAGS_REGEXPS = /<(\d+)>/g;
 
