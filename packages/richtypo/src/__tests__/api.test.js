@@ -155,6 +155,7 @@ npm install \`--save-dev\` typings-for-css-modules-loader
 			rt(rule3, '| A | B |\n| - | - |\n| a | b |'),
 			'| A | B |\n| - | - |\n| a | b |'
 		);
+		compare(rt(rule3, '| `a` | b |'), '| `a` | b |');
 	});
 
 	test('rules don’t affect text inside HTML tags', () => {
