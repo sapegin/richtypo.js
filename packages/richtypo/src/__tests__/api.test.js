@@ -144,6 +144,28 @@ npm install \`--save-dev\` typings-for-css-modules-loader
 		);
 	});
 
+	test('keep Markdown fenced code blocks with something that looks like Markdown links inside', () => {
+		compare(
+			rt(
+				rule2,
+				`\`\`\`js
+const getSpecialOffersForBrand = brand =>
+({
+  [BRANDS.HORNS_AND_HOOVES]: getHornsAndHoovesSpecialOffers,
+  [BRANDS.PAWS_AND_TAILS]: getPawsAndTailsSpecialOffers
+}[brand]());
+\`\`\``
+			),
+			`\`\`\`js
+const getSpecialOffersForBrand = brand =>
+({
+  [BRANDS.HORNS_AND_HOOVES]: getHornsAndHoovesSpecialOffers,
+  [BRANDS.PAWS_AND_TAILS]: getPawsAndTailsSpecialOffers
+}[brand]());
+\`\`\``
+		);
+	});
+
 	test('keep Markdown tables', () => {
 		compare(rt(rule3, '| - | - |'), '| - | - |');
 		compare(rt(rule3, '| -- | -- |'), '| -- | -- |');
