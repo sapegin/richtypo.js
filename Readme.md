@@ -166,14 +166,18 @@ For the complete list of common rules, check out the [Readme page of the common 
 
 Don’t forget to test your rules. Have a look at the [English rules package](https://github.com/sapegin/richtypo.js/packages/richtypo-rules-en) to see how tests are done.
 
----
+## Changelog
 
-## Change log
+The changelog can be found on the [Releases page](https://github.com/sapegin/richtypo.js/releases).
 
-The change log can be found on the [Releases page](https://github.com/sapegin/richtypo.js/releases).
+## Sponsoring
 
----
+This software has been developed with lots of coffee, buy me one more cup to keep it going.
 
-## License
+<a href="https://www.buymeacoffee.com/sapegin" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/lato-orange.png" alt="Buy Me A Coffee" height="51" width="217" ></a>
 
-The MIT License, see the included [License.md](License.md) file.
+## Authors and license
+
+[Artem Sapegin](https://sapegin.me) and [contributors](https://github.com/sapegin/stack-styled/graphs/contributors).
+
+MIT License, see the included [License.md](License.md) file.
