@@ -54,7 +54,7 @@ See more examples in [Richtypo docs](https://github.com/sapegin/richtypo.js).
 
 | Rule | Description | Input | Output |
 | --- | --- | --- | --- |
-| **`numbers`** | adds thousands separators to large numbers and put ordinals within `<sup>` tags | `10000.123, 1st 2nd 3rd` |
+| **`numbers`** | adds thousands separators to large numbers and put ordinals within `<sup>` tags | `10000.123, 1st 2nd 3rd` | `10,000.123, 1<sup>st</sup> 2<sup>nd</sup> 3<sup>rd</sup>` |
 | **`abbrs`¹** | wrap abbreviations in `<abbr>` tag | `FOX` | `<abbr>FOX</abbr>` |
 | **`amps`** | wrap ampersands (&) in `<span class="amp">` tag | `Dog & Cat` | `Dog <span class="amp">&</span> Cat` |
 | **`dashes`¹** | transform a dash between two words to an em dash (—), add a non-breaking space before an em dash | `dog - friend` | `dog&nbsp;— friend`² |
