@@ -52,7 +52,18 @@ See more examples in [Richtypo docs](https://github.com/sapegin/richtypo.js).
 
 ### The rules
 
-| **`numbers`** | adds thousands separators to large numbers and put ordinals within `<sup>` tags | `10000.123, 1st 2nd 3rd` | | | Rule | Description | Input | Output | | ---------------------- | ------------------------------------------------------------------------------------------------ | -------------------- | -------------------------- | | **`abbrs`¹** | wrap abbreviations in `<abbr>` tag | `FOX` | `<abbr>FOX</abbr>` | | **`amps`** | wrap ampersands (&) in `<span class="amp">` tag | `Dog & Cat` | `Dog <span class="amp">&</span> Cat` | | **`dashes`¹** | transform a dash between two words to an em dash (—), add a non-breaking space before an em dash | `dog - friend` | `dog&nbsp;— friend`² | | **`degreeSigns`¹** | add a non-breaking space between a number and a degree sign (°) | `13 °C` | `13&#x202f;°C` | | **`ellipses`¹** | transform three dots (...) to an ellipsis (…) | `...` | `…` | | **`hyphenatedWords`¹** | wrap words with a hyphen in `<nobr>` tag | `to-day` | `<nobr>to-day</nobr>` | | **`numberUnits`¹** | add a non-breaking space between a number and its unit | `2 kg` | `2&nbsp;kg`² | | **`orphans`¹** | add a non-breaking space in front of the last word in a paragraph (line) | `their worst dreams` | `their worst&nbsp;dreams`² | | **`quotes`¹** | transform dumb quotes (") to typography quotes («») | `text "in quotes"` | `text «in quotes»` | | **`shortWords`¹** | add a non-breaking space after short words | `my dogs` | `my&nbsp;dogs`² |
+| Rule | Description | Input | Output |
+| --- | --- | --- | --- |
+| **`numbers`** | adds thousands separators to large numbers and put ordinals within `<sup>` tags | `10000.123, 1st 2nd 3rd` |
+| **`abbrs`¹** | wrap abbreviations in `<abbr>` tag | `FOX` | `<abbr>FOX</abbr>` |
+| **`amps`** | wrap ampersands (&) in `<span class="amp">` tag | `Dog & Cat` | `Dog <span class="amp">&</span> Cat` |
+| **`dashes`¹** | transform a dash between two words to an em dash (—), add a non-breaking space before an em dash | `dog - friend` | `dog&nbsp;— friend`² |
+| **`degreeSigns`¹** | add a non-breaking space between a number and a degree sign (°) | `13 °C` | `13&#x202f;°C` |
+| **`ellipses`¹** | transform three dots (...) to an ellipsis (…) | `...` | `…` |
+| **`hyphenatedWords`¹** | wrap words with a hyphen in `<nobr>` tag | `to-day` | `<nobr>to-day</nobr>` |
+| **`numberUnits`¹** | add a non-breaking space between a number and its unit | `2 kg` | `2&nbsp;kg`² |
+| **`orphans`¹** | add a non-breaking space in front of the last word in a paragraph (line) | `their worst dreams` | `their worst&nbsp;dreams`² |  | **`quotes`¹** | transform dumb quotes (") to typography quotes («») | `text "in quotes"` | `text «in quotes»` |
+| **`shortWords`¹** | add a non-breaking space after short words | `my dogs` | `my&nbsp;dogs`² |
 
 _¹ Recommended rules (see code examples above)_
 
