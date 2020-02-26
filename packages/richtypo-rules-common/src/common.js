@@ -122,6 +122,6 @@ export const quotesFactory = ({ openingQuote, closingQuote }) => text =>
 	text
 		.replace(
 			new RegExp(`${notInTag}(["“«]|&ldquo;)((${tag})?(${dash}${space})?${letter})`, 'gmi'),
-			`${openingQuote}$1`
+			`${openingQuote}$2`
 		)
 		.replace(new RegExp(`${notInTag}(["”»]|&rdquo;)`, 'gmi'), `${closingQuote}`);
