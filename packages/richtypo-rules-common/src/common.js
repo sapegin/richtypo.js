@@ -121,7 +121,7 @@ export const numberSeparatorsFactory = ({
 export const quotesFactory = ({ openingQuote, closingQuote }) => text =>
 	text
 		.replace(
-			new RegExp(`${notInTag}"((${tag})?(${dash}${space})?${letter})`, 'gmi'),
+			new RegExp(`${notInTag}(["“«]|&ldquo;)((${tag})?(${dash}${space})?${letter})`, 'gmi'),
 			`${openingQuote}$1`
 		)
-		.replace(new RegExp(`${notInTag}"`, 'gmi'), `${closingQuote}`);
+		.replace(new RegExp(`${notInTag}(["”»]|&rdquo;)`, 'gmi'), `${closingQuote}`);
