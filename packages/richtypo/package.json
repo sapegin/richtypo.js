@@ -5,7 +5,7 @@
   "homepage": "https://github.com/sapegin/richtypo.js",
   "author": {
     "name": "Artem Sapegin",
-    "url": "http://sapegin.me/"
+    "url": "https://sapegin.me/"
   },
   "contributors": [
     {
@@ -21,6 +21,11 @@
   },
   "license": "MIT",
   "main": "lib/richtypo.js",
+  "types": "types/index.d.ts",
+  "files": [
+    "lib",
+    "types"
+  ],
   "keywords": [
     "typography",
     "typo",
