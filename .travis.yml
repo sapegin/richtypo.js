@@ -35,7 +35,7 @@ jobs:
       script:
         - git config --global user.name "Richtypo Bot"
         - git config --global user.email "${BOT_EMAIL}"
-        - git remote set-url origin "https://${GH_TOKEN}@github.com/sapegin/mrm.git" > /dev/null 2>&1
+        - git remote set-url origin "https://${GH_TOKEN}@github.com/sapegin/richtypo.js.git" > /dev/null 2>&1
         - git checkout master
         - git reset --hard
         - echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" >> $HOME/.npmrc 2> /dev/null
