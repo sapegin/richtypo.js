@@ -2,7 +2,12 @@
 	"packages": ["packages/*", "example"],
 	"version": "independent",
   "command": {
+    "version": {
+      "allowBranch": "master",
+      "message": "chore: Publish :shipit: [skip ci]"
+    },
     "publish": {
+      "conventionalCommits": true,
       "ignoreChanges": [
         "package-lock.json",
         "*.md",
