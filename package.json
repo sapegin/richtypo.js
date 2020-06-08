@@ -42,8 +42,7 @@
     "format": "prettier --write \"**/*.{js,jsx,md,css}\"",
     "gh-pages": "gh-pages -d example/build",
     "example:build": "lerna exec --scope richtypo-example -- npm run build",
-    "example:serve": "lerna exec --scope richtypo-example -- npm run serve",
-    "publish": "npm publish"
+    "example:serve": "lerna exec --scope richtypo-example -- npm run serve"
   },
   "license": "MIT",
   "lint-staged": {
