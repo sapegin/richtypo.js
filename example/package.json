@@ -1,13 +1,13 @@
 {
   "name": "richtypo-example",
-  "version": "4.0.10",
+  "version": "4.0.11",
   "main": "build/index.html",
   "private": true,
   "license": "MIT",
   "dependencies": {
     "fledermaus": "^7.1.0",
     "richtypo": "^4.1.0",
-    "richtypo-rules-en": "^4.0.5",
+    "richtypo-rules-en": "^4.0.6",
     "richtypo-rules-fr": "^4.0.2",
     "richtypo-rules-ru": "^4.0.2"
   },
