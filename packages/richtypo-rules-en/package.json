@@ -2,7 +2,6 @@
   "name": "richtypo-rules-en",
   "version": "4.0.4",
   "description": "English Typography Rules for richtypo.js",
-  "main": "lib/en.js",
   "author": {
     "name": "Artem Sapegin",
     "url": "http://sapegin.me/"
@@ -13,6 +12,12 @@
     }
   ],
   "license": "MIT",
+  "main": "lib/en.js",
+  "types": "types/index.d.ts",
+  "files": [
+    "lib",
+    "types"
+  ],
   "dependencies": {
     "richtypo-rules-common": "^4.0.2"
   },
