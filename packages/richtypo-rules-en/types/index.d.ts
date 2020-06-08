@@ -1,23 +1,23 @@
 declare module 'richtypo-rules-en' {
 	type Rule = (text: string) => string;
 
-	function abbrs(text: string): string;
-	function amps(text: string): string;
-	function dashesAdvanced(text: string): string;
-	function dashesBasic(text: string): string;
-	function degreeSigns(text: string): string;
-	function ellipses(text: string): string;
-	function hyphenatedWords(text: string): string;
-	function numberOrdinals(text: string): string;
-	function numberSeparators(text: string): string;
-	function numberUnits(text: string): string;
-	function orphans(text: string): string;
-	function prepositions(text: string): string;
-	function quotes(text: string): string;
-	function shortWords(text: string): string;
+	export function abbrs(text: string): string;
+	export function amps(text: string): string;
+	export function dashesAdvanced(text: string): string;
+	export function dashesBasic(text: string): string;
+	export function degreeSigns(text: string): string;
+	export function ellipses(text: string): string;
+	export function hyphenatedWords(text: string): string;
+	export function numberOrdinals(text: string): string;
+	export function numberSeparators(text: string): string;
+	export function numberUnits(text: string): string;
+	export function orphans(text: string): string;
+	export function prepositions(text: string): string;
+	export function quotes(text: string): string;
+	export function shortWords(text: string): string;
 
-	type dashes = Rule[];
+	export const dashes: Rule[];
 
-	type recommended = Rule[];
-	export = recommended;
+	const recommended: Rule[];
+	export default recommended;
 }
