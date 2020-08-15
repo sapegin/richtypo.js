@@ -7,11 +7,15 @@ const rule3 = text => text.replace(/-/g, '#');
 const compare = (actual, expected) =>
 	expect(actual.replace(/\xA0/g, '_')).toEqual(expected);
 
-describe('rightypo', () => {
+describe('richtypo', () => {
 	test('run one rule', () => {
 		expect(rt(rule1, `changes number 100 with percent`)).toEqual(
 			`changes number % with percent`
 		);
+	});
+
+	test('run rule with empty string', () => {
+		expect(rt(rule1, '')).toEqual('');
 	});
 
 	test('run curried rule', () => {

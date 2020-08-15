@@ -75,7 +75,7 @@ function run(rules, text) {
  * @returns {Function|text}
  */
 const richtypo = (rules, text) => {
-	if (text) {
+	if (typeof text !== 'undefined') {
 		return run(rules, text);
 	}
 
