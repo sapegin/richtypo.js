@@ -1,6 +1,6 @@
 {
   "name": "richtypo-rules-en",
-  "version": "4.0.6",
+  "version": "4.0.7",
   "description": "English Typography Rules for richtypo.js",
   "author": {
     "name": "Artem Sapegin",
@@ -19,7 +19,7 @@
     "types"
   ],
   "dependencies": {
-    "richtypo-rules-common": "^4.0.2"
+    "richtypo-rules-common": "^4.1.0"
   },
   "scripts": {
     "build": "babel src --out-dir lib --ignore **/*.test.js",
