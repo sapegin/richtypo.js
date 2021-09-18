@@ -1,12 +1,12 @@
 {
   "name": "richtypo-rules-fr",
-  "version": "4.0.3",
+  "version": "4.0.4",
   "description": "French Typography Rules for richtypo.js",
   "main": "lib/fr.js",
   "author": "David Bismut",
   "license": "MIT",
   "dependencies": {
-    "richtypo-rules-common": "^4.1.0"
+    "richtypo-rules-common": "^4.1.1"
   },
   "scripts": {
     "build": "babel src --out-dir lib --ignore **/*.test.js",

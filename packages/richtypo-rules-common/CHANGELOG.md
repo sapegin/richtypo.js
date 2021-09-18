@@ -1,11 +1,17 @@
 # Change Log
 
-All notable changes to this project will be documented in this file.
-See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [4.1.1](https://github.com/sapegin/richtypo.js/compare/richtypo-rules-common@4.1.0...richtypo-rules-common@4.1.1) (2021-09-18)
+
+### Bug Fixes
+
+- Don't break Markdown lists with one word content ([c69f0f3](https://github.com/sapegin/richtypo.js/commit/c69f0f33436ea4461f4cbdffd3ca5aa147199ca3))
+- Don't break Markdown lists with one word content ([0859c3d](https://github.com/sapegin/richtypo.js/commit/0859c3da92da0e537ec8fae1a7c9bca3903def30))
+- Don't treat small "d" as a capital letter ([67ee020](https://github.com/sapegin/richtypo.js/commit/67ee02065f850e48c96331281808c3730e5fa302))
 
 # [4.1.0](https://github.com/sapegin/richtypo.js/compare/richtypo-rules-common@4.0.2...richtypo-rules-common@4.1.0) (2020-08-16)
 
-
 ### Features
 
-* **richtypo-rules-common:** Add TypeScript definitions ([#35](https://github.com/sapegin/richtypo.js/issues/35)) ([aa09a5c](https://github.com/sapegin/richtypo.js/commit/aa09a5c4b3ac337ec3f31bf5d5144bd1c6a319fc))
+- **richtypo-rules-common:** Add TypeScript definitions ([#35](https://github.com/sapegin/richtypo.js/issues/35)) ([aa09a5c](https://github.com/sapegin/richtypo.js/commit/aa09a5c4b3ac337ec3f31bf5d5144bd1c6a319fc))
