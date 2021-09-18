@@ -1,4 +1,3 @@
-//
 const nbsp = '\xA0';
 const hairspace = '\xAF';
 const space = `[ \t${nbsp}${hairspace}]`;
