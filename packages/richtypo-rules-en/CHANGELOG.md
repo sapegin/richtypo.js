@@ -1,6 +1,18 @@
 # Change Log
 
-All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 4.0.9 (2021-09-18)
+
+
+### Bug Fixes
+
+* Fix semantic release again, maybe 🦜 ([117b91c](https://github.com/sapegin/richtypo.js/commit/117b91cf8affab8b4e216dab74c05d8d854ef1fd))
+
+
+
+
 
 ## [4.0.8](https://github.com/sapegin/richtypo.js/compare/richtypo-rules-en@4.0.7...richtypo-rules-en@4.0.8) (2021-09-18)
 
