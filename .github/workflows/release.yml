@@ -13,7 +13,7 @@ jobs:
         run: |
           git config --global user.name "Richtypo Bot"
           git config --global user.email "${BOT_EMAIL}"
-          git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/sapegin/richtypo.git"
+          git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/sapegin/richtypo.js.git"
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           BOT_EMAIL: ${{ secrets.BOT_EMAIL }}
