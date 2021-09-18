@@ -1,6 +1,6 @@
-# Richtypo: HTML typography enhancer for Node.js
+# Richtypo: HTML and Markdown typography enhancer for Node.js
 
-[![npm](https://img.shields.io/npm/v/richtypo.svg)](https://www.npmjs.com/package/richtypo) [![Build Status](https://travis-ci.org/sapegin/richtypo.js.svg)](https://travis-ci.org/sapegin/richtypo.js) [![Codecov](https://codecov.io/gh/sapegin/richtypo.js/branch/master/graph/badge.svg)](https://codecov.io/gh/sapegin/richtypo.js)
+[![npm](https://img.shields.io/npm/v/richtypo.svg)](https://www.npmjs.com/package/richtypo) [![Codecov](https://codecov.io/gh/sapegin/richtypo/branch/master/graph/badge.svg)](https://codecov.io/gh/sapegin/richtypo) [![Node.js CI status](https://github.com/sapegin/richtypo/workflows/Node.js%20CI/badge.svg)](https://github.com/sapegin/richtypo/actions)
 
 Richtypo prepares your texts to publication on web: applies typography rules like quotes (`"` → `“”`), dashes (`-` → `—`) and non-breaking spaces to make text easier to read.
 

@@ -1,7 +1,7 @@
 {
   "name": "richtypo",
   "version": "4.1.1",
-  "description": "HTML typography enhancer with extensible rules",
+  "description": "HTML and Markdown typography enhancer with extensible rules",
   "homepage": "https://github.com/sapegin/richtypo.js",
   "author": {
     "name": "Artem Sapegin",
@@ -30,6 +30,7 @@
     "typography",
     "typo",
     "html",
+    "markdown",
     "quotes",
     "prepositions",
     "abbr",

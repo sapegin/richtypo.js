@@ -1,0 +1,24 @@
+name: Codecov
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Git
+        run: |
+          git config --global user.name "Richtypo Bot"
+          git config --global user.email "${BOT_EMAIL}"
+        env:
+          BOT_EMAIL: ${{ secrets.BOT_EMAIL }}
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+      - run: npm ci
+      - run: npm run bootstrap
+      - run: npm run test:coverage
+      - uses: codecov/codecov-action@v2
