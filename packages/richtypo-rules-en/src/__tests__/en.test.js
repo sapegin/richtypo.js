@@ -160,6 +160,10 @@ describe('English, recommended rules', () => {
 		compare(rt(recommended, `- [Foo](/) — bar`), `- [Foo](/)_=_bar`);
 	});
 
+	test('do not break Markdown lists', () => {
+		compare(rt(recommended, `- mixer\n- oven`), `- mixer\n- oven`);
+	});
+
 	test('keep words with a hyphen at the end', () => {
 		compare(
 			rt(recommended, `one- and twotailed dogs`),
