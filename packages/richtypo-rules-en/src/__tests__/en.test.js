@@ -10,9 +10,9 @@ import recommended, {
 function compare(actual, expected) {
 	expect(
 		actual
-			.replace(/\xA0/g, '__')
-			.replace(/&#x202f;/g, '_')
-			.replace(/—/g, '=')
+			.replace(/\xA0/g, '__') // non-breaking space
+			.replace(/&#x202f;/g, '_') // hair space
+			.replace(/—/g, '=') // em dash
 	).toEqual(expected);
 }
 
@@ -93,10 +93,17 @@ describe('English, recommended rules', () => {
 		);
 	});
 
-	test('add non-breaking space between a number and a degree sign', () => {
+	test('add hair space between a number and a degree sign', () => {
 		compare(
 			rt(recommended, `Temperature <b>-30</b> °C? Even -25°C maybe`),
 			`Temperature <b>-30</b>_°C? Even -25_°C__maybe`
+		);
+	});
+
+	test('add hair space between a number and a degree sign 2', () => {
+		compare(
+			rt(recommended, `Preheat oven toddd 170 °C.`),
+			`Preheat oven toddd 170_°C.`
 		);
 	});
 
