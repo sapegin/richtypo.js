@@ -16,7 +16,6 @@ import {
 const {
 	punctuation,
 	punctuationOrQuote,
-	endash,
 	emdash,
 	dash,
 	space,
@@ -56,15 +55,12 @@ export const dashesAdvanced = text =>
 		)
 		// Wrap in <nobr> emdash and preceeding word
 		.replace(
-			new RegExp(
-				`([^\\s\\]\\)\\>]+)${space}?[${endash}${emdash}]${space}?`,
-				'gmi'
-			),
+			new RegExp(`([^\\s\\]\\)\\>]+)${space}?${emdash}${space}?`, 'gmi'),
 			`<nobr>$1${hairspace}${emdash}</nobr>${hairspace}`
 		)
 		// Add hair spaces before and after an em dash
 		.replace(
-			new RegExp(`${space}[${endash}${emdash}]${space}`, 'gmi'),
+			new RegExp(`${space}${emdash}${space}`, 'gmi'),
 			`${hairspace}${emdash}${hairspace}`
 		);
 
