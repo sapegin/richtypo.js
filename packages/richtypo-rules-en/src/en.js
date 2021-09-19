@@ -10,7 +10,7 @@ import {
 	quotesFactory,
 	numberOrdinalsFactory,
 	numberSeparatorsFactory,
-	definitions,
+	definitions as commonDefinitions,
 } from 'richtypo-rules-common';
 
 const {
@@ -23,13 +23,23 @@ const {
 	hairspace,
 	tag,
 	notInTag,
-} = definitions;
+} = commonDefinitions;
 const thousandsSeparator = ',';
 const decimalsSeparator = '[.]';
 const ordinal = '(st|nd|rd|th)';
 const preposition = 'and|the|for';
 const openingQuote = '“';
 const closingQuote = '”';
+
+export const definitions = {
+	...commonDefinitions,
+	thousandsSeparator,
+	decimalsSeparator,
+	ordinal,
+	preposition,
+	openingQuote,
+	closingQuote,
+};
 
 // Prepositions
 export const prepositions = text =>
