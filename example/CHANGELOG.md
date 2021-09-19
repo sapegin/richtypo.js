@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 4.0.18 (2021-09-19)
+
+
+### Bug Fixes
+
+* Add types for definitions ([ae2b3c6](https://github.com/sapegin/richtypo.js/commit/ae2b3c6f97a2300dc0f57e9c54c43d5b862a46bc))
+
+
+
+
+
 ## 4.0.17 (2021-09-19)
 
 **Note:** Version bump only for package richtypo-example
