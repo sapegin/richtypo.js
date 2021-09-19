@@ -61,7 +61,7 @@ export const numberUnits = text =>
 
 export const degreeSigns = text =>
 	text.replace(
-		new RegExp(`${notInTag}(\\d${tag}?)${space}?°`, 'gmi'),
+		new RegExp(`${notInTag}(\\d${tag}?)${space}?[˚°]`, 'gmi'),
 		`$1${hairspace}°`
 	);
 
