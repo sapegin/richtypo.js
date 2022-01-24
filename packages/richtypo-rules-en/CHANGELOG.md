@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 4.0.14 (2022-01-24)
+
+
+### Bug Fixes
+
+* Remove duplicate type declaration ([9be730f](https://github.com/sapegin/richtypo.js/commit/9be730f453136bfd34a96547e979844300f9447c))
+
+
+
+
+
 ## 4.0.13 (2021-09-19)
 
 
