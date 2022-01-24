@@ -2,30 +2,29 @@ declare module 'richtypo-rules-en' {
 	type Rule = (text: string) => string;
 
 	export const definitions: {
-		nbsp: string;
+		closingQuote: string;
+		dash: string;
+		decimalsSeparator: string;
+		emdash: string;
+		endash: string;
 		hairspace: string;
-		space: string;
-		tag: string;
-		quote: string;
 		letter: string;
 		letterOrHyphen: string;
-		notLetterOrHyphen: string;
-		upperLetter: string;
 		letterOrQuote: string;
-		punctuation: string;
-		punctuationOrQuote: string;
-		endash: string;
-		emdash: string;
-		dash: string;
-		openingQuote: string;
-		shortWord: string;
+		nbsp: string;
 		notInTag: string;
-		thousandsSeparator: string;
-		decimalsSeparator: string;
+		notLetterOrHyphen: string;
+		openingQuote: string;
 		ordinal: string;
 		preposition: string;
-		openingQuote: string;
-		closingQuote: string;
+		punctuation: string;
+		punctuationOrQuote: string;
+		quote: string;
+		shortWord: string;
+		space: string;
+		tag: string;
+		thousandsSeparator: string;
+		upperLetter: string;
 	};
 
 	export function abbrs(text: string): string;
