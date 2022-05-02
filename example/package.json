@@ -1,15 +1,15 @@
 {
   "name": "richtypo-example",
-  "version": "4.0.21",
+  "version": "4.0.22",
   "main": "build/index.html",
   "private": true,
   "license": "MIT",
   "dependencies": {
     "fledermaus": "^7.1.0",
-    "richtypo": "^4.1.10",
-    "richtypo-rules-en": "^4.0.16",
-    "richtypo-rules-fr": "^4.0.12",
-    "richtypo-rules-ru": "^4.0.12"
+    "richtypo": "^4.1.11",
+    "richtypo-rules-en": "^4.0.17",
+    "richtypo-rules-fr": "^4.0.13",
+    "richtypo-rules-ru": "^4.0.13"
   },
   "scripts": {
     "build": "babel-node src",
