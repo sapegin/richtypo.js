@@ -1,6 +1,6 @@
 {
   "name": "richtypo-rules-ru",
-  "version": "4.0.14",
+  "version": "4.0.15",
   "description": "Russian typography rules for Richtypo",
   "main": "lib/ru.js",
   "author": {
@@ -9,7 +9,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "richtypo-rules-common": "^4.1.11"
+    "richtypo-rules-common": "^4.1.12"
   },
   "scripts": {
     "build": "babel src --out-dir lib --ignore **/*.test.js",
