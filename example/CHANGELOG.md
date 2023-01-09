@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 4.0.26 (2023-01-09)
+
+**Note:** Version bump only for package richtypo-example
+
+
+
+
+
 ## 4.0.25 (2022-12-08)
 
 **Note:** Version bump only for package richtypo-example
