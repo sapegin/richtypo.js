@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 4.0.18 (2023-03-02)
+
+**Note:** Version bump only for package richtypo-rules-ru
+
+
+
+
+
 ## 4.0.17 (2023-01-09)
 
 **Note:** Version bump only for package richtypo-rules-ru
