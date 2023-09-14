@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 4.0.25 (2023-09-14)
+
+**Note:** Version bump only for package richtypo-rules-en
+
+
+
+
+
 ## 4.0.24 (2023-09-14)
 
 **Note:** Version bump only for package richtypo-rules-en
