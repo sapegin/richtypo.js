@@ -1,37 +1,62 @@
 /* Page styles */
+
 body {
 	background: #f5e9d2;
-	color: hsla(0,0%,0%,.75);
-	font-size: 100%;
+	color: hsla(0, 0%, 0%, 0.75);
+	font-size: 120%;
+	line-height: 1.68;
 	padding: 1em;
 	margin: 0 auto;
-	max-width: 30em;
-	font-family: "Sorts Mill Goudy", Georgia, serif;
+	max-width: 80em;
+	font-family: 'Vollkorn', Georgia, serif;
 	-webkit-hyphens: auto;
 	-moz-hyphens: auto;
 	hyphens: auto;
 	-webkit-font-kerning: normal;
 	font-kerning: normal;
-	font-variant-numeric: "oldstyle-nums";
-	-webkit-font-variant-ligatures: common-ligatures discretionary-ligatures contextual historical-ligatures;
-	font-variant-ligatures: common-ligatures discretionary-ligatures contextual historical-ligatures;
-	-webkit-font-feature-settings: "kern", "liga", "dlig", "hlig", "clig", "ss01", "ss03", "salt", "onum";
-	font-feature-settings: "kern", "liga", "dlig", "hlig", "clig", "ss01", "ss03", "salt", "onum";
-	}
+}
+
+.rule {
+	cursor: help;
+	background-color: rgba(0, 0, 0, 0.2);
+}
+
+.rule-nbsp {
+	background-color: rgba(4, 0, 255, 0.2);
+}
+
+.rule-narrow {
+	background-color: rgba(4, 0, 255, 0.4);
+}
+
+.rule-quote {
+	background-color: rgba(255, 145, 0, 0.2);
+}
+
+.rule-emdash {
+	background-color: rgba(21, 255, 0, 0.2);
+}
+
+.content {
+	display: flex;
+}
+
+.content__column {
+	margin: 0 2em;
+}
 
 h1 {
 	margin: 0 0 1em;
+	text-align: center;
 	line-height: 1.1;
 	font-size: 2.4em;
 	font-weight: normal;
-	text-shadow: 0 1px 0 hsla(0,0%,100%,.5);
-	}
+	text-shadow: 0 1px 0 hsla(0, 0%, 100%, 0.5);
+}
 
 p {
 	margin: 0 0 1em;
-	line-height: 1.6;
-	font-size: 1.15em;
-	}
+}
 
 a,
 a:link,
@@ -40,16 +65,18 @@ a:hover,
 a:active,
 a:focus {
 	color: inherit;
-	}
+}
 
 /* Typography */
+
 abbr {
 	font-size: 0.875em;
 	letter-spacing: 0.15em;
 	margin-right: -0.15em;
-	}
+}
 
 .amp {
-	font-family: Baskerville, Constantia, Palatino, "Palatino Linotype", "Book Antiqua", serif;
+	font-family: Baskerville, Constantia, Palatino, 'Palatino Linotype',
+		'Book Antiqua', serif;
 	font-style: italic;
-	}
+}
