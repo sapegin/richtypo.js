@@ -1,6 +1,6 @@
 {
   "name": "richtypo-rules-ru",
-  "version": "4.0.21",
+  "version": "5.0.0",
   "description": "Russian typography rules for Richtypo",
   "author": {
     "name": "Artem Sapegin",
@@ -9,7 +9,7 @@
   "license": "MIT",
   "type": "module",
   "dependencies": {
-    "richtypo-rules-common": "^4.1.18"
+    "richtypo-rules-common": "^5.0.0"
   },
   "main": "dist/ru.js",
   "types": "dist/ru.d.ts",
