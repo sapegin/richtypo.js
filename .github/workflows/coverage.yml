@@ -16,9 +16,11 @@ jobs:
           git config --global user.email "${BOT_EMAIL}"
         env:
           BOT_EMAIL: ${{ secrets.BOT_EMAIL }}
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: .nvmrc
+          cache: 'npm'
       - run: npm ci
-      - run: npm run bootstrap
       - run: npm run test:coverage
       - uses: codecov/codecov-action@v2

@@ -1,67 +1,53 @@
 {
   "name": "richtypo.js",
   "private": true,
-  "devDependencies": {
-    "@babel/cli": "^7.5.5",
-    "@babel/core": "^7.5.5",
-    "@babel/node": "^7.5.5",
-    "@babel/preset-env": "^7.5.5",
-    "babel-core": "^7.0.0-bridge",
-    "babel-jest": "^24.9.0",
-    "babel-plugin-transform-react-jsx": "^6.24.1",
-    "eslint": "^6.2.0",
-    "eslint-config-tamia": "^7.0.0",
-    "gh-pages": "^2.1.1",
-    "husky": "^3.0.4",
-    "jest": "^24.9.0",
-    "lerna": "^3.16.4",
-    "lint-staged": "^9.2.3",
-    "prettier": "^1.18.2",
-    "serve": "^14.1.2"
-  },
+  "license": "MIT",
   "engines": {
-    "node": ">=8.10"
+    "node": ">=18"
   },
-  "jest": {
-    "moduleNameMapper": {
-      "^richtypo$": "<rootDir>/packages/richtypo/src/richtypo.js",
-      "^richtypo-rules-common$": "<rootDir>/packages/richtypo-rules-common/src/common.js"
-    },
-    "coveragePathIgnorePatterns": [
-      "<rootDir>/packages/(.*)/lib/(.*)\\.js"
-    ]
+  "devDependencies": {
+    "@types/jest": "^29.5.5",
+    "@types/node": "^20.8.3",
+    "@typescript-eslint/eslint-plugin": "^6.7.5",
+    "@typescript-eslint/parser": "^6.7.5",
+    "eslint": "^8.51.0",
+    "eslint-config-tamia": "^8.1.1",
+    "gh-pages": "^2.1.1",
+    "husky": "^8.0.3",
+    "jest": "^29.7.0",
+    "lerna": "^7.3.0",
+    "lint-staged": "^14.0.1",
+    "prettier": "^3.0.3",
+    "richtypo": "file:packages/richtypo",
+    "richtypo-rules-en": "file:packages/richtypo-rules-en",
+    "richtypo-rules-fr": "file:packages/richtypo-rules-fr",
+    "richtypo-rules-ru": "file:packages/richtypo-rules-ru",
+    "ts-jest": "^29.1.1",
+    "tsx": "^3.13.0",
+    "typescript": "^5.2.2",
+    "vitest": "^0.34.6"
   },
   "scripts": {
-    "bootstrap": "lerna bootstrap",
     "pretest": "npm run lint",
-    "test": "jest",
+    "test": "vitest run",
     "posttest": "npm run format",
-    "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage",
+    "test:watch": "vitest watch",
+    "test:coverage": "vitest run --coverage",
     "lint": "eslint . --cache --fix",
-    "format": "prettier --write \"**/*.{js,jsx,md,css}\"",
-    "gh-pages": "gh-pages -d example/build",
-    "example:build": "lerna exec --scope richtypo-example -- npm run build",
-    "example:serve": "lerna exec --scope richtypo-example -- npm run serve"
+    "format": "prettier --write \"**/*.{js,ts,tsx,md,css,html}\"",
+    "gh-pages": "gh-pages -d example/dist",
+    "build": "npm run build --workspaces"
   },
-  "license": "MIT",
+  "workspaces": [
+    "packages/richtypo",
+    "packages/richtypo-rules-common",
+    "packages/richtypo-rules-en",
+    "packages/richtypo-rules-ru",
+    "packages/richtypo-rules-fr",
+    "example"
+  ],
   "lint-staged": {
-    "*.{js,jsx,md,css}": [
-      "prettier --write",
-      "git add"
-    ],
-    "*.{js,jsx}": [
-      "eslint --fix",
-      "git add"
-    ],
-    "*.js": [
-      "eslint --fix",
-      "git add"
-    ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
+    "*.{js,ts,tsx,md,css,html}": "prettier --write",
+    "*.{js,ts,tsx}": "eslint --cache --fix"
   }
 }

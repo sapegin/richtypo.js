@@ -1,15 +1,18 @@
-export default function({
-	config: { lang },
+export function template({
+	lang,
 	title,
-	richtypo,
 	content,
-	pageTitle,
+	contentTypo,
+}: {
+	lang: string;
+	title: string;
+	content: string;
+	contentTypo: string;
 }) {
-	return (
-		<html lang={lang}>
+	return `<html lang="${lang}">
 			<head>
 				<meta charset="utf-8" />
-				<title>{title}</title>
+				<title>${title}</title>
 				<link
 					href="https://fonts.googleapis.com/css?family=Vollkorn:400,400i,700i&amp;subset=cyrillic,latin-ext"
 					rel="stylesheet"
@@ -17,12 +20,10 @@ export default function({
 				<link href="example.css" rel="stylesheet" />
 			</head>
 			<body>
-				<h1>{vdo.markSafe(pageTitle)}</h1>
 				<main role="main" class="content">
-					<div class="content__column">{vdo.markSafe(content)}</div>
-					<div class="content__column">{vdo.markSafe(richtypo)}</div>
+					<div class="content__column">${content}</div>
+					<div class="content__column">${contentTypo}</div>
 				</main>
 			</body>
-		</html>
-	);
+		</html>`;
 }

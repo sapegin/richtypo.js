@@ -2,25 +2,20 @@
   "name": "richtypo-rules-common",
   "version": "4.1.18",
   "description": "Common Typography Rules for Richtypo",
+  "license": "MIT",
+  "type": "module",
   "author": {
     "name": "Artem Sapegin",
-    "url": "http://sapegin.me/"
+    "url": "https://sapegin.me/"
   },
-  "contributors": [
-    {
-      "name": "David Bismut"
-    }
-  ],
-  "main": "lib/common.js",
-  "types": "types/index.d.ts",
+  "main": "dist/common.js",
+  "types": "dist/common.d.ts",
   "files": [
-    "lib",
-    "types"
+    "dist"
   ],
-  "license": "MIT",
   "scripts": {
-    "build": "babel src --out-dir lib --ignore **/*.test.js",
-    "watch": "babel -w src --out-dir lib --ignore **/*.test.js",
+    "build": "tsc",
+    "watch": "tsc --watch",
     "prepare": "npm run build"
   }
 }

@@ -4,26 +4,21 @@
   "description": "English Typography Rules for richtypo.js",
   "author": {
     "name": "Artem Sapegin",
-    "url": "http://sapegin.me/"
+    "url": "https://sapegin.me/"
   },
-  "contributors": [
-    {
-      "name": "David Bismut"
-    }
-  ],
   "license": "MIT",
-  "main": "lib/en.js",
-  "types": "types/index.d.ts",
+  "type": "module",
+  "main": "dist/en.js",
+  "types": "dist/en.d.ts",
   "files": [
-    "lib",
-    "types"
+    "dist"
   ],
   "dependencies": {
     "richtypo-rules-common": "^4.1.18"
   },
   "scripts": {
-    "build": "babel src --out-dir lib --ignore **/*.test.js",
-    "watch": "babel -w src --out-dir lib --ignore **/*.test.js",
+    "build": "tsc",
+    "watch": "tsc --watch",
     "prepare": "npm run build"
   }
 }

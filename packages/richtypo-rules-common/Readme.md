@@ -68,7 +68,7 @@ export const quotes = quotesFactory({
 ```
 
 | Rule | Arguments | Description |
-| --- | --- | --- |
-| **`numberOrdinalsFactory`** | `{ ordinals }` | format _1st, 2nd, 3rd_ etc. into _1st, 2nd, 3rd_. `ordinals` should be a regex array of strings such as `'(st|nd|rd|th)'`. |
+| --- | --- | --- | --- | --- | --- |
+| **`numberOrdinalsFactory`** | `{ ordinal }` | format _1st, 2nd, 3rd_ etc. into _1st, 2nd, 3rd_. `ordinal` should be a regex array of strings such as `'(st | nd | rd | th)'`. |
 | **`numberSeparatorsFactory`** | `{ decimalsSeparator, thousandsSeparator }` | format numbers with thousands separator |
 | **`quotesFactory`** | `{ openingQuote, closingQuote }` | replace dumb quotes with typography quotes |

@@ -1,18 +1,21 @@
 {
   "name": "richtypo-example",
   "version": "4.0.30",
-  "main": "build/index.html",
+  "main": "dist/index.html",
   "private": true,
   "license": "MIT",
   "dependencies": {
-    "fledermaus": "^7.1.0",
+    "fs-extra": "^11.1.1",
+    "glob": "^10.3.10",
     "richtypo": "^4.1.19",
     "richtypo-rules-en": "^4.0.25",
     "richtypo-rules-fr": "^4.0.21",
     "richtypo-rules-ru": "^4.0.21"
   },
   "scripts": {
-    "build": "babel-node src",
-    "serve": "serve build"
+    "build": "tsx src"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.2"
   }
 }

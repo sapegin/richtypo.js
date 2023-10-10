@@ -1,5 +1,5 @@
 coverage/
 __tests__/
 *.jsx
-lib/
+dist/
 node_modules/

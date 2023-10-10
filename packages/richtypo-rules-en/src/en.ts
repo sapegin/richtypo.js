@@ -1,3 +1,5 @@
+type Rule = (text: string) => string;
+
 import {
 	shortWords,
 	hyphenatedWords,
@@ -42,7 +44,7 @@ export const definitions = {
 };
 
 // Prepositions
-export const prepositions = text =>
+export const prepositions = (text: string) =>
 	text.replace(
 		new RegExp(
 			`${notInTag}(?<=^|${space}|${punctuationOrQuote}|>)(${preposition}(${tag})?)${space}`,
@@ -51,7 +53,7 @@ export const prepositions = text =>
 		`$1${nbsp}`
 	);
 
-export const dashesAdvanced = text =>
+export const dashesAdvanced = (text: string) =>
 	text
 		// Add hair space between , or ) and a dash
 		.replace(
@@ -102,14 +104,14 @@ export {
 // - numberOrdinals
 // - numberSeparators - breaks years, like "1920"
 
-const recommended = [
+const recommended: Rule[] = [
 	// Common rules
 	shortWords,
 	hyphenatedWords,
 	prepositions,
 	orphans,
 	abbrs,
-	dashes,
+	...dashes,
 	ellipses,
 	numberUnits,
 	degreeSigns,

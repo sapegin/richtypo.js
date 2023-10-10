@@ -1,3 +1,5 @@
+type Rule = (text: string) => string;
+
 import {
 	numberUnits,
 	degreeSigns,
@@ -11,23 +13,15 @@ import {
 	definitions,
 } from 'richtypo-rules-common';
 
-const {
-	notInTag,
-	space,
-	nbsp,
-	hairspace,
-	endash,
-	emdash,
-	dash,
-	punctuation,
-} = definitions;
+const { notInTag, space, nbsp, hairspace, endash, emdash, dash, punctuation } =
+	definitions;
 const thousandsSeparator = hairspace;
 const decimalsSeparator = ',';
 const openingQuote = '«';
 const closingQuote = '»';
 const particle = 'б|бы|ж|же|ли|ль';
 
-export const dashesAdvanced = text =>
+export const dashesAdvanced = (text: string) =>
 	text
 		// Replace - at the beginnning of a line or right after a tag with em dash
 		.replace(new RegExp(`^[-${endash}](${space})`, 'gmi'), `${emdash}$1`)
@@ -45,7 +39,7 @@ export const dashesAdvanced = text =>
 export const dashes = [dashesBasic, dashesAdvanced];
 
 // Spaces inside "и т. д." and "и т. п."
-export const etcs = text =>
+export const etcs = (text: string) =>
 	text
 		.replace(
 			new RegExp(`и${space}т\\.${space}д\\.`, 'gi'),
@@ -57,26 +51,26 @@ export const etcs = text =>
 		);
 
 // Spaces inside "№ N"
-export const numberSigns = text =>
+export const numberSigns = (text: string) =>
 	text.replace(new RegExp(`№${space}`, 'g'), `№${nbsp}`);
 
 // Spaces inside "§ N"
-export const sectionSigns = text =>
+export const sectionSigns = (text: string) =>
 	text.replace(new RegExp(`§${space}`, 'g'), `§${nbsp}`);
 
 // Nowrap ("В. И. Ленин")
-export const initials = text =>
+export const initials = (text: string) =>
 	text.replace(/((?:[А-ЯЁ]\.\s){1,2}[А-ЯЁ][а-яё]+)/g, `<nobr>$1</nobr>`);
 
 // Nowrap short words with a hyphen ("из-за")
-export const hyphenatedWords = text =>
+export const hyphenatedWords = (text: string) =>
 	text.replace(
 		/([^а-яёА-ЯЁ]|^)((?:[а-яёА-ЯЁ]{1,2}(?:-[а-яёА-ЯЁ]+))|(?:[а-яёА-ЯЁ]+(?:-[а-яёА-ЯЁ]{1,2})))(?![-а-яёА-ЯЁ])/g,
 		`$1<nobr>$2</nobr>`
 	);
 
 // Particles
-export const particles = text =>
+export const particles = (text: string) =>
 	text
 		.replace(
 			new RegExp(`([а-яёА-ЯЁ]) (${particle})(?=[?!,.:;"‘“»])`, 'g'),
@@ -109,7 +103,7 @@ export {
 // Not in recommended:
 // - numberSeparators - breaks years, like "1920"
 
-const recommended = [
+const recommended: Rule[] = [
 	// Common rules
 	numberUnits,
 	shortWords,
@@ -125,6 +119,7 @@ const recommended = [
 	initials,
 	hyphenatedWords,
 	particles,
-	dashes,
+	...dashes,
 ];
+
 export default recommended;
