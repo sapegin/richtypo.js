@@ -1,3 +1,5 @@
+type Rule = (text: string) => string;
+
 import {
 	shortWords,
 	orphans,
@@ -28,7 +30,7 @@ export const numberSeparators = numberSeparatorsFactory({
 	decimalsSeparator,
 });
 
-export const dashesAdvanced = text =>
+export const dashesAdvanced = (text: string) =>
 	text
 		// Replace - at the beginnning of a line or right after a tag with em dash
 		.replace(new RegExp(`^-(${space})`, 'gmi'), `—$1`)
@@ -42,7 +44,7 @@ export const dashesAdvanced = text =>
 
 export const dashes = [dashesBasic, dashesAdvanced];
 
-export const punctuationMarks = text =>
+export const punctuationMarks = (text: string) =>
 	text
 		.replace(
 			new RegExp(`${notInTag}(?:${space}+)?([\\?!:»]|${semicolon})`, 'gmi'),
@@ -70,12 +72,12 @@ export {
 // - numberOrdinals
 // - numberSeparators - breaks years, like "1920"
 
-const recommended = [
+const recommended: Rule[] = [
 	// Common rules
 	shortWords,
 	orphans,
 	abbrs,
-	dashes,
+	...dashes,
 	ellipses,
 	numberUnits,
 	degreeSigns,

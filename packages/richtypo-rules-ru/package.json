@@ -2,18 +2,23 @@
   "name": "richtypo-rules-ru",
   "version": "4.0.21",
   "description": "Russian typography rules for Richtypo",
-  "main": "lib/ru.js",
   "author": {
     "name": "Artem Sapegin",
-    "url": "http://sapegin.me/"
+    "url": "https://sapegin.me/"
   },
   "license": "MIT",
+  "type": "module",
   "dependencies": {
     "richtypo-rules-common": "^4.1.18"
   },
+  "main": "dist/ru.js",
+  "types": "dist/ru.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "build": "babel src --out-dir lib --ignore **/*.test.js",
-    "watch": "babel -w src --out-dir lib --ignore **/*.test.js",
+    "build": "tsc",
+    "watch": "tsc --watch",
     "prepare": "npm run build"
   },
   "keywords": [

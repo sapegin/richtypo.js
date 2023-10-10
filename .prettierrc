@@ -6,6 +6,7 @@
 		{
 			"files": "*.md",
 			"options": {
+				"arrowParens": "avoid",
 				"printWidth": 70,
 				"useTabs": false,
 				"trailingComma": "none",

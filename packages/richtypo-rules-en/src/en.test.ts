@@ -1,3 +1,4 @@
+import { describe, expect, test } from 'vitest';
 import rt from 'richtypo';
 
 import recommended, {
@@ -5,9 +6,9 @@ import recommended, {
 	amps,
 	numberOrdinals,
 	numberSeparators,
-} from '../en';
+} from './en';
 
-function compare(actual, expected) {
+function compare(actual: string, expected: string) {
 	expect(
 		actual
 			.replace(/\xA0/g, '__') // non-breaking space

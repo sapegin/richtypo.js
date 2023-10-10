@@ -8,7 +8,6 @@ Install dependencies first:
 
 ```bash
 npm install
-npm run bootstrap
 ```
 
 Run linters and tests:

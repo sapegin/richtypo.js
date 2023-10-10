@@ -1,96 +1,93 @@
-import rt from '../richtypo';
+import { describe, expect, test } from 'vitest';
+import richtypo from './richtypo';
 
-const rule1 = text => text.replace(/100/g, '%');
-const rule2 = text => text.toUpperCase();
-const rule3 = text => text.replace(/-/g, '#');
+const rule1 = (text: string) => text.replace(/100/g, '%');
+const rule2 = (text: string) => text.toUpperCase();
+const rule3 = (text: string) => text.replace(/-/g, '#');
 
-const compare = (actual, expected) =>
+const compare = (actual: string, expected: string) =>
 	expect(actual.replace(/\xA0/g, '_')).toEqual(expected);
 
 describe('richtypo', () => {
 	test('run one rule', () => {
-		expect(rt(rule1, `changes number 100 with percent`)).toEqual(
+		expect(richtypo(rule1, `changes number 100 with percent`)).toEqual(
 			`changes number % with percent`
 		);
 	});
 
 	test('run rule with empty string', () => {
-		expect(rt(rule1, '')).toEqual('');
-	});
-
-	test('run curried rule', () => {
-		const curried = rt(rule1);
-		expect(curried(`changes number 100 with percent`)).toEqual(
-			`changes number % with percent`
-		);
+		expect(richtypo(rule1, '')).toEqual('');
 	});
 
 	test('run an array of rules', () => {
-		expect(rt([rule1, rule2], `changes number 100 with percent`)).toEqual(
-			`CHANGES NUMBER % WITH PERCENT`
-		);
-	});
-
-	test('run a nested array of rules', () => {
-		expect(rt([rule1, [rule2]], `changes number 100 with percent`)).toEqual(
+		expect(richtypo([rule1, rule2], `changes number 100 with percent`)).toEqual(
 			`CHANGES NUMBER % WITH PERCENT`
 		);
 	});
 
 	test('keep HTML tags', () => {
 		compare(
-			rt(rule1, '<b>a 100 b</b and an image <img src="pixel.gif" alt="">'),
+			richtypo(
+				rule1,
+				'<b>a 100 b</b and an image <img src="pixel.gif" alt="">'
+			),
 			'<b>a % b</b and an image <img src="pixel.gif" alt="">'
 		);
 	});
 
 	test('keep HTML tags (code)', () => {
-		compare(rt(rule1, '<code> a 100 b </code>'), '<code> a 100 b </code>');
+		compare(
+			richtypo(rule1, '<code> a 100 b </code>'),
+			'<code> a 100 b </code>'
+		);
 	});
 
 	test('keep HTML tags (pre)', () => {
-		compare(rt(rule1, '<pre> a 100 b </pre>'), '<pre> a 100 b </pre>');
+		compare(richtypo(rule1, '<pre> a 100 b </pre>'), '<pre> a 100 b </pre>');
 	});
 
 	test('keep HTML tags (style)', () => {
-		compare(rt(rule1, '<style> a 100 b </style>'), '<style> a 100 b </style>');
+		compare(
+			richtypo(rule1, '<style> a 100 b </style>'),
+			'<style> a 100 b </style>'
+		);
 	});
 
 	test('keep HTML tags (script)', () => {
 		compare(
-			rt(rule1, '<script> a 100 b </script>'),
+			richtypo(rule1, '<script> a 100 b </script>'),
 			'<script> a 100 b </script>'
 		);
 	});
 
 	test('keep HTML tags (works well with >)', () => {
-		compare(rt(rule1, '<code> -->> </code>'), '<code> -->> </code>');
+		compare(richtypo(rule1, '<code> -->> </code>'), '<code> -->> </code>');
 	});
 
 	test('keep Markdown images', () => {
 		compare(
-			rt(rule2, '![](/foo.jpg) ![Bar](/bar.jpg)'),
+			richtypo(rule2, '![](/foo.jpg) ![Bar](/bar.jpg)'),
 			'![](/foo.jpg) ![BAR](/bar.jpg)'
 		);
 	});
 
 	test('keep Markdown links', () => {
 		compare(
-			rt(rule2, 'Some [foo bar](/foo) baz.'),
+			richtypo(rule2, 'Some [foo bar](/foo) baz.'),
 			'SOME [FOO BAR](/foo) BAZ.'
 		);
 	});
 
 	test('keep Markdown code blocks', () => {
 		compare(
-			rt(rule2, `Some \`and some bar\` foo.`),
+			richtypo(rule2, `Some \`and some bar\` foo.`),
 			`SOME \`and some bar\` FOO.`
 		);
 	});
 
 	test('keep Markdown fenced code blocks', () => {
 		compare(
-			rt(
+			richtypo(
 				rule2,
 				`Some foo.
 
@@ -110,7 +107,7 @@ npm install --save-dev typings-for-css-modules-loader
 
 	test('keep Markdown fenced code blocks with HTML inside', () => {
 		compare(
-			rt(
+			richtypo(
 				rule2,
 				`Some foo.
 
@@ -130,7 +127,7 @@ npm install --save-dev typings-for-css-modules-loader
 
 	test('keep Markdown fenced code blocks with template literals inside', () => {
 		compare(
-			rt(
+			richtypo(
 				rule2,
 				`Some foo.
 
@@ -150,7 +147,7 @@ npm install \`--save-dev\` typings-for-css-modules-loader
 
 	test('keep Markdown fenced code blocks with something that looks like Markdown links inside', () => {
 		compare(
-			rt(
+			richtypo(
 				rule2,
 				`\`\`\`js
 const getSpecialOffersForBrand = brand =>
@@ -171,29 +168,32 @@ const getSpecialOffersForBrand = brand =>
 	});
 
 	test('keep Markdown tables', () => {
-		compare(rt(rule3, '| - | - |'), '| - | - |');
-		compare(rt(rule3, '| -- | -- |'), '| -- | -- |');
-		compare(rt(rule3, '| --- | --- |'), '| --- | --- |');
-		compare(rt(rule3, '| :- | -: |'), '| :- | -: |');
-		compare(rt(rule3, '| :-- | --: |'), '| :-- | --: |');
-		compare(rt(rule3, '| :--- | ---: |'), '| :--- | ---: |');
+		compare(richtypo(rule3, '| - | - |'), '| - | - |');
+		compare(richtypo(rule3, '| -- | -- |'), '| -- | -- |');
+		compare(richtypo(rule3, '| --- | --- |'), '| --- | --- |');
+		compare(richtypo(rule3, '| :- | -: |'), '| :- | -: |');
+		compare(richtypo(rule3, '| :-- | --: |'), '| :-- | --: |');
+		compare(richtypo(rule3, '| :--- | ---: |'), '| :--- | ---: |');
 		compare(
-			rt(rule3, '| A | B |\n| - | - |\n| a | b |'),
+			richtypo(rule3, '| A | B |\n| - | - |\n| a | b |'),
 			'| A | B |\n| - | - |\n| a | b |'
 		);
-		compare(rt(rule3, '| `a` | b |'), '| `a` | b |');
+		compare(richtypo(rule3, '| `a` | b |'), '| `a` | b |');
 	});
 
 	test('rules don’t affect text inside HTML tags', () => {
 		compare(
-			rt(rule1, 'No typo <img src="hamster.jpg" alt="a 100 b"> inside tags.'),
+			richtypo(
+				rule1,
+				'No typo <img src="hamster.jpg" alt="a 100 b"> inside tags.'
+			),
 			'No typo <img src="hamster.jpg" alt="a 100 b"> inside tags.'
 		);
 	});
 
 	test('rules don’t affect text inside HTML tags (complex example)', () => {
 		compare(
-			rt(
+			richtypo(
 				rule1,
 				'More <b>a 100 b</b>. No typo <img src="hamster.jpg" alt="a 100 b"> inside tags. And some code: <pre><code>\na 100 b\na 100 b\na 100 b\n</code></pre>.'
 			),
@@ -203,7 +203,7 @@ const getSpecialOffersForBrand = brand =>
 
 	test('leave commented out tags alone', () => {
 		compare(
-			rt(
+			richtypo(
 				rule1,
 				'<!-- <script>alert("wheee");</script><style>* { color: red; }</style><pre>...</pre> -->'
 			),
@@ -213,34 +213,37 @@ const getSpecialOffersForBrand = brand =>
 
 	test('plays nice with IE conditional comments', () => {
 		compare(
-			rt(
+			richtypo(
 				rule1,
 				'<!--[if lte IE 6]><script>alert("wheee");</script><style>* { color: red; }</style><pre>...</pre><![endif]-->'
 			),
 			'<!--[if lte IE 6]><script>alert("wheee");</script><style>* { color: red; }</style><pre>...</pre><![endif]-->'
 		);
 		compare(
-			rt(rule1, '<!--[if lte IE 6]>The “quoted text.”<![endif]-->', 'en'),
+			richtypo(rule1, '<!--[if lte IE 6]>The “quoted text.”<![endif]-->'),
 			'<!--[if lte IE 6]>The “quoted text.”<![endif]-->'
 		);
 	});
 
 	test('remove repeated spaces from the source', () => {
-		expect(rt(rule1, `changes   number 100  with percent`)).toEqual(
+		expect(richtypo(rule1, `changes   number 100  with percent`)).toEqual(
 			`changes number % with percent`
 		);
 	});
 
 	test('convert hair spaces to HTML entities', () => {
 		expect(
-			rt(s => s.replace(/100/, '\xAF'), `changes number 100 with a hair space`)
+			richtypo(
+				(s) => s.replace(/100/, '\xAF'),
+				`changes number 100 with a hair space`
+			)
 		).toEqual(`changes number &#x202f; with a hair space`);
 	});
 
 	test('remove double tags', () => {
 		expect(
-			rt(
-				s => s.replace(/100/, '<abbr><abbr>%</abbr></abbr>'),
+			richtypo(
+				(s) => s.replace(/100/, '<abbr><abbr>%</abbr></abbr>'),
 				`changes number 100 with a tag`
 			)
 		).toEqual(`changes number <abbr>%</abbr> with a tag`);

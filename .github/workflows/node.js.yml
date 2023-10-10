@@ -9,12 +9,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version:
-          - 10.x
-          - 12.x
-          - 14.x
     steps:
       - name: Set up Git
         run: |
@@ -22,11 +16,11 @@ jobs:
           git config --global user.email "${BOT_EMAIL}"
         env:
           BOT_EMAIL: ${{ secrets.BOT_EMAIL }}
-      - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version-file: .nvmrc
+          cache: 'npm'
       - run: npm ci
-      - run: npm run bootstrap
       - run: npm test
+      - run: npm run build

@@ -1,17 +1,18 @@
 {
-	"packages": ["packages/*", "example"],
-	"version": "independent",
+  "$schema": "node_modules/lerna/schemas/lerna-schema.json",
+  "version": "independent",
   "command": {
     "version": {
       "allowBranch": "master",
-      "message": "chore: Publish :shipit: [skip ci]"
+      "conventionalCommits": true,
+      "message": "chore: Publish :shipit:"
     },
     "publish": {
       "conventionalCommits": true,
       "ignoreChanges": [
         "package-lock.json",
         "*.md",
-        "*.spec.js",
+        "*.test.ts",
         "*.snap"
       ]
     }

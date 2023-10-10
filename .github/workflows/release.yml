@@ -7,8 +7,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: .nvmrc
+          cache: 'npm'
       - name: Set up Git
         run: |
           git config --global user.name "Richtypo Bot"
@@ -22,6 +25,7 @@ jobs:
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       - run: npm ci
+      - run: npm run build
       - name: Publish
         run: |
           npx lerna version --yes --create-release=github

@@ -1,4 +1,5 @@
-import flatten from '@arr/flatten';
+export type Rule = (text: string) => string;
+export type Rules = Rule[] | Rule;
 
 const SAVE_TAGS_REGEXPS = [
 	// Markdown tables
@@ -19,11 +20,11 @@ const SAVE_TAGS_REGEXPS = [
 ];
 const RESTORE_TAGS_REGEXPS = /<(\d+)>/g;
 
-const beforeAll = text =>
+const beforeAll = (text: string) =>
 	// Remove repeated spaces
 	text.replace(/ {2,}/gm, ' ');
 
-const afterAll = text =>
+const afterAll = (text: string) =>
 	text
 		// Convert hairspace to an HTML entity
 		.replace(/\xAF/gm, '&#x202f;')
@@ -31,11 +32,11 @@ const afterAll = text =>
 		.replace(/<(\w+)>(<\1>[^<]+<\/\1>)<\/\1>/g, '$2');
 
 // Replace HTML tags with <0>, <1>, etc.
-const saveTags = text => {
+const saveTags = (text: string) => {
 	let index = 0;
-	const tags = [];
+	const tags: string[] = [];
 
-	const save = tag => {
+	const save = (tag: string) => {
 		const replacement = `<${index}>`;
 		tags[index] = tag;
 		index++;
@@ -50,18 +51,16 @@ const saveTags = text => {
 	return { text: textWithoutTags, tags };
 };
 
-const restoreTags = (text, { tags }) =>
-	text.replace(RESTORE_TAGS_REGEXPS, (_, index) => tags[index]);
+const restoreTags = (text: string, { tags }: { tags: string[] }) =>
+	text.replace(
+		RESTORE_TAGS_REGEXPS,
+		(_, index: number): string => tags[index] ?? ''
+	);
 
-const runAllRules = (text, { rules }) =>
-	flatten([rules]).reduce((processedText, rule) => rule(processedText), text);
+const runAllRules = (text: string, { rules }: { rules: Rules }) =>
+	[rules].flat(1).reduce((processedText, rule) => rule(processedText), text);
 
-/**
- * @param {Function[]|Function} rules
- * @param {string} text
- * @returns {string}
- */
-function run(rules, text) {
+function run(rules: Rules, text: string) {
 	const { text: textWithoutTags, tags } = saveTags(text);
 	return [beforeAll, runAllRules, restoreTags, afterAll].reduce(
 		(processedText, fn) => fn(processedText, { rules, tags }),
@@ -69,17 +68,6 @@ function run(rules, text) {
 	);
 }
 
-/**
- * @param {Function[]|Function} rules
- * @param {string} [text]
- * @returns {Function|text}
- */
-const richtypo = (rules, text) => {
-	if (typeof text !== 'undefined') {
-		return run(rules, text);
-	}
-
-	return text => run(rules, text);
-};
-
-export default richtypo;
+export default function richtypo(rules: Rules, text: string): string {
+	return run(rules, text);
+}

@@ -7,11 +7,6 @@
     "name": "Artem Sapegin",
     "url": "https://sapegin.me/"
   },
-  "contributors": [
-    {
-      "name": "David Bismut"
-    }
-  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/sapegin/richtypo.js.git"
@@ -20,11 +15,11 @@
     "url": "https://github.com/sapegin/richtypo.js/issues"
   },
   "license": "MIT",
-  "main": "lib/richtypo.js",
-  "types": "types/index.d.ts",
+  "type": "module",
+  "main": "dist/richtypo.js",
+  "types": "dist/richtypo.d.ts",
   "files": [
-    "lib",
-    "types"
+    "dist"
   ],
   "keywords": [
     "typography",
@@ -43,11 +38,8 @@
     "space"
   ],
   "scripts": {
-    "build": "babel src --out-dir lib --ignore **/*.test.js",
-    "watch": "babel -w src --out-dir lib --ignore **/*.test.js",
+    "build": "tsc",
+    "watch": "tsc --watch",
     "prepare": "npm run build"
-  },
-  "dependencies": {
-    "@arr/flatten": "^1.0.0"
   }
 }
