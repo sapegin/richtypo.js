@@ -1,6 +1,6 @@
 {
   "name": "richtypo-rules-fr",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "description": "French Typography Rules for richtypo.js",
   "author": "David Bismut",
   "license": "MIT",
@@ -11,7 +11,7 @@
     "dist"
   ],
   "dependencies": {
-    "richtypo-rules-common": "^5.0.0"
+    "richtypo-rules-common": "^5.0.1"
   },
   "scripts": {
     "build": "tsc",
