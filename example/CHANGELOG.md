@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 5.1.0 (2023-10-16)
+
+### Features
+
+- Don't convert hair spaces to HTML entities ([0af9dc5](https://github.com/sapegin/richtypo.js/commit/0af9dc5e9acb5fe26b3680d9412b8a597943998d))
+
 ## 5.0.1 (2023-10-10)
 
 **Note:** Version bump only for package richtypo-example
