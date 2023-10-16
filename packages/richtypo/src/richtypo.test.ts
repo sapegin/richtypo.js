@@ -231,15 +231,6 @@ const getSpecialOffersForBrand = brand =>
 		);
 	});
 
-	test('convert hair spaces to HTML entities', () => {
-		expect(
-			richtypo(
-				(s) => s.replace(/100/, '\xAF'),
-				`changes number 100 with a hair space`
-			)
-		).toEqual(`changes number &#x202f; with a hair space`);
-	});
-
 	test('remove double tags', () => {
 		expect(
 			richtypo(

@@ -26,8 +26,6 @@ const beforeAll = (text: string) =>
 
 const afterAll = (text: string) =>
 	text
-		// Convert hairspace to an HTML entity
-		.replace(/\xAF/gm, '&#x202f;')
 		// Remove double tags, like <abbr><abbr>JS</abbr></abbr>
 		.replace(/<(\w+)>(<\1>[^<]+<\/\1>)<\/\1>/g, '$2');
 
