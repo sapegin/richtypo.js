@@ -9,10 +9,7 @@ import recommended, {
 
 function compare(actual: string, expected: string) {
 	expect(
-		actual
-			.replace(/\xA0/g, '__')
-			.replace(/&#x202f;/g, '_')
-			.replace(/—/g, '---')
+		actual.replace(/\xA0/g, '__').replace(/\xAF/g, '_').replace(/—/g, '---')
 	).toEqual(expected);
 }
 

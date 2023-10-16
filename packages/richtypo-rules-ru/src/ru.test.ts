@@ -4,7 +4,9 @@ import richtypo from 'richtypo';
 import recommended, { quotes, numberSeparators } from './ru';
 
 function compare(actual: string, expected: string) {
-	expect(actual.replace(/\xA0/g, '_').replace(/—/g, '=')).toEqual(expected);
+	expect(
+		actual.replace(/\xA0/g, '_').replace(/\xAF/gm, '^').replace(/—/g, '=')
+	).toEqual(expected);
 }
 
 describe('Russian, recommended rules', () => {
@@ -30,7 +32,7 @@ describe('Russian, recommended rules', () => {
 	});
 
 	test('add hair space after degree sign', () => {
-		compare(richtypo(recommended, '13 °C'), '13&#x202f;°C');
+		compare(richtypo(recommended, '13 °C'), '13^°C');
 	});
 
 	test('wrap initials with <nobr>', () => {
@@ -180,10 +182,7 @@ describe('Russian, recommended rules', () => {
 
 describe('Russian, other rules', () => {
 	test('add thousand separators to number', () => {
-		compare(
-			richtypo(numberSeparators, '123456789,00'),
-			'123&#x202f;456&#x202f;789,00'
-		);
+		compare(richtypo(numberSeparators, '123456789,00'), '123^456^789,00');
 	});
 });
 
@@ -200,7 +199,7 @@ describe('Russian, examples from Readme', () => {
 	test('selected rules', () => {
 		compare(
 			richtypo([quotes, numberSeparators], 'Текст "в кавычках" - 123456,78'),
-			'Текст «в кавычках» - 123&#x202f;456,78'
+			'Текст «в кавычках» - 123^456,78'
 		);
 	});
 });
