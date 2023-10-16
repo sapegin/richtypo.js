@@ -1,6 +1,6 @@
 {
   "name": "richtypo-rules-common",
-  "version": "5.0.1",
+  "version": "5.1.0",
   "description": "Common Typography Rules for Richtypo",
   "license": "MIT",
   "type": "module",
