@@ -1,5 +1,5 @@
 const nbsp = '\xA0';
-const hairspace = '\xAF';
+const hairspace = '\u202f'; // Narrow no-break space
 const space = `[ \t${nbsp}${hairspace}]`;
 const tag = '(?:<[^<>]*>)';
 const quote = '["“”«»‘’]';

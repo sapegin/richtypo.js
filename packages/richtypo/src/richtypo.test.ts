@@ -6,7 +6,7 @@ const rule2 = (text: string) => text.toUpperCase();
 const rule3 = (text: string) => text.replace(/-/g, '#');
 
 const compare = (actual: string, expected: string) =>
-	expect(actual.replace(/\xA0/g, '_')).toEqual(expected);
+	expect(actual.replace(/\u202f/g, '_')).toEqual(expected);
 
 describe('richtypo', () => {
 	test('run one rule', () => {

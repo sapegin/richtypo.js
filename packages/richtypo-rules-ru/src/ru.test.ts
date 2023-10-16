@@ -5,7 +5,10 @@ import recommended, { quotes, numberSeparators } from './ru';
 
 function compare(actual: string, expected: string) {
 	expect(
-		actual.replace(/\xA0/g, '_').replace(/\xAF/gm, '^').replace(/—/g, '=')
+		actual
+			.replace(/\xA0/g, '_')
+			.replace(/\u202f/gm, '^')
+			.replace(/—/g, '=')
 	).toEqual(expected);
 }
 

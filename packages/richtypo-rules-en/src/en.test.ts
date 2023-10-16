@@ -12,7 +12,7 @@ function compare(actual: string, expected: string) {
 	expect(
 		actual
 			.replace(/\xA0/g, '__') // non-breaking space
-			.replace(/\xAF/g, '_') // hair space
+			.replace(/\u202f/g, '_') // hair space
 			.replace(/—/g, '=') // em dash
 	).toEqual(expected);
 }

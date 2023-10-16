@@ -18,7 +18,7 @@ export const numberSigns = text =>
 | Definition name | Description |
 | --- | --- |
 | **`dash`** | hyphen (-) or em dash (—) |
-| **`hairspace`** | narrow non-breaking space (`\xAF`).¹ |
+| **`hairspace`** | narrow non-breaking space (`\u202f`). |
 | **`letter`** | any European or Cyrillic letter |
 | **`letterOrQuote`** | any European or Cyrillic letter with quotes |
 | **`nbsp`** | non-breaking space |
@@ -31,8 +31,6 @@ export const numberSigns = text =>
 | **`space`** | any space (except `\n`) |
 | **`tag`** | matches any HTML tag |
 | **`upperLetter`** | any uppercase European or Cyrillic letter |
-
-_¹ Richtypo will automatically replace the hair space symbol with the HTML entity `&#x202f` that works in modern browsers._
 
 ### Rules
 

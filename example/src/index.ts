@@ -16,7 +16,7 @@ const highlight = (text: string) =>
 			'<span class="rule rule-nbsp" title="Non-breaking space">$1</span>'
 		)
 		.replace(
-			/(\xAF)/gm,
+			/(\u202f)/gm,
 			'<span class="rule rule-narrow" title="Narrow space">$1</span>'
 		)
 		.replace(
