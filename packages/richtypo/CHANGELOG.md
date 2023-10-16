@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 5.1.2 (2023-10-16)
+
+### Bug Fixes
+
+- Use correct hair space (narrow no-break space) character ([13f8e6b](https://github.com/sapegin/richtypo.js/commit/13f8e6ba93a2459ab7d75069ebe5db4f76fe91b2))
+
 ## 5.1.1 (2023-10-16)
 
 **Note:** Version bump only for package richtypo
