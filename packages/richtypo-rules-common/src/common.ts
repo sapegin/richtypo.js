@@ -24,6 +24,8 @@ export const definitions = {
 	tag,
 	quote,
 	letter,
+	letterOrHyphen,
+	notLetterOrHyphen,
 	upperLetter,
 	letterOrQuote,
 	punctuation,

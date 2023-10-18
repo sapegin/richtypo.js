@@ -83,6 +83,22 @@ describe('English, recommended rules', () => {
 		);
 	});
 
+	test('do not wrap words with hyphen in nobr at the beginning of a line', () => {
+		compare(
+			rt(
+				recommended,
+				`First paragraph.
+
+Monday - Friday 12-20
+Saturdays 11-18`
+			),
+			`First__paragraph.
+
+Monday_=_Friday <nobr>12-20</nobr>
+Saturdays <nobr>11-18</nobr>`
+		);
+	});
+
 	test('do not replace trailing whitespace with nbsp', () => {
 		compare(rt(recommended, 'This was\n'), 'This__was\n');
 	});

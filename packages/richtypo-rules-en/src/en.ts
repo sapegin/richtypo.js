@@ -67,7 +67,10 @@ export const dashesAdvanced = (text: string) =>
 		)
 		// Wrap in <nobr> emdash and preceeding word
 		.replace(
-			new RegExp(`([^\\s\\]\\)\\>]+)${space}?${emdash}${space}?`, 'gmi'),
+			new RegExp(
+				`(?<!\\n[^ ]+)([^\\s\\]\\)\\>]+)${space}?${emdash}${space}?`,
+				'gmi'
+			),
 			`<nobr>$1${hairspace}${emdash}</nobr>${hairspace}`
 		)
 		// Add hair spaces before and after an em dash
