@@ -1,6 +1,6 @@
 {
   "name": "richtypo-rules-en",
-  "version": "5.1.2",
+  "version": "5.1.3",
   "description": "English Typography Rules for richtypo.js",
   "author": {
     "name": "Artem Sapegin",
@@ -14,7 +14,7 @@
     "dist"
   ],
   "dependencies": {
-    "richtypo-rules-common": "^5.1.2"
+    "richtypo-rules-common": "^5.1.3"
   },
   "scripts": {
     "build": "tsc",
