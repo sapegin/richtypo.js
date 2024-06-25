@@ -16,7 +16,7 @@
     "gh-pages": "^6.0.0",
     "husky": "^8.0.3",
     "jest": "^29.7.0",
-    "lerna": "^7.3.0",
+    "lerna": "^8.1.5",
     "lint-staged": "^14.0.1",
     "prettier": "^3.0.3",
     "richtypo": "file:packages/richtypo",
