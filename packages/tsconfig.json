@@ -25,5 +25,12 @@
 		"forceConsistentCasingInFileNames": true,
 		"skipLibCheck": true
 	},
+	"references": [
+		{ "path": "richtypo" },
+		{ "path": "richtypo-rules-common" },
+		{ "path": "richtypo-rules-ru" },
+		{ "path": "richtypo-rules-en" },
+		{ "path": "richtypo-rules-fr" }
+	],
 	"exclude": ["**/*.test.ts"]
 }

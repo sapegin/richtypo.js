@@ -25,7 +25,7 @@
     "richtypo-rules-ru": "file:packages/richtypo-rules-ru",
     "ts-jest": "^29.1.1",
     "tsx": "^3.13.0",
-    "typescript": "^5.2.2",
+    "typescript": "^5.5.2",
     "vitest": "^0.34.6"
   },
   "scripts": {
