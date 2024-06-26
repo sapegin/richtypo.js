@@ -1,10 +1,9 @@
 {
 	"compilerOptions": {
-		"target": "es2015",
 		"module": "NodeNext",
+		"target": "es2020",
 		"moduleResolution": "NodeNext",
 		"declaration": true,
-		"outDir": "./dist",
 		"noEmit": false,
 		"strict": true,
 		"noImplicitAny": true,
@@ -23,14 +22,16 @@
 		"noPropertyAccessFromIndexSignature": true,
 		"esModuleInterop": true,
 		"forceConsistentCasingInFileNames": true,
-		"skipLibCheck": true
+		"skipLibCheck": true,
+		"composite": true,
+		"baseUrl": ".",
+		"paths": {
+			"richtypo": ["packages/richtypo"],
+			"richtypo-rules-common": ["packages/richtypo-rules-common"],
+			"richtypo-rules-ru": ["packages/richtypo-rules-ru"],
+			"richtypo-rules-en": ["packages/richtypo-rules-en"],
+			"richtypo-rules-fr": ["packages/richtypo-rules-fr"]
+		}
 	},
-	"references": [
-		{ "path": "richtypo" },
-		{ "path": "richtypo-rules-common" },
-		{ "path": "richtypo-rules-ru" },
-		{ "path": "richtypo-rules-en" },
-		{ "path": "richtypo-rules-fr" }
-	],
 	"exclude": ["**/*.test.ts"]
 }

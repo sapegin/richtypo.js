@@ -24,7 +24,7 @@
     "richtypo-rules-fr": "file:packages/richtypo-rules-fr",
     "richtypo-rules-ru": "file:packages/richtypo-rules-ru",
     "ts-jest": "^29.1.1",
-    "tsx": "^3.13.0",
+    "tsx": "^4.15.7",
     "typescript": "^5.5.2",
     "vitest": "^0.34.6"
   },
@@ -37,7 +37,7 @@
     "lint": "eslint . --cache --fix",
     "format": "prettier --write \"**/*.{js,ts,tsx,md,css,html}\"",
     "gh-pages": "gh-pages -d example/dist",
-    "build": "npm run build --workspaces"
+    "build": "tsc --build"
   },
   "workspaces": [
     "packages/richtypo",
