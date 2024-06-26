@@ -13,9 +13,5 @@
   "dependencies": {
     "richtypo-rules-common": "*"
   },
-  "scripts": {
-    "build": "tsc",
-    "watch": "tsc --watch",
-    "prepare": "npm run build"
-  }
+  "scripts": {}
 }

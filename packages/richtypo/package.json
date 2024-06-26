@@ -37,9 +37,5 @@
     "ampersands",
     "space"
   ],
-  "scripts": {
-    "build": "tsc",
-    "watch": "tsc --watch",
-    "prepare": "npm run build"
-  }
+  "scripts": {}
 }

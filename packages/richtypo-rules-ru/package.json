@@ -16,11 +16,7 @@
   "files": [
     "dist"
   ],
-  "scripts": {
-    "build": "tsc",
-    "watch": "tsc --watch",
-    "prepare": "npm run build"
-  },
+  "scripts": {},
   "keywords": [
     "typography",
     "typo",
