@@ -14,7 +14,7 @@
     "dist"
   ],
   "dependencies": {
-    "richtypo-rules-common": "^5.1.3"
+    "richtypo-rules-common": "*"
   },
   "scripts": {
     "build": "tsc",

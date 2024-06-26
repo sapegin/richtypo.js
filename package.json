@@ -40,11 +40,7 @@
     "build": "tsc --build"
   },
   "workspaces": [
-    "packages/richtypo",
-    "packages/richtypo-rules-common",
-    "packages/richtypo-rules-en",
-    "packages/richtypo-rules-ru",
-    "packages/richtypo-rules-fr",
+    "packages/*",
     "example"
   ],
   "lint-staged": {
