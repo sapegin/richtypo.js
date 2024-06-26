@@ -23,6 +23,7 @@
     "richtypo-rules-en": "file:packages/richtypo-rules-en",
     "richtypo-rules-fr": "file:packages/richtypo-rules-fr",
     "richtypo-rules-ru": "file:packages/richtypo-rules-ru",
+    "rimraf": "^5.0.7",
     "ts-jest": "^29.1.1",
     "tsx": "^4.15.7",
     "typescript": "^5.5.2",
@@ -37,11 +38,12 @@
     "lint": "eslint . --cache --fix",
     "format": "prettier --write \"**/*.{js,ts,tsx,md,css,html}\"",
     "gh-pages": "gh-pages -d example/dist",
-    "build": "tsc --build"
+    "clean": "rimraf -g \"packages/**/dist\" \"packages/**/*.tsbuildinfo\"",
+    "compile": "tsc --build tsconfig.build.json",
+    "prepare": "npm run compile"
   },
   "workspaces": [
-    "packages/*",
-    "example"
+    "packages/*"
   ],
   "lint-staged": {
     "*.{js,ts,tsx,md,css,html}": "prettier --write",

@@ -1,11 +1,15 @@
 {
-	"extends": "./tsconfig.settings.json",
-	"references": [
-		{ "path": "./packages/richtypo" },
-		{ "path": "./packages/richtypo-rules-common" },
-		{ "path": "./packages/richtypo-rules-ru" },
-		{ "path": "./packages/richtypo-rules-en" },
-		{ "path": "./packages/richtypo-rules-fr" }
-	],
-	"files": ["example/src/index.ts"]
+	"compilerOptions": {
+		"incremental": true,
+		"target": "es2020",
+		"module": "CommonJS",
+		"moduleResolution": "Node10",
+		"declaration": true,
+		"sourceMap": true,
+		"composite": true,
+		"strict": true,
+		"esModuleInterop": true,
+		"skipLibCheck": true,
+		"forceConsistentCasingInFileNames": true
+	}
 }
