@@ -1,6 +1,6 @@
 {
   "name": "richtypo-example",
-  "version": "5.1.3",
+  "version": "5.1.4",
   "type": "module",
   "main": "dist/index.html",
   "private": true,
@@ -8,10 +8,10 @@
   "dependencies": {
     "fs-extra": "^11.1.1",
     "glob": "^10.3.10",
-    "richtypo": "*",
-    "richtypo-rules-en": "*",
-    "richtypo-rules-fr": "*",
-    "richtypo-rules-ru": "*"
+    "richtypo": "^6.0.1",
+    "richtypo-rules-en": "^6.0.1",
+    "richtypo-rules-fr": "^6.0.1",
+    "richtypo-rules-ru": "^6.0.1"
   },
   "scripts": {
     "build": "tsx src"
