@@ -115,14 +115,14 @@ describe('English, recommended rules', () => {
 	test('do not replace a hyphen with an em dash between tags', () => {
 		compare(
 			rt(recommended, `<i>Dachshund</i> - <b>beast</b>.`),
-			`<i>Dachshund</i>_=_<b>beast</b>.`
+			`<i>Dachshund</i>_=^<b>beast</b>.`
 		);
 	});
 
 	test('do not replace a hyphen with an em dash between tags, multiple words', () => {
 		compare(
 			rt(recommended, `<i>Big dog</i> - <b>beast</b>.`),
-			`<i>Big dog</i>_=_<b>beast</b>.`
+			`<i>Big dog</i>_=^<b>beast</b>.`
 		);
 	});
 
@@ -137,7 +137,7 @@ describe('English, recommended rules', () => {
 	});
 
 	test('do not break Markdown links in front of em-dash', () => {
-		compare(rt(recommended, `- [Foo](/) — bar`), `- [Foo](/)_=_bar`);
+		compare(rt(recommended, `- [Foo](/) — bar`), `- [Foo](/)_=^bar`);
 	});
 
 	test('do not break Markdown lists', () => {
@@ -212,7 +212,7 @@ describe('English, recommended rules', () => {
 				recommended,
 				`Have spoken at a conference ([React Alicante](http://reactalicante.es/talks)) and at a meetup ([React Open Source in Berlin](https://www.youtube.com/watch?v=5tHfAf4bRcM)) — my first talks in English.`
 			),
-			`Have spoken at__a__conference ([React Alicante](http://reactalicante.es/talks)) and__at__a__meetup ([React Open Source in__Berlin](https://www.youtube.com/watch?v=5tHfAf4bRcM))_=_my__first talks in__English.`
+			`Have spoken at__a__conference ([React Alicante](http://reactalicante.es/talks)) and__at__a__meetup ([React Open Source in__Berlin](https://www.youtube.com/watch?v=5tHfAf4bRcM))_=^my__first talks in__English.`
 		);
 	});
 });
