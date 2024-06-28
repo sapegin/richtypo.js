@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 6.0.0 (2024-06-28)
+
+### Features
+
+- Upgrade to Node.js 20 ([#66](https://github.com/sapegin/richtypo.js/issues/66)) ([14e7265](https://github.com/sapegin/richtypo.js/commit/14e7265b2dd9278b5483fbd898d59e73b9f0889b))
+
+### BREAKING CHANGES
+
+- Node.js 20 is the minimum supported version
+
 ## 5.1.3 (2023-10-18)
 
 **Note:** Version bump only for package richtypo-rules-en
