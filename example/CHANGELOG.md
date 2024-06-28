@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 5.2.1 (2024-06-28)
+
+**Note:** Version bump only for package richtypo-example
+
 # 5.2.0 (2024-06-28)
 
 ### Features
