@@ -40,10 +40,12 @@
     "gh-pages": "gh-pages -d example/dist",
     "clean": "rimraf -g \"packages/**/dist\" \"packages/**/*.tsbuildinfo\"",
     "compile": "tsc --build tsconfig.build.json",
+    "docs": "npm run build --workspace=example",
     "prepare": "npm run compile"
   },
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "example"
   ],
   "lint-staged": {
     "*.{js,ts,tsx,md,css,html}": "prettier --write",
