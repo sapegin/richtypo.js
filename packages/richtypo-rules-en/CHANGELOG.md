@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 6.1.0 (2024-06-28)
+
+### Features
+
+- Use thin and non-breaking thin spaces around em-dashes ([8da4f84](https://github.com/sapegin/richtypo.js/commit/8da4f84b1299d346ccc7abe8bb431ee5e577bf59))
+
 ## 6.0.1 (2024-06-28)
 
 **Note:** Version bump only for package richtypo-rules-en
