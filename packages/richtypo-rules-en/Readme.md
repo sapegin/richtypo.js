@@ -15,7 +15,7 @@ The quick brown FOX&#x202f;—&#x2009;weighting
 on&nbsp;sunny&nbsp;morning…
 ```
 
-> [!NOTE]
+> [!NOTE]  
 > `&#x202f;` is and HTML entity for a non-breaking thin space, `&#x2009;` for a thin space, and `&nbsp;` for a normal-width non-breaking space. HTML entities are shown only for clarity, since the spacing characters are invisible, Richtypo inserts Unicode characters instead, so it can be used for HTML, Markdown, or plan text.
 
 ### Installation

@@ -14,10 +14,10 @@ The rules of this package include the `spaces`, `abbr`, `emdash`, `amp`, `ellips
 
 _For better readability, the non-breaking space symbol `&nbsp;` is replaced with two underscores `__` and the narrow non-breaking space symbol `&#x202f;` with a single underscore `_`\_
 
-| Rule | Description | Input | Output |
-| --- | --- | --- | --- |
-| **`quotes`** | transforms straight double quotes into double angle quotes | `texte entre "guillemets"` | `texte entre «guillemets»` |
-| **`numberOrdinals`** | put ordinals within `<sup>` tags | `1er 2nd 3èmes` | `<sup>er</sup> 2<sup>nd</sup> 3<sup>èmes` |
-| **`numberSeparators`** | adds thousands separators to large numbers | `10000,123` | `10__000,123` |
+| Rule                   | Description                                                                                       | Input                                            | Output                                               |
+| ---------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------ | ---------------------------------------------------- |
+| **`quotes`**           | transforms straight double quotes into double angle quotes                                        | `texte entre "guillemets"`                       | `texte entre «guillemets»`                           |
+| **`numberOrdinals`**   | put ordinals within `<sup>` tags                                                                  | `1er 2nd 3èmes`                                  | `<sup>er</sup> 2<sup>nd</sup> 3<sup>èmes`            |
+| **`numberSeparators`** | adds thousands separators to large numbers                                                        | `10000,123`                                      | `10__000,123`                                        |
 | **`punctuationMarks`** | adds narrow non-breaking space before or after punctuation as it is the rule in French typography | `Ceci ? est: un «texte» avec de la ponctuation!` | `Ceci_? est_: un «_texte_» avec de la ponctuation_!` |
-| **`recommended`** | runs all rules except `numberOrdinals` and `numberSeparators` |  |  |
+| **`recommended`**      | runs all rules except `numberOrdinals` and `numberSeparators`                                     |                                                  |                                                      |
