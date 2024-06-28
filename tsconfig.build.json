@@ -1,0 +1,10 @@
+{
+	"files": [],
+	"references": [
+		{ "path": "./packages/richtypo" },
+		{ "path": "./packages/richtypo-rules-common" },
+		{ "path": "./packages/richtypo-rules-ru" },
+		{ "path": "./packages/richtypo-rules-en" },
+		{ "path": "./packages/richtypo-rules-fr" }
+	]
+}
