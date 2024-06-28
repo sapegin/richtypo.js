@@ -4,6 +4,8 @@ import rt from 'richtypo';
 import recommended, {
 	quotes,
 	amps,
+	abbrs,
+	hyphenatedWords,
 	numberOrdinals,
 	numberSeparators,
 } from './en';
@@ -13,6 +15,7 @@ function compare(actual: string, expected: string) {
 		actual
 			.replace(/\xA0/g, '__') // non-breaking space
 			.replace(/\u202f/g, '_') // hair space
+			.replace(/\u2060/g, '^') // word joiner
 			.replace(/—/g, '=') // em dash
 	).toEqual(expected);
 }
@@ -69,47 +72,6 @@ describe('English, recommended rules', () => {
 		);
 	});
 
-	test('wrap words with hyphen in nobr when one part is 1-2 characters', () => {
-		compare(
-			rt(recommended, 'Lie-Fi e-commerce 75-Jähriger US-Krankenhaus'),
-			'<nobr>Lie-Fi</nobr> <nobr>e-commerce</nobr> <nobr>75-Jähriger</nobr> <nobr>US-Krankenhaus</nobr>'
-		);
-	});
-
-	test('do not wrap words with hyphen in nobr if parts are longer than 2 characters', () => {
-		compare(
-			rt(recommended, 'Paul-Löbe auto-da-fé and -g -w'),
-			'Paul-Löbe auto-da-fé and__-g__-w'
-		);
-	});
-
-	test('do not wrap words with hyphen in nobr at the beginning of a line', () => {
-		compare(
-			rt(
-				recommended,
-				`First paragraph.
-
-Monday - Friday 12-20
-Saturdays 11-18`
-			),
-			`First__paragraph.
-
-Monday_=_Friday <nobr>12-20</nobr>
-Saturdays <nobr>11-18</nobr>`
-		);
-	});
-
-	test('do not replace trailing whitespace with nbsp', () => {
-		compare(rt(recommended, 'This was\n'), 'This__was\n');
-	});
-
-	test('do not wrap words in nobr twice', () => {
-		compare(
-			rt(recommended, '<nobr>75-Jähriger</nobr>'),
-			'<nobr>75-Jähriger</nobr>'
-		);
-	});
-
 	test('add hair space between a number and a degree sign', () => {
 		compare(
 			rt(recommended, `Temperature <b>-30</b> °C? Even -25°C maybe`),
@@ -126,30 +88,27 @@ Saturdays <nobr>11-18</nobr>`
 
 	test('wrap abbreviations in <abbr>', () => {
 		compare(
-			rt(recommended, `DOXIE and ONU and DaN`),
-			`<abbr>DOXIE</abbr> and__<abbr>ONU</abbr> and__DaN`
+			rt(abbrs, `DOXIE and ONU and DaN`),
+			`<abbr>DOXIE</abbr> and <abbr>ONU</abbr> and DaN`
 		);
 	});
 
 	test('add hair spaces before and after a dash', () => {
-		compare(
-			rt(recommended, `Naïve — is word.`),
-			`<nobr>Naïve_=</nobr>_is__word.`
-		);
-		compare(rt(recommended, `Naïve—word.`), `<nobr>Naïve_=</nobr>_word.`);
+		compare(rt(recommended, `Naïve — is word.`), `Naïve_^=_is__word.`);
+		compare(rt(recommended, `Naïve—word.`), `Naïve_^=_word.`);
 	});
 
 	test('replace a hyphen with an em dash', () => {
 		compare(
 			rt(recommended, `“Richtypo” - is awesome!`),
-			`<nobr>“Richtypo”_=</nobr>_is__awesome!`
+			`“Richtypo”_^=_is__awesome!`
 		);
 	});
 
 	test('replace an en dash with an em dash', () => {
 		compare(
 			rt(recommended, `“Richtypo” – is awesome!`),
-			`<nobr>“Richtypo”_=</nobr>_is__awesome!`
+			`“Richtypo”_^=_is__awesome!`
 		);
 	});
 
@@ -168,11 +127,8 @@ Saturdays <nobr>11-18</nobr>`
 	});
 
 	test('replace two or more hyphens with an em dash', () => {
-		compare(
-			rt(recommended, `Naïve -- is word.`),
-			`<nobr>Naïve_=</nobr>_is__word.`
-		);
-		compare(rt(recommended, `Naïve---word.`), `<nobr>Naïve_=</nobr>_word.`);
+		compare(rt(recommended, `Naïve -- is word.`), `Naïve_^=_is__word.`);
+		compare(rt(recommended, `Naïve---word.`), `Naïve_^=_word.`);
 	});
 
 	test('do not replace two or more hyphens on a separate line (Markdown horizontal line)', () => {
@@ -235,14 +191,14 @@ Saturdays <nobr>11-18</nobr>`
 				recommended,
 				`<p>Down, down, down. There was nothing else to do, so Alice soon began talking again. "Dinah’ll miss me very much to-night, I should think!" (Dinah was the cat.) "I hope they’ll remember her saucer of milk at tea-time. Dinah my dear! I wish you were down here with me! There are no mice in the air, I’m afraid, but you might catch a bat, and that’s very like a mouse, you know. But do cats eat bats, I wonder?" And here Alice began to get rather sleepy, and went on saying to herself, in a dreamy sort of way, "Do cats eat bats? Do cats eat bats?" and sometimes, "Do bats eat cats?’ for, you see, as she couldn’t answer either question, it didn’t much matter which way she put it. She felt that she was dozing off, and had just begun to dream that she was walking hand in hand with Dinah, and saying to her very earnestly, "Now, Dinah, tell me the truth: did you ever eat a bat?" when suddenly, thump! thump! down she came upon a heap of sticks and dry leaves, and the fall was over.</p>`
 			),
-			`<p>Down, down, down. There was nothing else to__do, so__Alice soon began talking again. “Dinah’ll__miss me__very much <nobr>to-night</nobr>, I__should think!” (Dinah was the__cat.) “I__hope they’ll__remember her saucer of__milk at__tea-time. Dinah my__dear! I__wish you were down here with me! There are no__mice in__the__air, I’m__afraid, but you might catch a__bat, and__that’s__very like a__mouse, you know. But do__cats eat bats, I__wonder?” And__here Alice began to__get rather sleepy, and__went on__saying to__herself, in__a__dreamy sort of__way, “Do__cats eat bats? Do__cats eat bats?” and__sometimes, “Do__bats eat cats?’ for, you see, as__she couldn’t__answer either question, it__didn’t__much matter which way she put it. She felt that she was dozing off, and__had just begun to__dream that she was walking hand in__hand with Dinah, and__saying to__her very earnestly, “Now, Dinah, tell me__the__truth: did you ever eat a__bat?” when suddenly, thump! thump! down she came upon a__heap of__sticks and__dry leaves, and__the__fall was__over.</p>`
+			`<p>Down, down, down. There was nothing else to__do, so__Alice soon began talking again. “Dinah’ll__miss me__very much to-night, I__should think!” (Dinah was the__cat.) “I__hope they’ll__remember her saucer of__milk at__tea-time. Dinah my__dear! I__wish you were down here with me! There are no__mice in__the__air, I’m__afraid, but you might catch a__bat, and__that’s__very like a__mouse, you know. But do__cats eat bats, I__wonder?” And__here Alice began to__get rather sleepy, and__went on__saying to__herself, in__a__dreamy sort of__way, “Do__cats eat bats? Do__cats eat bats?” and__sometimes, “Do__bats eat cats?’ for, you see, as__she couldn’t__answer either question, it__didn’t__much matter which way she put it. She felt that she was dozing off, and__had just begun to__dream that she was walking hand in__hand with Dinah, and__saying to__her very earnestly, “Now, Dinah, tell me__the__truth: did you ever eat a__bat?” when suddenly, thump! thump! down she came upon a__heap of__sticks and__dry leaves, and__the__fall was__over.</p>`
 		);
 		compare(
 			rt(
 				recommended,
 				`Presently she began again. "I wonder if I shall fall right through the earth! How funny it’ll seem to come out among the people that walk with their heads downward! The Antipathies, I think <...> but I shall have to ask them what the name of the country is, you know. Please, Ma’am, is this New Zealand or Australia?" (and she tried to curtsey as she spoke - fancy curtseying as you’re falling through the air! Do you think you could manage it?) "And what an ignorant little girl she’ll think me for asking! No, it’ll never do to ask: perhaps I shall see it written up somewhere."`
 			),
-			`Presently she began again. “I__wonder if__I__shall fall right through the__earth! How funny it’ll__seem to__come out among the__people that walk with their heads downward! The__Antipathies, I__think <...> but I__shall have to__ask them what the__name of__the__country is, you know. Please, Ma’am, is__this New Zealand or__Australia?” (and__she tried to__curtsey as__she <nobr>spoke_=</nobr>_fancy curtseying as__you’re__falling through the__air! Do__you think you could manage it?) “And__what an__ignorant little girl she’ll__think me__for__asking! No, it’ll__never do__to__ask: perhaps I__shall see it__written up__somewhere.”`
+			`Presently she began again. “I__wonder if__I__shall fall right through the__earth! How funny it’ll__seem to__come out among the__people that walk with their heads downward! The__Antipathies, I__think <...> but I__shall have to__ask them what the__name of__the__country is, you know. Please, Ma’am, is__this New Zealand or__Australia?” (and__she tried to__curtsey as__she spoke_^=_fancy curtseying as__you’re__falling through the__air! Do__you think you could manage it?) “And__what an__ignorant little girl she’ll__think me__for__asking! No, it’ll__never do__to__ask: perhaps I__shall see it__written up__somewhere.”`
 		);
 		compare(
 			rt(
@@ -285,6 +241,47 @@ describe('English, other rules', () => {
 			`There are <b>6,234,689,821</b> people, revenue is 1,432.331123 yens`
 		);
 	});
+
+	test('wrap words with hyphen in nobr when one part is 1-2 characters', () => {
+		compare(
+			rt(hyphenatedWords, 'Lie-Fi e-commerce 75-Jähriger US-Krankenhaus'),
+			'<nobr>Lie-Fi</nobr> <nobr>e-commerce</nobr> <nobr>75-Jähriger</nobr> <nobr>US-Krankenhaus</nobr>'
+		);
+	});
+
+	test('do not wrap words with hyphen in nobr if parts are longer than 2 characters', () => {
+		compare(
+			rt(hyphenatedWords, 'Paul-Löbe auto-da-fé and -g -w'),
+			'Paul-Löbe auto-da-fé and -g -w'
+		);
+	});
+
+	test('do not wrap words with hyphen in nobr at the beginning of a line', () => {
+		compare(
+			rt(
+				hyphenatedWords,
+				`First paragraph.
+
+Monday - Friday 12-20
+Saturdays 11-18`
+			),
+			`First paragraph.
+
+Monday - Friday <nobr>12-20</nobr>
+Saturdays <nobr>11-18</nobr>`
+		);
+	});
+
+	test('do not replace trailing whitespace with nbsp', () => {
+		compare(rt(hyphenatedWords, 'This was\n'), 'This was\n');
+	});
+
+	test('do not wrap words in nobr twice', () => {
+		compare(
+			rt(hyphenatedWords, '<nobr>75-Jähriger</nobr>'),
+			'<nobr>75-Jähriger</nobr>'
+		);
+	});
 });
 
 describe('English, examples from Readme', () => {
@@ -294,7 +291,7 @@ describe('English, examples from Readme', () => {
 				recommended,
 				'The quick brown FOX - weighting 47 kg - jumps over "the lazy dog" on sunny morning...'
 			),
-			'The__quick brown <abbr>FOX</abbr>_=_weighting 47__<nobr>kg_=</nobr>_jumps over “the__lazy dog” on__sunny__morning…'
+			'The__quick brown FOX_^=_weighting 47__kg_^=_jumps over “the__lazy dog” on__sunny__morning…'
 		);
 	});
 	test('selected rules', () => {

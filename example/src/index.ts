@@ -2,8 +2,8 @@ import fs from 'fs-extra';
 import path from 'path';
 import { globSync } from 'glob';
 import richtypo from 'richtypo';
-import enRules, { amps as enAmps } from 'richtypo-rules-en';
-import frRules, { amps as frAmps } from 'richtypo-rules-fr';
+import enRules from 'richtypo-rules-en';
+import frRules from 'richtypo-rules-fr';
 import ruRules from 'richtypo-rules-ru';
 
 function template({
@@ -58,8 +58,8 @@ const highlight = (text: string) =>
 		);
 
 const rt: Record<string, (x: string) => string> = {
-	index: (x: string) => richtypo([...enRules, enAmps, highlight], x),
-	french: (x: string) => richtypo([...frRules, frAmps, highlight], x),
+	index: (x: string) => richtypo([...enRules, highlight], x),
+	french: (x: string) => richtypo([...frRules, highlight], x),
 	russian: (x: string) => richtypo([...ruRules, highlight], x),
 };
 

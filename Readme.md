@@ -11,9 +11,10 @@ Have a look at [the example page](https://sapegin.github.io/richtypo.js/) and [i
 ## Features
 
 - Works with plain text, Markdown, or HTML
+- Uses Unicode characters, doesn’t add any HTML markup by default
 - Takes care of your HTML tags
 - English, French, and Russian rules
-- Run only rules you need
+- Run the recommended rules or cherry pick the ones you need
 - Add your own rules
 - Works on the server and in the browser
 - No dependencies

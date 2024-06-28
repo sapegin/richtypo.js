@@ -1,6 +1,7 @@
 const nbsp = '\xA0';
 const hairspace = '\u202f'; // Narrow no-break space
 const space = `[ \t${nbsp}${hairspace}]`;
+const wordJoiner = '\u2060'; // Prevents line break
 const tag = '(?:<[^<>]*>)';
 const quote = '["“”«»‘’]';
 const letter = '[a-zà-ž0-9а-яё]';
@@ -21,6 +22,7 @@ export const definitions = {
 	nbsp,
 	hairspace,
 	space,
+	wordJoiner,
 	tag,
 	quote,
 	letter,

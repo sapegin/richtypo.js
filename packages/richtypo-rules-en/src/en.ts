@@ -2,9 +2,7 @@ type Rule = (text: string) => string;
 
 import {
 	shortWords,
-	hyphenatedWords,
 	orphans,
-	abbrs,
 	ellipses,
 	dashesBasic,
 	numberUnits,
@@ -23,6 +21,7 @@ const {
 	space,
 	nbsp,
 	hairspace,
+	wordJoiner,
 	tag,
 	notInTag,
 } = commonDefinitions;
@@ -65,13 +64,13 @@ export const dashesAdvanced = (text: string) =>
 			new RegExp(`(?<!\\s)(${tag})${dash}(${space}?)`, 'gmi'),
 			`$1${hairspace}${emdash}$2`
 		)
-		// Wrap in <nobr> emdash and preceeding word
+		// Add a work joiner character between emdash and preceding word to avoid line wrapping
 		.replace(
 			new RegExp(
 				`(?<!\\n[^ ]+)([^\\s\\]\\)\\>]+)${space}?${emdash}${space}?`,
 				'gmi'
 			),
-			`<nobr>$1${hairspace}${emdash}</nobr>${hairspace}`
+			`$1${hairspace}${wordJoiner}${emdash}${hairspace}`
 		)
 		// Add hair spaces before and after an em dash
 		.replace(
@@ -79,6 +78,7 @@ export const dashesAdvanced = (text: string) =>
 			`${hairspace}${emdash}${hairspace}`
 		);
 
+/** @deprecated Use `dashesBasic` or `dashesAdvanced` directly */
 export const dashes = [dashesBasic, dashesAdvanced];
 
 export const quotes = quotesFactory({ openingQuote, closingQuote });
@@ -103,18 +103,20 @@ export {
 // TODO: export defs
 
 // Not in recommended:
-// - amps
+// - amps, abbrs - add HTML and require custom styling
 // - numberOrdinals
 // - numberSeparators - breaks years, like "1920"
+// - dashesLite - used for the plain preset
+// - hyphenatedWords - does't really make sense with `hyphens: auto` anymore
 
+/** Recommended rules */
 const recommended: Rule[] = [
 	// Common rules
 	shortWords,
-	hyphenatedWords,
 	prepositions,
 	orphans,
-	abbrs,
-	...dashes,
+	dashesBasic,
+	dashesAdvanced,
 	ellipses,
 	numberUnits,
 	degreeSigns,
