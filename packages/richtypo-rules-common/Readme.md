@@ -18,7 +18,8 @@ export const numberSigns = text =>
 | Definition name | Description |
 | --- | --- |
 | **`dash`** | hyphen (-) or em dash (—) |
-| **`hairspace`** | narrow non-breaking space (`\u202f`). |
+| **`thinspace`** | thin space (`\u2009`). |
+| **`nbthinspace`** | thin non-breaking space (`\u202f`). |
 | **`letter`** | any European or Cyrillic letter |
 | **`letterOrQuote`** | any European or Cyrillic letter with quotes |
 | **`nbsp`** | non-breaking space |
@@ -44,14 +45,15 @@ import { abbrs } from 'richtypo-common-rules';
 | --- | --- | --- | --- |
 | **`abbrs`** | wrap abbreviations in `<abbr>` tags | `ONU` | `<abbr>ONU</abbr>` |
 | **`amps`** | wrap an ampersand (&) in `<span class="amp">` tags | `Cie & Sons` | `Cie <span class="amp">&</span> Sons` |
-| **`dashes`** | replace the hyphen character with a em dash and add non-breaking spaces when it makes sense. | `- Hello` | `—&nbsp;Hello`² |
-| **`degreeSigns`** | add a hair space between numbers and degree symbol | `34 ° or 34°` | `34&#x202f;°` |
+| **`dashesBasic`** | replace `-` and `--` with an em-dashes | `dog -- friend` | `dog — friend`¹ |
+| **`dashesAdvanced`** | add a non-breaking thin space before an em dash, and a thin space after | `dog - friend` | `dog&#x202f;—&#x2009;friend`¹ |
+| **`degreeSigns`** | add a non-breaking thin space between numbers and degree symbol | `34 ° or 34°` | `34&#x202f;°` |
 | **`ellipses`** | replace three consecutive dots with an ellipsis | `oh...` | `oh…` |
-| **`numberUnits`** | insert non-breaking space between numbers and the following word | `100 km` | `100&nbsp;km`² |
-| **`orphans`** | add a non-breaking space to avoid orphans | `We go to the mall` | `We go to the&nbsp;mall`² |
-| **`shortWords`** | add a non-breaking space after short words | `We go to the mall` | `We&nbsp;go&nbsp;to&nbsp;the mall`² |
+| **`numberUnits`** | insert non-breaking space between numbers and the following word | `100 km` | `100&nbsp;km`¹ |
+| **`orphans`** | add a non-breaking space to avoid orphans | `We go to the mall` | `We go to the&nbsp;mall`¹ |
+| **`shortWords`** | add a non-breaking space after short words | `We go to the mall` | `We&nbsp;go&nbsp;to&nbsp;the mall`¹ |
 
-_² `&nbsp;` is actually rendered as a symbol (`\xA0`), not an HTML entity. We use `&nbsp;` only in the docs for readability._
+_¹ `&nbsp;` is actually rendered as a symbol (`\xA0`), not an HTML entity. We use `&nbsp;` only in the docs for readability._
 
 ### Rule factories
 

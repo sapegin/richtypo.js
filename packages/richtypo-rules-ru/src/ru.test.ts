@@ -6,8 +6,8 @@ import recommended, { quotes, numberSeparators } from './ru';
 function compare(actual: string, expected: string) {
 	expect(
 		actual
-			.replace(/\xA0/g, '_')
-			.replace(/\u202f/gm, '^')
+			.replace(/\xA0/g, '_') // non-breaking space
+			.replace(/\u202f/gm, '^') // non-breaking thin space
 			.replace(/—/g, '=')
 	).toEqual(expected);
 }
@@ -34,7 +34,7 @@ describe('Russian, recommended rules', () => {
 		);
 	});
 
-	test('add hair space after degree sign', () => {
+	test('add non-breaking thin space after degree sign', () => {
 		compare(richtypo(recommended, '13 °C'), '13^°C');
 	});
 

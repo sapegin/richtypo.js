@@ -10,12 +10,12 @@ sunny morning...
 to this:
 
 ```html
-The quick brown FOX&#x202f;&#x2060;—&#x202f;weighting
-47&nbsp;kg&#x202f;&#x2060;—&#x202f; jumps over “the lazy dog”
+The quick brown FOX&#x202f;—&#x2009;weighting
+47&nbsp;kg&#x202f;—&#x2009; jumps over “the lazy dog”
 on&nbsp;sunny&nbsp;morning…
 ```
 
-_**Note:** `&#x202f;` is and HTML entity for a hair space._
+> [!NOTE] > `&#x202f;` is and HTML entity for a non-breaking thin space, `&#x2009;` for a thin space, and `&nbsp;` for a normal-width non-breaking space. HTML entities are shown only for clarity, since the spacing characters are invisible, Richtypo inserts Unicode characters instead, so it can be used for HTML, Markdown, or plan text.
 
 ### Installation
 
@@ -33,7 +33,7 @@ const text = `The quick brown FOX - weighting 47 kg - jumps over "the lazy dog" 
 
 richtypo(rules, text);
 
-// → The quick brown FOX&#x202f;&#x2060;—&#x202f;weighting 47&nbsp;kg&#x202f;&#x2060;—&#x202f;
+// → The quick brown FOX&#x202f;—&#x2009;weighting 47&nbsp;kg&#x202f;—&#x2009;
 //   jumps over “the lazy dog” on&nbsp;sunny&nbsp;morning…
 ```
 
@@ -55,8 +55,8 @@ See more examples in [Richtypo docs](https://github.com/sapegin/richtypo.js).
 | **`abbrs`** | wrap abbreviations in `<abbr>` tag | `FOX` | `<abbr>FOX</abbr>` |
 | **`amps`** | wrap ampersands (&) in `<span class="amp">` tag | `Dog & Cat` | `Dog <span class="amp">&</span> Cat` |
 | **`dashesBasic`¹** | replace `-` and `--` with an em-dashes | `dog -- friend` | `dog — friend`² |
-| **`dashesAdvanced`¹** | add a non-breaking hair space before an em dash | `dog - friend` | `dog&#x202f;&#x2060;—&#x202f;friend`² |
-| **`degreeSigns`¹** | add a non-breaking space between a number and a degree sign (°) | `13 °C` | `13&#x202f;°C` |
+| **`dashesAdvanced`¹** | add a non-breaking thin space before an em dash, and a thin space after | `dog - friend` | `dog&#x202f;—&#x2009;friend`² |
+| **`degreeSigns`¹** | add a non-breaking thin space between a number and a degree sign (°) | `13 °C` | `13&#x202f;°C` |
 | **`ellipses`¹** | transform three dots (...) to an ellipsis (…) | `...` | `…` |
 | **`hyphenatedWords`** | wrap words with a hyphen in `<nobr>` tag | `to-day` | `<nobr>to-day</nobr>` |
 | **`numberUnits`¹** | add a non-breaking space between a number and its unit | `2 kg` | `2&nbsp;kg`² |

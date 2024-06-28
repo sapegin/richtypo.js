@@ -14,7 +14,7 @@ import {
 	ellipses,
 } from 'richtypo-rules-common';
 
-const { punctuation, nbsp, space, hairspace, dash, notInTag } = definitions;
+const { punctuation, nbsp, space, nbthinspace, dash, notInTag } = definitions;
 
 const semicolon = '(?<!&\\S*);';
 const ordinal = '(ème|er|ère|nd)s?';
@@ -48,11 +48,11 @@ export const punctuationMarks = (text: string) =>
 	text
 		.replace(
 			new RegExp(`${notInTag}(?:${space}+)?([\\?!:»]|${semicolon})`, 'gmi'),
-			`${hairspace}$1`
+			`${nbthinspace}$1`
 		)
 		.replace(
 			new RegExp(`${notInTag}(«)(?:${space}+)?`, 'gmi'),
-			`$1${hairspace}`
+			`$1${nbthinspace}`
 		);
 
 export {

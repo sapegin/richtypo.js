@@ -20,8 +20,8 @@ const {
 	dash,
 	space,
 	nbsp,
-	hairspace,
-	wordJoiner,
+	thinspace,
+	nbthinspace,
 	tag,
 	notInTag,
 } = commonDefinitions;
@@ -54,15 +54,15 @@ export const prepositions = (text: string) =>
 
 export const dashesAdvanced = (text: string) =>
 	text
-		// Add hair space between , or ) and a dash
+		// Add non-breaking thin space between , or ) and a dash
 		.replace(
 			new RegExp(`(${punctuation})${dash}(${space}?)`, 'gmi'),
-			`$1${hairspace}${emdash}$2`
+			`$1${nbthinspace}${emdash}$2`
 		)
-		// Add hair space between a tag and a dash
+		// Add non-breaking thin space between a tag and a dash
 		.replace(
 			new RegExp(`(?<!\\s)(${tag})${dash}(${space}?)`, 'gmi'),
-			`$1${hairspace}${emdash}$2`
+			`$1${nbthinspace}${emdash}$2`
 		)
 		// Add a work joiner character between emdash and preceding word to avoid line wrapping
 		.replace(
@@ -70,12 +70,12 @@ export const dashesAdvanced = (text: string) =>
 				`(?<!\\n[^ ]+)([^\\s\\]\\)\\>]+)${space}?${emdash}${space}?`,
 				'gmi'
 			),
-			`$1${hairspace}${wordJoiner}${emdash}${hairspace}`
+			`$1${nbthinspace}${emdash}${thinspace}`
 		)
-		// Add hair spaces before and after an em dash
+		// Add non-breaking thin spaces before, and normal thin space after an em dash
 		.replace(
 			new RegExp(`${space}${emdash}${space}`, 'gmi'),
-			`${hairspace}${emdash}${hairspace}`
+			`${nbthinspace}${emdash}${thinspace}`
 		);
 
 /** @deprecated Use `dashesBasic` or `dashesAdvanced` directly */

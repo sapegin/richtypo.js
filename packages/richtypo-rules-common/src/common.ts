@@ -1,7 +1,7 @@
 const nbsp = '\xA0';
-const hairspace = '\u202f'; // Narrow no-break space
-const space = `[ \t${nbsp}${hairspace}]`;
-const wordJoiner = '\u2060'; // Prevents line break
+const thinspace = '\u2009'; // Thin space
+const nbthinspace = '\u202f'; // Thin no-break space
+const space = `[ \t${nbsp}${nbthinspace}]`;
 const tag = '(?:<[^<>]*>)';
 const quote = '["“”«»‘’]';
 const letter = '[a-zà-ž0-9а-яё]';
@@ -20,9 +20,9 @@ const notInTag = `(?<!<[^>]*)`;
 
 export const definitions = {
 	nbsp,
-	hairspace,
+	thinspace,
+	nbthinspace,
 	space,
-	wordJoiner,
 	tag,
 	quote,
 	letter,
@@ -66,7 +66,7 @@ export const numberUnits = (text: string) =>
 export const degreeSigns = (text: string) =>
 	text.replace(
 		new RegExp(`${notInTag}(\\d${tag}?)${space}?[˚°]`, 'gmi'),
-		`$1${hairspace}°`
+		`$1${nbthinspace}°`
 	);
 
 export const ellipses = (text: string) =>

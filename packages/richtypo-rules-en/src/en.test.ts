@@ -14,8 +14,8 @@ function compare(actual: string, expected: string) {
 	expect(
 		actual
 			.replace(/\xA0/g, '__') // non-breaking space
-			.replace(/\u202f/g, '_') // hair space
-			.replace(/\u2060/g, '^') // word joiner
+			.replace(/\u202f/g, '_') // non-breaking thin space
+			.replace(/\u2009/g, '^') // thin space
 			.replace(/—/g, '=') // em dash
 	).toEqual(expected);
 }
@@ -72,14 +72,14 @@ describe('English, recommended rules', () => {
 		);
 	});
 
-	test('add hair space between a number and a degree sign', () => {
+	test('add non-breaking thin space between a number and a degree sign', () => {
 		compare(
 			rt(recommended, `Temperature <b>-30</b> °C? Even -25°C maybe`),
 			`Temperature <b>-30</b>_°C? Even -25_°C__maybe`
 		);
 	});
 
-	test('add hair space between a number and a degree sign 2', () => {
+	test('add non-breaking thin space between a number and a degree sign 2', () => {
 		compare(
 			rt(recommended, `Preheat oven toddd 170 °C.`),
 			`Preheat oven toddd 170_°C.`
@@ -93,22 +93,22 @@ describe('English, recommended rules', () => {
 		);
 	});
 
-	test('add hair spaces before and after a dash', () => {
-		compare(rt(recommended, `Naïve — is word.`), `Naïve_^=_is__word.`);
-		compare(rt(recommended, `Naïve—word.`), `Naïve_^=_word.`);
+	test('add thin spaces before and after a dash', () => {
+		compare(rt(recommended, `Naïve — is word.`), `Naïve_=^is__word.`);
+		compare(rt(recommended, `Naïve—word.`), `Naïve_=^word.`);
 	});
 
 	test('replace a hyphen with an em dash', () => {
 		compare(
 			rt(recommended, `“Richtypo” - is awesome!`),
-			`“Richtypo”_^=_is__awesome!`
+			`“Richtypo”_=^is__awesome!`
 		);
 	});
 
 	test('replace an en dash with an em dash', () => {
 		compare(
 			rt(recommended, `“Richtypo” – is awesome!`),
-			`“Richtypo”_^=_is__awesome!`
+			`“Richtypo”_=^is__awesome!`
 		);
 	});
 
@@ -127,8 +127,8 @@ describe('English, recommended rules', () => {
 	});
 
 	test('replace two or more hyphens with an em dash', () => {
-		compare(rt(recommended, `Naïve -- is word.`), `Naïve_^=_is__word.`);
-		compare(rt(recommended, `Naïve---word.`), `Naïve_^=_word.`);
+		compare(rt(recommended, `Naïve -- is word.`), `Naïve_=^is__word.`);
+		compare(rt(recommended, `Naïve---word.`), `Naïve_=^word.`);
 	});
 
 	test('do not replace two or more hyphens on a separate line (Markdown horizontal line)', () => {
@@ -198,7 +198,7 @@ describe('English, recommended rules', () => {
 				recommended,
 				`Presently she began again. "I wonder if I shall fall right through the earth! How funny it’ll seem to come out among the people that walk with their heads downward! The Antipathies, I think <...> but I shall have to ask them what the name of the country is, you know. Please, Ma’am, is this New Zealand or Australia?" (and she tried to curtsey as she spoke - fancy curtseying as you’re falling through the air! Do you think you could manage it?) "And what an ignorant little girl she’ll think me for asking! No, it’ll never do to ask: perhaps I shall see it written up somewhere."`
 			),
-			`Presently she began again. “I__wonder if__I__shall fall right through the__earth! How funny it’ll__seem to__come out among the__people that walk with their heads downward! The__Antipathies, I__think <...> but I__shall have to__ask them what the__name of__the__country is, you know. Please, Ma’am, is__this New Zealand or__Australia?” (and__she tried to__curtsey as__she spoke_^=_fancy curtseying as__you’re__falling through the__air! Do__you think you could manage it?) “And__what an__ignorant little girl she’ll__think me__for__asking! No, it’ll__never do__to__ask: perhaps I__shall see it__written up__somewhere.”`
+			`Presently she began again. “I__wonder if__I__shall fall right through the__earth! How funny it’ll__seem to__come out among the__people that walk with their heads downward! The__Antipathies, I__think <...> but I__shall have to__ask them what the__name of__the__country is, you know. Please, Ma’am, is__this New Zealand or__Australia?” (and__she tried to__curtsey as__she spoke_=^fancy curtseying as__you’re__falling through the__air! Do__you think you could manage it?) “And__what an__ignorant little girl she’ll__think me__for__asking! No, it’ll__never do__to__ask: perhaps I__shall see it__written up__somewhere.”`
 		);
 		compare(
 			rt(
@@ -291,7 +291,7 @@ describe('English, examples from Readme', () => {
 				recommended,
 				'The quick brown FOX - weighting 47 kg - jumps over "the lazy dog" on sunny morning...'
 			),
-			'The__quick brown FOX_^=_weighting 47__kg_^=_jumps over “the__lazy dog” on__sunny__morning…'
+			'The__quick brown FOX_=^weighting 47__kg_=^jumps over “the__lazy dog” on__sunny__morning…'
 		);
 	});
 	test('selected rules', () => {
