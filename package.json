@@ -1,12 +1,53 @@
 {
-  "name": "richtypo.js",
-  "private": true,
+  "name": "richtypo",
   "license": "MIT",
+  "description": "HTML and Markdown typography enhancer with extensible rules",
   "engines": {
     "node": ">=20"
   },
+  "author": {
+    "name": "Artem Sapegin",
+    "url": "https://sapegin.me/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sapegin/richtypo.js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sapegin/richtypo.js/issues"
+  },
+  "type": "module",
+  "main": "dist/richtypo.js",
+  "types": "dist/richtypo.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/richtypo.js"
+    },
+    "./rules/common": "./dist/rules/common.js",
+    "./rules/en": "./dist/rules/en.js",
+    "./rules/ru": "./dist/rules/ru.js",
+    "./rules/fr": "./dist/rules/fr.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "typography",
+    "typo",
+    "html",
+    "markdown",
+    "quotes",
+    "prepositions",
+    "abbr",
+    "abbreviations",
+    "nobr",
+    "nbsp",
+    "punctuation",
+    "em-dash",
+    "ampersands",
+    "space"
+  ],
   "devDependencies": {
-    "@types/jest": "^29.5.5",
     "@types/node": "^20.8.3",
     "@typescript-eslint/eslint-plugin": "^6.7.5",
     "@typescript-eslint/parser": "^6.7.5",
@@ -14,17 +55,11 @@
     "eslint": "^8.51.0",
     "eslint-config-tamia": "^8.1.1",
     "gh-pages": "^6.0.0",
+    "glob": "^10.4.2",
     "husky": "^8.0.3",
-    "jest": "^29.7.0",
-    "lerna": "^8.1.5",
     "lint-staged": "^14.0.1",
     "prettier": "^3.3.2",
-    "richtypo": "file:packages/richtypo",
-    "richtypo-rules-en": "file:packages/richtypo-rules-en",
-    "richtypo-rules-fr": "file:packages/richtypo-rules-fr",
-    "richtypo-rules-ru": "file:packages/richtypo-rules-ru",
-    "rimraf": "^5.0.7",
-    "ts-jest": "^29.1.1",
+    "richtypo": "file:.",
     "tsx": "^4.15.7",
     "typescript": "^5.5.2",
     "vitest": "^0.34.6"
@@ -38,17 +73,12 @@
     "lint": "eslint . --cache --fix",
     "format": "prettier --write \"**/*.{js,ts,tsx,md,css,html}\"",
     "gh-pages": "gh-pages -d example/dist",
-    "clean": "rimraf -g \"packages/**/dist\" \"packages/**/*.tsbuildinfo\"",
-    "compile": "tsc --build tsconfig.build.json",
-    "docs": "npm run build --workspace=example",
+    "compile": "tsc",
+    "docs": "tsx example/src",
     "prepare": "npm run compile"
   },
-  "workspaces": [
-    "packages/*",
-    "example"
-  ],
   "lint-staged": {
-    "*.{js,ts,tsx,md,css,html}": "prettier --write",
+    "*.{js,ts,tsx,md,css,html,json}": "prettier --write",
     "*.{js,ts,tsx}": "eslint --cache --fix"
   }
 }

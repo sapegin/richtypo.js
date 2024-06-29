@@ -1,4 +1,6 @@
-# Richtypo English Rule Package
+# Richtypo English typography rules
+
+The English typography rules for [Richtypo](https://github.com/sapegin/richtypo.js).
 
 Converts this:
 
@@ -18,17 +20,17 @@ on&nbsp;sunny&nbsp;morning…
 > [!NOTE]  
 > `&#x202f;` is and HTML entity for a non-breaking thin space, `&#x2009;` for a thin space, and `&nbsp;` for a normal-width non-breaking space. HTML entities are shown only for clarity, since the spacing characters are invisible, Richtypo inserts Unicode characters instead, so it can be used for HTML, Markdown, or plan text.
 
-### Installation
+## Installation
 
 ```bash
-npm install --save richtypo richtypo-rules-en
+npm install --save richtypo
 ```
 
 ### Basic usage
 
 ```javascript
 import richtypo from 'richtypo';
-import rules from 'richtypo-rules-en';
+import rules from 'richtypo/rules/en';
 
 const text = `The quick brown FOX - weighting 47 kg - jumps over "the lazy dog" on sunny morning...`;
 
@@ -38,18 +40,18 @@ richtypo(rules, text);
 //   jumps over “the lazy dog” on&nbsp;sunny&nbsp;morning…
 ```
 
-The default export of `richtypo-rules-en` contains _recommended_ rules (marked with ¹ in a table below), but you can import each rule separately:
+The default export of `richtypo/rules/en` contains _recommended_ rules (marked with ¹ in a table below), but you can import each rule separately:
 
 ```js
 import richtypo from 'richtypo';
-import { quotes, numberSeparators } from 'richtypo-rules-en';
+import { quotes, numberSeparators } from 'richtypo/rules/en';
 richtypo([quotes, numberSeparators], 'Text "in quotes" - 123456.78');
 // → Text “in quotes” - 123,456.78
 ```
 
-See more examples in [Richtypo docs](https://github.com/sapegin/richtypo.js).
+See more examples in the [Richtypo docs](../Readme.md).
 
-### The rules
+## Rules
 
 | Rule                  | Description                                                                     | Input                    | Output                                                     |
 | --------------------- | ------------------------------------------------------------------------------- | ------------------------ | ---------------------------------------------------------- |

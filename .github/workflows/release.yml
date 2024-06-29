@@ -1,10 +1,11 @@
-name: Release
+name: Semantic Release
 on:
   push:
     branches:
       - master
 jobs:
-  build:
+  release:
+    name: Release
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -12,23 +13,8 @@ jobs:
         with:
           node-version-file: .nvmrc
           cache: 'npm'
-      - name: Set up Git
-        run: |
-          git config --global user.name "Richtypo Bot"
-          git config --global user.email "${BOT_EMAIL}"
-          git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/sapegin/richtypo.js.git"
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
-          BOT_EMAIL: ${{ secrets.BOT_EMAIL }}
-      - name: Set up npm
-        run: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> ~/.npmrc 2> /dev/null
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       - run: npm ci
-      - name: Publish
-        run: |
-          npx lerna version --yes --create-release=github
-          npx lerna publish from-git --yes
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      - env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npx semantic-release

@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest';
-import richtypo from 'richtypo';
+import richtypo from '../richtypo';
 
 import recommended, { quotes, numberSeparators } from './ru';
 

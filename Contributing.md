@@ -21,9 +21,3 @@ Or run tests in watch mode:
 ```bash
 npm run test:watch
 ```
-
-To update Jest snapshots:
-
-```bash
-npm run test:jest -- -u
-```

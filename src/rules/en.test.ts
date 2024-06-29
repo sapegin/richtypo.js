@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest';
-import rt from 'richtypo';
+import rt from '../richtypo';
 
 import recommended, {
 	quotes,

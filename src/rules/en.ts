@@ -11,7 +11,7 @@ import {
 	numberOrdinalsFactory,
 	numberSeparatorsFactory,
 	definitions as commonDefinitions,
-} from 'richtypo-rules-common';
+} from './common.js';
 
 const {
 	punctuation,
@@ -98,7 +98,7 @@ export {
 	dashesBasic,
 	numberUnits,
 	degreeSigns,
-} from 'richtypo-rules-common';
+} from './common.js';
 
 // TODO: export defs
 

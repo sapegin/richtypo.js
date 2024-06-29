@@ -2,17 +2,18 @@
 
 The French typography rules for [Richtypo](https://github.com/sapegin/richtypo.js).
 
-### Installation
+## Installation
 
 ```bash
-npm install --save richtypo-rules-fr
+npm install --save richtypo
 ```
 
-### The rules
+## Rules
 
-The rules of this package include the `spaces`, `abbr`, `emdash`, `amp`, `ellipsis` rules that are directly imported from the [`richtypo-rules-common` package](https://github.com/sapegin/richtypo.js/packages/richtypo-rules-common).
+The rules of this module include the `spaces`, `abbr`, `emdash`, `amp`, `ellipsis` rules that are directly imported from the [`richtypo/rules/common` module](./CommonRules.md).
 
-_For better readability, the non-breaking space symbol `&nbsp;` is replaced with two underscores `__` and the narrow non-breaking space symbol `&#x202f;` with a single underscore `_`\_
+> [!NOTE]  
+> For better readability, the non-breaking space symbol `&nbsp;` is replaced with two underscores `__` and the narrow non-breaking space symbol `&#x202f;` with a single underscore `_`.
 
 | Rule                   | Description                                                                                       | Input                                            | Output                                               |
 | ---------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------ | ---------------------------------------------------- |
