@@ -1,18 +1,19 @@
 # Richtypo common typography rules
 
-A convenience package to create [Richtypo](https://github.com/sapegin/richtypo.js) typography rules for different languages.
+A convenience module to create [Richtypo](https://github.com/sapegin/richtypo.js) typography rules for different languages.
 
-It includes definitions, rules and rule factories.
+It includes definitions, rules, and rule factories.
 
-### Definitions
+## Definitions
 
 Use definitions to improve readability of your rules:
 
 ```js
-import { definitions } from 'richtypo-common-rules';
+import { definitions } from 'richtypo/rules/common';
 const { space, nbsp } = definitions;
-export const numberSigns = text =>
-  text.replace(new RegExp(`№${space}`, 'g'), `№${nbsp}`);
+export function numberSigns(text) {
+  return text.replace(new RegExp(`№${space}`, 'g'), `№${nbsp}`);
+}
 ```
 
 | Definition name     | Description                                                                                                                                |
@@ -33,12 +34,12 @@ export const numberSigns = text =>
 | **`tag`**           | matches any HTML tag                                                                                                                       |
 | **`upperLetter`**   | any uppercase European or Cyrillic letter                                                                                                  |
 
-### Rules
+## Rules
 
 Rules are available as named exports:
 
 ```js
-import { abbrs } from 'richtypo-common-rules';
+import { abbrs } from 'richtypo/rules/common';
 ```
 
 | Rule name            | Description                                                             | Input               | Output                                |
@@ -55,12 +56,12 @@ import { abbrs } from 'richtypo-common-rules';
 
 _¹ `&nbsp;` is actually rendered as a symbol (`\xA0`), not an HTML entity. We use `&nbsp;` only in the docs for readability._
 
-### Rule factories
+## Rule factories
 
 Use factory rules to customize some common rules, like quotes, for your language. For example, quotes in English are written as `“”` while in French they are written as `«»`.
 
 ```js
-import { quotesFactory } from 'richtypo-rules-common';
+import { quotesFactory } from 'richtypo/rules/common';
 export const quotes = quotesFactory({
   openingQuote: '«',
   closingQuote: '»'

@@ -12,7 +12,7 @@ import {
 	degreeSigns,
 	dashesBasic,
 	ellipses,
-} from 'richtypo-rules-common';
+} from './common.js';
 
 const { punctuation, nbsp, space, nbthinspace, dash, notInTag } = definitions;
 
@@ -32,7 +32,7 @@ export const numberSeparators = numberSeparatorsFactory({
 
 export const dashesAdvanced = (text: string) =>
 	text
-		// Replace - at the beginnning of a line or right after a tag with em dash
+		// Replace - at the beginning of a line or right after a tag with em dash
 		.replace(new RegExp(`^-(${space})`, 'gmi'), `—$1`)
 		// Add non-braking space between , or ) and a dash
 		.replace(
@@ -65,7 +65,7 @@ export {
 	amps,
 	dashesBasic,
 	ellipses,
-} from 'richtypo-rules-common';
+} from './common.js';
 
 // Not in recommended:
 // - amps

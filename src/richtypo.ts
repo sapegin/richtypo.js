@@ -58,14 +58,10 @@ const restoreTags = (text: string, { tags }: { tags: string[] }) =>
 const runAllRules = (text: string, { rules }: { rules: Rules }) =>
 	[rules].flat(1).reduce((processedText, rule) => rule(processedText), text);
 
-function run(rules: Rules, text: string) {
+export default function richtypo(rules: Rules, text: string): string {
 	const { text: textWithoutTags, tags } = saveTags(text);
 	return [beforeAll, runAllRules, restoreTags, afterAll].reduce(
 		(processedText, fn) => fn(processedText, { rules, tags }),
 		textWithoutTags
 	);
-}
-
-export default function richtypo(rules: Rules, text: string): string {
-	return run(rules, text);
 }

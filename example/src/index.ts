@@ -1,10 +1,10 @@
 import fs from 'fs-extra';
 import path from 'path';
 import { globSync } from 'glob';
-import richtypo from 'richtypo';
-import enRules from 'richtypo-rules-en';
-import frRules from 'richtypo-rules-fr';
-import ruRules from 'richtypo-rules-ru';
+import richtypo from '../../src/richtypo.js';
+import enRules from '../../src/rules/en.js';
+import frRules from '../../src/rules/fr.js';
+import ruRules from '../../src/rules/ru.js';
 
 function template({
 	lang,
@@ -65,7 +65,7 @@ const rt: Record<string, (x: string) => string> = {
 
 fs.ensureDirSync('dist');
 
-const files = globSync('src/content/*.html');
+const files = globSync('example/src/content/*.html');
 
 files.forEach((file) => {
 	console.log('👉', file);
@@ -87,8 +87,8 @@ files.forEach((file) => {
 console.log('👉 example.css');
 
 fs.writeFileSync(
-	'dist/example.css',
-	fs.readFileSync('src/example.css', 'utf8')
+	'example/dist/example.css',
+	fs.readFileSync('example/src/example.css', 'utf8')
 );
 
 console.log('👉 Done');

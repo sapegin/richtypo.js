@@ -11,7 +11,7 @@ import {
 	quotesFactory,
 	numberSeparatorsFactory,
 	definitions,
-} from 'richtypo-rules-common';
+} from './common.js';
 
 const {
 	notInTag,
@@ -104,7 +104,7 @@ export {
 	abbrs,
 	ellipses,
 	dashesBasic,
-} from 'richtypo-rules-common';
+} from './common.js';
 
 // TODO: export defs
 

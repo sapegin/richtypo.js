@@ -17,17 +17,17 @@ to this:
 и&nbsp;ваши уши будут торчать <nobr>из-за</nobr>&nbsp;туч.
 ```
 
-### Installation
+## Installation
 
 ```bash
-npm install --save richtypo richtypo-rules-ru
+npm install --save richtypo
 ```
 
-### Basic usage
+## Basic usage
 
 ```javascript
 import richtypo from 'richtypo';
-import rules from 'richtypo-rules-ru';
+import rules from 'richtypo/rules/ru';
 
 const text =
   'Настругал Папа Карло тысячу БУРАТИН 29 февраля - ' +
@@ -39,11 +39,11 @@ richtypo(rules, text);
 //    используйте «Ричтайпо» и&nbsp;ваши уши будут торчать <nobr>из-за</nobr>&nbsp;туч.
 ```
 
-The default export of `richtypo-rules-ru` contains _recommended_ rules (marked with ¹ in a table below), but you can import each rule separately:
+The default export of `richtypo/rules/ru` contains _recommended_ rules (marked with ¹ in a table below), but you can import each rule separately:
 
 ```js
 import richtypo from 'richtypo';
-import { quotes, numberSeparators } from 'richtypo-rules-ru';
+import { quotes, numberSeparators } from 'richtypo/rules/ru';
 richtypo(
   [quotes, numberSeparators],
   'Текст "в кавычках" - 123456,78'
@@ -51,9 +51,9 @@ richtypo(
 // -> Текст «в кавычках» - 123&#x202f;456,78
 ```
 
-See more examples in [Richtypo docs](https://github.com/sapegin/richtypo.js).
+See more examples in [Richtypo docs](../Readme.md).
 
-### The rules
+## Rules
 
 | Rule                   | Description                                                                                      | Input                | Output                     |
 | ---------------------- | ------------------------------------------------------------------------------------------------ | -------------------- | -------------------------- |
