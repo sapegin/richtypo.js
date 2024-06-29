@@ -37,7 +37,7 @@ export const dashesAdvanced = (text: string) =>
 		// Add non-braking space between , or ) and a dash
 		.replace(
 			new RegExp(`(${punctuation})${dash}(${space})`, 'gmi'),
-			`$1${nbsp}—$2`
+			`$1${nbsp}—$2`,
 		)
 		// Add non-breaking space in front of a dash
 		.replace(new RegExp(`${notInTag}(\\S)${space}?—`, 'gmi'), `$1${nbsp}—`);
@@ -48,11 +48,11 @@ export const punctuationMarks = (text: string) =>
 	text
 		.replace(
 			new RegExp(`${notInTag}(?:${space}+)?([\\?!:»]|${semicolon})`, 'gmi'),
-			`${nbthinspace}$1`
+			`${nbthinspace}$1`,
 		)
 		.replace(
 			new RegExp(`${notInTag}(«)(?:${space}+)?`, 'gmi'),
-			`$1${nbthinspace}`
+			`$1${nbthinspace}`,
 		);
 
 export {

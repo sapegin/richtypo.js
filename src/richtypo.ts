@@ -43,7 +43,7 @@ const saveTags = (text: string) => {
 
 	const textWithoutTags = SAVE_TAGS_REGEXPS.reduce(
 		(processedText, regex) => processedText.replace(regex, save),
-		text
+		text,
 	);
 
 	return { text: textWithoutTags, tags };
@@ -52,7 +52,7 @@ const saveTags = (text: string) => {
 const restoreTags = (text: string, { tags }: { tags: string[] }) =>
 	text.replace(
 		RESTORE_TAGS_REGEXPS,
-		(_, index: number): string => tags[index] ?? ''
+		(_, index: number): string => tags[index] ?? '',
 	);
 
 const runAllRules = (text: string, { rules }: { rules: Rules }) =>
@@ -62,6 +62,6 @@ export default function richtypo(rules: Rules, text: string): string {
 	const { text: textWithoutTags, tags } = saveTags(text);
 	return [beforeAll, runAllRules, restoreTags, afterAll].reduce(
 		(processedText, fn) => fn(processedText, { rules, tags }),
-		textWithoutTags
+		textWithoutTags,
 	);
 }

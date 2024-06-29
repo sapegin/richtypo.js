@@ -47,9 +47,9 @@ export const prepositions = (text: string) =>
 	text.replace(
 		new RegExp(
 			`${notInTag}(?<=^|${space}|${punctuationOrQuote}|>)(${preposition}(${tag})?)${space}`,
-			'gmi'
+			'gmi',
 		),
-		`$1${nbsp}`
+		`$1${nbsp}`,
 	);
 
 export const dashesAdvanced = (text: string) =>
@@ -57,25 +57,25 @@ export const dashesAdvanced = (text: string) =>
 		// Add non-breaking thin space between , or ) and a dash
 		.replace(
 			new RegExp(`(${punctuation})${dash}(${space}?)`, 'gmi'),
-			`$1${nbthinspace}${emdash}$2`
+			`$1${nbthinspace}${emdash}$2`,
 		)
 		// Add non-breaking thin space between a tag and a dash
 		.replace(
 			new RegExp(`(?<!\\s)(${tag})${dash}(${space}?)`, 'gmi'),
-			`$1${nbthinspace}${emdash}$2`
+			`$1${nbthinspace}${emdash}$2`,
 		)
 		// Add a work joiner character between emdash and preceding word to avoid line wrapping
 		.replace(
 			new RegExp(
 				`(?<!\\n[^ ]+)([^\\s\\]\\)\\>]+)${space}?${emdash}${space}?`,
-				'gmi'
+				'gmi',
 			),
-			`$1${nbthinspace}${emdash}${thinspace}`
+			`$1${nbthinspace}${emdash}${thinspace}`,
 		)
 		// Add non-breaking thin spaces before, and normal thin space after an em dash
 		.replace(
 			new RegExp(`${space}${emdash}${space}`, 'gmi'),
-			`${nbthinspace}${emdash}${thinspace}`
+			`${nbthinspace}${emdash}${thinspace}`,
 		);
 
 /** @deprecated Use `dashesBasic` or `dashesAdvanced` directly */

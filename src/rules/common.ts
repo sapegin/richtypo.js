@@ -45,28 +45,28 @@ export const shortWords = (text: string) =>
 	text.replace(
 		new RegExp(
 			`${notInTag}(?<=^|${space}|${punctuationOrQuote}|>)(${shortWord}(${tag})?)${space}`,
-			'gmi'
+			'gmi',
 		),
-		`$1${nbsp}`
+		`$1${nbsp}`,
 	);
 
 // Orphans (non-breaking space before the last word)
 export const orphans = (text: string) =>
 	text.replace(
 		new RegExp(`${notInTag}(?<![\\#-])${space}([\\S<]{1,10}(?:\n\n|$))`, 'gmi'),
-		`${nbsp}$1`
+		`${nbsp}$1`,
 	);
 
 export const numberUnits = (text: string) =>
 	text.replace(
 		new RegExp(`${notInTag}(\\d+${tag}?)${space}(\\w)`, 'gmi'),
-		`$1${nbsp}$2`
+		`$1${nbsp}$2`,
 	);
 
 export const degreeSigns = (text: string) =>
 	text.replace(
 		new RegExp(`${notInTag}(\\d${tag}?)${space}?[˚°]`, 'gmi'),
-		`$1${nbthinspace}°`
+		`$1${nbthinspace}°`,
 	);
 
 export const ellipses = (text: string) =>
@@ -75,13 +75,13 @@ export const ellipses = (text: string) =>
 export const amps = (text: string) =>
 	text.replace(
 		new RegExp(`${notInTag}${space}(&(?!\\S*;))${space}`, 'gmi'),
-		`${nbsp}<span class="amp">&</span>${nbsp}`
+		`${nbsp}<span class="amp">&</span>${nbsp}`,
 	);
 
 export const abbrs = (text: string) =>
 	text.replace(
 		new RegExp(`${notInTag}(${upperLetter}{3,})`, 'gm'),
-		`<abbr>$1</abbr>`
+		`<abbr>$1</abbr>`,
 	);
 
 // Nowrap short words with a hyphen ("из-за")
@@ -89,9 +89,9 @@ export const hyphenatedWords = (text: string) =>
 	text.replace(
 		new RegExp(
 			`(${notLetterOrHyphen}|^)((?:${letter}{1,2}(?:-${letter}+))|(?:${letter}+(?:-${letter}{1,2})))(?!${letterOrHyphen})`,
-			'gi'
+			'gi',
 		),
-		`$1<nobr>$2</nobr>`
+		`$1<nobr>$2</nobr>`,
 	);
 
 export const dashesBasic = (text: string) =>
@@ -101,14 +101,14 @@ export const dashesBasic = (text: string) =>
 		// Replace - with em dash if there's a space or a tag before and a space after it
 		.replace(
 			new RegExp(`(${space}|${tag})[-${endash}](${space})`, 'gmi'),
-			`$1${emdash}$2`
+			`$1${emdash}$2`,
 		);
 
 export const numberOrdinalsFactory =
 	(props: { ordinal: string }) => (text: string) =>
 		text.replace(
 			new RegExp(`${notInTag}(\\d+)(${props.ordinal})`, 'gmi'),
-			`$1<sup>$2</sup>`
+			`$1<sup>$2</sup>`,
 		);
 
 export const numberSeparatorsFactory =
@@ -117,9 +117,9 @@ export const numberSeparatorsFactory =
 		text.replace(
 			new RegExp(
 				`(?<!${props.decimalsSeparator}\\d*)\\d{1,3}(?=(\\d{3})+(?!\\d))`,
-				'gmi'
+				'gmi',
 			),
-			`$&${props.thousandsSeparator}`
+			`$&${props.thousandsSeparator}`,
 		);
 
 export const quotesFactory =
@@ -127,6 +127,6 @@ export const quotesFactory =
 		text
 			.replace(
 				new RegExp(`${notInTag}"((${tag})?(${dash}${space})?${letter})`, 'gmi'),
-				`${props.openingQuote}$1`
+				`${props.openingQuote}$1`,
 			)
 			.replace(new RegExp(`${notInTag}"`, 'gmi'), `${props.closingQuote}`);

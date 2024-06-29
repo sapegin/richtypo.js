@@ -42,19 +42,19 @@ const highlight = (text: string) =>
 	text
 		.replace(
 			/(&nbsp;|\xA0)/gm,
-			'<span class="rule rule-nbsp" title="Non-breaking space">$1</span>'
+			'<span class="rule rule-nbsp" title="Non-breaking space">$1</span>',
 		)
 		.replace(
 			/(\u202f)/gm,
-			'<span class="rule rule-narrow" title="Narrow space">$1</span>'
+			'<span class="rule rule-narrow" title="Narrow space">$1</span>',
 		)
 		.replace(
 			/([“”«»])/gm,
-			'<span class="rule rule-quote" title="Quote">$1</span>'
+			'<span class="rule rule-quote" title="Quote">$1</span>',
 		)
 		.replace(
 			/(—)/gm,
-			'<span class="rule rule-emdash" title="Em dash">$1</span>'
+			'<span class="rule rule-emdash" title="Em dash">$1</span>',
 		);
 
 const rt: Record<string, (x: string) => string> = {
@@ -88,7 +88,7 @@ console.log('👉 example.css');
 
 fs.writeFileSync(
 	'example/dist/example.css',
-	fs.readFileSync('example/src/example.css', 'utf8')
+	fs.readFileSync('example/src/example.css', 'utf8'),
 );
 
 console.log('👉 Done');

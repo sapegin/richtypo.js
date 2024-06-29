@@ -11,7 +11,7 @@ const compare = (actual: string, expected: string) =>
 describe('richtypo', () => {
 	test('run one rule', () => {
 		expect(richtypo(rule1, `changes number 100 with percent`)).toEqual(
-			`changes number % with percent`
+			`changes number % with percent`,
 		);
 	});
 
@@ -21,7 +21,7 @@ describe('richtypo', () => {
 
 	test('run an array of rules', () => {
 		expect(richtypo([rule1, rule2], `changes number 100 with percent`)).toEqual(
-			`CHANGES NUMBER % WITH PERCENT`
+			`CHANGES NUMBER % WITH PERCENT`,
 		);
 	});
 
@@ -29,16 +29,16 @@ describe('richtypo', () => {
 		compare(
 			richtypo(
 				rule1,
-				'<b>a 100 b</b and an image <img src="pixel.gif" alt="">'
+				'<b>a 100 b</b and an image <img src="pixel.gif" alt="">',
 			),
-			'<b>a % b</b and an image <img src="pixel.gif" alt="">'
+			'<b>a % b</b and an image <img src="pixel.gif" alt="">',
 		);
 	});
 
 	test('keep HTML tags (code)', () => {
 		compare(
 			richtypo(rule1, '<code> a 100 b </code>'),
-			'<code> a 100 b </code>'
+			'<code> a 100 b </code>',
 		);
 	});
 
@@ -49,14 +49,14 @@ describe('richtypo', () => {
 	test('keep HTML tags (style)', () => {
 		compare(
 			richtypo(rule1, '<style> a 100 b </style>'),
-			'<style> a 100 b </style>'
+			'<style> a 100 b </style>',
 		);
 	});
 
 	test('keep HTML tags (script)', () => {
 		compare(
 			richtypo(rule1, '<script> a 100 b </script>'),
-			'<script> a 100 b </script>'
+			'<script> a 100 b </script>',
 		);
 	});
 
@@ -67,21 +67,21 @@ describe('richtypo', () => {
 	test('keep Markdown images', () => {
 		compare(
 			richtypo(rule2, '![](/foo.jpg) ![Bar](/bar.jpg)'),
-			'![](/foo.jpg) ![BAR](/bar.jpg)'
+			'![](/foo.jpg) ![BAR](/bar.jpg)',
 		);
 	});
 
 	test('keep Markdown links', () => {
 		compare(
 			richtypo(rule2, 'Some [foo bar](/foo) baz.'),
-			'SOME [FOO BAR](/foo) BAZ.'
+			'SOME [FOO BAR](/foo) BAZ.',
 		);
 	});
 
 	test('keep Markdown code blocks', () => {
 		compare(
 			richtypo(rule2, `Some \`and some bar\` foo.`),
-			`SOME \`and some bar\` FOO.`
+			`SOME \`and some bar\` FOO.`,
 		);
 	});
 
@@ -94,14 +94,14 @@ describe('richtypo', () => {
 \`\`\`bash
 npm install --save-dev typings-for-css-modules-loader
 \`\`\`
-			`
+			`,
 			),
 			`SOME FOO.
 
 \`\`\`bash
 npm install --save-dev typings-for-css-modules-loader
 \`\`\`
-			`
+			`,
 		);
 	});
 
@@ -114,14 +114,14 @@ npm install --save-dev typings-for-css-modules-loader
 \`\`\`bash
 <p><a href="#">Click here</a> for puppy videos!!</p>
 \`\`\`
-			`
+			`,
 			),
 			`SOME FOO.
 
 \`\`\`bash
 <p><a href="#">Click here</a> for puppy videos!!</p>
 \`\`\`
-			`
+			`,
 		);
 	});
 
@@ -134,14 +134,14 @@ npm install --save-dev typings-for-css-modules-loader
 \`\`\`bash
 npm install \`--save-dev\` typings-for-css-modules-loader
 \`\`\`
-			`
+			`,
 			),
 			`SOME FOO.
 
 \`\`\`bash
 npm install \`--save-dev\` typings-for-css-modules-loader
 \`\`\`
-			`
+			`,
 		);
 	});
 
@@ -155,7 +155,7 @@ const getSpecialOffersForBrand = brand =>
   [BRANDS.HORNS_AND_HOOVES]: getHornsAndHoovesSpecialOffers,
   [BRANDS.PAWS_AND_TAILS]: getPawsAndTailsSpecialOffers
 }[brand]());
-\`\`\``
+\`\`\``,
 			),
 			`\`\`\`js
 const getSpecialOffersForBrand = brand =>
@@ -163,7 +163,7 @@ const getSpecialOffersForBrand = brand =>
   [BRANDS.HORNS_AND_HOOVES]: getHornsAndHoovesSpecialOffers,
   [BRANDS.PAWS_AND_TAILS]: getPawsAndTailsSpecialOffers
 }[brand]());
-\`\`\``
+\`\`\``,
 		);
 	});
 
@@ -176,7 +176,7 @@ const getSpecialOffersForBrand = brand =>
 		compare(richtypo(rule3, '| :--- | ---: |'), '| :--- | ---: |');
 		compare(
 			richtypo(rule3, '| A | B |\n| - | - |\n| a | b |'),
-			'| A | B |\n| - | - |\n| a | b |'
+			'| A | B |\n| - | - |\n| a | b |',
 		);
 		compare(richtypo(rule3, '| `a` | b |'), '| `a` | b |');
 	});
@@ -185,9 +185,9 @@ const getSpecialOffersForBrand = brand =>
 		compare(
 			richtypo(
 				rule1,
-				'No typo <img src="hamster.jpg" alt="a 100 b"> inside tags.'
+				'No typo <img src="hamster.jpg" alt="a 100 b"> inside tags.',
 			),
-			'No typo <img src="hamster.jpg" alt="a 100 b"> inside tags.'
+			'No typo <img src="hamster.jpg" alt="a 100 b"> inside tags.',
 		);
 	});
 
@@ -195,9 +195,9 @@ const getSpecialOffersForBrand = brand =>
 		compare(
 			richtypo(
 				rule1,
-				'More <b>a 100 b</b>. No typo <img src="hamster.jpg" alt="a 100 b"> inside tags. And some code: <pre><code>\na 100 b\na 100 b\na 100 b\n</code></pre>.'
+				'More <b>a 100 b</b>. No typo <img src="hamster.jpg" alt="a 100 b"> inside tags. And some code: <pre><code>\na 100 b\na 100 b\na 100 b\n</code></pre>.',
 			),
-			'More <b>a % b</b>. No typo <img src="hamster.jpg" alt="a 100 b"> inside tags. And some code: <pre><code>\na 100 b\na 100 b\na 100 b\n</code></pre>.'
+			'More <b>a % b</b>. No typo <img src="hamster.jpg" alt="a 100 b"> inside tags. And some code: <pre><code>\na 100 b\na 100 b\na 100 b\n</code></pre>.',
 		);
 	});
 
@@ -205,9 +205,9 @@ const getSpecialOffersForBrand = brand =>
 		compare(
 			richtypo(
 				rule1,
-				'<!-- <script>alert("wheee");</script><style>* { color: red; }</style><pre>...</pre> -->'
+				'<!-- <script>alert("wheee");</script><style>* { color: red; }</style><pre>...</pre> -->',
 			),
-			'<!-- <script>alert("wheee");</script><style>* { color: red; }</style><pre>...</pre> -->'
+			'<!-- <script>alert("wheee");</script><style>* { color: red; }</style><pre>...</pre> -->',
 		);
 	});
 
@@ -215,19 +215,19 @@ const getSpecialOffersForBrand = brand =>
 		compare(
 			richtypo(
 				rule1,
-				'<!--[if lte IE 6]><script>alert("wheee");</script><style>* { color: red; }</style><pre>...</pre><![endif]-->'
+				'<!--[if lte IE 6]><script>alert("wheee");</script><style>* { color: red; }</style><pre>...</pre><![endif]-->',
 			),
-			'<!--[if lte IE 6]><script>alert("wheee");</script><style>* { color: red; }</style><pre>...</pre><![endif]-->'
+			'<!--[if lte IE 6]><script>alert("wheee");</script><style>* { color: red; }</style><pre>...</pre><![endif]-->',
 		);
 		compare(
 			richtypo(rule1, '<!--[if lte IE 6]>The “quoted text.”<![endif]-->'),
-			'<!--[if lte IE 6]>The “quoted text.”<![endif]-->'
+			'<!--[if lte IE 6]>The “quoted text.”<![endif]-->',
 		);
 	});
 
 	test('remove repeated spaces from the source', () => {
 		expect(richtypo(rule1, `changes   number 100  with percent`)).toEqual(
-			`changes number % with percent`
+			`changes number % with percent`,
 		);
 	});
 
@@ -235,8 +235,8 @@ const getSpecialOffersForBrand = brand =>
 		expect(
 			richtypo(
 				(s) => s.replace(/100/, '<abbr><abbr>%</abbr></abbr>'),
-				`changes number 100 with a tag`
-			)
+				`changes number 100 with a tag`,
+			),
 		).toEqual(`changes number <abbr>%</abbr> with a tag`);
 	});
 });
