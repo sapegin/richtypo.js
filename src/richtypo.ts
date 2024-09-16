@@ -4,12 +4,12 @@ export type Rules = Rule[] | Rule;
 const SAVE_TAGS_REGEXPS = [
 	// Markdown tables
 	/^\|.*?\|$/gm,
-	// Markdown links and images
-	/(?<=\])\([^)]+\)/gim,
 	// Markdown fenced code blocks
 	/```[\s\S]*?```/gim,
 	// Markdown code blocks
 	/`[^`]+?`/gim,
+	// Markdown links and images
+	/(?<=\])\([^)]+\)/gim,
 	/<!(--\[[^\]>]+\]|\[[^\]>]+\]--)>/gim,
 	/<!--[\s\S]*?-->/gim,
 	/<pre[^>]*>[\s\S]*?<\/pre>/gim,

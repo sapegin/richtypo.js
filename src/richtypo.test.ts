@@ -167,6 +167,32 @@ const getSpecialOffersForBrand = brand =>
 		);
 	});
 
+	test('keep Markdown fenced code blocks with actual Markdown links inside', () => {
+		compare(
+			richtypo(
+				rule2,
+				`\`\`\`js
+/**
+ * Returns a slug from a Markdown link:
+ * [#](tres-leches-cake) → tres-leches-cake
+ */
+function getSubrecipeSlug(markdown) {
+  /* ... */
+}
+\`\`\``,
+			),
+			`\`\`\`js
+/**
+ * Returns a slug from a Markdown link:
+ * [#](tres-leches-cake) → tres-leches-cake
+ */
+function getSubrecipeSlug(markdown) {
+  /* ... */
+}
+\`\`\``,
+		);
+	});
+
 	test('keep Markdown tables', () => {
 		compare(richtypo(rule3, '| - | - |'), '| - | - |');
 		compare(richtypo(rule3, '| -- | -- |'), '| -- | -- |');
