@@ -5,29 +5,29 @@ const SAVE_TAGS_REGEXPS = [
 	// Markdown tables
 	/^\|.*?\|$/gm,
 	// Markdown fenced code blocks
-	/```[\s\S]*?```/gim,
+	/```[\S\s]*?```/gim,
 	// Markdown code blocks
 	/`[^`]+?`/gim,
 	// Markdown links and images
-	/(?<=\])\([^)]+\)/gim,
-	/<!(--\[[^\]>]+\]|\[[^\]>]+\]--)>/gim,
-	/<!--[\s\S]*?-->/gim,
-	/<pre[^>]*>[\s\S]*?<\/pre>/gim,
-	/<code[^>]*>[\s\S]*?<\/code>/gim,
-	/<style[^>]*>[\s\S]*?<\/style>/gim,
-	/<script[^>]*>[\s\S]*?<\/script>/gim,
-	/<[a-z/][^>]*>/gim,
+	/(?<=])\([^)]+\)/gim,
+	/<!(--\[[^>\]]+]|\[[^>\]]+]--)>/gim,
+	/<!--[\S\s]*?-->/gim,
+	/<pre[^>]*>[\S\s]*?<\/pre>/gim,
+	/<code[^>]*>[\S\s]*?<\/code>/gim,
+	/<style[^>]*>[\S\s]*?<\/style>/gim,
+	/<script[^>]*>[\S\s]*?<\/script>/gim,
+	/<[/a-z][^>]*>/gim,
 ];
 const RESTORE_TAGS_REGEXPS = /<(\d+)>/g;
 
 const beforeAll = (text: string) =>
 	// Remove repeated spaces
-	text.replace(/ {2,}/gm, ' ');
+	text.replaceAll(/ {2,}/gm, ' ');
 
 const afterAll = (text: string) =>
 	text
 		// Remove double tags, like <abbr><abbr>JS</abbr></abbr>
-		.replace(/<(\w+)>(<\1>[^<]+<\/\1>)<\/\1>/g, '$2');
+		.replaceAll(/<(\w+)>(<\1>[^<]+<\/\1>)<\/\1>/g, '$2');
 
 // Replace HTML tags with <0>, <1>, etc.
 const saveTags = (text: string) => {
@@ -50,7 +50,7 @@ const saveTags = (text: string) => {
 };
 
 const restoreTags = (text: string, { tags }: { tags: string[] }) =>
-	text.replace(
+	text.replaceAll(
 		RESTORE_TAGS_REGEXPS,
 		(_, index: number): string => tags[index] ?? '',
 	);

@@ -49,36 +49,35 @@
   ],
   "devDependencies": {
     "@types/node": "^20.8.3",
-    "@typescript-eslint/eslint-plugin": "^6.7.5",
-    "@typescript-eslint/parser": "^6.7.5",
     "@vitest/coverage-v8": "^2.1.1",
-    "eslint": "^8.51.0",
-    "eslint-config-tamia": "^8.1.1",
+    "eslint": "^9.10.0",
+    "eslint-config-tamia": "^9.1.18",
     "gh-pages": "^6.0.0",
     "glob": "^10.4.2",
-    "husky": "^8.0.3",
-    "lint-staged": "^14.0.1",
-    "prettier": "^3.3.2",
+    "husky": "^9.1.6",
+    "lint-staged": "^15.2.10",
+    "prettier": "^3.3.3",
     "richtypo": "file:.",
     "tsx": "^4.15.7",
     "typescript": "^5.5.2",
     "vitest": "^2.1.1"
   },
   "scripts": {
-    "pretest": "npm run lint",
+    "pretest": "npm run lint && npm run typecheck",
     "test": "vitest run",
     "posttest": "npm run format",
     "test:watch": "vitest watch",
     "test:coverage": "vitest run --coverage",
     "lint": "eslint . --cache --fix",
-    "format": "prettier --write \"**/*.{js,ts,tsx,md,css,html}\"",
+    "typecheck": "tsc --noEmit",
+    "format": "prettier --write \"**/*.{js,cjs,mjs,ts,tsx,md,css,html}\"",
     "gh-pages": "gh-pages -d example/dist",
-    "compile": "tsc",
+    "compile": "tsc --project tsconfig.build.json",
     "docs": "tsx example/src",
     "prepare": "npm run compile"
   },
   "lint-staged": {
-    "*.{js,ts,tsx,md,css,html,json}": "prettier --write",
-    "*.{js,ts,tsx}": "eslint --cache --fix"
+    "*.{js,cjs,mjs,ts,tsx,md,css,html,json}": "prettier --write",
+    "*.{js,cjs,mjs,ts,tsx}": "eslint --cache --fix"
   }
 }

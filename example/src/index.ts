@@ -1,5 +1,5 @@
 import fs from 'fs-extra';
-import path from 'path';
+import path from 'node:path';
 import { globSync } from 'glob';
 import richtypo from '../../src/richtypo.js';
 import enRules from '../../src/rules/en.js';
@@ -40,19 +40,19 @@ console.log('Building the example site...');
 
 const highlight = (text: string) =>
 	text
-		.replace(
-			/(&nbsp;|\xA0)/gm,
+		.replaceAll(
+			/(&nbsp;|\u00A0)/gm,
 			'<span class="rule rule-nbsp" title="Non-breaking space">$1</span>',
 		)
-		.replace(
-			/(\u202f)/gm,
+		.replaceAll(
+			/(\u202F)/gm,
 			'<span class="rule rule-narrow" title="Narrow space">$1</span>',
 		)
-		.replace(
-			/([“”«»])/gm,
+		.replaceAll(
+			/([«»“”])/gm,
 			'<span class="rule rule-quote" title="Quote">$1</span>',
 		)
-		.replace(
+		.replaceAll(
 			/(—)/gm,
 			'<span class="rule rule-emdash" title="Em dash">$1</span>',
 		);
@@ -67,7 +67,7 @@ fs.ensureDirSync('dist');
 
 const files = globSync('example/src/content/*.html');
 
-files.forEach((file) => {
+for (const file of files) {
 	console.log('👉', file);
 
 	const lang = path.basename(file, '.html');
@@ -82,7 +82,7 @@ files.forEach((file) => {
 	});
 
 	fs.writeFileSync(file.replace('src/content', 'dist'), html);
-});
+}
 
 console.log('👉 example.css');
 

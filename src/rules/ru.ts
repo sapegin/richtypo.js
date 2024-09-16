@@ -32,14 +32,14 @@ const particle = 'б|бы|ж|же|ли|ль';
 export const dashesAdvanced = (text: string) =>
 	text
 		// Replace - at the beginning of a line or right after a tag with em dash
-		.replace(new RegExp(`^[-${endash}](${space})`, 'gmi'), `${emdash}$1`)
+		.replaceAll(new RegExp(`^[-${endash}](${space})`, 'gmi'), `${emdash}$1`)
 		// Add non-braking space between , or ) and a dash
-		.replace(
+		.replaceAll(
 			new RegExp(`(${punctuation})${dash}(${space})`, 'gmi'),
 			`$1${nbsp}${emdash}$2`,
 		)
 		// Add non-breaking space in front of a dash
-		.replace(
+		.replaceAll(
 			new RegExp(`${notInTag}(\\S)${space}?[${endash}${emdash}]`, 'gmi'),
 			`$1${nbsp}${emdash}`,
 		);
@@ -49,42 +49,42 @@ export const dashes = [dashesBasic, dashesAdvanced];
 // Spaces inside "и т. д." and "и т. п."
 export const etcs = (text: string) =>
 	text
-		.replace(
+		.replaceAll(
 			new RegExp(`и${space}т\\.${space}д\\.`, 'gi'),
 			`и${nbsp}т.${nbsp}д.`,
 		)
-		.replace(
+		.replaceAll(
 			new RegExp(`и${space}т\\.${space}п\\.`, 'gi'),
 			`и${nbsp}т.${nbsp}п.`,
 		);
 
 // Spaces inside "№ N"
 export const numberSigns = (text: string) =>
-	text.replace(new RegExp(`№${space}`, 'g'), `№${nbsp}`);
+	text.replaceAll(new RegExp(`№${space}`, 'g'), `№${nbsp}`);
 
 // Spaces inside "§ N"
 export const sectionSigns = (text: string) =>
-	text.replace(new RegExp(`§${space}`, 'g'), `§${nbsp}`);
+	text.replaceAll(new RegExp(`§${space}`, 'g'), `§${nbsp}`);
 
 // Nowrap ("В. И. Ленин")
 export const initials = (text: string) =>
-	text.replace(/((?:[А-ЯЁ]\.\s){1,2}[А-ЯЁ][а-яё]+)/g, `<nobr>$1</nobr>`);
+	text.replaceAll(/((?:[ЁА-Я]\.\s){1,2}[ЁА-Я][а-яё]+)/g, `<nobr>$1</nobr>`);
 
 // Nowrap short words with a hyphen ("из-за")
 export const hyphenatedWords = (text: string) =>
-	text.replace(
-		/([^а-яёА-ЯЁ]|^)((?:[а-яёА-ЯЁ]{1,2}(?:-[а-яёА-ЯЁ]+))|(?:[а-яёА-ЯЁ]+(?:-[а-яёА-ЯЁ]{1,2})))(?![-а-яёА-ЯЁ])/g,
+	text.replaceAll(
+		/([^ЁА-яё]|^)((?:[ЁА-яё]{1,2}-[ЁА-яё]+)|(?:[ЁА-яё]+-[ЁА-яё]{1,2}))(?![ЁА-яё-])/g,
 		`$1<nobr>$2</nobr>`,
 	);
 
 // Particles
 export const particles = (text: string) =>
 	text
-		.replace(
+		.replaceAll(
 			new RegExp(`([а-яёА-ЯЁ]) (${particle})(?=[?!,.:;"‘“»])`, 'g'),
 			`$1${nbsp}$2`,
 		)
-		.replace(
+		.replaceAll(
 			new RegExp(`([а-яёА-ЯЁ])${space}(${particle})${space}`, 'g'),
 			`$1${nbsp}$2 `,
 		);

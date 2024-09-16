@@ -1,12 +1,12 @@
 import { describe, expect, test } from 'vitest';
-import richtypo from './richtypo';
+import richtypo from './richtypo.js';
 
-const rule1 = (text: string) => text.replace(/100/g, '%');
+const rule1 = (text: string) => text.replaceAll('100', '%');
 const rule2 = (text: string) => text.toUpperCase();
-const rule3 = (text: string) => text.replace(/-/g, '#');
+const rule3 = (text: string) => text.replaceAll('-', '#');
 
 const compare = (actual: string, expected: string) =>
-	expect(actual.replace(/\u202f/g, '_')).toEqual(expected);
+	expect(actual.replaceAll('\u202F', '_')).toEqual(expected);
 
 describe('richtypo', () => {
 	test('run one rule', () => {

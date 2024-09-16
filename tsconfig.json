@@ -2,15 +2,15 @@
 	"compilerOptions": {
 		"rootDir": "src",
 		"outDir": "dist",
-		"target": "ES2020",
+		"target": "ES2022",
 		"module": "NodeNext",
 		"moduleResolution": "NodeNext",
+		"lib": ["ESNext"],
 		"declaration": true,
 		"strict": true,
 		"esModuleInterop": true,
 		"skipLibCheck": true,
 		"forceConsistentCasingInFileNames": true
 	},
-	"include": ["src"],
-	"exclude": ["**/*.test.ts"]
+	"include": ["src"]
 }

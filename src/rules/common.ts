@@ -1,6 +1,6 @@
-const nbsp = '\xA0';
+const nbsp = '\u00A0';
 const thinspace = '\u2009'; // Thin space
-const nbthinspace = '\u202f'; // Thin no-break space
+const nbthinspace = '\u202F'; // Thin no-break space
 const space = `[ \t${nbsp}${nbthinspace}]`;
 const tag = '(?:<[^<>]*>)';
 const quote = '["“”«»‘’]';
@@ -42,7 +42,7 @@ export const definitions = {
 
 // Non-breaking space after short words
 export const shortWords = (text: string) =>
-	text.replace(
+	text.replaceAll(
 		new RegExp(
 			`${notInTag}(?<=^|${space}|${punctuationOrQuote}|>)(${shortWord}(${tag})?)${space}`,
 			'gmi',
@@ -52,41 +52,41 @@ export const shortWords = (text: string) =>
 
 // Orphans (non-breaking space before the last word)
 export const orphans = (text: string) =>
-	text.replace(
+	text.replaceAll(
 		new RegExp(`${notInTag}(?<![\\#-])${space}([\\S<]{1,10}(?:\n\n|$))`, 'gmi'),
 		`${nbsp}$1`,
 	);
 
 export const numberUnits = (text: string) =>
-	text.replace(
+	text.replaceAll(
 		new RegExp(`${notInTag}(\\d+${tag}?)${space}(\\w)`, 'gmi'),
 		`$1${nbsp}$2`,
 	);
 
 export const degreeSigns = (text: string) =>
-	text.replace(
+	text.replaceAll(
 		new RegExp(`${notInTag}(\\d${tag}?)${space}?[˚°]`, 'gmi'),
 		`$1${nbthinspace}°`,
 	);
 
 export const ellipses = (text: string) =>
-	text.replace(new RegExp(`${notInTag}\\.{2,}`, 'gmi'), `…`);
+	text.replaceAll(new RegExp(`${notInTag}\\.{2,}`, 'gmi'), `…`);
 
 export const amps = (text: string) =>
-	text.replace(
+	text.replaceAll(
 		new RegExp(`${notInTag}${space}(&(?!\\S*;))${space}`, 'gmi'),
 		`${nbsp}<span class="amp">&</span>${nbsp}`,
 	);
 
 export const abbrs = (text: string) =>
-	text.replace(
+	text.replaceAll(
 		new RegExp(`${notInTag}(${upperLetter}{3,})`, 'gm'),
 		`<abbr>$1</abbr>`,
 	);
 
 // Nowrap short words with a hyphen ("из-за")
 export const hyphenatedWords = (text: string) =>
-	text.replace(
+	text.replaceAll(
 		new RegExp(
 			`(${notLetterOrHyphen}|^)((?:${letter}{1,2}(?:-${letter}+))|(?:${letter}+(?:-${letter}{1,2})))(?!${letterOrHyphen})`,
 			'gi',
@@ -97,16 +97,16 @@ export const hyphenatedWords = (text: string) =>
 export const dashesBasic = (text: string) =>
 	text
 		// Replace -- or --- with em dash
-		.replace(new RegExp(`${notInTag}(?<!\n)---?(?!\n)`, 'gmi'), emdash)
+		.replaceAll(new RegExp(`${notInTag}(?<!\n)---?(?!\n)`, 'gmi'), emdash)
 		// Replace - with em dash if there's a space or a tag before and a space after it
-		.replace(
+		.replaceAll(
 			new RegExp(`(${space}|${tag})[-${endash}](${space})`, 'gmi'),
 			`$1${emdash}$2`,
 		);
 
 export const numberOrdinalsFactory =
 	(props: { ordinal: string }) => (text: string) =>
-		text.replace(
+		text.replaceAll(
 			new RegExp(`${notInTag}(\\d+)(${props.ordinal})`, 'gmi'),
 			`$1<sup>$2</sup>`,
 		);
@@ -114,7 +114,7 @@ export const numberOrdinalsFactory =
 export const numberSeparatorsFactory =
 	(props: { decimalsSeparator: string; thousandsSeparator: string }) =>
 	(text: string) =>
-		text.replace(
+		text.replaceAll(
 			new RegExp(
 				`(?<!${props.decimalsSeparator}\\d*)\\d{1,3}(?=(\\d{3})+(?!\\d))`,
 				'gmi',
@@ -125,8 +125,8 @@ export const numberSeparatorsFactory =
 export const quotesFactory =
 	(props: { openingQuote: string; closingQuote: string }) => (text: string) =>
 		text
-			.replace(
+			.replaceAll(
 				new RegExp(`${notInTag}"((${tag})?(${dash}${space})?${letter})`, 'gmi'),
 				`${props.openingQuote}$1`,
 			)
-			.replace(new RegExp(`${notInTag}"`, 'gmi'), `${props.closingQuote}`);
+			.replaceAll(new RegExp(`${notInTag}"`, 'gmi'), `${props.closingQuote}`);

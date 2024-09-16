@@ -1,14 +1,14 @@
 import { describe, expect, test } from 'vitest';
-import richtypo from '../richtypo';
+import richtypo from '../richtypo.js';
 
-import recommended, { quotes, numberSeparators } from './ru';
+import recommended, { quotes, numberSeparators } from './ru.js';
 
 function compare(actual: string, expected: string) {
 	expect(
 		actual
-			.replace(/\xA0/g, '_') // non-breaking space
-			.replace(/\u202f/gm, '^') // non-breaking thin space
-			.replace(/—/g, '='),
+			.replaceAll('\u00A0', '_') // non-breaking space
+			.replaceAll(/\u202F/gm, '^') // non-breaking thin space
+			.replaceAll('—', '='),
 	).toEqual(expected);
 }
 

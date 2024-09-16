@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest';
-import rt from '../richtypo';
+import rt from '../richtypo.js';
 
 import recommended, {
 	quotes,
@@ -8,15 +8,15 @@ import recommended, {
 	hyphenatedWords,
 	numberOrdinals,
 	numberSeparators,
-} from './en';
+} from './en.js';
 
 function compare(actual: string, expected: string) {
 	expect(
 		actual
-			.replace(/\xA0/g, '__') // non-breaking space
-			.replace(/\u202f/g, '_') // non-breaking thin space
-			.replace(/\u2009/g, '^') // thin space
-			.replace(/—/g, '='), // em dash
+			.replaceAll('\u00A0', '__') // non-breaking space
+			.replaceAll('\u202F', '_') // non-breaking thin space
+			.replaceAll('\u2009', '^') // thin space
+			.replaceAll('—', '='), // em dash
 	).toEqual(expected);
 }
 
