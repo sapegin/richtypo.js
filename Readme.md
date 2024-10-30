@@ -8,6 +8,8 @@ Richtypo comes with [typography rules](docs/Readme.md#rules) for English, French
 
 Have a look at [the example page](https://sapegin.github.io/richtypo.js/) and [its source](https://github.com/sapegin/richtypo.js/tree/master/example/src).
 
+[![Washing your code. A book on clean code for frontend developers](https://sapegin.me/images/washing-code-github.jpg)](https://sapegin.me/book/)
+
 ## Features
 
 - Works with plain text, Markdown, or HTML
