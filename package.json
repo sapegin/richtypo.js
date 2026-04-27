@@ -1,5 +1,6 @@
 {
   "name": "richtypo",
+  "version": "7.0.1",
   "license": "MIT",
   "description": "HTML and Markdown typography enhancer with extensible rules",
   "engines": {
