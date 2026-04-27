@@ -109,13 +109,6 @@ describe('Russian, recommended rules', () => {
 		);
 	});
 
-	test('replace - in the beginning of a line with em dash', () => {
-		compare(
-			richtypo(recommended, '- Бадыдыщь йоу!\n- Бадыдыщь_йоу!'),
-			'= Бадыдыщь_йоу!\n= Бадыдыщь_йоу!',
-		);
-	});
-
 	test('replace en dash in the beginning of a line with em dash', () => {
 		compare(
 			richtypo(recommended, '– Бадыдыщь йоу!\n– Бадыдыщь_йоу!'),

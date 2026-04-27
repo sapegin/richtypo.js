@@ -193,6 +193,24 @@ function getSubrecipeSlug(markdown) {
 		);
 	});
 
+	test('keep Markdown unordered lists (including nested)', () => {
+		compare(
+			richtypo(
+				rule3,
+				`- foo - bar
+- baz
+  - nested - item
+  * star nested
+    * deeper - star`,
+			),
+			`- foo # bar
+- baz
+  - nested # item
+  * star nested
+    * deeper # star`,
+		);
+	});
+
 	test('keep Markdown tables', () => {
 		compare(richtypo(rule3, '| - | - |'), '| - | - |');
 		compare(richtypo(rule3, '| -- | -- |'), '| -- | -- |');

@@ -8,6 +8,8 @@ const SAVE_TAGS_REGEXPS = [
 	/```[\S\s]*?```/gim,
 	// Markdown code blocks
 	/`[^`]+?`/gim,
+	// Markdown unordered lists (including nested)
+	/^[\t ]*[*-] /gm,
 	// Markdown links and images
 	/(?<=])\([^)]+\)/gim,
 	/<!(--\[[^>\]]+]|\[[^>\]]+]--)>/gim,
