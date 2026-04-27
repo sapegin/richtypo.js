@@ -59,7 +59,7 @@ richtypo([spaces, quotes], text);
 ```
 
 > [!NOTE]  
-> Have a look at [the example page](https://sapegin.github.io/richtypo.js/) and [its source](https://github.com/sapegin/richtypo.js/tree/master/example/src).
+> Have a look at [the example page](https://sapegin.github.io/richtypo.js/) and [its source](https://github.com/sapegin/richtypo.js/tree/main/example/src).
 
 ### Custom rules
 
@@ -81,7 +81,7 @@ richtypo(ellipsis, 'Typography everywhere...');
 
 ### Common rules
 
-The [richtypo/rules/common](https://github.com/sapegin/richtypo.js/tree/master/packages/richtypo/rules/common) module contains common typography rules that you can use or extend in your own rules.
+The [richtypo/rules/common](https://github.com/sapegin/richtypo.js/tree/main/packages/richtypo/rules/common) module contains common typography rules that you can use or extend in your own rules.
 
 For example, the `ellipsis` rule replaces `...` with `…` symbol. Rather than you having to write that rule yourself, you can reexport it as part of your rules.
 

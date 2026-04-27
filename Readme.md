@@ -1,12 +1,12 @@
 # Richtypo: HTML and Markdown typography enhancer for Node.js
 
-[![npm](https://img.shields.io/npm/v/richtypo.svg)](https://www.npmjs.com/package/richtypo) [![Codecov](https://codecov.io/gh/sapegin/richtypo.js/branch/master/graph/badge.svg)](https://codecov.io/gh/sapegin/richtypo.js) [![Node.js CI status](https://github.com/sapegin/richtypo.js/workflows/Node.js%20CI/badge.svg)](https://github.com/sapegin/richtypo.js/actions)
+[![npm](https://img.shields.io/npm/v/richtypo.svg)](https://www.npmjs.com/package/richtypo) [![Codecov](https://codecov.io/gh/sapegin/richtypo.js/branch/main/graph/badge.svg)](https://codecov.io/gh/sapegin/richtypo.js) [![Node.js CI status](https://github.com/sapegin/richtypo.js/workflows/Node.js%20CI/badge.svg)](https://github.com/sapegin/richtypo.js/actions)
 
 Richtypo prepares your texts to publication by improving typography, like fancy quotes (`"` → `“”`), dashes (`-` → `—`), and adding non-breaking spaces to make the text prettier and more readable by avoiding undesired line breaks.
 
 Richtypo comes with [typography rules](docs/Readme.md#rules) for English, French, and Russian, and you can customize them and create your own rules — each rule is an independent JavaScript function.
 
-Have a look at [the example page](https://sapegin.github.io/richtypo.js/) and [its source](https://github.com/sapegin/richtypo.js/tree/master/example/src).
+Have a look at [the example page](https://sapegin.github.io/richtypo.js/) and [its source](https://github.com/sapegin/richtypo.js/tree/main/example/src).
 
 [![Washing your code. A book on clean code for frontend developers](https://sapegin.me/images/washing-code-github.jpg)](https://sapegin.me/book/)
 
