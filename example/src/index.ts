@@ -1,4 +1,4 @@
-import fs from 'fs-extra';
+import fs from 'node:fs';
 import path from 'node:path';
 import { globSync } from 'glob';
 import richtypo from '../../src/richtypo.js';
@@ -41,11 +41,11 @@ console.log('Building the example site...');
 const highlight = (text: string) =>
 	text
 		.replaceAll(
-			/(&nbsp;|\u00A0)/gm,
+			/(&nbsp;|\u00a0)/gm,
 			'<span class="rule rule-nbsp" title="Non-breaking space">$1</span>',
 		)
 		.replaceAll(
-			/(\u202F)/gm,
+			/(\u202f)/gm,
 			'<span class="rule rule-narrow" title="Narrow space">$1</span>',
 		)
 		.replaceAll(
@@ -63,7 +63,7 @@ const rt: Record<string, (x: string) => string> = {
 	russian: (x: string) => richtypo([...ruRules, highlight], x),
 };
 
-fs.ensureDirSync('dist');
+fs.mkdirSync('dist', { recursive: true });
 
 const files = globSync('example/src/content/*.html');
 
@@ -72,7 +72,7 @@ for (const file of files) {
 
 	const lang = path.basename(file, '.html');
 	const content = fs.readFileSync(file, 'utf8');
-	const contentTypo = rt[lang]?.(content) ?? '';
+	const contentTypo = rt[lang](content);
 
 	const html = template({
 		lang: { french: 'fr', russian: 'ru' }[lang] ?? 'en',

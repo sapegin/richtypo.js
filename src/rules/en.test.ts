@@ -1,20 +1,19 @@
 import { describe, expect, test } from 'vitest';
 import rt from '../richtypo.js';
-
 import recommended, {
-	quotes,
-	amps,
 	abbrs,
+	amps,
 	hyphenatedWords,
 	numberOrdinals,
 	numberSeparators,
+	quotes,
 } from './en.js';
 
 function compare(actual: string, expected: string) {
 	expect(
 		actual
-			.replaceAll('\u00A0', '__') // non-breaking space
-			.replaceAll('\u202F', '_') // non-breaking thin space
+			.replaceAll('\u00a0', '__') // non-breaking space
+			.replaceAll('\u202f', '_') // non-breaking thin space
 			.replaceAll('\u2009', '^') // thin space
 			.replaceAll('—', '='), // em dash
 	).toEqual(expected);
@@ -294,6 +293,7 @@ describe('English, examples from Readme', () => {
 			'The__quick brown FOX_=^weighting 47__kg_=^jumps over “the__lazy dog” on__sunny__morning…',
 		);
 	});
+
 	test('selected rules', () => {
 		compare(
 			rt([quotes, numberSeparators], 'Text "in quotes" - 123456.78'),

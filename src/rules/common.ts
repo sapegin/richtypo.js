@@ -1,6 +1,6 @@
-const nbsp = '\u00A0';
+const nbsp = '\u00a0';
 const thinspace = '\u2009'; // Thin space
-const nbthinspace = '\u202F'; // Thin no-break space
+const nbthinspace = '\u202f'; // Thin no-break space
 const space = `[ \t${nbsp}${nbthinspace}]`;
 const tag = '(?:<[^<>]*>)';
 const quote = '["“”«»‘’]';
@@ -59,22 +59,22 @@ export const orphans = (text: string) =>
 
 export const numberUnits = (text: string) =>
 	text.replaceAll(
-		new RegExp(`${notInTag}(\\d+${tag}?)${space}(\\w)`, 'gmi'),
+		new RegExp(String.raw`${notInTag}(\d+${tag}?)${space}(\w)`, 'gmi'),
 		`$1${nbsp}$2`,
 	);
 
 export const degreeSigns = (text: string) =>
 	text.replaceAll(
-		new RegExp(`${notInTag}(\\d${tag}?)${space}?[˚°]`, 'gmi'),
+		new RegExp(String.raw`${notInTag}(\d${tag}?)${space}?[˚°]`, 'gmi'),
 		`$1${nbthinspace}°`,
 	);
 
 export const ellipses = (text: string) =>
-	text.replaceAll(new RegExp(`${notInTag}\\.{2,}`, 'gmi'), `…`);
+	text.replaceAll(new RegExp(String.raw`${notInTag}\.{2,}`, 'gmi'), `…`);
 
 export const amps = (text: string) =>
 	text.replaceAll(
-		new RegExp(`${notInTag}${space}(&(?!\\S*;))${space}`, 'gmi'),
+		new RegExp(String.raw`${notInTag}${space}(&(?!\S*;))${space}`, 'gmi'),
 		`${nbsp}<span class="amp">&</span>${nbsp}`,
 	);
 
@@ -107,7 +107,7 @@ export const dashesBasic = (text: string) =>
 export const numberOrdinalsFactory =
 	(props: { ordinal: string }) => (text: string) =>
 		text.replaceAll(
-			new RegExp(`${notInTag}(\\d+)(${props.ordinal})`, 'gmi'),
+			new RegExp(String.raw`${notInTag}(\d+)(${props.ordinal})`, 'gmi'),
 			`$1<sup>$2</sup>`,
 		);
 
@@ -116,7 +116,7 @@ export const numberSeparatorsFactory =
 	(text: string) =>
 		text.replaceAll(
 			new RegExp(
-				`(?<!${props.decimalsSeparator}\\d*)\\d{1,3}(?=(\\d{3})+(?!\\d))`,
+				String.raw`(?<!${props.decimalsSeparator}\d*)\d{1,3}(?=(\d{3})+(?!\d))`,
 				'gmi',
 			),
 			`$&${props.thousandsSeparator}`,
@@ -129,4 +129,4 @@ export const quotesFactory =
 				new RegExp(`${notInTag}"((${tag})?(${dash}${space})?${letter})`, 'gmi'),
 				`${props.openingQuote}$1`,
 			)
-			.replaceAll(new RegExp(`${notInTag}"`, 'gmi'), `${props.closingQuote}`);
+			.replaceAll(new RegExp(`${notInTag}"`, 'gmi'), props.closingQuote);

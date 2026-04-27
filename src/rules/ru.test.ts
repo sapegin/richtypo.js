@@ -1,13 +1,12 @@
 import { describe, expect, test } from 'vitest';
 import richtypo from '../richtypo.js';
-
-import recommended, { quotes, numberSeparators } from './ru.js';
+import recommended, { numberSeparators, quotes } from './ru.js';
 
 function compare(actual: string, expected: string) {
 	expect(
 		actual
-			.replaceAll('\u00A0', '_') // non-breaking space
-			.replaceAll(/\u202F/gm, '^') // non-breaking thin space
+			.replaceAll('\u00a0', '_') // non-breaking space
+			.replaceAll(/\u202f/gm, '^') // non-breaking thin space
 			.replaceAll('—', '='),
 	).toEqual(expected);
 }
@@ -199,6 +198,7 @@ describe('Russian, examples from Readme', () => {
 			'Настругал Папа Карло тысячу <abbr>БУРАТИН</abbr> 29_февраля_= используйте «Ричтайпо» и_ваши уши будут торчать <nobr>из-за</nobr>_туч.',
 		);
 	});
+
 	test('selected rules', () => {
 		compare(
 			richtypo([quotes, numberSeparators], 'Текст "в кавычках" - 123456,78'),

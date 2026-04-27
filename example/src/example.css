@@ -76,7 +76,8 @@ abbr {
 }
 
 .amp {
-	font-family: Baskerville, Constantia, Palatino, 'Palatino Linotype',
-		'Book Antiqua', serif;
+	font-family:
+		Baskerville, Constantia, Palatino, 'Palatino Linotype', 'Book Antiqua',
+		serif;
 	font-style: italic;
 }

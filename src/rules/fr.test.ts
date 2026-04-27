@@ -1,17 +1,17 @@
 import { describe, expect, test } from 'vitest';
 import richtypo from '../richtypo.js';
 import recommended, {
-	quotes,
-	punctuationMarks,
 	numberOrdinals,
 	numberSeparators,
+	punctuationMarks,
+	quotes,
 } from './fr.js';
 
 function compare(actual: string, expected: string) {
 	expect(
 		actual
-			.replaceAll('\u00A0', '__') // non-breaking space
-			.replaceAll('\u202F', '_') // non-breaking thin space
+			.replaceAll('\u00a0', '__') // non-breaking space
+			.replaceAll('\u202f', '_') // non-breaking thin space
 			.replaceAll('\u2009', '^') // thin space
 			.replaceAll('—', '='), // em dash
 	).toEqual(expected);
@@ -63,6 +63,7 @@ describe('numbers', () => {
 			`1<sup>er</sup> 2<sup>ème</sup> ou 2<sup>nd</sup> 1<sup>ères</sup> 100<sup>èmes</sup>`,
 		);
 	});
+
 	test(`should add space as number separators`, () => {
 		compare(
 			richtypo(

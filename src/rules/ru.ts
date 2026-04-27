@@ -1,16 +1,16 @@
 type Rule = (text: string) => string;
 
 import {
-	numberUnits,
-	degreeSigns,
-	shortWords,
-	orphans,
 	abbrs,
-	ellipses,
 	dashesBasic,
-	quotesFactory,
-	numberSeparatorsFactory,
 	definitions,
+	degreeSigns,
+	ellipses,
+	numberSeparatorsFactory,
+	numberUnits,
+	orphans,
+	quotesFactory,
+	shortWords,
 } from './common.js';
 
 const {
@@ -40,7 +40,10 @@ export const dashesAdvanced = (text: string) =>
 		)
 		// Add non-breaking space in front of a dash
 		.replaceAll(
-			new RegExp(`${notInTag}(\\S)${space}?[${endash}${emdash}]`, 'gmi'),
+			new RegExp(
+				String.raw`${notInTag}(\S)${space}?[${endash}${emdash}]`,
+				'gmi',
+			),
 			`$1${nbsp}${emdash}`,
 		);
 
@@ -50,11 +53,11 @@ export const dashes = [dashesBasic, dashesAdvanced];
 export const etcs = (text: string) =>
 	text
 		.replaceAll(
-			new RegExp(`и${space}т\\.${space}д\\.`, 'gi'),
+			new RegExp(String.raw`и${space}т\.${space}д\.`, 'gi'),
 			`и${nbsp}т.${nbsp}д.`,
 		)
 		.replaceAll(
-			new RegExp(`и${space}т\\.${space}п\\.`, 'gi'),
+			new RegExp(String.raw`и${space}т\.${space}п\.`, 'gi'),
 			`и${nbsp}т.${nbsp}п.`,
 		);
 
@@ -97,13 +100,13 @@ export const numberSeparators = numberSeparatorsFactory({
 });
 
 export {
-	numberUnits,
-	degreeSigns,
-	shortWords,
-	orphans,
 	abbrs,
-	ellipses,
 	dashesBasic,
+	degreeSigns,
+	ellipses,
+	numberUnits,
+	orphans,
+	shortWords,
 } from './common.js';
 
 // TODO: export defs

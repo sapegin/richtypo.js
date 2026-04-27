@@ -1,16 +1,16 @@
 type Rule = (text: string) => string;
 
 import {
-	shortWords,
-	orphans,
-	ellipses,
 	dashesBasic,
-	numberUnits,
+	definitions as commonDefinitions,
 	degreeSigns,
-	quotesFactory,
+	ellipses,
 	numberOrdinalsFactory,
 	numberSeparatorsFactory,
-	definitions as commonDefinitions,
+	numberUnits,
+	orphans,
+	quotesFactory,
+	shortWords,
 } from './common.js';
 
 const {
@@ -61,13 +61,13 @@ export const dashesAdvanced = (text: string) =>
 		)
 		// Add non-breaking thin space between a tag and a dash
 		.replaceAll(
-			new RegExp(`(?<!\\s)(${tag})${dash}(${space}?)`, 'gmi'),
+			new RegExp(String.raw`(?<!\s)(${tag})${dash}(${space}?)`, 'gmi'),
 			`$1${nbthinspace}${emdash}$2`,
 		)
 		// Add a work joiner character between emdash and preceding word to avoid line wrapping
 		.replaceAll(
 			new RegExp(
-				`(?<!\\n[^ ]+)([^\\s\\]\\)\\>]+)${space}?${emdash}${space}?`,
+				String.raw`(?<!\n[^ ]+)([^\s\]\)\>]+)${space}?${emdash}${space}?`,
 				'gmi',
 			),
 			`$1${nbthinspace}${emdash}${thinspace}`,
@@ -89,15 +89,15 @@ export const numberSeparators = numberSeparatorsFactory({
 });
 
 export {
-	shortWords,
-	hyphenatedWords,
-	orphans,
 	abbrs,
 	amps,
-	ellipses,
 	dashesBasic,
-	numberUnits,
 	degreeSigns,
+	ellipses,
+	hyphenatedWords,
+	numberUnits,
+	orphans,
+	shortWords,
 } from './common.js';
 
 // TODO: export defs

@@ -1,17 +1,17 @@
 type Rule = (text: string) => string;
 
 import {
-	shortWords,
-	orphans,
-	definitions,
 	abbrs,
-	quotesFactory,
+	dashesBasic,
+	definitions,
+	degreeSigns,
+	ellipses,
 	numberOrdinalsFactory,
 	numberSeparatorsFactory,
 	numberUnits,
-	degreeSigns,
-	dashesBasic,
-	ellipses,
+	orphans,
+	quotesFactory,
+	shortWords,
 } from './common.js';
 
 const { punctuation, nbsp, space, nbthinspace, dash, notInTag } = definitions;
@@ -40,14 +40,20 @@ export const dashesAdvanced = (text: string) =>
 			`$1${nbsp}—$2`,
 		)
 		// Add non-breaking space in front of a dash
-		.replaceAll(new RegExp(`${notInTag}(\\S)${space}?—`, 'gmi'), `$1${nbsp}—`);
+		.replaceAll(
+			new RegExp(String.raw`${notInTag}(\S)${space}?—`, 'gmi'),
+			`$1${nbsp}—`,
+		);
 
 export const dashes = [dashesBasic, dashesAdvanced];
 
 export const punctuationMarks = (text: string) =>
 	text
 		.replaceAll(
-			new RegExp(`${notInTag}(?:${space}+)?([\\?!:»]|${semicolon})`, 'gmi'),
+			new RegExp(
+				String.raw`${notInTag}(?:${space}+)?([\?!:»]|${semicolon})`,
+				'gmi',
+			),
 			`${nbthinspace}$1`,
 		)
 		.replaceAll(
@@ -56,15 +62,15 @@ export const punctuationMarks = (text: string) =>
 		);
 
 export {
-	shortWords,
-	orphans,
-	definitions,
 	abbrs,
-	numberUnits,
-	degreeSigns,
 	amps,
 	dashesBasic,
+	definitions,
+	degreeSigns,
 	ellipses,
+	numberUnits,
+	orphans,
+	shortWords,
 } from './common.js';
 
 // Not in recommended:
